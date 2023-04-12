@@ -225,8 +225,8 @@ textarea {
   font-family: 'DOS';
   font-style: normal;
   font-weight: normal;
-  src: url('fonts/Fixedsys500c.eot');
-  src: local('☺'), url('fonts/Fixedsys500c.woff') format('woff'), url('fonts/Fixedsys500c.ttf') format('truetype'), url('fonts/Fixedsys500c.svg') format('svg');
+  src: url('fonts/Bm437_IBM_DOS_ISO8.otb');
+  src: local('☺'), url('fonts/Web437_IBM_DOS_ISO8.woff') format('woff'), url('fonts/Ac437_IBM_DOS_ISO8.ttf') format('truetype');
 }
 
 body {
@@ -235,7 +235,7 @@ body {
   font-size: 18px;
   line-height: 20px;
   color: #bbbbbb;
-  background-color: #000084;
+  background-color: #000044;
 }
 
 a {
@@ -246,7 +246,7 @@ a {
 a:hover,
 a:focus {
   color: #fefe54;
-  background: #aa5500;
+  background: #aa3532;
 }
 
 .img-rounded {
@@ -846,7 +846,7 @@ h4 small {
 .page-header {
   padding: 20px 20px;
   margin: 20px 0 20px;
-  background: #00aaaa;
+  background: #008899;
 }
 
 .page-header h1 {
