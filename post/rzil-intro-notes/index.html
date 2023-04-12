@@ -65,12 +65,12 @@
 <h3 id="pure--effect-operations-in-rzil">Pure &amp; Effect Operations in RzIL</h3>
 <ul>
 <li><code>RzILOpEffect</code> is to reperesent an instruction/operation that changes the VM state from one to another. This means instructions like <strong><code>ADD</code></strong>, <strong><code>SUB</code></strong> etc… should be treated as <code>RzILOpEffect</code>! But that’s not the complete story, keep reading…</li>
-<li><code>RzILOpPure</code> is to represent operations/instructions that don’t change the CPU state but evaluate to a pure expression. By pure, we mean, it will be a constant expression. So the result of instructions like <strong><code>ADD</code></strong>, <strong><code>SUB</code></strong>, etc… can now be treated like an <code>RzILOpPure</code>! There are three different types of <code>RzILOpPure</code> operations, meaning three different types of operations in RzIL that evaluate to three completely different types of values :
+<li><code>RzILOpPure</code> is to represent operations/instructions that don’t change the CPU state but evaluate to a pure expression. By pure, we mean, it will be a constant expression. So the result of instructions like <strong><code>ADD</code></strong>, <strong><code>SUB</code></strong>, etc… can now be treated like an <code>RzILOpPure</code>!</li>
+<li>There are three different types of <code>RzILOpPure</code> operations, meaning three different types of operations in RzIL that evaluate to three completely different types of values, you can find all these definitions in <a href="https://github.com/rizinorg/rizin/blob/9ab709bc34843f04ffde3b63322c809596123e77/librz/include/rz_il/rz_il_opcodes.h#L41"><code>rz_il_opcodes.h#L41</code></a> :
 <ul>
 <li><code>RzILOpBool</code> To represent a boolean pure expression.</li>
 <li><code>RzILOpBitvector</code> To represent integers/numerical values of any size!</li>
-<li><code>RzILOpFloat</code> To represent float values of different spec/fomat.<br>
-You can find all these definitions in <a href="https://github.com/rizinorg/rizin/blob/9ab709bc34843f04ffde3b63322c809596123e77/librz/include/rz_il/rz_il_opcodes.h#L41"><code>rz_il_opcodes.h#L41</code></a></li>
+<li><code>RzILOpFloat</code> To represent float values of different spec/fomat.</li>
 </ul>
 </li>
 </ul>

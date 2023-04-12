@@ -232,7 +232,7 @@ textarea {
 body {
   margin: 0;
   font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   color: #bbbbcc;
   background-color: #000044;
@@ -240,7 +240,8 @@ body {
 
 a {
   color: #fefe54;
-  text-decoration: none;
+  text-decoration: underline;
+  font-weight: semibold;
 }
 
 a:hover,
@@ -1031,8 +1032,8 @@ code,
 pre {
   padding: 0;
   font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 18px;
+  line-height: 18px;
   overflow-x: auto;
   white-space: pre;
   white-space: pre-wrap;
