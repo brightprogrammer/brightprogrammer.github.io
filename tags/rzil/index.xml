@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rzil on Project Blue</title>
+    <link>https://brightprogrammer.in/tags/rzil/</link>
+    <description>Recent content in rzil on Project Blue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 10 Apr 2023 20:49:41 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/rzil/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RzIL Introductory Notes</title>
+      <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>
+      <pubDate>Mon, 10 Apr 2023 20:49:41 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/post/rzil-intro-notes/</guid>
+      <description>An Introduction To Rizin with Examples</description>
+    </item>
+    
+  </channel>
+</rss>

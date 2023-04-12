@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>new on Project Blue</title>
-    <link>https://brightprogrammer.in/tags/new/</link>
-    <description>Recent content in new on Project Blue</description>
+    <title>experiment on Project Blue</title>
+    <link>https://brightprogrammer.in/categories/experiment/</link>
+    <description>Recent content in experiment on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/new/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/experiment/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Garbage Collection Systems And Myths</title>
       <link>https://brightprogrammer.in/post/garbage-collectors/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/post/garbage-collectors/</guid>
-      <description>Basic Memory Manager
+      <description>WARNING : THIS IS A DUMMY POST, PLEASE DON&amp;rsquo;T PAY ATTENTION! Basic Memory Manager
 /** * @brief MemoryManager state. * */ typedef struct memory_manager_t { HashTable* buffer_map; ///&amp;lt; Pointer to size map. . . . } MemoryManager; MemoryManager* MemoryManagerCreate(); void MemoryManagerDestroy(MemoryManager* m); . . . Writing memory managers are a difficult task. We have two basic options. First one is that we implement a full blown Garbage Collector that can scan the entire stack and heap for possible memory regions having no reference stored anywhere anymore, other is we implement a Memory Checker that&amp;rsquo;ll check if allocated memory objects are free&amp;rsquo;d or not.</description>
     </item>
     

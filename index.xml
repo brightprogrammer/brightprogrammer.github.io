@@ -6,14 +6,14 @@
     <description>Recent content on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Apr 2023 09:08:52 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First_note</title>
-      <link>https://brightprogrammer.in/note/first_note/</link>
-      <pubDate>Wed, 12 Apr 2023 09:08:52 +0530</pubDate>
+      <title>RzIL Introductory Notes</title>
+      <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>
+      <pubDate>Mon, 10 Apr 2023 20:49:41 +0530</pubDate>
       
-      <guid>https://brightprogrammer.in/note/first_note/</guid>
-      <description></description>
+      <guid>https://brightprogrammer.in/post/rzil-intro-notes/</guid>
+      <description>An Introduction To Rizin with Examples</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/post/garbage-collectors/</guid>
-      <description>Basic Memory Manager
+      <description>WARNING : THIS IS A DUMMY POST, PLEASE DON&amp;rsquo;T PAY ATTENTION! Basic Memory Manager
 /** * @brief MemoryManager state. * */ typedef struct memory_manager_t { HashTable* buffer_map; ///&amp;lt; Pointer to size map. . . . } MemoryManager; MemoryManager* MemoryManagerCreate(); void MemoryManagerDestroy(MemoryManager* m); . . . Writing memory managers are a difficult task. We have two basic options. First one is that we implement a full blown Garbage Collector that can scan the entire stack and heap for possible memory regions having no reference stored anywhere anymore, other is we implement a Memory Checker that&amp;rsquo;ll check if allocated memory objects are free&amp;rsquo;d or not.</description>
     </item>
     
@@ -36,15 +36,6 @@
     </item>
     
     <item>
-      <title>Markdown Syntax Guide</title>
-      <link>https://brightprogrammer.in/post/markdown-syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://brightprogrammer.in/post/markdown-syntax/</guid>
-      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Placeholder Text</title>
       <link>https://brightprogrammer.in/post/placeholder-text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
@@ -55,23 +46,12 @@ pectora summo.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Emoji Support</title>
-      <link>https://brightprogrammer.in/post/emoji-support/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://brightprogrammer.in/post/emoji-support/</guid>
-      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>About</title>
       <link>https://brightprogrammer.in/about/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://brightprogrammer.in/about/</guid>
-      <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
-Hugo makes use of a variety of open source projects including:
-https://github.com/yuin/goldmark https://github.</description>
+      <description>About Me Nothing to say yet&amp;hellip; Site under development&amp;hellip;</description>
     </item>
     
   </channel>
