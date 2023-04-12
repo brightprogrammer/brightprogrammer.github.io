@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>rizin on Project Blue</title>
-    <link>https://brightprogrammer.in/tags/rizin/</link>
+    <link>https://brightprogrammer.in/categories/rizin/</link>
     <description>Recent content in rizin on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/rizin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/rizin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RzIL Introductory Notes</title>
       <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>

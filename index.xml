@@ -8,15 +8,6 @@
     <language>en</language>
     <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>RzIL Introductory Notes</title>
-      <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>
-      <pubDate>Mon, 10 Apr 2023 20:49:41 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/post/rzil-intro-notes/</guid>
-      <description>An Introduction To Rizin with Examples</description>
-    </item>
-    
-    <item>
       <title>Garbage Collection Systems And Myths</title>
       <link>https://brightprogrammer.in/post/garbage-collectors/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
@@ -24,6 +15,15 @@
       <guid>https://brightprogrammer.in/post/garbage-collectors/</guid>
       <description>WARNING : THIS IS A DUMMY POST, PLEASE DON&amp;rsquo;T PAY ATTENTION! Basic Memory Manager
 /** * @brief MemoryManager state. * */ typedef struct memory_manager_t { HashTable* buffer_map; ///&amp;lt; Pointer to size map. . . . } MemoryManager; MemoryManager* MemoryManagerCreate(); void MemoryManagerDestroy(MemoryManager* m); . . . Writing memory managers are a difficult task. We have two basic options. First one is that we implement a full blown Garbage Collector that can scan the entire stack and heap for possible memory regions having no reference stored anywhere anymore, other is we implement a Memory Checker that&amp;rsquo;ll check if allocated memory objects are free&amp;rsquo;d or not.</description>
+    </item>
+    
+    <item>
+      <title>RzIL Introductory Notes</title>
+      <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/post/rzil-intro-notes/</guid>
+      <description>References First Some idea about how RzIL works can be found here : https://github.com/rizinorg/rizin/blob/dev/doc/rzil.md RzIL is based on BAP&amp;rsquo;s Core Theory so do read about that too. Analysis code is present in librz/include/rz_analysis.h and librz/analysis. ESIL uplifters are present in librz/analysis/p and the new RzIL uplifters are present in librz/analysis/arch. Each of these intermediate languages can be emulated so there must be a VM to interpret these ILs and run them.</description>
     </item>
     
     <item>

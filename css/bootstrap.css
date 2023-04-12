@@ -234,7 +234,7 @@ body {
   font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
   font-size: 18px;
   line-height: 20px;
-  color: #bbbbbb;
+  color: #bbbbcc;
   background-color: #000044;
 }
 
@@ -853,24 +853,36 @@ h4 small {
   color: #000000;
 }
 
-ul,
-ol {
-  padding: 0;
+/* find different possible line-styles here : https://css-tricks.com/almanac/properties/l/list-style/ */
+
+ul {
+  padding: 5;
   margin: 0 0 20px 20px;
+  list-style: disc;
+}
+
+ol {
+  padding: 5;
+  margin: 0 0 20px 20px;
+  list-style: decimal;
 }
 
 ul ul,
-ul ol,
-ol ol,
 ol ul {
   margin-bottom: 0;
+  list-style: square;
+}
+
+ul ol,
+ol ol {
+  margin-bottom: 0;
+  list-style: decimal;
 }
 
 li {
   padding-left: 0;
   margin-left: 0;
   line-height: 20px;
-  list-style: none;
 }
 
 ul.unstyled,
@@ -1019,17 +1031,28 @@ code,
 pre {
   padding: 0;
   font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-  font-size: 18px;
+  font-size: 14px;
+  line-height: 16px;
+  overflow-x: auto;
+  white-space: pre;
+  white-space: pre-wrap;
   color: #555555;
   -webkit-border-radius: 0;
      -moz-border-radius: 0;
           border-radius: 0;
 }
 
+::-webkit-scrollbar {
+  height: 4px;              /* height of horizontal scrollbar ← You're missing this */
+  width: 4px;               /* width of vertical scrollbar */
+  border: 1px solid #d5d5d5;
+}
+
 code {
   padding: 0;
   color: #ffffff;
-  white-space: nowrap;
+  overflow-x: auto;
+  white-space: pre;
   background-color: #000000;
   border: 0;
 }
@@ -1040,11 +1063,10 @@ pre {
   margin: 0 0 10px;
   font-size: 18px;
   font-weight: normal;
-  line-height: 20px;
-  word-break: break-all;
-  word-wrap: break-word;
+  line-height: 18px;
+  /* word-break: break-all; */
+  /* word-wrap: break-word; */
   white-space: pre;
-  white-space: pre-wrap;
   background-color: #000000;
   border: 0;
   -webkit-border-radius: 0;
@@ -1059,8 +1081,8 @@ pre.prettyprint {
 pre code {
   padding: 0;
   color: inherit;
+  overflow-x: auto;
   white-space: pre;
-  white-space: pre-wrap;
   background-color: transparent;
   border: 0;
 }
