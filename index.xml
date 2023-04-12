@@ -8,22 +8,85 @@
     <language>en</language>
     <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Garbage Collection Systems And Myths</title>
-      <link>https://brightprogrammer.in/post/garbage-collectors/</link>
+      <title>About Me</title>
+      <link>https://brightprogrammer.in/about-me/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
-      <guid>https://brightprogrammer.in/post/garbage-collectors/</guid>
+      <guid>https://brightprogrammer.in/about-me/</guid>
+      <description>Nothing much to tell yet&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>About Project Blue</title>
+      <link>https://brightprogrammer.in/about-project-blue/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/about-project-blue/</guid>
+      <description>Nothing much to tell yet&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Copyright information</title>
+      <link>https://brightprogrammer.in/copyright/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/copyright/</guid>
+      <description>Nothing much to tell yet&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Dummy Note For Testing</title>
+      <link>https://brightprogrammer.in/notes/sample-note/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/notes/sample-note/</guid>
+      <description>This is a sample note Dummy note to test this page! More things to come. I&amp;rsquo;ll add breadcrums and all to make this look better.</description>
+    </item>
+    
+    <item>
+      <title>Garbage Collection Systems And Myths</title>
+      <link>https://brightprogrammer.in/posts/garbage-collectors/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/garbage-collectors/</guid>
       <description>WARNING : THIS IS A DUMMY POST, PLEASE DON&amp;rsquo;T PAY ATTENTION! Basic Memory Manager
 /** * @brief MemoryManager state. * */ typedef struct memory_manager_t { HashTable* buffer_map; ///&amp;lt; Pointer to size map. . . . } MemoryManager; MemoryManager* MemoryManagerCreate(); void MemoryManagerDestroy(MemoryManager* m); . . . Writing memory managers are a difficult task. We have two basic options. First one is that we implement a full blown Garbage Collector that can scan the entire stack and heap for possible memory regions having no reference stored anywhere anymore, other is we implement a Memory Checker that&amp;rsquo;ll check if allocated memory objects are free&amp;rsquo;d or not.</description>
     </item>
     
     <item>
-      <title>RzIL Introductory Notes</title>
-      <link>https://brightprogrammer.in/post/rzil-intro-notes/</link>
+      <title>My Reverse Engineering Bookmarks</title>
+      <link>https://brightprogrammer.in/bookmarks/reverse-engineering/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
-      <guid>https://brightprogrammer.in/post/rzil-intro-notes/</guid>
+      <guid>https://brightprogrammer.in/bookmarks/reverse-engineering/</guid>
+      <description>Bookmark Begins </description>
+    </item>
+    
+    <item>
+      <title>RzIL Introductory Notes</title>
+      <link>https://brightprogrammer.in/posts/rzil-intro-notes/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/rzil-intro-notes/</guid>
       <description>References First Some idea about how RzIL works can be found here : https://github.com/rizinorg/rizin/blob/dev/doc/rzil.md RzIL is based on BAP&amp;rsquo;s Core Theory so do read about that too. Analysis code is present in librz/include/rz_analysis.h and librz/analysis. ESIL uplifters are present in librz/analysis/p and the new RzIL uplifters are present in librz/analysis/arch. Each of these intermediate languages can be emulated so there must be a VM to interpret these ILs and run them.</description>
+    </item>
+    
+    <item>
+      <title>Sample Dummy Project</title>
+      <link>https://brightprogrammer.in/projects/sample-project/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/projects/sample-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sample Dummy Project</title>
+      <link>https://brightprogrammer.in/publication/sample/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/publication/sample/</guid>
+      <description>Dummy Test Publication This is a goal!!</description>
     </item>
     
     <item>
@@ -33,16 +96,6 @@
       
       <guid>https://brightprogrammer.in/archives/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Placeholder Text</title>
-      <link>https://brightprogrammer.in/post/placeholder-text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://brightprogrammer.in/post/placeholder-text/</guid>
-      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de
-pectora summo.&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -8,6 +8,15 @@
     <language>en</language>
     <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>bookmark</title>
+      <link>https://brightprogrammer.in/categories/bookmark/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/categories/bookmark/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>experiment</title>
       <link>https://brightprogrammer.in/categories/experiment/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
@@ -17,11 +26,38 @@
     </item>
     
     <item>
+      <title>note</title>
+      <link>https://brightprogrammer.in/categories/note/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/categories/note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>open-source</title>
       <link>https://brightprogrammer.in/categories/open-source/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/categories/open-source/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>project</title>
+      <link>https://brightprogrammer.in/categories/project/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/categories/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>publication</title>
+      <link>https://brightprogrammer.in/categories/publication/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/categories/publication/</guid>
       <description></description>
     </item>
     

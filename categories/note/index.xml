@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>note on Project Blue</title>
+    <link>https://brightprogrammer.in/categories/note/</link>
+    <description>Recent content in note on Project Blue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dummy Note For Testing</title>
+      <link>https://brightprogrammer.in/notes/sample-note/</link>
+      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/notes/sample-note/</guid>
+      <description>This is a sample note Dummy note to test this page! More things to come. I&amp;rsquo;ll add breadcrums and all to make this look better.</description>
+    </item>
+    
+  </channel>
+</rss>
