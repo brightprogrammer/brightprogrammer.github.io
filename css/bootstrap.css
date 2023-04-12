@@ -847,11 +847,12 @@ h4 small {
 .page-header {
   padding: 20px 20px;
   margin: 20px 0 20px;
-  background: #008899;
+  background: #000000;
 }
 
 .page-header h1 {
-  color: #000000;
+  color: #ffffff;
+  font-size: 40px;
 }
 
 /* find different possible line-styles here : https://css-tricks.com/almanac/properties/l/list-style/ */
