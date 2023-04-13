@@ -26,7 +26,8 @@
                 data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false"
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation"
+                href="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -86,8 +87,8 @@
                 </li>
                 
             </ul>
-            
         </div>
+        
     </div>
 </div>
 <div id="content" class="bs-component container-fluid">
@@ -95,13 +96,23 @@
 <br>
 <br>
 
-<h3 align="center">
+<div class="bs-component">
+    <h3 align="center">
         <strong> Dummy Note For Testing </strong> <br>
-        published at Wed, Apr 12, 2023 <br>
+        published on Wed, Apr 12, 2023 <br>
         <br>
         Dummy Note
-</h3>
+    </h3>
+</div>
 
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/notes/">Notes</a></li>
+        <li class="breadcrumb-item inactive" >Dummy Note For Testing</li>
+
+    </ul>
+</div>
 
 <h3 id="this-is-a-sample-note">This is a sample note</h3>
 <p>Dummy note to test this page!
@@ -175,7 +186,6 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 </footer>
 
 <script src="/js/jquery.min.js"></script>
-    </body>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
@@ -186,7 +196,6 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.min.js"></script>
 
 
 <script>
@@ -203,4 +212,5 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 </script>
 
 
+</body>
 </html>
