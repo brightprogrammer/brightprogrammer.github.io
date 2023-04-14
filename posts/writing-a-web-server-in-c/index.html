@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en"><head>
+    <title>Project Blue</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
+    <link rel="canonical" href="https://brightprogrammer.in">
+</head>
+<body>
+
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+
+        
+        <a href="https://brightprogrammer.in"
+           class="navbar-brand">Project Blue
+        </a>
+
+        
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                href="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse"
+             id="navbarResponsive">
+
+            
+            <ul class="navbar-nav">
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="filemenu">
+                        File <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="filemenu">
+                        <a class="dropdown-item" href="/posts/">Posts</a>
+                        <a class="dropdown-item" href="/notes/">Notes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/projects/">Projects<a>
+                        <a class="dropdown-item" href="/publication/">
+                            Publications
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/bookmarks/">
+                            Bookmarks
+                        </a>
+                    </div>
+                    
+                </li>
+                
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="helpmenu">
+                        Help <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="helpmenu">
+                        <a class="dropdown-item" href="/about-me">About Me</a>
+                        <a class="dropdown-item" href="/about-project-blue">
+                            About Project Blue
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/copyright">
+                            Copyright
+                        </a>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+<div id="content" class="bs-component container-fluid">
+
+<br>
+<br>
+
+<div class="bs-component">
+    <h3 align="center">
+        <strong> Writing A HTTP Web Server In C </strong> <br>
+        published on Wed, Apr 12, 2023 <br>
+        <br>
+        Using Linux Socket API
+    </h3>
+</div>
+
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
+        <li class="breadcrumb-item inactive" >Writing A HTTP Web Server In C</li>
+
+    </ul>
+</div>
+
+<h2 id="first-things-first">First Things First!</h2>
+<p>For those who are here just for code and hack it to make it their own, please have it :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;netinet/in.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;netdb.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;arpa/inet.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Basic procedure to create server is.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * setup hints in struct addrinfo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * getaddrinfo()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * use the information retrieved from getaddrinfo() to create a socket
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * call socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bind() socket to specific port
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * listen() to wait for incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * accept() an incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * send() your HTML file with an HTTP header.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** typedef to represent a socket descriptor */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">int</span> SOCKET_DESC;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">int</span> STATUS;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define ERROR_AND_EXIT(...) fprintf(stderr, &#34;[!] ERROR : &#34;); fprintf(stderr, __VA_ARGS__); exit(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define SERVER_ADDR &#34;localhost&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SERVER_PORT &#34;1337&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SERVER_INCOMING_CONNECTION_QUEUE_SIZE 20
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* get address information */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> addrinfo hints, <span style="color:#f92672">*</span>res <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// setup hints
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>hints, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span> hints);
+</span></span><span style="display:flex;"><span>    hints.ai_family <span style="color:#f92672">=</span> AF_UNSPEC;
+</span></span><span style="display:flex;"><span>    hints.ai_socktype <span style="color:#f92672">=</span> SOCK_STREAM;
+</span></span><span style="display:flex;"><span>    hints.ai_flags <span style="color:#f92672">=</span> AI_PASSIVE; <span style="color:#75715e">/* set my IP address for me */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get information
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// NULL and AI_PASSIVE will indicate to get addr info for local host
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    STATUS status <span style="color:#f92672">=</span> <span style="color:#a6e22e">getaddrinfo</span>(NULL, SERVER_PORT, <span style="color:#f92672">&amp;</span>hints, <span style="color:#f92672">&amp;</span>res);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;getaddrinfo failed : %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">gai_strerror</span>(status));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// iterate over all entries in the linked list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// and print information.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> ipstr[INET6_ADDRSTRLEN] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">struct</span> addrinfo <span style="color:#f92672">*</span>iter <span style="color:#f92672">=</span> res; iter <span style="color:#f92672">!=</span> NULL; iter <span style="color:#f92672">=</span> iter<span style="color:#f92672">-&gt;</span>ai_next) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>ipver <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>addr <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(iter<span style="color:#f92672">-&gt;</span>ai_family <span style="color:#f92672">==</span> AF_INET) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">struct</span> sockaddr_in <span style="color:#f92672">*</span>ipv4 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> sockaddr_in <span style="color:#f92672">*</span>)iter<span style="color:#f92672">-&gt;</span>ai_addr;
+</span></span><span style="display:flex;"><span>            ipver <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;IPv4&#34;</span>;
+</span></span><span style="display:flex;"><span>            addr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>(ipv4<span style="color:#f92672">-&gt;</span>sin_addr);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">struct</span> sockaddr_in <span style="color:#f92672">*</span>ipv6 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> sockaddr_in <span style="color:#f92672">*</span>)iter<span style="color:#f92672">-&gt;</span>ai_addr;
+</span></span><span style="display:flex;"><span>            ipver <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;IPv6&#34;</span>;
+</span></span><span style="display:flex;"><span>            addr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>(ipv6<span style="color:#f92672">-&gt;</span>sin_addr);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">memset</span>(ipstr, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span> ipstr);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">inet_ntop</span>(iter<span style="color:#f92672">-&gt;</span>ai_family, addr, ipstr, <span style="color:#66d9ef">sizeof</span> ipstr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s : %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ipver, ipstr);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create a socket with returned information
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">struct</span> addrinfo <span style="color:#f92672">*</span>target <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>    SOCKET_DESC sock_desc <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(target<span style="color:#f92672">-&gt;</span>ai_family, target<span style="color:#f92672">-&gt;</span>ai_socktype, target<span style="color:#f92672">-&gt;</span>ai_protocol);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>sock_desc) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;Failed to create socket&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// bind socket descriptor to a port
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    status <span style="color:#f92672">=</span> <span style="color:#a6e22e">bind</span>(sock_desc, target<span style="color:#f92672">-&gt;</span>ai_addr, target<span style="color:#f92672">-&gt;</span>ai_addrlen);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;bind : returned %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, status);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// listen/wait for connections
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">listen</span>(sock_desc, SERVER_INCOMING_CONNECTION_QUEUE_SIZE);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// accept an incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">struct</span> sockaddr_storage conn_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">socklen_t</span> addr_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span> conn_addr;
+</span></span><span style="display:flex;"><span>    SOCKET_DESC new_conn <span style="color:#f92672">=</span> <span style="color:#a6e22e">accept</span>(sock_desc, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>conn_addr, <span style="color:#f92672">&amp;</span>addr_size);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>new_conn) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;accept : failed to accept connection</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// send some data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> http_header[<span style="color:#ae81ff">8000</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HTTP/1.1 404 OK</span><span style="color:#ae81ff">\r\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;!doctype html&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;html&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;head&gt;&lt;title&gt;project blue&lt;/title&gt;&lt;/head&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;body bgcolor=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">gray</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;&lt;h1&gt; &lt;font color=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">cyan</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;Project Blue&lt;/font&gt;&lt;/h1&gt;&lt;body&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;/html&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">send</span>(new_conn, http_header, <span style="color:#66d9ef">sizeof</span> http_header, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">freeaddrinfo</span>(res);
+</span></span><span style="display:flex;"><span>    target <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>and here&rsquo;s the output :</p>
+<p align="center">
+  <img src="/images/working-server.png" />
+  Working image of server
+</p>
+<h2 id="background">Background</h2>
+<p>I created this blog but it&rsquo;s static because it&rsquo;s being served on hugo. Now I have this urge to make this site dynamic for some reason and I wanna do it in C. I can use python easily since I already have experience with Django as I created a site using that last year. It was hosted on a free hosting service which got converted to paid later previous year. I can use Python or if I wanna look more cool (or fool to some people) I can use C++ but I just wanna create this whole backend in C and that too from scratch.<br>
+That&rsquo;s enough background, let&rsquo;s move on with actual explanation of the above code. You can also see the coding session <a href="https://youtu.be/P9muoNLgZio">here</a> on <a href="https://youtube.com/@brightprogrammer">My YouTube Channel</a>.</p>
+<h2 id="explanation">Explanation</h2>
+<p>We start of with this guy here :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Basic procedure to create server is.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * setup hints in struct addrinfo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * getaddrinfo()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * use the information retrieved from getaddrinfo() to create a socket
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * call socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bind() socket to specific port
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * listen() to wait for incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * accept() an incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * send() your HTML file with an HTTP header.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span></code></pre></div><p>Just follow everything in exact same manner and you&rsquo;ll have your basic web server running in no time.</p>
+<p>First thing you need to understand is use of <code>struct addrinfo</code> and <code>getaddrinfo()</code>. I&rsquo;ll explain you this from two point of views :</p>
+<ul>
+<li>Client</li>
+<li>Server</li>
+</ul>
+<h3 id="when-we-are-client">When We Are Client</h3>
+<p>Clients like web browsers need to connect to any domain or IP address that you give to it. If a connection cannot be made or if you entered a wrong URL or IP address, they also need to inform you with relevant error messages. There are a few steps involved in making connection (already listed above), but the very first step is Domain Name Resolution.</p>
+<p>This step involves taking the domain name like <code>https://brightprogrammer.in</code> and getting all <code>IPv4</code> and/or <code>IPv6</code> addresses that are pointed by the given domain name. This is done by the help of DNS servers but let&rsquo;s not get into that much depth. Now in our case, this resolution is provided by the <code>struct addrinfo hints</code> and <code>getaddrinfo()</code>.</p>
+<p>We fill in the <code>hints</code> variable with relevant details like which IP versions we want to enumerate and what protocol are we using <code>TCP</code> -&gt; <code>SOCK_STREAM</code> or <code>UDP</code> -&gt; <code>SOCK_DGRAM</code>. Next, you need to pass in the domain name you are trying to get information about in the first parameter of <code>getaddrinfo</code> call.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* get address information */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> addrinfo hints, <span style="color:#f92672">*</span>res <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// setup hints
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>hints, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span> hints);
+</span></span><span style="display:flex;"><span>hints.ai_family <span style="color:#f92672">=</span> AF_UNSPEC;
+</span></span><span style="display:flex;"><span>hints.ai_socktype <span style="color:#f92672">=</span> SOCK_STREAM;
+</span></span><span style="display:flex;"><span>hints.ai_flags <span style="color:#f92672">=</span> AI_PASSIVE; <span style="color:#75715e">/* set my IP address for me */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get information
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// NULL and AI_PASSIVE will indicate to get addr info for local host
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>STATUS status <span style="color:#f92672">=</span> <span style="color:#a6e22e">getaddrinfo</span>(NULL, SERVER_PORT, <span style="color:#f92672">&amp;</span>hints, <span style="color:#f92672">&amp;</span>res);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;getaddrinfo failed : %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">gai_strerror</span>(status));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If you already have exact data like IP version, IP address and port number then you don&rsquo;t need to perform this step. But in case of clients like web browsers, we need this step to get as much details about target as possible. The returned <code>res</code> struct is a linked list of returned details.</p>
+<h3 id="when-we-are-server">When We Are Server</h3>
+<p>Servers already know which port they&rsquo;ll listen to and which IP address they&rsquo;ll use so they can skip this step. I don&rsquo;t know exactly at this moment because by the time of writing this I&rsquo;m a beginner in network programming so it&rsquo;s just my intuition. For servers we can hardcode all data to the <code>socket()</code> call!</p>
+<h3 id="example-run">Example Run</h3>
+<p>For example :<br>
+Running this program as it is will get us addr info of local host like this :</p>
+<pre tabindex="0"><code>IPv4 : 0.0.0.0
+IPv6 : ::
+</code></pre><p>and changing the first parameter in <code>getaddrinfo</code> returns :</p>
+<pre tabindex="0"><code>IPv4 : 185.199.108.153
+IPv4 : 185.199.109.153
+IPv4 : 185.199.110.153
+IPv4 : 185.199.111.153
+IPv6 : 0:0:2606:50c0:8000::
+IPv6 : 0:0:2606:50c0:8001::
+IPv6 : 0:0:2606:50c0:8003::
+IPv6 : 0:0:2606:50c0:8002::
+</code></pre><p>Which are IP addresses that GitHub asks you to set when attaching your github pages site with your domain name. Interesting isn&rsquo;t it?</p>
+<h3 id="sockets-sockets-sockets">Sockets Sockets Sockets!</h3>
+<p>The very next step is to create a socket that will connect to our retrieved IP addresses. Note that if we get IP addresses this way then we don&rsquo;t need to hardcode protocol and all since that&rsquo;ll all be provided by our helpful <code>struct addrinfo</code>.</p>
+<p>Here&rsquo;s how <code>addrinfo</code> struct looks like :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> sockaddr {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">short</span>   sa_family;   <span style="color:#75715e">/* indicates IPv4 or IPv6 family */</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">char</span>             sa_data[<span style="color:#ae81ff">14</span>]; <span style="color:#75715e">/* can contain IPv4 or IPv6 addresses*/</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> addrinfo {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>     ai_flags;          <span style="color:#75715e">/* (too complicated for me to understand atm) */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>     ai_family;         <span style="color:#75715e">/* AF_INET for IPv4 and AF_INET6 for IPv6 or AF_UNSPEC for both/any */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>     ai_socktype;       <span style="color:#75715e">/* SOCK_STREAM or SOCK_DGRAM */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>     ai_protocol;       <span style="color:#75715e">/* set it to 0 for default (TCP) protocol */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">size_t</span>  ai_addrlen;        <span style="color:#75715e">/* size of upcoming ai_addr struct */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span>  sockaddr <span style="color:#f92672">*</span>ai_addr; <span style="color:#75715e">/* retrieved ip address */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span>    <span style="color:#f92672">*</span>ai_canonname;     <span style="color:#75715e">/* canonical name */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span>  addrinfo <span style="color:#f92672">*</span>ai_next; <span style="color:#75715e">/* this struct can form a linked list */</span>
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Now we have all the information we want about our target.</p>
+<ul>
+<li>IP Address</li>
+<li>Port (we already had this since we passed it to <code>getaddrinfo</code>)</li>
+<li>Protocol</li>
+</ul>
+<p>So, lets create a socket!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create a socket with returned information
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">struct</span> addrinfo <span style="color:#f92672">*</span>target <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>    SOCKET_DESC sock_desc <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(target<span style="color:#f92672">-&gt;</span>ai_family, target<span style="color:#f92672">-&gt;</span>ai_socktype, target<span style="color:#f92672">-&gt;</span>ai_protocol);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>sock_desc) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;Failed to create socket&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Nice, so we now have a socket!</p>
+<h3 id="when-we-are-client-1">When We Are Client</h3>
+<p>Client&rsquo;s don&rsquo;t need to bind to any port in order to make any connection. They can just create a socket and call <code>connect</code> in order to establish a connection with target server.</p>
+<p>(Not covering client case here because that&rsquo;s easy and out of scope of this article)</p>
+<h3 id="when-we-are-server-1">When We Are Server</h3>
+<p>Servers need a fix port on which they will wait/listen for incoming connections. For this they do a <code>bind()</code> just after creating a socket.</p>
+<div class="card text-white bg-warning mb-3">
+    <div class="card-header">Important Note</div>
+        <div class="card-body">
+            <p class="card-text">
+                It might be possible that after restarting your server, you can't bind to the same port again, in that case you need to setup a mechanism to reuse the same port (out of scope of this article).
+            </p>
+        </div>
+    </div>
+</div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// bind socket descriptor to a port
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>status <span style="color:#f92672">=</span> <span style="color:#a6e22e">bind</span>(sock_desc, target<span style="color:#f92672">-&gt;</span>ai_addr, target<span style="color:#f92672">-&gt;</span>ai_addrlen);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;bind : returned %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, status);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// listen/wait for connections
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// this queue size is sometimes called backlog
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">listen</span>(sock_desc, SERVER_INCOMING_CONNECTION_QUEUE_SIZE);
+</span></span></code></pre></div><p>This way we are waiting for connections on a specific port. Note that if you are a client, you&rsquo;ll use the same port that the server bound to, to get information!</p>
+<h3 id="accepting-connections">Accepting Connections</h3>
+<p>After we get a connection, we&rsquo;ll call <code>accept</code> to accept the connection and read/write to/from the new socket descriptor. Yes! everytime you accept a new connection a new socket is created. The old one&rsquo;s still out there listening to new connections (if you wanna do that) but new ones are also created automatically on accepting new connections.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// accept an incoming connection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> sockaddr_storage conn_addr;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">socklen_t</span> addr_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span> conn_addr;
+</span></span><span style="display:flex;"><span>SOCKET_DESC new_conn <span style="color:#f92672">=</span> <span style="color:#a6e22e">accept</span>(sock_desc, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>conn_addr, <span style="color:#f92672">&amp;</span>addr_size);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>new_conn) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;accept : failed to accept connection</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Yay! we accepted connection, now if there&rsquo;s no error, we can just <code>send()</code>/<code>recv()</code> data to/from the socket descriptor. If this is a stream socket connection then this socket will act like a pipe where whatever you write on the server end will reach on the client end in same exact order.</p>
+<h3 id="sending-a-webpage-to-client">Sending A Webpage To Client</h3>
+<p>Note that our client in this case is the web browser itself! So let&rsquo;s send a web page :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#75715e">// send some data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> http_header[<span style="color:#ae81ff">1024</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HTTP/1.1 200 OK</span><span style="color:#ae81ff">\r\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;!doctype html&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;html&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;head&gt;&lt;title&gt;project blue&lt;/title&gt;&lt;/head&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;body bgcolor=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">#222222</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;&lt;h1&gt; &lt;font color=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">red</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;Project Blue&lt;/font&gt;&lt;/h1&gt;&lt;body&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&lt;/html&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">send</span>(new_conn, http_header, <span style="color:#66d9ef">sizeof</span> http_header, <span style="color:#ae81ff">0</span>); <span style="color:#75715e">/* when last argument is 0, this acts like a write(fd, data, size) call */</span>
+</span></span></code></pre></div><div class="card text-white bg-warning mb-3">
+    <div class="card-header">Important Note</div>
+        <div class="card-body">
+            <p class="card-text">
+                `send` returns the number of bytes sent. It might happen that only a part of data was sent but rest was left out. `send` API documentation states that it's your responsibilty to reuse `send` and send the rest of data! This is easily doable since our data is sent like a stream and we know the offset in the buffer! This means you need to add a verification check to how much data you intended to send and how much was actually sent!
+            </p>
+        </div>
+    </div>
+</div>
+<p>Well! This marks the ending of this post. Let&rsquo;s end this with a beautiful quote :</p>
+<blockquote>
+<p>“The best way to predict the future is to invent it. Every technology really needs to be shipped with a special manual – not how to use it but why, when and for what.” - Alan Kay</p>
+</blockquote>
+
+
+<h4 align="center">
+    <a href="https://brightprogrammer.in">
+        Project Blue Main Page
+    </a>
+</h4>
+<br>
+
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+<div class="bs-component" align = "center">
+    <div class="modal" style='display:block;position:relative'>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                
+                <div class="modal-header">
+                    
+                    <div class="modal-title">Copyright Message</div>
+
+                    
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+
+                
+                <div class="modal-body">
+                    <p>
+                        Copyright (c) Siddharth Mishra 2023 <br>
+                        <br>
+                        Content may or may not be copyrighted.
+                        Please ask for permission before use if necessary.
+                        Attribution is not necessary but will be appreciated!
+                    </p>
+                </div>
+
+                
+                <div class="modal-footer">
+                    <button type="button submit"
+                            class="btn btn-primary">
+                        Who Cares?
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+                        Learn More!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</p>
+
+    <p align="center">
+        -- custom theme written with help of
+        <a href="https://kristopolous.github.io/BOOTSTRA.386/demo.html">
+            BOOTSTRAP.385
+        </a> --
+</footer>
+
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
+
+
+
+
+
+
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
+
+
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+    
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script>
+
+
+</body>
+</html>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>

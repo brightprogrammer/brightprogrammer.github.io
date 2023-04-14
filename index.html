@@ -6,7 +6,6 @@
     <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#000084" />
     <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
     <link rel="canonical" href="https://brightprogrammer.in">
 </head>
@@ -187,6 +186,16 @@
                 
             
                 
+                <li>
+                    <a href="https://brightprogrammer.in/posts/writing-a-web-server-in-c/">
+                        2023-04-12 |
+                        Writing A HTTP Web Server In C |
+                        Using Linux Socket API
+                    </a>
+                </li>
+                
+            
+                
             
                 
             
@@ -212,6 +221,10 @@
             
             <li>
                 <a href="https://brightprogrammer.in/categories/experiment/">experiment</a>
+            </li>
+            
+            <li>
+                <a href="https://brightprogrammer.in/categories/network-programming/">network-programming</a>
             </li>
             
             <li>
@@ -261,7 +274,23 @@
             </li>
             
             <li>
+                <a href="https://brightprogrammer.in/tags/http/">http</a>
+            </li>
+            
+            <li>
                 <a href="https://brightprogrammer.in/tags/intermediate-language/">intermediate-language</a>
+            </li>
+            
+            <li>
+                <a href="https://brightprogrammer.in/tags/linux/">linux</a>
+            </li>
+            
+            <li>
+                <a href="https://brightprogrammer.in/tags/network-programming/">network-programming</a>
+            </li>
+            
+            <li>
+                <a href="https://brightprogrammer.in/tags/note/">note</a>
             </li>
             
             <li>
@@ -269,15 +298,11 @@
             </li>
             
             <li>
+                <a href="https://brightprogrammer.in/tags/project-blue/">project-blue</a>
+            </li>
+            
+            <li>
                 <a href="https://brightprogrammer.in/tags/reverse-engineering/">reverse-engineering</a>
-            </li>
-            
-            <li>
-                <a href="https://brightprogrammer.in/tags/rizin/">rizin</a>
-            </li>
-            
-            <li>
-                <a href="https://brightprogrammer.in/tags/index/">index</a>
             </li>
             
             
@@ -289,28 +314,6 @@
         </ul>
     </div>
 </div>
-
-<script>
-    (function(){
-        _386.magicCursor();
-        _386.scrollLock();
-        $('[data-toggle="tooltip"]').tooltip();
-        $('[data-toggle="popover"]').popover();
-
-        $(window).scroll(function() {
-            var top = $(document).scrollTop();
-            if(top > 50)
-                $('#home > .navbar').removeClass('navbar-transparent');
-            else
-                $('#home > .navbar').addClass('navbar-transparent');
-        });
-
-        $("a[href='#']").click(function(e) {
-            e.preventDefault();
-        });
-
-    })();
-</script>
 
 
         </div><footer class="container">
@@ -372,16 +375,27 @@
 </footer>
 
 <script src="/js/jquery.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
 
 
 
 
 
-<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
 
 
 <script>
@@ -400,3 +414,25 @@
 
 </body>
 </html>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>

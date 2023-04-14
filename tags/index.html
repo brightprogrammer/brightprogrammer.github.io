@@ -5,7 +5,6 @@
     <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#000084" />
     <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
     <link rel="canonical" href="https://brightprogrammer.in">
 </head>
@@ -110,11 +109,31 @@
     </li>
 
     <li>
+        <a href="https://brightprogrammer.in/tags/http/">2023-04-12 | http</a>
+    </li>
+
+    <li>
         <a href="https://brightprogrammer.in/tags/intermediate-language/">2023-04-12 | intermediate-language</a>
     </li>
 
     <li>
+        <a href="https://brightprogrammer.in/tags/linux/">2023-04-12 | linux</a>
+    </li>
+
+    <li>
+        <a href="https://brightprogrammer.in/tags/network-programming/">2023-04-12 | network-programming</a>
+    </li>
+
+    <li>
+        <a href="https://brightprogrammer.in/tags/note/">2023-04-12 | note</a>
+    </li>
+
+    <li>
         <a href="https://brightprogrammer.in/tags/notes/">2023-04-12 | notes</a>
+    </li>
+
+    <li>
+        <a href="https://brightprogrammer.in/tags/project-blue/">2023-04-12 | project-blue</a>
     </li>
 
     <li>
@@ -123,6 +142,14 @@
 
     <li>
         <a href="https://brightprogrammer.in/tags/rizin/">2023-04-12 | rizin</a>
+    </li>
+
+    <li>
+        <a href="https://brightprogrammer.in/tags/server/">2023-04-12 | server</a>
+    </li>
+
+    <li>
+        <a href="https://brightprogrammer.in/tags/socket/">2023-04-12 | socket</a>
     </li>
 
     <li>
@@ -193,16 +220,27 @@
 </footer>
 
 <script src="/js/jquery.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
 
 
 
 
 
-<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
 
 
 <script>
@@ -221,3 +259,25 @@
 
 </body>
 </html>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>
