@@ -314,13 +314,12 @@ IPv6 : 0:0:2606:50c0:8002::
 <li>Protocol</li>
 </ul>
 <p>So, lets create a socket!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create a socket with returned information
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">struct</span> addrinfo <span style="color:#f92672">*</span>target <span style="color:#f92672">=</span> res;
-</span></span><span style="display:flex;"><span>    SOCKET_DESC sock_desc <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(target<span style="color:#f92672">-&gt;</span>ai_family, target<span style="color:#f92672">-&gt;</span>ai_socktype, target<span style="color:#f92672">-&gt;</span>ai_protocol);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>sock_desc) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;Failed to create socket&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// create a socket with returned information
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> addrinfo <span style="color:#f92672">*</span>target <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>SOCKET_DESC sock_desc <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(target<span style="color:#f92672">-&gt;</span>ai_family, target<span style="color:#f92672">-&gt;</span>ai_socktype, target<span style="color:#f92672">-&gt;</span>ai_protocol);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>sock_desc) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ERROR_AND_EXIT</span>(<span style="color:#e6db74">&#34;Failed to create socket&#34;</span>);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Nice, so we now have a socket!</p>
 <h3 id="when-we-are-client-1">When We Are Client</h3>
 <p>Client&rsquo;s don&rsquo;t need to bind to any port in order to make any connection. They can just create a socket and call <code>connect</code> in order to establish a connection with target server.</p>
