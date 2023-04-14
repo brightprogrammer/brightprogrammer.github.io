@@ -3,7 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://brightprogrammer.in/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/http/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/linux/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/network-programming/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/network-programming/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/note/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/posts/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/project/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/project-blue/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/server/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/socket/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/about-me/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
@@ -15,9 +54,6 @@
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/bookmarks/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/copyright/</loc>
@@ -38,25 +74,10 @@
     <loc>https://brightprogrammer.in/tags/garbage-collector/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
-    <loc>https://brightprogrammer.in/tags/http/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
     <loc>https://brightprogrammer.in/tags/intermediate-language/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
-    <loc>https://brightprogrammer.in/tags/linux/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
     <loc>https://brightprogrammer.in/bookmarks/reverse-engineering/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/network-programming/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/network-programming/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/note/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/note/</loc>
@@ -69,15 +90,6 @@
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/open-source/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/posts/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/project/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/project-blue/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/projects/</loc>
@@ -105,18 +117,6 @@
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/publication/sample/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/server/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/socket/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/archives/</loc>

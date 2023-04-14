@@ -6,11 +6,11 @@
     <description>Recent content in note on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Apr 2023 08:11:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 03:12:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/note/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Writing A HTTP Web Server In C</title>
       <link>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</link>
-      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
+      <pubDate>Sat, 15 Apr 2023 03:12:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</guid>
       <description>First Things First! For those who are here just for code and hack it to make it their own, please have it :
