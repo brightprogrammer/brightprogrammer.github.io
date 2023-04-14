@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>about on Project Blue</title>
+    <link>https://brightprogrammer.in/categories/about/</link>
+    <description>Recent content in about on Project Blue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 15 Apr 2023 05:04:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Project Blue</title>
+      <link>https://brightprogrammer.in/about-project-blue/</link>
+      <pubDate>Sat, 15 Apr 2023 05:04:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/about-project-blue/</guid>
+      <description>Project Blue is the name of this blog as you might&amp;rsquo;ve figured this out already! The only thing special about this blog is that I&amp;rsquo;ve designed this blog bottom up by myself (except using Bootstrap for quick themeing).
+There&amp;rsquo;s nothing much to tell you about this blog yet but I&amp;rsquo;ll figure something amazing to tell when this blog gets some direction and then write it here! :=D</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://brightprogrammer.in/about-me/</link>
+      <pubDate>Sat, 15 Apr 2023 04:47:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/about-me/</guid>
+      <description>Hi! I&amp;rsquo;m Siddharth Mishra aka @brightprogrammer! I love Reverse Engineering and Software Development. I generally use C/C++ but nowadays my inclination is towards C in order to test whether we can avoid object oriented programming to solve any problem thrown at us.
+I&amp;rsquo;m a Mathematics &amp;amp; Computing student from India and I love Mathematics too! Nowadays I&amp;rsquo;m into Abstract Algebra like :
+Group Theory Linear Algebra Graph Theory I have a bucket list of things I want to create on my own from scratch in order to get the thrill of it :</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,28 @@
     <description>Recent content on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Apr 2023 03:12:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 05:04:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Project Blue</title>
+      <link>https://brightprogrammer.in/about-project-blue/</link>
+      <pubDate>Sat, 15 Apr 2023 05:04:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/about-project-blue/</guid>
+      <description>Project Blue is the name of this blog as you might&amp;rsquo;ve figured this out already! The only thing special about this blog is that I&amp;rsquo;ve designed this blog bottom up by myself (except using Bootstrap for quick themeing).
+There&amp;rsquo;s nothing much to tell you about this blog yet but I&amp;rsquo;ll figure something amazing to tell when this blog gets some direction and then write it here! :=D</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://brightprogrammer.in/about-me/</link>
+      <pubDate>Sat, 15 Apr 2023 04:47:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/about-me/</guid>
+      <description>Hi! I&amp;rsquo;m Siddharth Mishra aka @brightprogrammer! I love Reverse Engineering and Software Development. I generally use C/C++ but nowadays my inclination is towards C in order to test whether we can avoid object oriented programming to solve any problem thrown at us.
+I&amp;rsquo;m a Mathematics &amp;amp; Computing student from India and I love Mathematics too! Nowadays I&amp;rsquo;m into Abstract Algebra like :
+Group Theory Linear Algebra Graph Theory I have a bucket list of things I want to create on my own from scratch in order to get the thrill of it :</description>
+    </item>
+    
     <item>
       <title>Writing A HTTP Web Server In C</title>
       <link>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</link>
@@ -18,30 +39,12 @@
     </item>
     
     <item>
-      <title>About Me</title>
-      <link>https://brightprogrammer.in/about-me/</link>
-      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/about-me/</guid>
-      <description>Nothing much to tell yet&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>About Project Blue</title>
-      <link>https://brightprogrammer.in/about-project-blue/</link>
-      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/about-project-blue/</guid>
-      <description>Nothing much to tell yet&amp;hellip;</description>
-    </item>
-    
-    <item>
       <title>Copyright information</title>
       <link>https://brightprogrammer.in/copyright/</link>
       <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/copyright/</guid>
-      <description>Nothing much to tell yet&amp;hellip;</description>
+      <description>COPYRIGHT INFORMATION This page will contain copyright details of things around the blog. The general rule is that if you attribute this site in your work then please do! It&amp;rsquo;s not necessary though. If I use some resource from other sites then I&amp;rsquo;ll mention them. If I forget to do so, please write to me at admin@brightprogrammer.in to resolve the issue. Please give proper details about where the resource was mentioned, what&amp;rsquo;s it&amp;rsquo;s license and where I&amp;rsquo;ve used it in my blog.</description>
     </item>
     
     <item>
