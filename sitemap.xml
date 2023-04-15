@@ -2,29 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://brightprogrammer.in/</loc>
-    <lastmod>2023-04-15T05:04:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/about/</loc>
-    <lastmod>2023-04-15T05:04:25+05:30</lastmod>
-  </url><url>
     <loc>https://brightprogrammer.in/about-project-blue/</loc>
-    <lastmod>2023-04-15T05:04:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/about-project-blue/</loc>
-    <lastmod>2023-04-15T05:04:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/</loc>
-    <lastmod>2023-04-15T05:04:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/</loc>
     <lastmod>2023-04-15T05:04:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/about-me/</loc>
     <lastmod>2023-04-15T04:47:25+05:30</lastmod>
   </url><url>
-    <loc>https://brightprogrammer.in/tags/about-me/</loc>
-    <lastmod>2023-04-15T04:47:25+05:30</lastmod>
+    <loc>https://brightprogrammer.in/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/http/</loc>
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
@@ -54,6 +42,9 @@
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/socket/</loc>
+    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/</loc>
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</loc>
@@ -130,9 +121,6 @@
   </url><url>
     <loc>https://brightprogrammer.in/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/index/</loc>
   </url>
