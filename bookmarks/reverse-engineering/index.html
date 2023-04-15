@@ -98,9 +98,9 @@
 <div class="bs-component">
     <h3 align="center">
         <strong> My Reverse Engineering Bookmarks </strong> <br>
-        published on Wed, Apr 12, 2023 <br>
+        published on Sat, Apr 15, 2023 <br>
         <br>
-        Collection?
+        A Curated List Of My Bookmarks
     </h3>
 </div>
 
@@ -113,7 +113,60 @@
     </ul>
 </div>
 
-<h1 id="bookmark-begins">Bookmark Begins</h1>
+<div class="card text-white bg-warning mb-3">
+    <div class="card-header">Important Note</div>
+        <div class="card-body">
+            <p class="card-text">
+                Since after creating the bookmarks, not every link/resource is used frequently, it might be possible that some of the links stop working. At the time of writing this, all links work but if you find any of the links/resources not working please contact me at admin@brightprogrammer.in with updated information.
+            </p>
+        </div>
+    </div>
+</div>
+<h4 id="every-major-category-is-arranged-lexographically">EVERY MAJOR CATEGORY IS ARRANGED LEXOGRAPHICALLY</h4>
+<h1 id="courses--blogs--series--challenges">Courses / Blogs / Series / Challenges</h1>
+<ul>
+<li><a href="https://maxkersten.nl/binary-analysis-course/">Binary Analysis Course</a> by <a href="https://github.com/ThisIsLibra">Max &lsquo;Libra&rsquo; Kersten</a></li>
+<li><a href="https://secret.club/">Security.Club</a>. They also have an awesome discord channel. You can find invite somewhere on their site.</li>
+<li><a href="https://challenges.re/">challenges.re</a> containing reverseing challenges of different types and for different architectures.</li>
+<li><a href="https://crackmes.one">crackmes.one</a> is another awesome site where you can find plenty of awesome reverse engineering challenges!</li>
+<li><a href="https://tc.gts3.org/cs6265/2019/tut/tut01-warmup1.html">CS6265: Information Security Lab</a> that takes you through the process of debugging and writing exploit scripts.</li>
+<li><a href="https://ropemporium.com">RopEmporium</a> contains awesome beginner to intermediate level binary-exploitation challenges.</li>
+<li><a href="https://pwnable.tw/">pwnable.tw</a> another site with awesome intermediate to hard and super hard level binary-exploitation challenges.</li>
+<li><a href="https://xz.aliyun.com/t/8320">CVE-2020-14364-Qemu Escape Vulnerability Analysis and Two Exploitation Ideas</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">Understanding WebAssembly Text Format</a> sometimes we encounter wasm challenges in CTF and they are quite annoying for me.</li>
+<li><a href="https://blog.can.ac/">can.ac</a> with awesome blogs in windows, x86 etc&hellip; internals and vulnerability discussions.</li>
+</ul>
+<h1 id="syscall-tables">Syscall Tables</h1>
+<p>Sometimes while working on some challenge or binary you suddenly see a <code>syscall</code> instruction or an <code>int 80h</code> and you need to figure out what the value in <code>$rax</code> register corresponds to. In that case these syscall tables are quite useful.</p>
+<h3 id="linux-syscall-tables">Linux Syscall Tables</h3>
+<p>Linux syscalls don&rsquo;t change over different versions unlike Windows.</p>
+<ul>
+<li><a href="https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">Syscall Table for Linux x86_64</a></li>
+<li><a href="https://github.com/torvalds/linux/blob/v4.17/arch/x86/entry/syscalls/syscall_32.tbl">Syscall Table from Linux x86_32 Source Code (Kernel Version 4.17)</a></li>
+<li><a href="https://github.com/torvalds/linux/blob/v4.17/arch/x86/entry/syscalls/syscall_32.tbl">Syscall Table from Linux x86_64 Source Code (Kernel Version 4.17)</a></li>
+<li><a href="https://filippo.io/linux-syscall-table/">A Searchable Linux Syscall Table</a></li>
+</ul>
+<h3 id="windows-syscall-tables">Windows Syscall Tables</h3>
+<p>All of the following links take their data from json data present <a href="https://github.com/j00ru/windows-syscalls">here</a> but are more readable because they are in table format. Windows syscalls change with every new version.</p>
+<ul>
+<li><a href="https://j00ru.vexillium.org/syscalls/nt/32/">Windows X86 System Call Table (NT/2000/XP/2003/Vista/2008/7/8/10)</a></li>
+<li><a href="https://j00ru.vexillium.org/syscalls/nt/64/">Windows X86-64 System Call Table (XP/2003/Vista/2008/7/2012/8/10)</a></li>
+<li><a href="https://j00ru.vexillium.org/syscalls/win32k/32/">Windows WIN32K.SYS System Call Table (NT/2000/XP/2003/Vista/2008/7/8/10)</a></li>
+<li><a href="https://j00ru.vexillium.org/syscalls/win32k/64/">Windows x86-64 WIN32K.SYS System Call Table (XP/2003/Vista/2008/7/2012/8/10)</a></li>
+</ul>
+<h1 id="talks--publications">Talks &amp; Publications</h1>
+<h3 id="awesome-publications">Awesome Publications</h3>
+<ul>
+<li>by <a href="https://j00ru.vexillium.org/articles/">Mateusz Jurczyk aka j00ru</a> who coauthored some articles with will know <a href="https://gynvael.coldwind.pl/">Gynvael Coldwind</a></li>
+</ul>
+<h3 id="awesome-talks">Awesome Talks</h3>
+<ul>
+<li>by <a href="https://j00ru.vexillium.org/talks/">Mateusz Jurczyk aka j00ru</a></li>
+<li>by <a href="https://github.com/xoreaxeaxeax">Christopher Domas</a> on <a href="https://youtu.be/HlUe0TUHOIc">Psychological Warfare in Reverse Engineering</a></li>
+<li>by <a href="https://github.com/xoreaxeaxeax">Christopher Domas</a> on <a href="https://youtu.be/R7EEoWg6Ekk">Turning MOV Into A Soul Crushing RE Nightmare</a> and here&rsquo;s the <a href="https://github.com/xoreaxeaxeax/movfuscator">code</a></li>
+<li>by <a href="https://github.com/xoreaxeaxeax">Christopher Domas</a> on <a href="https://youtu.be/_eSAF_qT_FY">God Mode Unlocked</a>   where he explains a security flaw built into intel architecture and he exploits that to gain root privileges! This talk is crazy, watched it 3 times still didn&rsquo;t get all of it!!</li>
+<li>by Julian Kirsch &amp; Clemens Jonischkeit on <a href="https://youtu.be/d_R8i0dVBsQ">M\o/vfusctor be gone!</a> and here&rsquo;s the <a href="https://github.com/leetonidas/demovfuscator">code</a></li>
+</ul>
 
 
 <h4 align="center">

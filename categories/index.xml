@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Apr 2023 03:12:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 12:00:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bookmark</title>
+      <link>https://brightprogrammer.in/categories/bookmark/</link>
+      <pubDate>Sat, 15 Apr 2023 12:00:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/categories/bookmark/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>network-programming</title>
       <link>https://brightprogrammer.in/categories/network-programming/</link>
@@ -22,15 +31,6 @@
       <pubDate>Sat, 15 Apr 2023 03:12:25 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/categories/project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bookmark</title>
-      <link>https://brightprogrammer.in/categories/bookmark/</link>
-      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/categories/bookmark/</guid>
       <description></description>
     </item>
     

@@ -2,17 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://brightprogrammer.in/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/bookmark/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/bookmarks/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/bookmarks/reverse-engineering/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/reverse-engineering/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/</loc>
+    <lastmod>2023-04-15T12:00:25+05:30</lastmod>
+  </url><url>
     <loc>https://brightprogrammer.in/about-project-blue/</loc>
     <lastmod>2023-04-15T05:04:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/about-me/</loc>
     <lastmod>2023-04-15T04:47:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/</loc>
-    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/</loc>
-    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/http/</loc>
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
@@ -44,17 +59,8 @@
     <loc>https://brightprogrammer.in/tags/socket/</loc>
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
   </url><url>
-    <loc>https://brightprogrammer.in/tags/</loc>
-    <lastmod>2023-04-15T03:12:25+05:30</lastmod>
-  </url><url>
     <loc>https://brightprogrammer.in/posts/writing-a-web-server-in-c/</loc>
     <lastmod>2023-04-15T03:12:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/categories/bookmark/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/bookmarks/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/copyright/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
@@ -77,9 +83,6 @@
     <loc>https://brightprogrammer.in/tags/intermediate-language/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
-    <loc>https://brightprogrammer.in/bookmarks/reverse-engineering/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
     <loc>https://brightprogrammer.in/categories/note/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
@@ -99,9 +102,6 @@
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/publication/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/reverse-engineering/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/rizin/</loc>

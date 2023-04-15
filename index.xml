@@ -6,7 +6,16 @@
     <description>Recent content on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Apr 2023 03:12:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 12:00:25 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Reverse Engineering Bookmarks</title>
+      <link>https://brightprogrammer.in/bookmarks/reverse-engineering/</link>
+      <pubDate>Sat, 15 Apr 2023 12:00:25 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/bookmarks/reverse-engineering/</guid>
+      <description>Important Note Since after creating the bookmarks, not every link/resource is used frequently, it might be possible that some of the links stop working. At the time of writing this, all links work but if you find any of the links/resources not working please contact me at admin@brightprogrammer.in with updated information. EVERY MAJOR CATEGORY IS ARRANGED LEXOGRAPHICALLY Courses / Blogs / Series / Challenges Binary Analysis Course by Max &amp;lsquo;Libra&amp;rsquo; Kersten Security.</description>
+    </item>
+    
     <item>
       <title>About Project Blue</title>
       <link>https://brightprogrammer.in/about-project-blue/</link>
@@ -65,15 +74,6 @@ Some other topics I want to study in futureinclude : Format Methods &amp;amp; Fo
       <guid>https://brightprogrammer.in/posts/garbage-collectors/</guid>
       <description>WARNING : THIS IS A DUMMY POST, PLEASE DON&amp;rsquo;T PAY ATTENTION! Basic Memory Manager
 /** * @brief MemoryManager state. * */ typedef struct memory_manager_t { HashTable* buffer_map; ///&amp;lt; Pointer to size map. . . . } MemoryManager; MemoryManager* MemoryManagerCreate(); void MemoryManagerDestroy(MemoryManager* m); . . . Writing memory managers are a difficult task. We have two basic options. First one is that we implement a full blown Garbage Collector that can scan the entire stack and heap for possible memory regions having no reference stored anywhere anymore, other is we implement a Memory Checker that&amp;rsquo;ll check if allocated memory objects are free&amp;rsquo;d or not.</description>
-    </item>
-    
-    <item>
-      <title>My Reverse Engineering Bookmarks</title>
-      <link>https://brightprogrammer.in/bookmarks/reverse-engineering/</link>
-      <pubDate>Wed, 12 Apr 2023 08:11:25 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/bookmarks/reverse-engineering/</guid>
-      <description>Bookmark Begins </description>
     </item>
     
     <item>

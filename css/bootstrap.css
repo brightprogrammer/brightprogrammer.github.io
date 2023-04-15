@@ -27,7 +27,7 @@ $cyan:     #00aaaad0 !default;
   --secondary: #bbbbbb;
   --success: #00aa00;
   --info: #00aaaa;
-  --warning: #cc6600;
+  --warning: #dd8800;
   --danger: #aa0000;
   --light: #fff;
   --dark: #000000;
@@ -1945,7 +1945,7 @@ pre code {
 .table-warning,
 .table-warning > th,
 .table-warning > td {
-  background-color: #cc6600;
+  background-color: #dd8800;
 }
 
 .table-danger,
@@ -2912,7 +2912,7 @@ fieldset:disabled a.btn {
 .btn-warning {
   color: #000000;
   border-color: #000000;
-  background-color: #cc6600;
+  background-color: #dd8800;
 }
 
 .btn-warning:hover:before, .btn-warning:hover:after {
@@ -2931,17 +2931,17 @@ fieldset:disabled a.btn {
 .btn-warning.disabled, .btn-warning:disabled {
   color: #555555;
   background-color: #bbbbbb;
-  border-color: #cc6600;
+  border-color: #dd8800;
 }
 
 .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
 .show > .btn-warning.dropdown-toggle {
-  color: #cc6600;
+  color: #dd8800;
   background-color: #000000;
 }
 
 .btn-warning.btn-lg, .btn-group-lg > .btn-warning.btn {
-  background-color: #cc6600;
+  background-color: #dd8800;
   border: 0.875px solid #000000;
   margin-top: 7px;
   padding-top: 6.125px;
@@ -2953,7 +2953,7 @@ fieldset:disabled a.btn {
   padding-left: 10.5px;
   padding-right: 11.5px;
   margin-right: 2.5px;
-  box-shadow: -3.5px -7px 0 0 #cc6600, 2.5px 6.125px 0 0 #cc6600, -3.5px 6.125px 0 0 #cc6600, 2.5px -7px 0 0 #cc6600;
+  box-shadow: -3.5px -7px 0 0 #dd8800, 2.5px 6.125px 0 0 #dd8800, -3.5px 6.125px 0 0 #dd8800, 2.5px -7px 0 0 #dd8800;
   -webkit-filter: drop-shadow(7px 8px 0 black);
   filter: drop-shadow(7px 8px 0 black);
   margin-right: 10.5px;
@@ -2961,19 +2961,19 @@ fieldset:disabled a.btn {
 }
 
 .btn-warning.btn-lg:hover, .btn-group-lg > .btn-warning.btn:hover {
-  box-shadow: -3.5px -7px 0 0 #cc6600, 2.5px 6.125px 0 0 #cc6600, -3.5px 6.125px 0 0 #cc6600, 2.5px -7px 0 0 #cc6600;
+  box-shadow: -3.5px -7px 0 0 #dd8800, 2.5px 6.125px 0 0 #dd8800, -3.5px 6.125px 0 0 #dd8800, 2.5px -7px 0 0 #dd8800;
   color: #fff;
   border-color: white;
-  background-color: #cc6600;
+  background-color: #dd8800;
 }
 
 .btn-warning.btn-lg:not(:disabled):not(.disabled):active, .btn-group-lg > .btn-warning.btn:not(:disabled):not(.disabled):active, .btn-warning.btn-lg:not(:disabled):not(.disabled).active, .btn-group-lg > .btn-warning.btn:not(:disabled):not(.disabled).active,
 .show > .btn-warning.btn-lg.dropdown-toggle,
 .btn-group-lg.show > .btn-warning.dropdown-toggle.btn {
-  box-shadow: -3.5px -7px 0 0 #cc6600, 2.5px 6.125px 0 0 #cc6600, -3.5px 6.125px 0 0 #cc6600, 2.5px -7px 0 0 #cc6600;
+  box-shadow: -3.5px -7px 0 0 #dd8800, 2.5px 6.125px 0 0 #dd8800, -3.5px 6.125px 0 0 #dd8800, 2.5px -7px 0 0 #dd8800;
   color: #fff;
   border-color: white;
-  background-color: #cc6600;
+  background-color: #dd8800;
   -webkit-filter: none;
   filter: none;
   filter: none;
@@ -3421,7 +3421,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-warning:hover {
-  border: 0.875px solid #cc6600;
+  border: 0.875px solid #dd8800;
   margin-top: 7px;
   padding-top: 6.125px;
   padding-bottom: 7px;
@@ -3436,13 +3436,13 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-warning.disabled, .btn-outline-warning:disabled {
-  color: #cc6600;
+  color: #dd8800;
 }
 
 .btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active,
 .show > .btn-outline-warning.dropdown-toggle {
   color: #ff5;
-  border-color: #cc6600;
+  border-color: #dd8800;
 }
 
 .btn-outline-danger {
@@ -5396,12 +5396,12 @@ a.badge-info:focus, a.badge-info.focus {
 }
 
 .badge-warning:before {
-  color: #cc6600;
+  color: #dd8800;
   content: "[";
 }
 
 .badge-warning:after {
-  color: #cc6600;
+  color: #dd8800;
   content: "]";
 }
 
@@ -5602,7 +5602,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   display: block;
   text-transform: capitalize;
   color: #fff;
-  background: #cc6600;
+  background: #dd8800;
   content: "warning";
 }
 
@@ -6814,13 +6814,13 @@ button.bg-info:focus {
 }
 
 .bg-warning {
-  background-color: #cc6600 !important;
+  background-color: #dd8800 !important;
 }
 
 a.bg-warning:hover, a.bg-warning:focus,
 button.bg-warning:hover,
 button.bg-warning:focus {
-  background-color: #cc6600 !important;
+  background-color: #dd8800 !important;
 }
 
 .bg-danger {
@@ -6898,7 +6898,7 @@ button.bg-dark:focus {
 }
 
 .border-warning {
-  border-color: #cc6600 !important;
+  border-color: #dd8800 !important;
 }
 
 .border-danger {
