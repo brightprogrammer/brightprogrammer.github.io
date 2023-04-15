@@ -425,7 +425,7 @@ h1, h2,
 .h1, .h2 {
   margin-bottom: 14px;
   margin-top: 18px;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 14px;
   text-indent: 8px;
   background: #d1bc00;
