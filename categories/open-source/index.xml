@@ -6,7 +6,17 @@
     <description>Recent content in open-source on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Apr 2023 18:44:55 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/open-source/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 Apr 2023 00:12:58 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/categories/open-source/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding The PIC Architecture</title>
+      <link>https://brightprogrammer.in/posts/understanding-the-pic-architecture/</link>
+      <pubDate>Mon, 17 Apr 2023 00:12:58 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/understanding-the-pic-architecture/</guid>
+      <description>In last post we defined the basic learning path and working method and defined a basic structure for our uplifter code but due to lack of knowledge about architecture we needed to break the work there. So, I&amp;rsquo;m here with new post where we&amp;rsquo;ll try to closely follow the learning path.
+Don&amp;rsquo;t worry, you don&amp;rsquo;t need to switch back and forth between posts to compare whether I&amp;rsquo;m following the order or not.</description>
+    </item>
+    
     <item>
       <title>Rzil PIC Uplifting</title>
       <link>https://brightprogrammer.in/posts/rzil-pic-uplifting/</link>

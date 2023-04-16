@@ -95,72 +95,128 @@
 <br>
 <br>
 
-<h3 align="center">Category : [publication]</h3>
+<div class="bs-component">
+    <h3 align="center">
+        <strong> Understanding The PIC Architecture </strong> <br>
+        Testing The Learning Plan For PIC Uplifing<br><br>
+        published on Mon, Apr 17, 2023 |
+        1 minutes read <br>
+    </h3>
+</div>
 
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
+        <li class="breadcrumb-item inactive" >Understanding The PIC Architecture</li>
 
+    </ul>
+</div>
+
+<p>In <a href="/posts/rzil-pic-uplifting">last post</a> we defined the basic learning path and working method and defined a basic structure for our uplifter code but due to lack of knowledge about architecture we needed to break the work there. So, I&rsquo;m here with new post where we&rsquo;ll try to closely follow the learning path.</p>
+<p>Don&rsquo;t worry, you don&rsquo;t need to switch back and forth between posts to compare whether I&rsquo;m following the order or not. You can trust me on this ツ. I&rsquo;ll be working of PIC Mid-Range series first.</p>
+<h3 id="how-pic-works--where-is-it-used">How PIC Works &amp; Where Is It Used?</h3>
+<p>Here are some resources I initially used to gain general idea of things :</p>
 <ul>
-    
-    <li>
-        <a href="/publication/sample/">2023-04-12 | Sample Dummy Project</a>
-    </li>
-    
+<li>First and major resources pointing to other resources is <a href="https://en.wikipedia.org/wiki/PIC_microcontrollers">Wikipedia</a></li>
+<li>Next <a href="https://www.youtube.com/watch?v=b_SBranD1k4">this video</a> introduced me to basic assembly and how to use PIC chips.</li>
+<li><a href="https://ww1.microchip.com/downloads/en/devicedoc/33023a.pdf">Architecture Manual</a> itself.</li>
+</ul>
+<p>After getting to know more about I understood the following things :</p>
+<ul>
+<li>PIC is used in embedded systems</li>
+<li>Has different chip varieties in same family for allowing different selections for different use cases.</li>
+<li>At present all chips are categories into three categories :
+<ul>
+<li>PIC Base-Line</li>
+<li>PIC Mid-Range</li>
+<li>PIC High-End</li>
+</ul>
+</li>
+<li>Due to different chips in each of these varieties, the whole manual is broken into two document types :
+<ul>
+<li>Family Reference Manual : Describe an overall general structure of chip. For understanding memory model, registers etc&hellip; we might need datasheets</li>
+<li>Datasheets : Describe information that are specific to device.
+<ul>
+<li>Which ports are active and which ones aren&rsquo;t.</li>
+<li>Which registers are implemented.</li>
+<li>How many pages of memory are there?</li>
+<li>Which instructions are not supported (maybe, didn&rsquo;t go through datasheets yet because there are 100s of them!)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Things like instruction size, register size etc&hellip; don&rsquo;t change in same family.</li>
+</ul>
+<h5 id="-work-in-progress--please-come-back-later-">! WORK IN PROGRESS ! PLEASE COME BACK LATER !</h5>
+
+
+<h3>See Also</h3>
+<ul>
+  
+  <li><a href="/posts/rzil-pic-uplifting/">Rzil PIC Uplifting</a></li>
+  
+  <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
+  
 </ul>
 
-<h3 align="center">All Categories</h3>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/bookmark/ title="All pages with tag <i>bookmark</i>">bookmark</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/experiment/ title="All pages with tag <i>experiment</i>">experiment</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/network-programming/ title="All pages with tag <i>network-programming</i>">network-programming</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/note/ title="All pages with tag <i>note</i>">note</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/open-source/ title="All pages with tag <i>open-source</i>">open-source</a> <sup>3</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/project/ title="All pages with tag <i>project</i>">project</a> <sup>2</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/publication/ title="All pages with tag <i>publication</i>">publication</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/categories/rizin/ title="All pages with tag <i>rizin</i>">rizin</a> <sup>3</sup>
-</div>
-
-
-
-<br>
+<h4 align="center">
+    <a href="https://brightprogrammer.in">
+        Project Blue Main Page
+    </a>
+</h4>
 <br>
 
+<br><div style="border: 1px solid #ffffff;">
+
+<form action="https://formsubmit.co/30fe378dd2a9a7a6f563c0e7365b145c"
+      method="POST"
+      style="padding: 50px">
+
+  <h4 align="center"> Message Me! </h4>
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailName">Your Name</label>
+      <input type="text" class="col-10 form-control"
+             name="name"
+             id="emailName" placeholder="Shri Krishna Vasudev Yadav" reqyured>
+    </div>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailID">Email address</label>
+      <input type="email" class="col-10 form-control"
+             id="emailID" aria-describedby="emailHelp"
+             name="emailID"
+             placeholder="user@email.com" required>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">Your email will never be shared with anyone without your explicit permission!</small>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <label for="commentBox"> What do you wanna say? </label>
+    <textarea class="form-control" id="exampleTextarea" rows="4"
+              name="message"
+              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)" required></textarea>
+  </div>
+
+  
+  <div class="form-group" align="right">
+    <input type="submit" class="btn btn-outline-primary" value="Send">
+  </div>
+
+</form>
+</div>
 
         </div><footer class="container">
     <hr class="soften">
