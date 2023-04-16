@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en"><head>
+    <title>Project Blue</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
+    <link rel="canonical" href="https://brightprogrammer.in">
+</head>
+<body>
+
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+
+        
+        <a href="https://brightprogrammer.in"
+           class="navbar-brand">Project Blue
+        </a>
+
+        
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                href="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse"
+             id="navbarResponsive">
+
+            
+            <ul class="navbar-nav">
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="filemenu">
+                        File <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="filemenu">
+                        <a class="dropdown-item" href="/posts/">Posts</a>
+                        <a class="dropdown-item" href="/notes/">Notes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/projects/">Projects<a>
+                        <a class="dropdown-item" href="/publication/">
+                            Publications
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/bookmarks/">
+                            Bookmarks
+                        </a>
+                    </div>
+                    
+                </li>
+                
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="helpmenu">
+                        Help <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="helpmenu">
+                        <a class="dropdown-item" href="/about-me">About Me</a>
+                        <a class="dropdown-item" href="/about-project-blue">
+                            About Project Blue
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/copyright">
+                            Copyright
+                        </a>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+<div id="content" class="bs-component container-fluid">
+
+<br>
+<br>
+
+<div class="bs-component">
+    <h3 align="center">
+        <strong> Rzil PIC Uplifting </strong> <br>
+        Let&#39;s write an uplifter from PIC to RzIL<br><br>
+        published on Sun, Apr 16, 2023 |
+        8 minutes read <br>
+    </h3>
+</div>
+
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
+        <li class="breadcrumb-item inactive" >Rzil PIC Uplifting</li>
+
+    </ul>
+</div>
+
+<p>I&rsquo;ve already explained the working of RzIL in <a href="/posts/rzil-intro-notes">this</a> post. If you are a beginner or someone who is reading this blog just to explore a new topc, I strongly recommend you to go through that post. Also, if you are a maintainer and find some conceptual mistakes in the posts, please message me ツ about it.</p>
+<p>So, now I&rsquo;m assuming you already know how the lifting works on a basic level and also have a basic idea of RzIL. So, lets start lifting things around ツ</p>
+<h3 id="general-learning-plan">General Learning Plan</h3>
+<p>Since, this is the first time I&rsquo;m writing uplfiters, I&rsquo;m laying down a path that I think I must follow to accomplish this task. I actually took handwritten notes (before I had this blog) in order to map the path properly. I planned this path in a much general way. You can used this to path, remove PIC from everywhere and insert any alien architecture you want to work and this should work more or less the same way! Also, if I plan to change the path sometime in future, instead of editing it here, I&rsquo;ll recreate this somewhere else and add a reference here so you know what changed and why I changed it! This is good for people like me who wanna lern the process of learning itself.</p>
+<font color="#ff2222"> 
+    For Learning The Architecture
+</font>
+<ul>
+<li><strong>How PIC works? Where is it used?</strong> This includes things like taking a look at it&rsquo;s assembly even before you understand the meaning of instructions and their syntax. Trying to know terms (knowing meanings is not necessary at all!) such as &ldquo;registers&rdquo;, &ldquo;memory banks&rdquo;, &ldquo;pages&rdquo; etc&hellip;</li>
+<li><strong>Understanding Memory Model</strong>. This step must be taken before you try to understand any instruction.
+<ul>
+<li><strong>Memory Model</strong>
+<ul>
+<li>Von Neumann? (like x86)</li>
+<li>Harvard? (like this)</li>
+<li>Other (that I don&rsquo;t know about yet?)</li>
+</ul>
+</li>
+<li><strong>Endianness</strong> (if Von Neumann like architecture)</li>
+<li><strong>Registers</strong>
+<ul>
+<li>Names</li>
+<li>Sizes</li>
+<li>Is there any calling convention</li>
+<li>Meaning of registers (every architecture has some special registers and some general registers for scratch operations).</li>
+<li>Some other architecture specific information you can find, like in PIC there are memory banks which is not present in x86. Even if it is present, it is not programmatically differentiable to any public priviledged user.</li>
+</ul>
+</li>
+<li><strong>Try understanding some instructons with help of this new gained information/insights</strong></li>
+<li><strong>Memory Addressing Modes</strong> Some architectures have different addressing modes for different purposes.
+<ul>
+<li>Direct Addressing Modes.</li>
+<li>Indirect Addressing Modes.</li>
+</ul>
+</li>
+<li><strong>Do I need to understand Timers/Oscillators etc&hellip;?</strong>
+<ul>
+<li>How to get time in a register?</li>
+<li>How does instruction clock cycle work? In PIC it&rsquo;s divided into 4 cycles that run parallely. See <code>Instruction Pipelining</code>.</li>
+</ul>
+</li>
+<li><strong>Are there exceptions &amp; interrupts?</strong>
+<ul>
+<li>How do interrupts work? Almost any architecture that handles some type of external input must have support for interrupts and a way to handle them.</li>
+<li>How do exceptions work? Almost any architecture that supports arithmetic operations must support exceptions and a mechanism to handle them.</li>
+</ul>
+</li>
+<li><strong>How does device reset work?</strong>
+<ul>
+<li>How many types of reset are there? First one you already know is POR (Power On Reset).</li>
+<li>What is state of registers after a reset?</li>
+<li>Is there any way to know which type of reset occured? (Using <code>STATUS</code> register on PIC)</li>
+</ul>
+</li>
+<li><strong>Instruction format</strong>.
+<ul>
+<li>General instruction syntax/format</li>
+<li>RISC instruction sets will have fixed sized instructions which they generally call <code>Instruction Word</code>,</li>
+<li>CISC instruction sets (like x86) are generally hard to understand because of their hacky modifications in future versions to support new instrructions.</li>
+</ul>
+</li>
+<li><strong>Program Counter</strong>
+<ul>
+<li>Size of program counter.</li>
+<li>Working. Like in PIC, to address to different pages you need to specify the page index in <code>PCLATH</code> register. This means you need an understanding of addressing modes.
+<ul>
+<li>Direct Addressing Mode.</li>
+<li>Indirect Addressing Mode.</li>
+<li>Any other new Addressing Mode.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<font color="#ff2222"> 
+    For Writing Uplifters
+</font>
+<ul>
+<li>Start understanding the semantics of each instruction because good ILs capture the semantics of an instruction in an as good as possible way. Better semantics capturing means more knowledge about architecuture and easier simulation.
+<ul>
+<li>For instructions like <strong><code>ADD DST_REG, SRC_REG1, SRC_REG2</code></strong> the semantics would be :
+<ul>
+<li>Read value from <code>SRC_REG1</code></li>
+<li>Read value from <code>SRC_REG2</code></li>
+<li>Perform addition operation of <code>SRC_REG1</code> and <code>SRC_REG2</code></li>
+<li>Store the result in <code>DST_REG</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="card text-white bg-warning mb-3">
+    <div class="card-header">Important Note</div>
+        <div class="card-body">
+            <p class="card-text">
+                This need not be the way actual CPUs implement instructions because by capturing semantics, we need only capture detail in such a manner than it closely resembles the actual working but also enables use to directly emulate each operation in each instruction.
+                <ul>
+                <li> It might happen that internally they can directly use registers to operform addition. They just need to read one register and somehow directly add it to the other register. </li>
+                <li> It might also happen that CPU reads one register to a `Working Register` and then add the value in second register to the value in Working Register and then move this value to destination register. If destination is the Working Register itself, then it just skips this part. </li>
+                </ul>
+                In both the cases, if we follow the usual procedure, it'll still be very close to actual working of instruction.
+            </p>
+        </div>
+    </div>
+</div>
+<p>Each of the above steps including the instruction itself is an operation in RzIL (<strong><code>RzILEffectOp</code></strong>).</p>
+<ul>
+<li>Get to know the register model in a more concrete way because we need to define a function that&rsquo;ll return <strong><code>RzAnalysisILConfig</code></strong> for every architecture we uplift that represents the memory model of architecture RzIL is going to emulate. This includes knowledge of things like :
+<ul>
+<li>Program Counter
+<ul>
+<li>Size (in bits)</li>
+</ul>
+</li>
+<li>Is the architecture Big Endian?</li>
+<li>Registers
+<ul>
+<li>Size (in bits)</li>
+<li>Number</li>
+<li>Special Names?</li>
+<li>General ones?</li>
+</ul>
+</li>
+<li>Memory
+<ul>
+<li>Size (in bits)</li>
+</ul>
+</li>
+<li>Labels (for operations like : interrupt, syscall, hooks, callbacks etc&hellip;)</li>
+<li>Initial valus of registers</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief Description of the global context of an RzAnalysisILVM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * This defines all information needed to initialize an IL vm in order to run
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * in a declarative way, in particular:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Size of the program counter: given explicitly in `pc_size`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Endian: given explicitly in `big_endian`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Memories: currently always one memory with index 0 bound against IO, with key size given by `mem_key_size` and value size of 8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Registers: given explicitly in `reg_bindings` or derived from the register profile with `rz_il_reg_binding_derive()`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Labels: given explicitly in `labels`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * * Initial State of Variables: optionally given in `init_state`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#66d9ef">rz_analysis_il_config_t</span> {
+</span></span><span style="display:flex;"><span>	ut32 pc_size; <span style="color:#75715e">///&lt; size of the program counter in bits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> big_endian;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 * Optional null-terminated array of registers to bind to global vars of the same name.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 * If not specified, rz_il_reg_binding_derive will be used.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 */</span>
+</span></span><span style="display:flex;"><span>	RZ_NULLABLE <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>reg_bindings;
+</span></span><span style="display:flex;"><span>	ut32 mem_key_size; <span style="color:#75715e">///&lt; address size for memory 0, bound against IO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzPVector <span style="color:#75715e">/*&lt;RzILEffectLabel *&gt;*/</span> labels; <span style="color:#75715e">///&lt; global labels, primarily for syscall/hook callbacks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RZ_NULLABLE RzAnalysisILInitState <span style="color:#f92672">*</span>init_state; <span style="color:#75715e">///&lt; optional, initial contents for variables/registers, etc.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// more information might go in here, for example additional memories, etc.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} RzAnalysisILConfig;
+</span></span></code></pre></div><p>Where, <strong><code>RzAnalysisILInitState</code></strong> is defined as follows :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief Description of an initial state of an RzAnalysisILVM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * This may be used by an analysis plugin to communicate how to initialize
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * variables/registers for a clean vm.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Everything unspecified by this may be initialized to anything (for example
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * whatever contents the RzReg currently has).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#66d9ef">rz_analysis_il_init_state_t</span> {
+</span></span><span style="display:flex;"><span>	RzVector <span style="color:#75715e">/*&lt;RzAnalysisILInitStateVar&gt;*/</span> vars; <span style="color:#75715e">///&lt; Contents of global variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} RzAnalysisILInitState;
+</span></span></code></pre></div><div class="card text-white bg-success mb-3">
+    <div class="card-header">General Thoughts</div>
+        <div class="card-body">
+            <p class="card-text">
+                The best thing about Rizin is that it's commented very well, if you spend enough time with the code, it'll start revealing it's secrets to you! It took me just 2 weeks to complete my <a href="https://github.com/rizinorg/rizin/pull/3452">first (very big) PR</a> and I knew nothing about Rizin's code in the beginning!
+            </p>
+        </div>
+    </div>
+</div>
+<ul>
+<li>
+<p>Understand the disassembler plugin/tool used for disassembling the selected architecture. If you need to perform some modifications, make them because it&rsquo;s inevitable (for some old code).</p>
+<ul>
+<li>x86 uplifter typedefs Capstone&rsquo;s structures for ease of use.</li>
+<li>I made changes in <code>/librz/asm/arch/pic/pic_midrange.h/c</code> files to add a function that can return the type of operands for a given opcode.</li>
+</ul>
+</li>
+<li>
+<p>Next we need to think about how we can implement the whole uplifting mechanism. I took references from already written code in <strong><code>/librz/analysis/arch</code></strong> to write a similar initial code/structure.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file pic_il.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// SPDX-FileCopyrightText: 2023 Siddharth Mishra &lt;misra.cxx@gmail.com&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: LGPL-3.0-only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef PIC_IL_H_
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define PIC_IL_H_
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;../../../asm/arch/pic/pic_midrange.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;../../../asm/arch/pic/pic_baseline.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// midrange
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>RZ_IPI RzAnalysisILConfig <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_pic_midrange_il_vm_config</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis);
+</span></span><span style="display:flex;"><span>RZ_IPI RzILOpEffect <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_pic_midrange_il_op</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis, RZ_NONNULL RZ_BORROW RzAnalysisOp <span style="color:#f92672">*</span>op, ut16 instr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// baseline
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/* RZ_IPI RzAnalysisILConfig *rz_pic_baseline_il_vm_config(RZ_NONNULL RzAnalysis *analysis); */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* RZ_IPI RzILOpEffect *rz_pic_baseline_il_op(RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RZ_BORROW RzAnalysisOp *op, ut16 instr ; */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// TODO: Add support for PIC18F
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// PIC_IL_H_
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file pic_midrange_il.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;pic_il.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> RzILOpEffect <span style="color:#f92672">*</span>(PicILUplifter)(ut16 instr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_LIFTER(op) pic_##op_il_lifter(PicMidrangeOpArgs opargs, ut16 instr)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>PicILUplifter pic_midrange_il_uplifters[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_NOP] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(NOP),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RETURN] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RETURN),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RETFIE] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RETFIE),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_OPTION] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(OPTION),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_SLEEP] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(SLEEP),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_CLRWDT] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(CLRWDT),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_TRIS] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(TRIS),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_CLR] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(CLR),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_SUBWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(SUBWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_DECF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(DECF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_IORWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(IORWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ANDWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ANDWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_XORWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(XORWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ADDWF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ADDWF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_COMF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(COMF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_INCF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(INCF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_DECFSZ] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(DECFSZ),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RRF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RRF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RLF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RLF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_SWAPF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(SWAPF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_INCFSZ] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(INCFSZ),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BCF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BCF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BSF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BSF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BTFSC] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BTFSC),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BTFSS] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BTFSS),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_CALL] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(CALL),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_GOTO] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(GOTO),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RETLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RETLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_IORLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(IORLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ANDLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ANDLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_XORLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(XORLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_SUBLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(SUBLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ADDLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ADDLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_RESET] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(RESET),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_CALLW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(CALLW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BRW] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BRW),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVIW_1] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVIW_1),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVWI_1] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVWI_1),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVLB] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVLB),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_LSLF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(LSLF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_LSRF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(LSRF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ASRF] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ASRF),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_SUBWFB] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(SUBWFB),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ADDWFC] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ADDWFC),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_ADDFSR] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(ADDFSR),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVLP] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVLP),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_BRA] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(BRA),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVIW_2] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVIW_2),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_MOVWI_2] <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER</span>(MOVWI_2),
+</span></span><span style="display:flex;"><span>    [PIC_MIDRANGE_OPCODE_INVALID] <span style="color:#f92672">=</span> NULL
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(NOP) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RETURN) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RETFIE) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(OPTION) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(SLEEP) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(CLRWDT) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(TRIS) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(CLR) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(SUBWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(DECF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(IORWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ANDWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(XORWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADDWF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(COMF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(INCF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(DECFSZ) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RRF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RLF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(SWAPF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(INCFSZ) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BCF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BSF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BTFSC) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BTFSS) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(CALL) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(GOTO) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RETLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(IORLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ANDLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(XORLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(SUBLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADDLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(RESET) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(CALLW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BRW) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVIW_1) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVWI_1) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVLB) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(LSLF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(LSRF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ASRF) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(SUBWFB) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADDWFC) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADDFSR) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVLP) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(BRA) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVIW_2) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(MOVWI_2) {}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(INVALID) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RZ_IPI RzILOpEffect <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_pic_midrange_il_op</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis, RZ_NONNULL RZ_BORROW RzAnalysisOp <span style="color:#f92672">*</span>op, ut16 instr) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get opcode
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    PicMidrangeOpcode opcode <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_get_opcode</span>(instr);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (opcode <span style="color:#f92672">==</span> PIC_MIDRANGE_OPCODE_INVALID) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get opargs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    PicMidrangeOpArgs opargs <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_get_opargs</span>(instr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// uplift
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    PicILUplifter uplifter <span style="color:#f92672">=</span> pic_midrange_il_uplifters[opcode];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (uplifter) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">uplifter</span>(opargs, instr);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return NULL on failure
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RZ_IPI RzAnalysisILConfig <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_pic_midrange_il_vm_config</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis) {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Having this basic structure defined, I can now start writing uplifters directly! So, let&rsquo;s write a few.</p>
+
+
+<h3>See Also</h3>
+<ul>
+  
+  <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
+  
+</ul>
+
+<h4 align="center">
+    <a href="https://brightprogrammer.in">
+        Project Blue Main Page
+    </a>
+</h4>
+<br>
+
+<br><div style="border: 1px solid #ffffff;">
+
+<form action="https://formsubmit.co/30fe378dd2a9a7a6f563c0e7365b145c"
+      method="POST"
+      style="padding: 50px">
+
+  <h4 align="center"> Message Me! </h4>
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailName">Your Name</label>
+      <input type="text" class="col-10 form-control"
+             name="name"
+             id="emailName" placeholder="Shri Krishna Vasudev Yadav" reqyured>
+    </div>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailID">Email address</label>
+      <input type="email" class="col-10 form-control"
+             id="emailID" aria-describedby="emailHelp"
+             name="emailID"
+             placeholder="user@email.com" required>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">Your email will never be shared with anyone without your explicit permission!</small>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <label for="commentBox"> What do you wanna say? </label>
+    <textarea class="form-control" id="exampleTextarea" rows="4"
+              name="message"
+              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)" required></textarea>
+  </div>
+
+  
+  <div class="form-group" align="right">
+    <input type="submit" class="btn btn-outline-primary" value="Send">
+  </div>
+
+</form>
+</div>
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 align="center" style="padding:40px"> Copyright (c) 2023 Siddharth Mishra </h4>
+</p>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
+
+
+
+
+
+
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
+
+
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+    
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>
+
+
+</body>
+</html>

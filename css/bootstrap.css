@@ -160,12 +160,11 @@ blockquote {
 
 b,
 strong {
-  font-weight: normal;
+  font-weight: bold;
 }
 
 b::before, b::after,
-strong::before,
-strong::after {
+strong::before, strong::after {
   content: '*';
 }
 
@@ -5058,7 +5057,7 @@ input[type="button"].btn-block {
   padding: 0 16px;
   margin-bottom: 0;
   color: #fff;
-  background-color: #aa00aa;
+  background-color: #333;
 }
 
 .card-header + .list-group .list-group-item:first-child {
@@ -6789,7 +6788,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #00aa00 !important;
+  background-color: #1da000 !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
