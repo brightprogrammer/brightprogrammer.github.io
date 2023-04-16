@@ -121,9 +121,9 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 <h3>See Also</h3>
 <ul>
   
-  <li><a href="/publication/sample/">Sample Dummy Project</a></li>
-  
   <li><a href="/projects/sample-project/">Sample Dummy Project</a></li>
+  
+  <li><a href="/publication/sample/">Sample Dummy Project</a></li>
   
 </ul>
 
@@ -142,13 +142,6 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 
   <h4 align="center"> Message Me! </h4>
   <br>
-
-  
-  <input type="text" name="_honey" style="display: none">
-  
-  <input type="hidden" name="_captcha" value="false">
-  
-  <input type="hidden" name="_next" id="showSuccessModal">
 
   
   <div class="form-group">
@@ -191,70 +184,6 @@ More things to come. I&rsquo;ll add breadcrums and all to make this look better.
 
 </form>
 </div>
-
-
-<div class="bs-component" align="center">
-    <dialog id="successDialog" class="modal" style='position:relative'>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                
-                <div class="modal-header">
-                    
-                    <div class="modal-title">Message Sent!</div>
-
-                    
-                    <button type="button"
-                            class="close"
-                            data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-
-                
-                <div class="modal-body">
-                    <p>
-                        Yay! Message sent to me successfully! I will try to get back to you ASAP! ツ ¬‿¬ Till then take care and have a very awesome day \(^-^)/
-                    </p>
-                </div>
-
-                
-                <div class="modal-footer">
-                    <a href="https://youtu.be/dQw4w9WgXcQ">
-                    <button type="button submit"
-                            class="btn btn-primary">
-                        Who Cares?
-                    </button>
-
-                    <a href="/copyright">
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal">
-                        Learn More!
-                    </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </dialog>
-</div>
-
-
-<script>
-  const nextBtn = document.getElementById("showSuccessModal");
-  const okBtn = document.getElementById("successOkBtn");
-  const dialog = document.getElementById("successDialog");
-
-  
-  nextBtn.addEventListener("click", () => {
-      dialog.showModal();
-  });
-
-  
-  okBtn.addEventListener("click", () => {
-      dialog.close("ok");
-  });
-</script>
 
         </div><footer class="container">
     <hr class="soften">

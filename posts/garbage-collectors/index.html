@@ -187,13 +187,6 @@ the entire stack and heap for possible memory regions having no reference stored
   <br>
 
   
-  <input type="text" name="_honey" style="display: none">
-  
-  <input type="hidden" name="_captcha" value="false">
-  
-  <input type="hidden" name="_next" id="showSuccessModal">
-
-  
   <div class="form-group">
     <div class="row">
       <label class="col-2" for="emailName">Your Name</label>
@@ -234,70 +227,6 @@ the entire stack and heap for possible memory regions having no reference stored
 
 </form>
 </div>
-
-
-<div class="bs-component" align="center">
-    <dialog id="successDialog" class="modal" style='position:relative'>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                
-                <div class="modal-header">
-                    
-                    <div class="modal-title">Message Sent!</div>
-
-                    
-                    <button type="button"
-                            class="close"
-                            data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-
-                
-                <div class="modal-body">
-                    <p>
-                        Yay! Message sent to me successfully! I will try to get back to you ASAP! ツ ¬‿¬ Till then take care and have a very awesome day \(^-^)/
-                    </p>
-                </div>
-
-                
-                <div class="modal-footer">
-                    <a href="https://youtu.be/dQw4w9WgXcQ">
-                    <button type="button submit"
-                            class="btn btn-primary">
-                        Who Cares?
-                    </button>
-
-                    <a href="/copyright">
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal">
-                        Learn More!
-                    </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </dialog>
-</div>
-
-
-<script>
-  const nextBtn = document.getElementById("showSuccessModal");
-  const okBtn = document.getElementById("successOkBtn");
-  const dialog = document.getElementById("successDialog");
-
-  
-  nextBtn.addEventListener("click", () => {
-      dialog.showModal();
-  });
-
-  
-  okBtn.addEventListener("click", () => {
-      dialog.close("ok");
-  });
-</script>
 
         </div><footer class="container">
     <hr class="soften">
