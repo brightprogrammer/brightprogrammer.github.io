@@ -173,39 +173,43 @@ Some other topics I want to study in futureinclude :</li>
       style="padding: 50px">
 
   <h4 align="center"> Message Me! </h4>
+  <br>
 
   
   <div class="form-group">
     <div class="row">
       <label class="col-2" for="emailName">Your Name</label>
       <input type="text" class="col-10 form-control"
-             id="emailName" placeholder="Shri Krishna Vasudev Yadav">
+             name="Name"
+             id="emailName" placeholder="Shri Krishna Vasudev Yadav" reqyured>
     </div>
   </div>
 
   <br>
 
+  
   <div class="form-group">
     <div class="row">
       <label class="col-2" for="emailID">Email address</label>
       <input type="email" class="col-10 form-control"
              id="emailID" aria-describedby="emailHelp"
-             placeholder="user@email.com">
+             name="EmailID"
+             placeholder="user@email.com" required>
     </div>
     <small id="emailHelp" class="form-text text-muted">Your email will never be shared with anyone without your explicit permission!</small>
   </div>
 
   <br>
 
+  
   <div class="form-group">
-    <label for="commentBox">
-      
-      What do you wanna say?</label>
+    <label for="commentBox"> What do you wanna say? </label>
     <textarea class="form-control" id="exampleTextarea" rows="4"
-              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)"></textarea>
+              name="Message"
+              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)" required></textarea>
   </div>
 
-
+  
   <div class="form-group" align="right">
     <input type="submit" class="btn btn-outline-primary" value="Send">
   </div>
