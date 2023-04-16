@@ -210,7 +210,7 @@
     <div class="card-header">Important Note</div>
         <div class="card-body">
             <p class="card-text">
-                This need not be the way actual CPUs implement instructions because by capturing semantics, we need only capture detail in such a manner than it closely resembles the actual working but also enables use to directly emulate each operation in each instruction.
+                This need not be the way actual CPUs implement instructions because by capturing semantics, we need only capture detail in such a manner that it not only closely resembles the actual working but also allows us to directly emulate each operation in each instruction.
                 <ul>
                 <li> It might happen that internally they can directly use registers to operform addition. They just need to read one register and somehow directly add it to the other register. </li>
                 <li> It might also happen that CPU reads one register to a `Working Register` and then add the value in second register to the value in Working Register and then move this value to destination register. If destination is the Working Register itself, then it just skips this part. </li>
