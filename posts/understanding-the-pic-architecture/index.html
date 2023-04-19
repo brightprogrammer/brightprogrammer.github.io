@@ -100,7 +100,7 @@
         <strong> Understanding The PIC Architecture </strong> <br>
         Testing The Learning Plan For PIC Uplifing<br><br>
         published on Mon, Apr 17, 2023 |
-        1 minutes read <br>
+        6 minutes read <br>
     </h3>
 </div>
 
@@ -119,21 +119,21 @@
 <p>Here are some resources I initially used to gain general idea of things :</p>
 <ul>
 <li>First and major resources pointing to other resources is <a href="https://en.wikipedia.org/wiki/PIC_microcontrollers">Wikipedia</a></li>
-<li>Next <a href="https://www.youtube.com/watch?v=b_SBranD1k4">this video</a> introduced me to basic assembly and how to use PIC chips.</li>
+<li>Next <a href="https://www.youtube.com/watch?v=b_SBranD1k4">this video</a> introduced me to basic assembly and how to use PIC devices.</li>
 <li><a href="https://ww1.microchip.com/downloads/en/devicedoc/33023a.pdf">Architecture Manual</a> itself.</li>
 </ul>
 <p>After getting to know more about I understood the following things :</p>
 <ul>
 <li>PIC is used in embedded systems</li>
 <li>Has different chip varieties in same family for allowing different selections for different use cases.</li>
-<li>At present all chips are categories into three categories :
+<li>At present all devices are categories into three categories :
 <ul>
 <li>PIC Base-Line</li>
 <li>PIC Mid-Range</li>
 <li>PIC High-End</li>
 </ul>
 </li>
-<li>Due to different chips in each of these varieties, the whole manual is broken into two document types :
+<li>Due to different devices in each of these varieties, the whole manual is broken into two document types :
 <ul>
 <li>Family Reference Manual : Describe an overall general structure of chip. For understanding memory model, registers etc&hellip; we might need datasheets</li>
 <li>Datasheets : Describe information that are specific to device.
@@ -147,8 +147,245 @@
 </ul>
 </li>
 <li>Things like instruction size, register size etc&hellip; don&rsquo;t change in same family.</li>
+<li>There&rsquo;s also a naming convention for each family that is present in the beginning few pages of reference manual.
+This is not useful for this project probably but useful if you just want to understand the PIC architecture.
+<ul>
+<li>PIC16<code>C</code>XXX stands for EPROM type memory.</li>
+<li>PIC16<code>CR</code>XXX stands for ROM type memory.</li>
+<li>PIC16<code>F</code>XXX stands for flash type memory</li>
 </ul>
-<h5 id="-work-in-progress--please-come-back-later-">! WORK IN PROGRESS ! PLEASE COME BACK LATER !</h5>
+</li>
+<li>There are other less important (for this project) details mentioned like how you can select and publish your product and all&hellip;</li>
+</ul>
+<div class="card text-white bg-warning mb-3">
+    <div class="card-header">Important Note</div>
+        <div class="card-body">
+            <p class="card-text">
+                When learning an architecture for the first time, always properly go through the contents of manual first! This will
+                help you gain insight on what things are present where and how you can go through the manual strategically. When I started
+                writing a disassembler for x86, I spent lot of time just finding the x86 instruction format and later I realized that
+                if only I had went through the contents of each volume first. <br><br>
+                P.S. : x86 manual is more than 3000 pages! and 5000 pages for Intel's version!
+            </p>
+        </div>
+    </div>
+</div>
+<h3 id="understanding-memory-model">Understanding Memory Model</h3>
+<ul>
+<li><strong>Architecture</strong> : Harvard Architecture</li>
+<li><strong>Endianness</strong> : Don&rsquo;t care, but I&rsquo;ll assume it to be Little Endian</li>
+<li><strong>Memory Types</strong> :
+<ul>
+<li><code>Program Memory</code>
+<ul>
+<li>Each instruction is 14 bits in size.</li>
+<li><code>Program Counter (PC)</code> register is 13 bits in size to index 8K instructions.
+<ul>
+<li>Program counter is broken into two 8 bit registers | <code>PCH</code> | <code>PCL</code> |</li>
+<li>There&rsquo;s also a <code>PCLATH</code> (<code>P</code>rogram <code>C</code>ounter <code>La</code>tch <code>H</code>igh) that is used to calculate actual instruction address.
+<table>
+<thead>
+<tr>
+<th><img src="/images/pc-reg-pic.png" alt="pc-reg-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Since size of each instruction is fixed, a 14-bit quantum is called an <code>Instruction Word</code> in Program Memory.</li>
+<li>Also, since these instructions are quantum, PC just needs to specify the integral index of the instruction it wants to fetch.</li>
+</ul>
+</li>
+<li>Program memory bus is 14-bits in size in order to be able to fetch a single 14-bit instruction.</li>
+<li><code>HardWare Call Stack</code>
+<ul>
+<li>The call stack can go maximum 8 level deep.</li>
+<li>This means 9th depth call will overwrite the top most value on stack, 10th will overwrite the 2nd from top and so on.</li>
+<li>There is no check present to make sure there was a call stack curroption!
+<table>
+<thead>
+<tr>
+<th><img src="/images/call-stack-pic.png" alt="call-stack-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><img src="/images/call-stack-note-pic.png" alt="call-stack-note-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>This 8K instruction region is not completely implemented in all devices belonging to same family.</li>
+<li>The program memory is divided into 4x2K memory regions called a <code>Page</code>.</li>
+<li>If program counter crosses the implemented memory region, it&rsquo;ll wrap around to the beginning of memory region.</li>
+<li>It may be possible that not all (program) memory pages are implemented.</li>
+<li>To jump between memory pages, high bits of <code>PC</code> register must be modified. This is done by the help of <code>PCLATH</code> register.
+We can specify the page we want to jump to using
+<ul>
+<li><code>BSF PCLATH, &lt;bit&gt;</code> : <code>B</code>IT <code>S</code>ET <code>F</code>LAG and</li>
+<li><code>BCF PCLATH, &lt;bit&gt;</code> : <code>B</code>IT <code>C</code>LEAR <code>F</code>LAG
+<table>
+<thead>
+<tr>
+<th><img src="/images/page-switch-pic.png" alt="page-switch-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Data Memory</code>
+<ul>
+<li><strong>Registers</strong>
+<ul>
+<li>Types :
+<ul>
+<li><code>General Purpose Registers (GPR)</code> (multiple)</li>
+<li><code>Special Purpose Registers (SPR)</code> (multiple)</li>
+<li><code>Working Register (WREG)</code> (<a href="https://youtu.be/xZMIpPqnrzg">only one</a>)</li>
+</ul>
+</li>
+<li>Names :
+<ul>
+<li>Registers are indexed using values in between 0 to 255 instead of having names.</li>
+<li>Although in IDEs there are multiple defines to name them.</li>
+<li><code>GPR</code>s are called File Registers and can be named like <code>FREG#num</code> or <code>F#num</code></li>
+<li><code>SPR</code>s have special names in <a href="https://ww1.microchip.com/downloads/en/devicedoc/33023a.pdf">Reference Manual</a></li>
+<li><code>WREG</code> is named <code>WREG</code> or just <code>W</code>.</li>
+<li>Size of each register is 8 bits (1 BYTE)</li>
+<li>Data Memory is divided into four parts. Each part is called a <code>Memory Bank</code>.
+<ul>
+<li>Each memory bank is very similar to each other and follow the same template.</li>
+<li>There are some common (implemented) registers and some unimplemented registers.</li>
+<li>One can switch between memory banks by using <code>&lt;RP1&gt;:&lt;RP0&gt;</code> bits in the <code>STATUS</code> register or the <code>IRP</code> bit.</li>
+<li>This architectural feature gives rise to two addressing modes :
+<ul>
+<li><code>Direct Addressing Mode</code> : Use <code>&lt;RP1&gt;</code>:<code>&lt;RP0&gt;</code> bits of <code>STATUS</code> register. Used when exact address is known at runtime.</li>
+<li><code>Indirect Addressing Mode</code> : Use <code>&lt;IRP&gt;</code> bit of <code>STATUS</code> register to specify <code>PAGE0/PAGE1</code> address or <code>PAGE2/PAGE3</code> address.
+Used when address is to be calculated at runtime.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Some registers are present in all devices of same family but some aren&rsquo;t. Not present registers (unusable ones)
+are called <code>unimplemented</code> in reference manual and reading them will give 0.
+<table>
+<thead>
+<tr>
+<th><img src="/images/register-layout-pic.png" alt="register-layout-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from given PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There are two different and separate memory BUS to access each of these two memory regions.</li>
+</ul>
+<h3 id="skimming-over-some-instructions">Skimming Over Some Instructions</h3>
+<p>The third step in TODO list commands us to try to read and understand some assembly by the new gained information. For this, there is already some small snippets of assembly lying here and there with nice comments to explain what is being done and why?</p>
+<table>
+<thead>
+<tr>
+<th><img src="/images/indirect-addressing-pic.png" alt="indirect-addressing-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from given PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><img src="/images/bank-switching-pic.png" alt="bank-switching-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from given PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><img src="/images/bank-switching-2-pic.png" alt="bank-switching-2-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> taken from given PIC Mid-Range reference manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interrupts-exceptions--device-resets">Interrupts, Exceptions &amp; Device Resets</h3>
+<p>Yes, there are exceptions &amp; interrupts in PIC devices too! They generally occur due to some arithmetic instruction error or some other common cases. There are reset flags to inform program that a specific interrupt occured. Please take reference in manual for this. Understanding this is not that important now as we can reiterate over this when writing uplifters.</p>
+<p>There are also detailed tables that give the initial value of each registers at the time of initialization. This is good because we&rsquo;ll need this when writing uplifters.</p>
+<h3 id="instruction-format">Instruction Format</h3>
+<p>This is discussed in Section 5 of Reference Manual. It specifies different types of instructions, their arguments and their format.</p>
+<h3 id="end-notes">End Notes</h3>
+<p>I think this almost covers up whatever information we need. I hurried a little there because after following this list, ideas of writing uplifters are exploding in my head right now. So, let&rsquo;s hurry up and jump to next post!</p>
 
 
 <h3>See Also</h3>
