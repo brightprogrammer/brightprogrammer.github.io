@@ -383,7 +383,38 @@ are called <code>unimplemented</code> in reference manual and reading them will 
 <p>Yes, there are exceptions &amp; interrupts in PIC devices too! They generally occur due to some arithmetic instruction error or some other common cases. There are reset flags to inform program that a specific interrupt occured. Please take reference in manual for this. Understanding this is not that important now as we can reiterate over this when writing uplifters.</p>
 <p>There are also detailed tables that give the initial value of each registers at the time of initialization. This is good because we&rsquo;ll need this when writing uplifters.</p>
 <h3 id="instruction-format">Instruction Format</h3>
-<p>This is discussed in Section 5 of Reference Manual. It specifies different types of instructions, their arguments and their format.</p>
+<p>This is discussed in Section 5 &amp; Section 29 of Reference Manual. It specifies different types of instructions, their arguments and their format.</p>
+<p>Three types of instructions :</p>
+<ul>
+<li>Byte-Oriented operations</li>
+<li>Bit-Oriented operations</li>
+<li>Literal or Control operations</li>
+</ul>
+<p>For byte-oriented instructions, &lsquo;<code>f</code>&rsquo; represents a file register designator and &lsquo;<code>d</code>&rsquo; represents a destination designator.</p>
+<ul>
+<li>The file register designator specifies which file register is to be used by the instruction.</li>
+<li>The destination designator specifies where the result of the operation is to be placed.</li>
+<li>If &lsquo;<code>d</code>&rsquo; is zero, the result is placed in the <code>W</code> register.</li>
+<li>If &lsquo;<code>d</code>&rsquo; is one, the result is placed in the file register specified in the instruction.</li>
+</ul>
+<p>For bit-oriented instructions, &lsquo;<code>b</code>&rsquo; represents a bit field designator which selects the number of the bit affected by the operation,
+while &lsquo;<code>f</code>&rsquo; represents the number of the file in which the bit is located.</p>
+<p>For literal and control operations, &lsquo;<code>k</code>&rsquo; represents an eight or eleven bit constant or literal value.</p>
+<table>
+<thead>
+<tr>
+<th><img src="/images/instruction-table-pic.png" alt="instruction-table-pic"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><div align="center"> Taken from PIC Mid-Range Reference Manual </div></td>
+</tr>
+<tr>
+<td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="end-notes">End Notes</h3>
 <p>I think this almost covers up whatever information we need. I hurried a little there because after following this list, ideas of writing uplifters are exploding in my head right now. So, let&rsquo;s hurry up and jump to next post!</p>
 
