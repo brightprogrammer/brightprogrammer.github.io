@@ -100,7 +100,7 @@
         <strong> Writing Pic Uplifters </strong> <br>
         Damn It&#39;s Hard!<br><br>
         published on Fri, Apr 21, 2023 |
-        5 minutes read <br>
+        14 minutes read <br>
     </h3>
 </div>
 
@@ -437,7 +437,10 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 <h3 id="improvising-previous-plan">Improvising Previous Plan</h3>
 <p>Previously I was setting register map like a string array and assumed that it&rsquo;ll be same for all devices but now I think, since register types are same across each of these devices (not verified) and only memory map and supported instruction set is changing (verified) we can create an enum of register types, create a <code>lookup table</code> to map from these enums to their string values and then define the memory/register maps using these enums. This way to add new devices we just need to add new memory maps! Ez Pz af.</p>
 <p>Here&rsquo;s the register enum types :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-FileCopyrightText: 2023 Siddharth Mishra &lt;admin@brightprogrammer.in&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: LGPL-3.0-only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file : regtypes.h
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief : Defines the various reigster types supported by the PIC16F family
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * and a lookup table to map from these register types to their string names.
@@ -503,7 +506,10 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// RZ_PIC_MIDRANGE_PIC_REGTYPES_H
 </span></span></span></code></pre></div><p>Then the register/memory map is defined in a separate header file for each device type like this :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-FileCopyrightText: 2023 Siddharth Mishra &lt;admin@brightprogrammer.in&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: LGPL-3.0-only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file : pic16f882.h
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief : This file describes the memory map of PICF16882 device in PIC16F family.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
@@ -565,6 +571,328 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// RZ_PIC_MIDRANGE_PIC_MEMMAP_PIC16F882_H
 </span></span></span></code></pre></div><p>This also changes the <code>pic_il.h</code> header file that we created in <a href="/posts/rzil-pic-uplifting">the first post</a> in the series.</p>
+<p>Now we have a a new <code>PicMidrangeDeviceType</code> and <code>PicMidrangeCPUState</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-FileCopyrightText: 2023 Siddharth Mishra &lt;admin@brightprogrammer.in&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: LGPL-3.0-only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef PIC_IL_H_
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define PIC_IL_H_
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;rz_il.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * PIC Mid-Range Device Type.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Since each device has it&#39;s own set of supported instructions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * and memory map (# of banks, register arrangement etc...),
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * we&#39;ll support analysis of each of these devices differently!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">pic16f_device_type_t</span> {
+</span></span><span style="display:flex;"><span>	PIC16F882,
+</span></span><span style="display:flex;"><span>	PIC16F883,
+</span></span><span style="display:flex;"><span>	PIC16F884,
+</span></span><span style="display:flex;"><span>	PIC16F886,
+</span></span><span style="display:flex;"><span>	PIC16F887,
+</span></span><span style="display:flex;"><span>	PIC_MIDRANGE_SUPPORTED_DEVICE_NUM
+</span></span><span style="display:flex;"><span>} PicMidrangeDeviceType;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * This struct will store the CPU state of a PIC Mid-Range
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * device while being uplifted.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Register are indexed using a value between 0x00-0x7f and a selected bank.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Instructions are indexed using a page selector (PCLATH)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Hence we need to maintain a state of CPU while being analyzed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * This opens possibilities of storing more useful data to improve the process.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#66d9ef">pic_midrange_cpu_state_t</span> {
+</span></span><span style="display:flex;"><span>	PicMidrangeDeviceType device_type;
+</span></span><span style="display:flex;"><span>	ut8 selected_bank; <span style="color:#75715e">///&lt; for register indexing.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ut8 selected_page; <span style="color:#75715e">///&lt; for instruction indexing.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} PicMidrangeCPUState;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RZ_IPI RZ_OWN PicMidrangeCPUState <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_pic_midrange_new_cpu_state</span>(PicMidrangeDeviceType device_type);
+</span></span><span style="display:flex;"><span>RZ_IPI RzAnalysisILConfig <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_midrange_il_vm_config</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis, PicMidrangeDeviceType device_type);
+</span></span><span style="display:flex;"><span>RZ_IPI RzILOpEffect <span style="color:#f92672">*</span><span style="color:#a6e22e">rz_midrange_il_op</span>(RZ_NONNULL RzAnalysis <span style="color:#f92672">*</span>analysis,
+</span></span><span style="display:flex;"><span>									   RZ_NONNULL RZ_BORROW RzAnalysisOp <span style="color:#f92672">*</span>op,
+</span></span><span style="display:flex;"><span>									   RZ_NONNULL PicMidrangeCPUState <span style="color:#f92672">*</span>cpu_state,
+</span></span><span style="display:flex;"><span>									   ut16 instr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// baseline
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/* RZ_IPI RzAnalysisILConfig *rz_pic_baseline_il_vm_config(RZ_NONNULL RzAnalysis *analysis); */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* RZ_IPI RzILOpEffect *rz_pic_baseline_il_op(RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RZ_BORROW RzAnalysisOp *op, ut16 instr ; */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// TODO: Add support for PIC18F &amp; other device families
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// PIC_IL_H_
+</span></span></span></code></pre></div><p>Great! we&rsquo;ll correspondingly change function signatures (but the inner code doesn&rsquo;t change much!).</p>
+<h3 id="imporant-definitions">Imporant Definitions</h3>
+<p>While writing uplifters I created multiple functions and preprocessor macro defines in order to ease the whole process. I can show these defines and additions as show you how I write uplifters or I can just write them all here in one single section. I follow the latter approach because it&rsquo;s easy to have all things in one place for both readers and me.</p>
+<p>Also, the code is heavily commented so you can just read the comments and with few hops between lines, you&rsquo;ll the idea.</p>
+<h4 id="memory-maps--register-getters">Memory Maps &amp; Register Getters</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// REGISTER DECLARATIONS &amp; DEFINITIONS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;pic16f_memmaps/memmaps.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define GET_WREG() VARG(&#34;WREG&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define GET_FREG(idx) VARG(&#34;FREG&#34;#idx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define GET_SPREG(name) VARG(name)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define BANK_SIZE ((ut32)0x80)
+</span></span></span></code></pre></div><h4 id="get-register-type--rziloppure-for-given-register">Get Register Type &amp; RzILOpPure For Given Register</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// device to register schema map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>pic_midrange_device_reg_map[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    [PIC16F882] <span style="color:#f92672">=</span> pic16f882_reg_map,
+</span></span><span style="display:flex;"><span>    [PIC16F883] <span style="color:#f92672">=</span> pic16f883_reg_map,
+</span></span><span style="display:flex;"><span>    [PIC16F884] <span style="color:#f92672">=</span> pic16f884_reg_map,
+</span></span><span style="display:flex;"><span>    [PIC16F886] <span style="color:#f92672">=</span> pic16f886_reg_map,
+</span></span><span style="display:flex;"><span>    [PIC16F887] <span style="color:#f92672">=</span> pic16f887_reg_map,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Get PicMidrangeRegType corresponding to give register index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param cpu_state Device CPU state.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param regidx Register index inside given bank of given device type.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return PicMidrangeRegType
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>PicMidrangeRegType <span style="color:#a6e22e">pic_midrange_il_get_reg_type</span>(RZ_NONNULL PicMidrangeCPUState <span style="color:#f92672">*</span>cpu_state, ut8 regidx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rz_return_val_if_fail</span>(cpu_state, REG_INVALID);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// compute linear register address
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ut32 addr <span style="color:#f92672">=</span> cpu_state<span style="color:#f92672">-&gt;</span>selected_bank <span style="color:#f92672">*</span> BANK_SIZE <span style="color:#f92672">+</span> regidx;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pic_midrange_device_reg_map[cpu_state<span style="color:#f92672">-&gt;</span>device_type][addr];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Get RzILOpPure corresponding to given register index of given device type.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param cpu_state Device CPU state.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \paramm regidx Register index in given memory bank of given device type.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return valid RzILOpPure on success, NULL otherwise.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>RzILOpPure <span style="color:#f92672">*</span><span style="color:#a6e22e">pic_midrange_il_get_reg</span>(RZ_NONNULL PicMidrangeCPUState <span style="color:#f92672">*</span>cpu_state, ut8 bank, ut8 regidx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rz_return_val_if_fail</span>(cpu_state, NULL);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// compute linear address
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ut32 addr <span style="color:#f92672">=</span> cpu_state<span style="color:#f92672">-&gt;</span>selected_bank <span style="color:#f92672">*</span> BANK_SIZE <span style="color:#f92672">+</span> regidx;
+</span></span><span style="display:flex;"><span>    PicMidrangeRegType reg_type <span style="color:#f92672">=</span> pic_midrange_device_reg_map[device_type][addr];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return register for given type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(reg_type <span style="color:#f92672">==</span> REG_FREG) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_FREG</span>(reg);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// this will also handle REG_UNIMPLEMENTED &amp; REG_RESERVED automatically.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_SPREG</span>(pic_midrange_il_regnames[reg])
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// use only in IL_LIFTER functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define GET_REG_TYPE(idx) pic_midrange_il_get_reg_type(cpu_state, idx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define GET_REG(idx) pic_midrange_il_get_reg(cpu_state, idx);
+</span></span></span></code></pre></div><p>Now, at this point, we can either write a sequence of operations like <code>pic_midrage_il_get_reg(ut8 idx)</code> which&rsquo;ll automatically query the bank, convert <code>idx</code> to a <code>U8</code> and compute effective linear address of register. This way we get to use the register&rsquo;s linear address as it&rsquo;s identifier and we also won&rsquo;t be able to check if given register is an <code>UNIMPLEMENTED</code> or a <code>RESERVED</code> register that both read value 0 when accessed. In current way of things, we can easily differentiate between these two cases!</p>
+<h4 id="status-register">Status Register</h4>
+<pre tabindex="0"><code>// fields inside status register
+const char *pic_midrange_status_flags[] = {
+    &#34;IRP&#34;, &#34;RP1&#34;, &#34;RP0&#34;, &#34;TO&#34;, &#34;PD&#34;, &#34;Z&#34;, &#34;DC&#34;, &#34;C&#34;
+};
+
+#define IRP 7
+#define RP1 6
+#define RP0 5
+#define TO  4
+#define PD  3
+#define Z   2
+#define DC  1
+#define C   0
+#define STATUS(x) pic_midrange_status_flags[x]
+</code></pre><h4 id="checking-for-carry-flag">Checking For Carry Flag</h4>
+<p>At some point I thought of create a commom memory region in this CPU state in order to keep track of values in registers but after taking references from previously written uplifters I understood that since VM is already maintaining the state of registers, we can ask it to set these flags itself! We just need to set the IL code to do it! This thought came because I partially forgot I was capturing semantics of the instruction and how to capture this instruction&rsquo;s semantics! My mind was only thinking of setting the flags and performing additions. This is not semantics! To capture semantics we need to instruct the VM to do everything! From setting flags in <code>STATUS</code> register to computing some useful boolean operation.</p>
+<p>So the following code is nothing but instructions to the VM on how to deduce the carry flag :</p>
+<pre tabindex="0"><code>/**
+ * Set of operations the RzIL VM needs to perform to set the carry/overflow flag.
+ *
+ * \param res RzILOpPure in which result of addition is stored.
+ * \param x First addend.
+ * \param y Fecond addend.
+ *
+ * \return RzILOpBool specifying operations to perform to check for overflow.
+ */
+static RzILOpBool *pic_midrange_il_check_carry_op(RZ_BORROW RzILOpPure *res, RZ_BORROW RzILOpPure *x, RZ_BORROW RzILOpPure *y) {
+    RzILOpBool *msbx = MSB(x);
+    RzILOpBool *msby = MSB(y);
+    RzILOpBool *msbr = MSB(res);
+
+    // cases :
+    // adding two unsigned numbers may or may not result in a carry
+    // adding an unsigned and a signed number will never result in a carry
+    // adding two signed numbers is the same case as adding two unsigned nos.
+    //
+    // if adding two numbers of same sign, overflow will occur iff result is
+    // of opposite sign
+    // adding two numbers of different sign will never result in an overflow
+
+    RzILOpBool *rx = XOR(msbr, msbx); // 0 if of same sign, 1 otherwise
+    RzILOpBool *ry = XOR(msbr, msby); // same
+
+    // truth table
+    // x | y | r | x^y | r^x | r^y | and(rx, ry) | expected |
+    // --;---;---;-----;-----;-----;-------------;----------;
+    // + | + | + |  0  |  0  |  0  |      0      |     0    |
+    // + | + | - |  0  |  1  |  1  |      1      |     1    |
+    // + | - | + |  1  |  0  |  1  |      0      |     0    |
+    // + | - | - |  1  |  1  |  0  |      0      |     0    |
+    // - | + | + |  1  |  1  |  0  |      0      |     0    |
+    // - | + | - |  1  |  0  |  1  |      0      |     0    |
+    // - | - | + |  0  |  1  |  1  |      1      |     1    |
+    // - | - | - |  0  |  0  |  0  |      0      |     0    |
+
+    // we need to check (x, y); (r, x) &amp; (r, y) are of same sign
+    // hence check (x, y, r) are of same sign
+    return AND(rx, ry);
+}
+</code></pre><p>I took reference from <a href="https://www.doc.ic.ac.uk/~eedwards/compsys/arithmetic/index.html">here</a> to write this logic. Similar function is written for other architecture&rsquo;s uplifters too :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// THIS IS FOR X86 UPLIFTER
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief Return the carry bit when \p x and \p y are added, with result \p res
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param res
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param x
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> RzILOpBool <span style="color:#f92672">*</span><span style="color:#a6e22e">x86_il_is_add_carry</span>(RZ_OWN RzILOpPure <span style="color:#f92672">*</span>res, RZ_OWN RzILOpPure <span style="color:#f92672">*</span>x, RZ_OWN RzILOpPure <span style="color:#f92672">*</span>y) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// res = x + y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xmsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(x);
+</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>ymsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(y);
+</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>resmsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(res);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// x &amp; y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xy <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(xmsb, ymsb);
+</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>nres <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(resmsb);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// !res &amp; y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>ry <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(nres, <span style="color:#a6e22e">DUP</span>(ymsb));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// x &amp; !res
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xr <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(<span style="color:#a6e22e">DUP</span>(xmsb), <span style="color:#a6e22e">DUP</span>(nres));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// bit = xy | ry | xr
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span> or <span style="color:#f92672">=</span> <span style="color:#a6e22e">OR</span>(xy, ry);
+</span></span><span style="display:flex;"><span>	or <span style="color:#f92672">=</span> <span style="color:#a6e22e">OR</span>(or, xr);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// truth table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// x | y | r | x&amp;y | ~r&amp;x | ~r&amp;y |   rxVryVxy  | expected |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// --;---;---;-----;------;------;-------------;----------;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | + | + |  0  |   0  |   0  |      0      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | + | - |  0  |   0  |   0  |      0      |     1    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | - | + |  0  |   0  |   1  |      1      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | - | - |  0  |   1  |   0  |      1      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | + | + |  0  |   1  |   0  |      1      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | + | - |  0  |   0  |   1  |      1      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | - | + |  1  |   1  |   1  |      1      |     1    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | - | - |  1  |   0  |   0  |      1      |     0    |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> or ;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I don&rsquo;t know (I know) why they don&rsquo;t match. There&rsquo;s a very high probability that my code is wrong since the X86 code is tested already. In my case, I&rsquo;m testing whether there&rsquo;s an overflow this one seems to be using some bit propagation formula.</p>
+<p>Then there&rsquo;s</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Set of operations the RzIL VM needs to perform to set the digit carry flag.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Instead of checking for the MSB, digit carry checks for 4th bit.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Working is very similar to checking for carry bit.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param res RzILOpPure in which result of addition is stored.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param x First addend.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param y Fecond addend.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return RzILOpBool specifying operations to perform to check for overflow.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> RzILOpBool <span style="color:#f92672">*</span><span style="color:#a6e22e">pic_midrange_il_check_digit_carry_op</span>(RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>res, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>x, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>y) {
+</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4x <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(x, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4y <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(y, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4r <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(res, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>rx <span style="color:#f92672">=</span> <span style="color:#a6e22e">XOR</span>(bit4r, bit4x); <span style="color:#75715e">// 0 if of same sign, 1 otherwise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>ry <span style="color:#f92672">=</span> <span style="color:#a6e22e">XOR</span>(bit4r, bit4y); <span style="color:#75715e">// same
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">AND</span>(rx, ry);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="set-arithmetic-flags-after-add-or-sub">Set Arithmetic Flags After ADD or SUB</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Handle C, DC &amp; Z flags for the previous operation.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * To be used after an arithmetic operation.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param result Result of last performed operation that affected the flag.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return RzILOpEffect containing set of steps to set status flags.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>RzILOpEffect <span style="color:#f92672">*</span><span style="color:#a6e22e">pic_midrange_il_set_arithmetic_flags</span>(RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>res, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>x, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>y, <span style="color:#66d9ef">bool</span> add) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get carry flag
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>cf <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(add) {
+</span></span><span style="display:flex;"><span>        cf <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        cf <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(<span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get digit carry flag
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>dcf <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(add) {
+</span></span><span style="display:flex;"><span>        dcf <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        dcf <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(<span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get zero flag
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>zf <span style="color:#f92672">=</span> <span style="color:#a6e22e">IS_ZERO</span>(lastop);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">SEQ3</span>(<span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(C), cf),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(DC), dcf),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(Z), zf));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define SET_STATUS_ADD(r, x, y) pic_midrange_il_set_arithmetic_flags(r, x, y, true)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SET_STATUS_SUB(r, x, y) pic_midrange_il_set_arithmetic_flags(r, x, y, false)
+</span></span></span></code></pre></div><h3 id="easiest-uplifter-ever">Easiest Uplifter Ever!</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * NOP
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Operation: No Operation.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Operands: NONE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Status affected : NONE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(NOP) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">NOP</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="addwf-uplifter"><code>ADDWF</code> Uplifter</h3>
+<p>Finally we compile everything we built up until now and use that to write an <code>ADDWF</code> uplifter. Notice how we set flags by keeping a backup of old value of <code>WREG</code> register and using the newly defined <code>SET_STATUS_ADD</code> macro that&rsquo;ll return <code>RzILOpEffect</code> sequence of instructions to set required flags.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * ADDWF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Operation: Add FREG to WREG.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Operands: f, d
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Status affected : C, DC, Z
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADDWF) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get register type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ut8 regidx <span style="color:#f92672">=</span> <span style="color:#a6e22e">PIC_MIDRANGE_OP_ARGS_7F_GET_F</span>(instr);
+</span></span><span style="display:flex;"><span>    ut8 addr <span style="color:#f92672">=</span> cpu_state<span style="color:#f92672">-&gt;</span>selected_bank <span style="color:#f92672">*</span> BANK_SIZE <span style="color:#f92672">+</span> regidx;
+</span></span><span style="display:flex;"><span>    PicMidrangeRegType reg_type <span style="color:#f92672">=</span> <span style="color:#a6e22e">GET_REG_TYPE</span>(addr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create a copy of current value of wreg since it&#39;s going to change
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpEffect <span style="color:#f92672">*</span>wreg_old <span style="color:#f92672">=</span> <span style="color:#a6e22e">SETL</span>(<span style="color:#e6db74">&#34;wreg_old&#34;</span>, <span style="color:#a6e22e">GET_WREG</span>());
+</span></span><span style="display:flex;"><span>    RzILOpEffect <span style="color:#f92672">*</span>add_op <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    RzILOpEffect <span style="color:#f92672">*</span>set_status_op <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// if this is an unimplemented or reserved register then
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// it&#39;s read as 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(reg_type <span style="color:#f92672">==</span> REG_UNIMPLEMENTED <span style="color:#f92672">||</span> reg_type <span style="color:#f92672">==</span> REG_RESERVED) {
+</span></span><span style="display:flex;"><span>        add_op <span style="color:#f92672">=</span> <span style="color:#a6e22e">ADD</span>(<span style="color:#a6e22e">GET_WREG</span>(), <span style="color:#a6e22e">U8</span>(<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>        set_status_op <span style="color:#f92672">=</span> <span style="color:#a6e22e">SET_STATUS_ADD</span>(<span style="color:#a6e22e">GET_WREG</span>(), <span style="color:#a6e22e">VARL</span>(<span style="color:#e6db74">&#34;wreg_old&#34;</span>), <span style="color:#a6e22e">U8</span>(<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        add_op <span style="color:#f92672">=</span> <span style="color:#a6e22e">ADD</span>(<span style="color:#a6e22e">GET_WREG</span>(), <span style="color:#a6e22e">GET_REG</span>(idx))
+</span></span><span style="display:flex;"><span>        set_status_op <span style="color:#f92672">=</span> <span style="color:#a6e22e">SET_STATUS_ADD</span>(<span style="color:#a6e22e">GET_WREG</span>(), <span style="color:#a6e22e">VARL</span>(<span style="color:#e6db74">&#34;wreg_old&#34;</span>), <span style="color:#a6e22e">GET_REG</span>(idx));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">SEQ2</span>(add_op, set_status_op);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="this-is-a-work-in-progress-information-can-be-wrong-waiting-for-review-from-mentors">THIS IS A WORK IN PROGRESS! INFORMATION CAN BE WRONG! WAITING FOR REVIEW FROM MENTORS&hellip;</h5>
 
 
 <h3>See Also</h3>
