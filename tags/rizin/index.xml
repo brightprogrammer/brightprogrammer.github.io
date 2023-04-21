@@ -6,7 +6,17 @@
     <description>Recent content in rizin on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Apr 2023 00:12:58 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/rizin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Apr 2023 17:25:23 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/rizin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writing Pic Uplifters</title>
+      <link>https://brightprogrammer.in/posts/writing-pic-uplifters/</link>
+      <pubDate>Fri, 21 Apr 2023 17:25:23 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/writing-pic-uplifters/</guid>
+      <description>In last post we went through the general reference manual. Turns out that after going through some datasheets, it&amp;rsquo;s better to divide the whole IL uplifting process into families like :
+PIC16FXXXX PIC18FXXXX PIC32FXXXX (completely different device!, take a look) etc&amp;hellip; Why? Well because I went through the datasheets and it looks like the reference manual we referred to is outdated and new devices were added to family with more memory banks!</description>
+    </item>
+    
     <item>
       <title>Understanding The PIC Architecture</title>
       <link>https://brightprogrammer.in/posts/understanding-the-pic-architecture/</link>

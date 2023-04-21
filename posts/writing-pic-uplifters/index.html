@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en"><head>
+    <title>Project Blue</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
+    <link rel="canonical" href="https://brightprogrammer.in">
+</head>
+<body>
+
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+
+        
+        <a href="https://brightprogrammer.in"
+           class="navbar-brand">Project Blue
+        </a>
+
+        
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                href="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse"
+             id="navbarResponsive">
+
+            
+            <ul class="navbar-nav">
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="filemenu">
+                        File <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="filemenu">
+                        <a class="dropdown-item" href="/posts/">Posts</a>
+                        <a class="dropdown-item" href="/notes/">Notes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/projects/">Projects<a>
+                        <a class="dropdown-item" href="/publication/">
+                            Publications
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/bookmarks/">
+                            Bookmarks
+                        </a>
+                    </div>
+                    
+                </li>
+                
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="helpmenu">
+                        Help <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="helpmenu">
+                        <a class="dropdown-item" href="/about-me">About Me</a>
+                        <a class="dropdown-item" href="/about-project-blue">
+                            About Project Blue
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/copyright">
+                            Copyright
+                        </a>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+<div id="content" class="bs-component container-fluid">
+
+<br>
+<br>
+
+<div class="bs-component">
+    <h3 align="center">
+        <strong> Writing Pic Uplifters </strong> <br>
+        Damn It&#39;s Hard!<br><br>
+        published on Fri, Apr 21, 2023 |
+        4 minutes read <br>
+    </h3>
+</div>
+
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
+        <li class="breadcrumb-item inactive" >Writing Pic Uplifters</li>
+
+    </ul>
+</div>
+
+<p>In <a href="/posts/understanding-the-pic-architecture">last post</a> we went through the general reference manual. Turns out that after going through some datasheets, it&rsquo;s better to divide the whole IL uplifting process into families like :</p>
+<ul>
+<li><code>PIC16FXXXX</code></li>
+<li><code>PIC18FXXXX</code></li>
+<li><code>PIC32FXXXX</code> (completely different device!, take a look)</li>
+<li>etc&hellip;</li>
+</ul>
+<p>Why? Well because I went through the datasheets and it looks like the reference manual we referred to is outdated and new devices were added to family with more memory banks! I noticed some datasheets specifying that the given device has 32, 64, 128 etc&hellip; memory banks! The reference manual states there are only 4 memory banks in each device in family. Well, I did find some devices with 4 memory banks but now I think that since it&rsquo;s hard to find which device belongs to which family (since manual states devices starting with name pic16f but clearly new devices don&rsquo;t follow the manual), it&rsquo;s better to split them based on device initials instead of mid-range, base-line and high-end.</p>
+<p>Here are all the datasheets I found from <a href="https://microchip.com">official site</a> :</p>
+<!-- DANGER ZONE! DON'T TOUCH -->
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Datasheet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PIC16F15213/14/23/24/43/44</td>
+<td><a href="/documents/pic16f/PIC16F15213-14-23-24-43-44-Data-Sheet-40002195C.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15213/14/23/24/43/44</td>
+<td><a href="/documents/pic16f/PIC16F15213-14-23-24-43-44-Data-Sheet-40002195D.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15213/14/23/24/43/44</td>
+<td><a href="/documents/pic16f/PIC16F15213-14-23-24-43-44-Data-Sheet-DS40002195B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15213/14/23/24/43/44</td>
+<td><a href="/documents/pic16f/PIC16F15213_14_23_24_43_44_Full-Featured_8_14_20-Pin_Microcontrollers_40002195B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15213/14/23/24/43/44</td>
+<td><a href="/documents/pic16f/PIC16F15213-14-23-24-43-44-Microcontroller-Data-Sheet-40002195.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15225/45 14/20/Pin</td>
+<td><a href="/documents/pic16f/PIC16F15225-45-14-20-Pin-Microcontroller-DS-20006389C.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F1522545 Full Featured 14/20-Pin</td>
+<td><a href="/documents/pic16f/PIC16F1522545_Full_Featured_1420-Pin_Microcontrollers_Data_Sheet_20006389B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15225/45</td>
+<td><a href="/documents/pic16f/PIC16F15225-45-Microcontroller-Data-Sheet-20006389.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15254/55 28-Pin</td>
+<td><a href="/documents/pic16f/PIC16F15254-55-28-Pin-Microcontroller-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15254/55</td>
+<td><a href="/documents/pic16f/PIC16F15254-55-Microcontroller-Data-Sheet-40002324.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F15256/74/75/76</td>
+<td><a href="/documents/pic16f/PIC16F15256-74-75-76-Microcontroller-Data-Sheet-40002305.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F1614/8</td>
+<td><a href="/documents/pic16f/PIC16F1614_8-Data-Sheet-40002077A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F1615/9</td>
+<td><a href="/documents/pic16f/PIC16F1615_9-Data-Sheet-40002078A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17114/15/24/25/44/45</td>
+<td><a href="/documents/pic16f/PIC16F17114-15-24-25-44-45-Microcontroller-Data-Sheet-40002403A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17114/15/24/25/44/45</td>
+<td><a href="/documents/pic16f/PIC16F17114-15-24-25-44-45-Microcontroller-Data-Sheet-DS40002403.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17126/46 Full Featured</td>
+<td><a href="/documents/pic16f/PIC16F17126-46-Full-Featured-Microcontrollers-Data-Sheet-40002343B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17126/46 Full Featured</td>
+<td><a href="/documents/pic16f/PIC16F17126-46-Full-Featured-Microcontrollers-Data-Sheet-40002343C.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17126/46</td>
+<td><a href="/documents/pic16f/PIC16F17126-46-Microcontrollers-Data-Sheet-DS40002343.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F17156/76</td>
+<td><a href="/documents/pic16f/PIC16F17156-76-Microcontroller-Data-Sheet-DS40002485.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18015/25/44/45</td>
+<td><a href="/documents/pic16f/PIC16F18015-25-44-45-Microcontroller-Data-Sheet-40002340B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18026/46</td>
+<td><a href="/documents/pic16f/PIC16F18026-46-Microcontroller-Data-Sheet-40002415-1.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18026/46</td>
+<td><a href="/documents/pic16f/PIC16F18026-46-Microcontroller-Data-Sheet-40002415.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18054/55/74/75 28/40-Pin</td>
+<td><a href="/documents/pic16f/PIC16F18054-55-74-75-28-40-Pin-Micorocontroller-Data-Sheet-40002338.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18056/76 28/40-Pin</td>
+<td><a href="/documents/pic16f/PIC16F18056-76-28-40-Pin-Microcontroller-Data-Sheet-40002325A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18056/76 28/40-Pin</td>
+<td><a href="/documents/pic16f/PIC16F18056-76-28-40-Pin-Microcontroller-Data-Sheet-40002325B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18114/15/24/25/44/45</td>
+<td><a href="/documents/pic16f/PIC16F18114-15-24-25-44-45-Micorcontroller-Data-Sheet-DS40002404.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18114/15/24/25/44/45</td>
+<td><a href="/documents/pic16f/PIC16F18114-15-24-25-44-45-Microcontroller-Data-Sheet-40002404A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18126/46 Full Featured 14/20-Pin</td>
+<td><a href="/documents/pic16f/PIC16F18126-46-Full-Featured-14-20-Pin-Microcontrollers-40002339A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18126/46 Full Featured</td>
+<td><a href="/documents/pic16f/PIC16F18126-46-Full-Featured-Microcontrollers-Data-Sheet-40002339B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18126/46</td>
+<td><a href="/documents/pic16f/PIC16F18126-46-Microcontrollers-Data-Sheet-DS40002339.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F1826/1827</td>
+<td><a href="/documents/pic16f/PIC16F1826-1827.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F1829LIN-20-Pin-8-Bit-Flash-LIN-J2602-MCU-40001673B</td>
+<td><a href="/documents/pic16f/PIC16F1829LIN-20-Pin-8-Bit-Flash-LIN-J2602-MCU-40001673B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F18325/18345 Full Featured Low Pin Count High Temp MCU</td>
+<td><a href="/documents/pic16f/PIC16F18325-18345-Full-Featured-Low-Pin-Count-High-Temp-MCU-40002024B.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F193X/16LF193X</td>
+<td><a href="/documents/pic16f/PIC16F193X-16LF193X.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F194X-16LF194X</td>
+<td><a href="/documents/pic16f/PIC16F194X-16LF194X.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F526 14-Pin, 8-Bit Flash MCU</td>
+<td><a href="/documents/pic16f/PIC16F526-14-Pin-8-Bit-Flash-MCU-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F527</td>
+<td><a href="/documents/pic16f/PIC16F527-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F527 Product Brief</td>
+<td><a href="/documents/pic16f/PIC16F527-Product-Brief.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F54/57/59 18/20/40-Pin Flash Microcontroller</td>
+<td><a href="/documents/pic16f/PIC16F54-57-59-18_20_40-Pin-Flash-Microcontroller.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F570</td>
+<td><a href="/documents/pic16f/PIC16F570.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F570 Product Brief</td>
+<td><a href="/documents/pic16f/PIC16F570-Product-Brief.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F5X</td>
+<td><a href="/documents/pic16f/PIC16F5X.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F610/16HV610/PIC16F616/16HV616</td>
+<td><a href="/documents/pic16f/PIC16F610-16HV610-PIC16F616-16HV616-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F627A/628A/648A</td>
+<td><a href="/documents/pic16f/PIC16F627A-628A-648A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F62X FLASH-Based 8-Bit CMOS MCU</td>
+<td><a href="/documents/pic16f/PIC16F62X-FLASH-Based-8-Bit-CMOS-MCU-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F630/676</td>
+<td><a href="/documents/pic16f/PIC16F630-676-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F631/677/685/687/689/690</td>
+<td><a href="/documents/pic16f/PIC16F631-677-685-687-689-690-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F648A FLASH-Based Microcontrollers with Comparators, CCP and USART Product Brief</td>
+<td><a href="/documents/pic16f/PIC16F648A-FLASH-Based-Microcontrollers-with-Comparators-CCP-and-USART-Product-Brief.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F684</td>
+<td><a href="/documents/pic16f/PIC16F684.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F688-14-Pin-Flash-Based-8-Bit-CMOS-Microcontrollers-with-nanoWatt-Technology</td>
+<td><a href="/documents/pic16f/PIC16F688-14-Pin-Flash-Based-8-Bit-CMOS-Microcontrollers-with-nanoWatt-Technology.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F688 14-Pin Low Power FLASH Microcontroller Product Brief</td>
+<td><a href="/documents/pic16f/PIC16F688-14-Pin-Low-Power-FLASH-Microcontroller-Product-Brief.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F707/PIC16LF707 40-Pin, 8-Bit Flash mTouch MCU with 32 Capacitive Touch Channels</td>
+<td><a href="/documents/pic16f/PIC16F707-PIC16LF707-40-Pin-8-Bit-Flash-mTouch-MCU-with-32-Capacitive-Touch-Channels.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F716</td>
+<td><a href="/documents/pic16f/PIC16F716.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F720/721 Product Brief</td>
+<td><a href="/documents/pic16f/PIC16F720-721-Product-Brief.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F72 28-Pin, 8-bit CMOS FLASH Microcontroller with AD Converter</td>
+<td><a href="/documents/pic16f/PIC16F72-28-Pin-8-bit-CMOS-FLASH-Microcontroller-with-AD-Converter.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F753/HV753</td>
+<td><a href="/documents/pic16f/PIC16F753-HV753-dup.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F753/HV753</td>
+<td><a href="/documents/pic16f/PIC16F753-HV753.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F785/HV785</td>
+<td><a href="/documents/pic16f/PIC16F785-HV785.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F7X7</td>
+<td><a href="/documents/pic16f/PIC16F7X7-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F7X</td>
+<td><a href="/documents/pic16f/PIC16F7X-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F818/819</td>
+<td><a href="/documents/pic16f/PIC16F818-819.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F84A</td>
+<td><a href="/documents/pic16f/PIC16F84A.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F85/86</td>
+<td><a href="/documents/pic16f/PIC16F85-86.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F870/871</td>
+<td><a href="/documents/pic16f/PIC16F870-871.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F872</td>
+<td><a href="/documents/pic16f/PIC16F872.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F87/88</td>
+<td><a href="/documents/pic16f/PIC16F87-88.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F87XA</td>
+<td><a href="/documents/pic16f/PIC16F87XA.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F87X</td>
+<td><a href="/documents/pic16f/PIC16F87X.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F882/883/884/886/887</td>
+<td><a href="/documents/pic16f/PIC16F882-883-884-886-887-Data-Sheet.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F882/883/884/886/887</td>
+<td><a href="/documents/pic16f/pic16f882-883-884-886-887.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F913/914/916/917/946</td>
+<td><a href="/documents/pic16f/PIC16F913-914-916-917-946.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F/LF1825/1829</td>
+<td><a href="/documents/pic16f/pic16f-lf1825-1829.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16F/LF1847</td>
+<td><a href="/documents/pic16f/PIC16F-LF1847.pdf">download</a></td>
+</tr>
+<tr>
+<td>PIC16(L)F1777/8/9</td>
+<td><a href="/documents/pic16f/pic16(l)f1777-8-9_datasheet.pdf">download</a></td>
+</tr>
+</tbody>
+</table>
+<!-- DANGER ZONE END! -->
+<br>
+I downloaded these blidnly so don't judge me if some are copy of each other or some are just 6-7 pages long (there are such PDFs).  
+<p>Now I just have to go through these datasheets one by one and get their memory map and instruction set. One more advantage of this process is that we can get exact idea of which instructions a chip supports and which ones it doesn&rsquo;t. This might help improve analysis by detecting faulty instructions.</p>
+<h3 id="improvising-previous-plan">Improvising Previous Plan</h3>
+<p>Previously I was setting register map like a string array and assumed that it&rsquo;ll be same for all devices but now I think, since register types are same across each of these devices (not verified) and only memory map and supported instruction set is changing (verified) we can create an enum of register types, create a <code>lookup table</code> to map from these enums to their string values and then define the memory/register maps using these enums. This way to add new devices we just need to add new memory maps! Ez Pz af.</p>
+<p>Here&rsquo;s the register enum types :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file : regtypes.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief : Defines the various reigster types supported by the PIC16F family
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * and a lookup table to map from these register types to their string names.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef RZ_PIC_MIDRANGE_PIC_REGTYPES_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define RZ_PIC_MIDRANGE_PIC_REGTYPES_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format off
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Instead of storing strings in file register map,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * it&#39;s better to store enums in order to save memory.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">pic_midrange_reg_type_t</span> {
+</span></span><span style="display:flex;"><span>    REG_INDF,
+</span></span><span style="display:flex;"><span>    REG_TMR0,
+</span></span><span style="display:flex;"><span>    REG_PCL, <span style="color:#75715e">/* lower byte of PC register */</span>
+</span></span><span style="display:flex;"><span>    REG_STATUS, <span style="color:#75715e">/* status register */</span>
+</span></span><span style="display:flex;"><span>    REG_FSR,
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated, more registers here) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    REG_EEDAT,
+</span></span><span style="display:flex;"><span>    REG_EEADR,
+</span></span><span style="display:flex;"><span>    REG_SRCON,
+</span></span><span style="display:flex;"><span>    REG_BAUDCTL,
+</span></span><span style="display:flex;"><span>    REG_ANSEL,
+</span></span><span style="display:flex;"><span>    REG_ANSELH,
+</span></span><span style="display:flex;"><span>    REG_EECON1,
+</span></span><span style="display:flex;"><span>    REG_EECON2,
+</span></span><span style="display:flex;"><span>    REG_RESERVED,
+</span></span><span style="display:flex;"><span>    REG_FREG, <span style="color:#75715e">/* normal indexed file register */</span>
+</span></span><span style="display:flex;"><span>    REG_UNIMPLEMENTED, <span style="color:#75715e">/* unimplemented registers are read as 0 */</span>
+</span></span><span style="display:flex;"><span>} PicMidrangeRegType;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Map from reg enums to reg names
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> pic_midrange_il_regnames[REG_UNIMPLEMENTED <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    [REG_INDF]          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_INDF&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_TMR0]          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_TMR0&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_PCL]           <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_PCL&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_STATUS]        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_STATUS&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_FSR]           <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_FSR&#34;</span>,
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated, more registers here) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    [REG_EEDAT]         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_EEDAT&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_EEADR]         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_EEADR&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_SRCON]         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_SRCON&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_BAUDCTL]       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_BAUDCTL&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_ANSEL]         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_ANSEL&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_ANSELH]        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_ANSELH&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_EECON1]        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_EECON1&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_EECON2]        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_EECON2&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_RESERVED]      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_RESERVED&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_FREG]          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_FREG&#34;</span>,
+</span></span><span style="display:flex;"><span>    [REG_UNIMPLEMENTED] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REG_UNIMPLEMENTED&#34;</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format on
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// RZ_PIC_MIDRANGE_PIC_REGTYPES_H
+</span></span></span></code></pre></div><p>Then the register/memory map is defined in a separate header file for each device type like this :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \file : pic16f882.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief : This file describes the memory map of PICF16882 device in PIC16F family.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef RZ_PIC_MIDRANGE_PIC_MEMMAP_PIC16F882_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define RZ_PIC_MIDRANGE_PIC_MEMMAP_PIC16F882_H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;regtypes.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format off
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>PicMidrangeRegType pic16f882_reg_map[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* BANK 0 */</span>
+</span></span><span style="display:flex;"><span>    REG_INDF,                   <span style="color:#75715e">/* 0x00 */</span>
+</span></span><span style="display:flex;"><span>    REG_TMR0,                   <span style="color:#75715e">/* 0x01 */</span>
+</span></span><span style="display:flex;"><span>    REG_PCL,                    <span style="color:#75715e">/* 0x02 */</span>
+</span></span><span style="display:flex;"><span>    REG_STATUS,                 <span style="color:#75715e">/* 0x03 */</span>
+</span></span><span style="display:flex;"><span>    REG_FSR,                    <span style="color:#75715e">/* 0x04 */</span>
+</span></span><span style="display:flex;"><span>    REG_PORTA,                  <span style="color:#75715e">/* 0x05 */</span>
+</span></span><span style="display:flex;"><span>    REG_PORTB,                  <span style="color:#75715e">/* 0x06 */</span>
+</span></span><span style="display:flex;"><span>    REG_PORTC,                  <span style="color:#75715e">/* 0x07 */</span>
+</span></span><span style="display:flex;"><span>    REG_UNIMPLEMENTED,          <span style="color:#75715e">/* 0x08 */</span>
+</span></span><span style="display:flex;"><span>    REG_PORTE,                  <span style="color:#75715e">/* 0x09 */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    REG_CCPR2L,                 <span style="color:#75715e">/* 0x1b */</span>
+</span></span><span style="display:flex;"><span>    REG_CCPR2H,                 <span style="color:#75715e">/* 0x1c */</span>
+</span></span><span style="display:flex;"><span>    REG_CCP2CON,                <span style="color:#75715e">/* 0x1d */</span>
+</span></span><span style="display:flex;"><span>    REG_ADRESH,                 <span style="color:#75715e">/* 0x1e */</span>
+</span></span><span style="display:flex;"><span>    REG_ADCON0,                 <span style="color:#75715e">/* 0x1f */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x20 */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x21 */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x22 */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x7b */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x7c */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x7d */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x7e */</span>
+</span></span><span style="display:flex;"><span>    REG_FREG,                   <span style="color:#75715e">/* 0x7f */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* BANK1 */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* BANK 2 */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* BANK 3 */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . <span style="color:#75715e">/* (truncated) */</span>
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format on
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// RZ_PIC_MIDRANGE_PIC_MEMMAP_PIC16F882_H
+</span></span></span></code></pre></div>
+
+<h3>See Also</h3>
+<ul>
+  
+  <li><a href="/posts/rzil-pic-uplifting/">Rzil PIC Uplifting</a></li>
+  
+  <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
+  
+  <li><a href="/posts/understanding-the-pic-architecture/">Understanding The PIC Architecture</a></li>
+  
+</ul>
+
+<h4 align="center">
+    <a href="https://brightprogrammer.in">
+        Project Blue Main Page
+    </a>
+</h4>
+<br>
+
+<br><div style="border: 1px solid #ffffff;">
+
+<form action="https://formsubmit.co/30fe378dd2a9a7a6f563c0e7365b145c"
+      method="POST"
+      style="padding: 50px">
+
+  <h4 align="center"> Message Me! </h4>
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailName">Your Name</label>
+      <input type="text" class="col-10 form-control"
+             name="name"
+             id="emailName" placeholder="Shri Krishna Vasudev Yadav" reqyured>
+    </div>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailID">Email address</label>
+      <input type="email" class="col-10 form-control"
+             id="emailID" aria-describedby="emailHelp"
+             name="emailID"
+             placeholder="user@email.com" required>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">Your email will never be shared with anyone without your explicit permission!</small>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <label for="commentBox"> What do you wanna say? </label>
+    <textarea class="form-control" id="exampleTextarea" rows="4"
+              name="message"
+              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)" required></textarea>
+  </div>
+
+  
+  <div class="form-group" align="right">
+    <input type="submit" class="btn btn-outline-primary" value="Send">
+  </div>
+
+</form>
+</div>
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 align="center" style="padding:40px"> Copyright (c) 2023 Siddharth Mishra </h4>
+</p>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
+
+
+
+
+
+
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
+
+
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+    
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>
+
+
+</body>
+</html>
