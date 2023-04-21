@@ -100,7 +100,7 @@
         <strong> Writing Pic Uplifters </strong> <br>
         Damn It&#39;s Hard!<br><br>
         published on Fri, Apr 21, 2023 |
-        4 minutes read <br>
+        5 minutes read <br>
     </h3>
 </div>
 
@@ -113,7 +113,7 @@
     </ul>
 </div>
 
-<p>In <a href="/posts/understanding-the-pic-architecture">last post</a> we went through the general reference manual. Turns out that after going through some datasheets, it&rsquo;s better to divide the whole IL uplifting process into families like :</p>
+<p>In <a href="/posts/understanding-the-pic-architecture">last post</a> we went through the general reference manual. Turns out (after going through some datasheets), it&rsquo;s better to divide the whole IL uplifting process into families like :</p>
 <ul>
 <li><code>PIC16FXXXX</code></li>
 <li><code>PIC18FXXXX</code></li>
@@ -121,6 +121,7 @@
 <li>etc&hellip;</li>
 </ul>
 <p>Why? Well because I went through the datasheets and it looks like the reference manual we referred to is outdated and new devices were added to family with more memory banks! I noticed some datasheets specifying that the given device has 32, 64, 128 etc&hellip; memory banks! The reference manual states there are only 4 memory banks in each device in family. Well, I did find some devices with 4 memory banks but now I think that since it&rsquo;s hard to find which device belongs to which family (since manual states devices starting with name pic16f but clearly new devices don&rsquo;t follow the manual), it&rsquo;s better to split them based on device initials instead of mid-range, base-line and high-end.</p>
+<p>Keep in mind that we eventually want to uplift all Mid-Range devices even though it doesn&rsquo;t seem like so atm. We&rsquo;ll need datasheets of <code>PIC16CXXXX</code> etc&hellip; too but let&rsquo;s worry about those later. For now, we&rsquo;ll uplift only <code>PIC16FXXXX</code> devices.</p>
 <p>Here are all the datasheets I found from <a href="https://microchip.com">official site</a> :</p>
 <!-- DANGER ZONE! DON'T TOUCH -->
 <table>
@@ -563,7 +564,8 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format on
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif </span><span style="color:#75715e">// RZ_PIC_MIDRANGE_PIC_MEMMAP_PIC16F882_H
-</span></span></span></code></pre></div>
+</span></span></span></code></pre></div><p>This also changes the <code>pic_il.h</code> header file that we created in <a href="/posts/rzil-pic-uplifting">the first post</a> in the series.</p>
+
 
 <h3>See Also</h3>
 <ul>
@@ -687,7 +689,7 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 
 
 
-<h4 align="center" style="padding:40px"> Copyright (c) 2023 Siddharth Mishra </h4>
+<h4 align="center" style="padding:40px"> Copyright (c) 2023 Siddharth Mishra | YOU ARE IN NO SITUATION ALLOWED TO USE ANY CONTENT ON THIS BLOG TO TRAIN AN AI!</h4>
 </p>
 </footer>
 <script src="/js/jquery.min.js"></script>
