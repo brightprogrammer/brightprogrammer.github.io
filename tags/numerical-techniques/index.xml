@@ -14,7 +14,9 @@
       
       <guid>https://brightprogrammer.in/notes/numerical-techniques/part2/</guid>
       <description>Numerical Techniques Solving System Of Linear Equation Notes A system of linear equations
-$$ a_{11} x_1 + a_{12} x_2 + &amp;hellip; + a_{1n} x_n = b_1 \\ a_{21} x_1 + a_{22} x_2 + &amp;hellip; + a_{2n} x_n = b_2 \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ a_{n1} x_1 + a_{n2} x_2 + &amp;hellip; + a_{nn} x_n = b_2 $$</description>
+$$ a_{11} x_1 + a_{12} x_2 + &amp;hellip; + a_{1n} x_n = b_1 \\ a_{21} x_1 + a_{22} x_2 + &amp;hellip; + a_{2n} x_n = b_2 \\ . \\ . \\ . \\ a_{n1} x_1 + a_{n2} x_2 + &amp;hellip; + a_{nn} x_n = b_n $$
+can be written in matrix form as :
+$$ \begin{pmatrix} a_{11} &amp;amp; a_{12} &amp;amp; &amp;hellip; &amp;amp; a_{1n} \\ a_{21} &amp;amp; a_{22} &amp;amp; &amp;hellip; &amp;amp; a_{2n} \\ .</description>
     </item>
     
     <item>
