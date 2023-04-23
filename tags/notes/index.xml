@@ -6,7 +6,27 @@
     <description>Recent content in notes on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 21 Apr 2023 17:25:23 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Apr 2023 17:47:31 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>System Of Linear Equations</title>
+      <link>https://brightprogrammer.in/notes/numerical-techniques/part2/</link>
+      <pubDate>Sun, 23 Apr 2023 17:47:31 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/notes/numerical-techniques/part2/</guid>
+      <description>Numerical Techniques Solving System Of Linear Equation Notes A system of linear equations
+$$ a_{11} x_1 + a_{12} x_2 + &amp;hellip; + a_{1n} x_n = b_1 \\ a_{21} x_1 + a_{22} x_2 + &amp;hellip; + a_{2n} x_n = b_2 \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ . &amp;amp; . &amp;amp; &amp;amp; . \\ a_{n1} x_1 + a_{n2} x_2 + &amp;hellip; + a_{nn} x_n = b_2 $$</description>
+    </item>
+    
+    <item>
+      <title>Root Finding Of Functions</title>
+      <link>https://brightprogrammer.in/notes/numerical-techniques/part1/</link>
+      <pubDate>Sun, 23 Apr 2023 16:47:31 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/notes/numerical-techniques/part1/</guid>
+      <description>Numerical Techniques Root Finding Notes Tomorrow is my exam on numerical techniques and what better way to lear NT than by doing it!? Almost all of the blow methods follow the following points. To keep myself from repeating, I&amp;rsquo;ll mention them here :
+Given an equation \(f(x) = 0\) for which we need to find roots for Find \(a\) and \(b\) such that \(f(a)*f(b) &amp;lt; 0\) meaning \(f(a)\) &amp;amp; \(f(b)\) are of opposite signs.</description>
+    </item>
+    
     <item>
       <title>Writing Pic Uplifters</title>
       <link>https://brightprogrammer.in/posts/writing-pic-uplifters/</link>

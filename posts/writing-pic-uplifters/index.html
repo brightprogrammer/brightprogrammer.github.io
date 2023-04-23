@@ -7,6 +7,7 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
     <link rel="canonical" href="https://brightprogrammer.in">
+
 </head>
 <body>
 
@@ -679,10 +680,10 @@ I downloaded these blidnly so don't judge me if some are copy of each other or s
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return register for given type
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(reg_type <span style="color:#f92672">==</span> REG_FREG) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_FREG</span>(reg);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_FREG</span>(addr);
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// this will also handle REG_UNIMPLEMENTED &amp; REG_RESERVED automatically.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_SPREG</span>(pic_midrange_il_regnames[reg])
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GET_SPREG</span>(pic_midrange_il_regnames[reg_type])
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -892,7 +893,8 @@ static RzILOpBool *pic_midrange_il_check_carry_op(RZ_BORROW RzILOpPure *res, RZ_
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">SEQ2</span>(add_op, set_status_op);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h5 id="this-is-a-work-in-progress-information-can-be-wrong-waiting-for-review-from-mentors">THIS IS A WORK IN PROGRESS! INFORMATION CAN BE WRONG! WAITING FOR REVIEW FROM MENTORS&hellip;</h5>
+</span></span></code></pre></div><p>Nice notes on difference between <a href="https://teaching.idallen.com/dat2343/10f/notes/040_overflow.txt">carry &amp; overflow</a></p>
+<h5 id="this-is-a-work-in-progress-information-can-be-wrong-waiting-for-review-from-mentors">THIS IS A WORK IN PROGRESS! INFORMATION CAN BE WRONG! WAITING FOR REVIEW FROM MENTORS&hellip;</h5>
 
 
 <h3>See Also</h3>
@@ -903,6 +905,10 @@ static RzILOpBool *pic_midrange_il_check_carry_op(RZ_BORROW RzILOpPure *res, RZ_
   <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
   
   <li><a href="/posts/understanding-the-pic-architecture/">Understanding The PIC Architecture</a></li>
+  
+  <li><a href="/notes/numerical-techniques/part2/">System Of Linear Equations</a></li>
+  
+  <li><a href="/notes/numerical-techniques/part1/">Root Finding Of Functions</a></li>
   
 </ul>
 

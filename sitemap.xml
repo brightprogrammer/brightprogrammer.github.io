@@ -3,18 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://brightprogrammer.in/</loc>
-    <lastmod>2023-04-21T17:25:23+05:30</lastmod>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/</loc>
-    <lastmod>2023-04-21T17:25:23+05:30</lastmod>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/maths/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/maths/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/notes/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/categories/notes/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/notes/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/numerical-techniques/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/notes/numerical-techniques/part2/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/tags/</loc>
+    <lastmod>2023-04-23T17:47:31+05:30</lastmod>
+  </url><url>
+    <loc>https://brightprogrammer.in/notes/numerical-techniques/part1/</loc>
+    <lastmod>2023-04-23T16:47:31+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/il-uplifter/</loc>
     <lastmod>2023-04-21T17:25:23+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/tags/intermediate-language/</loc>
-    <lastmod>2023-04-21T17:25:23+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/notes/</loc>
     <lastmod>2023-04-21T17:25:23+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/open-source/</loc>
@@ -27,9 +51,6 @@
     <lastmod>2023-04-21T17:25:23+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/rizin/</loc>
-    <lastmod>2023-04-21T17:25:23+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/tags/</loc>
     <lastmod>2023-04-21T17:25:23+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/posts/writing-pic-uplifters/</loc>
@@ -111,9 +132,6 @@
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/categories/note/</loc>
-    <lastmod>2023-04-12T08:11:25+05:30</lastmod>
-  </url><url>
-    <loc>https://brightprogrammer.in/notes/</loc>
     <lastmod>2023-04-12T08:11:25+05:30</lastmod>
   </url><url>
     <loc>https://brightprogrammer.in/projects/</loc>

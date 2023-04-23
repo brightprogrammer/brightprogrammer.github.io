@@ -7,6 +7,36 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
     <link rel="canonical" href="https://brightprogrammer.in">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+
+
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+        integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+        crossorigin="anonymous">
+</script>
+
+
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+        integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+        crossorigin="anonymous" onload="renderMathInElement(document.body);">
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
 
 </head>
 <body>
@@ -98,22 +128,261 @@
 
 <div class="bs-component">
     <h3 align="center">
-        <strong>  </strong> <br>
+        <strong> System Of Linear Equations </strong> <br>
         <br><br>
-        published on Tue, May 28, 2019 |
-        0 minutes read <br>
+        published on Sun, Apr 23, 2023 |
+        4 minutes read <br>
     </h3>
 </div>
 
 <div class="bs-component" style="padding-bottom: 10px;">
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="/"></a></li>
-        <li class="breadcrumb-item inactive" ></li>
+        <li class="breadcrumb-item"><a href="/notes/">Notes</a></li>
+        <li class="breadcrumb-item inactive" >System Of Linear Equations</li>
 
     </ul>
 </div>
 
+<h1 id="numerical-techniques-solving-system-of-linear-equation-notes">Numerical Techniques Solving System Of Linear Equation Notes</h1>
+<p>A system of linear equations</p>
+<p>$$
+a_{11} x_1 + a_{12} x_2 + &hellip; + a_{1n} x_n = b_1 \\
+a_{21} x_1 + a_{22} x_2 + &hellip; + a_{2n} x_n = b_2 \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+a_{n1} x_1 + a_{n2} x_2 + &hellip; + a_{nn} x_n = b_2
+$$</p>
+<p>can be written in matrix form as :</p>
+<p>$$
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; &hellip; &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; &hellip; &amp; a_{2n} \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+a_{n1} &amp; a_{n2} &amp; &hellip; &amp; a_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+. \\
+. \\
+. \\
+x_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+. \\
+. \\
+. \\
+b_n
+\end{pmatrix}
+$$</p>
+<p>Which can also be written like
+$$ AX = B $$
+where
+$$
+A =
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; &hellip; &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; &hellip; &amp; a_{2n} \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+a_{n1} &amp; a_{n2} &amp; &hellip; &amp; a_{nn}
+\end{pmatrix}
+$$
+$$
+X =
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+. \\
+. \\
+. \\
+x_n
+\end{pmatrix}
+$$
+and
+$$
+B =
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+. \\
+. \\
+. \\
+b_n
+\end{pmatrix}
+$$</p>
+<ul>
+<li>If all \( b_i = 0\) then
+<ul>
+<li>System has a trivial solution ( all \( x_i = 0 \) ) if \( |A| \ne 0 \).</li>
+<li>System has infinitely many solutions if \( |A| = 0 \).</li>
+</ul>
+</li>
+<li>If at least \( b_i \ne 0 \) then
+<ul>
+<li>System has a unique solution if \( |A| \ne 0 \).</li>
+<li>System has no solutions if \( |A| = 0 \).</li>
+</ul>
+</li>
+</ul>
+<h3 id="eigenvalues--eigenvectors">Eigenvalues &amp; Eigenvectors</h3>
+<p>If \( Ax = \lambda x \) and \( x \ne 0 \) then \( \lambda \) is called the <code>eigenvalue</code> and \( x \) is called <code>eigenvector</code> corresponding to eigenvalue \( \lambda \). We can convert this to a homogeneous system as \( (Ax - \lambda I)x = 0 \).</p>
+<p>Methods for finding solution of \( AX = B \) and \( Ax = \lambda x \) is classified into two categories :</p>
+<ul>
+<li><strong>Direct Methods</strong> : Produce exact solution after a finite number of steps.</li>
+<li><strong>Iterative Methods</strong> : Solution converges to a specific value, so, large number of steps may be required.</li>
+</ul>
+<h4 id="direct-methods">Direct Methods</h4>
+<p>If \( A = D \) is a diagonal matrix then it&rsquo;s easiest to solve.
+$$
+A =
+\begin{pmatrix}
+a_{11} &amp; 0 &amp; &hellip; &amp; 0 \\
+0 &amp; a_{22} &amp; &hellip; &amp; 0 \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+0 &amp; 0 &amp; &hellip; &amp; a_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+. \\
+. \\
+. \\
+x_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+. \\
+. \\
+. \\
+b_n
+\end{pmatrix}
+$$</p>
+<p>here</p>
+<p>$$
+x_1 = \dfrac{b_1}{a_{11}} \\
+\ \\
+x_2 = \dfrac{b_2}{a_{22}} \\
+. \\
+. \\
+. \\
+x_1 = \dfrac{b_1}{a_{nn}} \\
+$$</p>
+<h4 id="lower-triangular-matrix">Lower Triangular Matrix</h4>
+<p>If \( A = L \) is a lower triangular matrix then we can solve it by method of forward substitution
+$$
+A =
+\begin{pmatrix}
+a_{11} &amp; 0 &amp; &hellip; &amp; 0 \\
+a_{21} &amp; a_{22} &amp; &hellip; &amp; 0 \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+. &amp; . &amp; &amp; . \\
+a_{n1} &amp; a_{n2} &amp; &hellip; &amp; a_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+. \\
+. \\
+. \\
+x_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+. \\
+. \\
+. \\
+b_n
+\end{pmatrix}
+$$</p>
+<p>here</p>
+<p>$$
+x_1 = \dfrac{b_1}{a_{11}} \\
+\ \\
+x_2 = \dfrac{b_2 - a_{21}x_1}{a_{22}}\\
+. \\
+. \\
+. \\
+x_n = \dfrac{b_n - a_{n2}x_1 - a_{n3}x_1 - &hellip; - a_{n-1}x_{n-1}}{a_{nn}}\\
+$$</p>
+<h4 id="upper-triangular-matrix">Upper Triangular Matrix</h4>
+<p>Similary we can do for upper triangular matrix
+$$
+A =
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} &amp; &hellip; &amp; a_{1(n-1)} &amp; a_{1n} \\
+0 &amp; a_{22} &amp; a_{23} &amp; &hellip; &amp; a_{2(n-1)} &amp; a_{2n} \\
+0 &amp; 0 &amp; a_{33} &amp; &hellip; &amp; a_{3(n-1)} &amp; a_{3n} \\
+. &amp; . &amp; . &amp; &amp; . &amp; . \\
+. &amp; . &amp; . &amp; &amp; . &amp; . \\
+. &amp; . &amp; . &amp; &amp; . &amp; . \\
+0 &amp; 0 &amp; 0 &amp; &hellip;  &amp; a_{(n-1)(n-1)} &amp; a_{(n-1)n} \\
+0 &amp; 0 &amp; 0 &amp; &hellip;  &amp; 0 &amp; a_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+. \\
+. \\
+. \\
+x_{n-1} \\
+x_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+b_1 \\
+b_2 \\
+b_3 \\
+. \\
+. \\
+. \\
+b_{n-1} \\
+b_n
+\end{pmatrix}
+$$</p>
+<p>here</p>
+<p>$$
+x_n = \dfrac{b_n}{a_{nn}} \\
+\ \\
+x_(n-1) = \dfrac{b_{n-1} - a_{(n-1)n}x_n}{a_{(n-1)(n-1)}} \\
+. \\
+. \\
+. \\
+x_1 = \dfrac{b_1 - \sum_{i=2}^{n} a_{1i}x_i}{a_{11}} \\
+$$</p>
+<p>This method is also called back substitution, because we are starting from \( x_n \) and ending at \( x_1 \)</p>
 
+
+<h3>See Also</h3>
+<ul>
+  
+  <li><a href="/notes/numerical-techniques/part1/">Root Finding Of Functions</a></li>
+  
+  <li><a href="/posts/writing-pic-uplifters/">Writing Pic Uplifters</a></li>
+  
+  <li><a href="/posts/understanding-the-pic-architecture/">Understanding The PIC Architecture</a></li>
+  
+  <li><a href="/posts/rzil-pic-uplifting/">Rzil PIC Uplifting</a></li>
+  
+  <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
+  
+</ul>
 
 <h4 align="center">
     <a href="https://brightprogrammer.in">
