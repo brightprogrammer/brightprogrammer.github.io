@@ -101,7 +101,7 @@
         <strong> Writing Pic Uplifters </strong> <br>
         Damn It&#39;s Hard!<br><br>
         published on Fri, Apr 21, 2023 |
-        14 minutes read <br>
+        10 minutes read <br>
     </h3>
 </div>
 
@@ -707,152 +707,15 @@ const char *pic_midrange_status_flags[] = {
 #define C   0
 #define STATUS(x) pic_midrange_status_flags[x]
 </code></pre><h4 id="checking-for-carry-flag">Checking For Carry Flag</h4>
-<p>At some point I thought of create a commom memory region in this CPU state in order to keep track of values in registers but after taking references from previously written uplifters I understood that since VM is already maintaining the state of registers, we can ask it to set these flags itself! We just need to set the IL code to do it! This thought came because I partially forgot I was capturing semantics of the instruction and how to capture this instruction&rsquo;s semantics! My mind was only thinking of setting the flags and performing additions. This is not semantics! To capture semantics we need to instruct the VM to do everything! From setting flags in <code>STATUS</code> register to computing some useful boolean operation.</p>
-<p>So the following code is nothing but instructions to the VM on how to deduce the carry flag :</p>
-<pre tabindex="0"><code>/**
- * Set of operations the RzIL VM needs to perform to set the carry/overflow flag.
- *
- * \param res RzILOpPure in which result of addition is stored.
- * \param x First addend.
- * \param y Fecond addend.
- *
- * \return RzILOpBool specifying operations to perform to check for overflow.
- */
-static RzILOpBool *pic_midrange_il_check_carry_op(RZ_BORROW RzILOpPure *res, RZ_BORROW RzILOpPure *x, RZ_BORROW RzILOpPure *y) {
-    RzILOpBool *msbx = MSB(x);
-    RzILOpBool *msby = MSB(y);
-    RzILOpBool *msbr = MSB(res);
-
-    // cases :
-    // adding two unsigned numbers may or may not result in a carry
-    // adding an unsigned and a signed number will never result in a carry
-    // adding two signed numbers is the same case as adding two unsigned nos.
-    //
-    // if adding two numbers of same sign, overflow will occur iff result is
-    // of opposite sign
-    // adding two numbers of different sign will never result in an overflow
-
-    RzILOpBool *rx = XOR(msbr, msbx); // 0 if of same sign, 1 otherwise
-    RzILOpBool *ry = XOR(msbr, msby); // same
-
-    // truth table
-    // x | y | r | x^y | r^x | r^y | and(rx, ry) | expected |
-    // --;---;---;-----;-----;-----;-------------;----------;
-    // + | + | + |  0  |  0  |  0  |      0      |     0    |
-    // + | + | - |  0  |  1  |  1  |      1      |     1    |
-    // + | - | + |  1  |  0  |  1  |      0      |     0    |
-    // + | - | - |  1  |  1  |  0  |      0      |     0    |
-    // - | + | + |  1  |  1  |  0  |      0      |     0    |
-    // - | + | - |  1  |  0  |  1  |      0      |     0    |
-    // - | - | + |  0  |  1  |  1  |      1      |     1    |
-    // - | - | - |  0  |  0  |  0  |      0      |     0    |
-
-    // we need to check (x, y); (r, x) &amp; (r, y) are of same sign
-    // hence check (x, y, r) are of same sign
-    return AND(rx, ry);
-}
-</code></pre><p>I took reference from <a href="https://www.doc.ic.ac.uk/~eedwards/compsys/arithmetic/index.html">here</a> to write this logic. Similar function is written for other architecture&rsquo;s uplifters too :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// THIS IS FOR X86 UPLIFTER
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \brief Return the carry bit when \p x and \p y are added, with result \p res
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param res
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> RzILOpBool <span style="color:#f92672">*</span><span style="color:#a6e22e">x86_il_is_add_carry</span>(RZ_OWN RzILOpPure <span style="color:#f92672">*</span>res, RZ_OWN RzILOpPure <span style="color:#f92672">*</span>x, RZ_OWN RzILOpPure <span style="color:#f92672">*</span>y) {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// res = x + y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xmsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(x);
-</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>ymsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(y);
-</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>resmsb <span style="color:#f92672">=</span> <span style="color:#a6e22e">MSB</span>(res);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// x &amp; y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xy <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(xmsb, ymsb);
-</span></span><span style="display:flex;"><span>	RzILOpBool <span style="color:#f92672">*</span>nres <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(resmsb);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// !res &amp; y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>ry <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(nres, <span style="color:#a6e22e">DUP</span>(ymsb));
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// x &amp; !res
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span>xr <span style="color:#f92672">=</span> <span style="color:#a6e22e">AND</span>(<span style="color:#a6e22e">DUP</span>(xmsb), <span style="color:#a6e22e">DUP</span>(nres));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// bit = xy | ry | xr
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	RzILOpBool <span style="color:#f92672">*</span> or <span style="color:#f92672">=</span> <span style="color:#a6e22e">OR</span>(xy, ry);
-</span></span><span style="display:flex;"><span>	or <span style="color:#f92672">=</span> <span style="color:#a6e22e">OR</span>(or, xr);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// truth table
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// x | y | r | x&amp;y | ~r&amp;x | ~r&amp;y |   rxVryVxy  | expected |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// --;---;---;-----;------;------;-------------;----------;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | + | + |  0  |   0  |   0  |      0      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | + | - |  0  |   0  |   0  |      0      |     1    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | - | + |  0  |   0  |   1  |      1      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + | - | - |  0  |   1  |   0  |      1      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | + | + |  0  |   1  |   0  |      1      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | + | - |  0  |   0  |   1  |      1      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | - | + |  1  |   1  |   1  |      1      |     1    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// - | - | - |  1  |   0  |   0  |      1      |     0    |
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> or ;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>I don&rsquo;t know (I know) why they don&rsquo;t match. There&rsquo;s a very high probability that my code is wrong since the X86 code is tested already. In my case, I&rsquo;m testing whether there&rsquo;s an overflow this one seems to be using some bit propagation formula.</p>
-<p>Then there&rsquo;s</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Set of operations the RzIL VM needs to perform to set the digit carry flag.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Instead of checking for the MSB, digit carry checks for 4th bit.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Working is very similar to checking for carry bit.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param res RzILOpPure in which result of addition is stored.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param x First addend.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param y Fecond addend.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return RzILOpBool specifying operations to perform to check for overflow.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> RzILOpBool <span style="color:#f92672">*</span><span style="color:#a6e22e">pic_midrange_il_check_digit_carry_op</span>(RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>res, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>x, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>y) {
-</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4x <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(x, <span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4y <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(y, <span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>bit4r <span style="color:#f92672">=</span> <span style="color:#a6e22e">BITN</span>(res, <span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    RzILOpBool <span style="color:#f92672">*</span>rx <span style="color:#f92672">=</span> <span style="color:#a6e22e">XOR</span>(bit4r, bit4x); <span style="color:#75715e">// 0 if of same sign, 1 otherwise
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>ry <span style="color:#f92672">=</span> <span style="color:#a6e22e">XOR</span>(bit4r, bit4y); <span style="color:#75715e">// same
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">AND</span>(rx, ry);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="set-arithmetic-flags-after-add-or-sub">Set Arithmetic Flags After ADD or SUB</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Handle C, DC &amp; Z flags for the previous operation.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * To be used after an arithmetic operation.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param result Result of last performed operation that affected the flag.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return RzILOpEffect containing set of steps to set status flags.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
-</span></span><span style="display:flex;"><span>RzILOpEffect <span style="color:#f92672">*</span><span style="color:#a6e22e">pic_midrange_il_set_arithmetic_flags</span>(RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>res, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>x, RZ_BORROW RzILOpPure <span style="color:#f92672">*</span>y, <span style="color:#66d9ef">bool</span> add) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get carry flag
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>cf <span style="color:#f92672">=</span> NULL;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(add) {
-</span></span><span style="display:flex;"><span>        cf <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        cf <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(<span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get digit carry flag
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>dcf <span style="color:#f92672">=</span> NULL;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(add) {
-</span></span><span style="display:flex;"><span>        dcf <span style="color:#f92672">=</span> <span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        dcf <span style="color:#f92672">=</span> <span style="color:#a6e22e">INV</span>(<span style="color:#a6e22e">pic_midrange_il_check_carry_op</span>(res, x, y));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// get zero flag
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RzILOpBool <span style="color:#f92672">*</span>zf <span style="color:#f92672">=</span> <span style="color:#a6e22e">IS_ZERO</span>(lastop);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">SEQ3</span>(<span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(C), cf),
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(DC), dcf),
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">SETG</span>(<span style="color:#a6e22e">STATUS</span>(Z), zf));
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#define SET_STATUS_ADD(r, x, y) pic_midrange_il_set_arithmetic_flags(r, x, y, true)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SET_STATUS_SUB(r, x, y) pic_midrange_il_set_arithmetic_flags(r, x, y, false)
-</span></span></span></code></pre></div><h3 id="easiest-uplifter-ever">Easiest Uplifter Ever!</h3>
+<p>This part took me some time to understand. I never paid much attention to use of overflow and carry flag. Let me make things simple for you.</p>
+<ul>
+<li>The term carry means the addition of two <strong><code>unsigned</code></strong> numbers was not able to fit in given area and hence the result is wrong.</li>
+<li>The term overflow means the addition of two <strong><code>signed</code></strong> numbers was not able to fit and we got a wrong result. Remember that in signed arithmetic, the most significant bit gives you the sign of given 2&rsquo;s complement number.</li>
+<li>ALU doesn&rsquo;t care about your signed or unsigned arithmetic so it&rsquo;ll set both these flags for each operation that can and must affect these flags. This means we need to capture this too while uplifting!</li>
+</ul>
+<p>Please refer to <a href="/posts/overflow-and-carry">this blog post</a> to get detailed understanding of how to detect an overflow or a carry using bitwise logical operators only!</p>
+<h4 id="set-arithmetic-flags-after-add-or-sub">Set Arithmetic Flags After ADD or SUB</h4>
+<h3 id="easiest-uplifter-ever">Easiest Uplifter Ever!</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * NOP
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Operation: No Operation.
@@ -906,9 +769,9 @@ static RzILOpBool *pic_midrange_il_check_carry_op(RZ_BORROW RzILOpPure *res, RZ_
   
   <li><a href="/posts/understanding-the-pic-architecture/">Understanding The PIC Architecture</a></li>
   
-  <li><a href="/notes/numerical-techniques/part2/">System Of Linear Equations</a></li>
+  <li><a href="/posts/overflow-and-carry/">Overflow and Carry</a></li>
   
-  <li><a href="/notes/numerical-techniques/part1/">Root Finding Of Functions</a></li>
+  <li><a href="/notes/numerical-techniques/part2/">System Of Linear Equations</a></li>
   
 </ul>
 

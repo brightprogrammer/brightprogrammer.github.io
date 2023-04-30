@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>alu-design on Project Blue</title>
+    <link>https://brightprogrammer.in/tags/alu-design/</link>
+    <description>Recent content in alu-design on Project Blue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 30 Apr 2023 15:05:44 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/alu-design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overflow and Carry</title>
+      <link>https://brightprogrammer.in/posts/overflow-and-carry/</link>
+      <pubDate>Sun, 30 Apr 2023 15:05:44 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/overflow-and-carry/</guid>
+      <description>I&amp;rsquo;ve been working on uplifting PIC Mid-Range device assemblies to Rizin&amp;rsquo;s RzIL. This has been quite interesting work so far but I encountered a conceptual blockage just when I started uplifting arithmetic instructions. I won&amp;rsquo;t talk much about my work in Rizin here but you can seach around the blog to find related posts. I want this post to be as short as possible for those who just want the concept and not my story!</description>
+    </item>
+    
+  </channel>
+</rss>
