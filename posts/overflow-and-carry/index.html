@@ -115,6 +115,7 @@
 </div>
 
 <p>I&rsquo;ve been working on uplifting PIC Mid-Range device assemblies to Rizin&rsquo;s RzIL. This has been quite interesting work so far but I encountered a conceptual blockage just when I started uplifting arithmetic instructions. I won&rsquo;t talk much about my work in Rizin here but you can seach around the blog to find related posts. I want this post to be as short as possible for those who just want the concept and not my story!</p>
+<h5 id="all-the-discussions-here-are-most-applicable-to-addition-operation">ALL THE DISCUSSIONS HERE ARE MOST APPLICABLE TO ADDITION OPERATION</h5>
 <h3 id="concept-of-carry">Concept of Carry</h3>
 <p>A carry bit is flagged only when certain conditions are met while treating the arithmetic operations as unsigned operation. By unsigned operations I mean that there&rsquo;s no differentiation between negative and positive numbers and all numbers are treated as positive numbers only!</p>
 <p>When a carry bit is flagged, it states that the final result of operation is wrong! The area wasn&rsquo;t enough to fit the result and hence I&rsquo;m flagging this to let you know that the result is wrong! Let&rsquo;s try to understand this by studying a one bit adder :</p>
