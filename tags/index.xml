@@ -6,22 +6,58 @@
     <description>Recent content in Tags on Project Blue</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 18 May 2023 14:30:12 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 May 2023 18:27:35 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>achievements</title>
-      <link>https://brightprogrammer.in/tags/achievements/</link>
-      <pubDate>Thu, 18 May 2023 14:30:12 +0530</pubDate>
+      <title>achievement</title>
+      <link>https://brightprogrammer.in/tags/achievement/</link>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
       
-      <guid>https://brightprogrammer.in/tags/achievements/</guid>
+      <guid>https://brightprogrammer.in/tags/achievement/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gsoc</title>
       <link>https://brightprogrammer.in/tags/gsoc/</link>
-      <pubDate>Thu, 18 May 2023 14:30:12 +0530</pubDate>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/tags/gsoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>intermediate-language</title>
+      <link>https://brightprogrammer.in/tags/intermediate-language/</link>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/tags/intermediate-language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rizin</title>
+      <link>https://brightprogrammer.in/tags/rizin/</link>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/tags/rizin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rzil</title>
+      <link>https://brightprogrammer.in/tags/rzil/</link>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/tags/rzil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>achievements</title>
+      <link>https://brightprogrammer.in/tags/achievements/</link>
+      <pubDate>Thu, 18 May 2023 14:30:12 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/tags/achievements/</guid>
       <description></description>
     </item>
     
@@ -53,29 +89,11 @@
     </item>
     
     <item>
-      <title>intermediate-language</title>
-      <link>https://brightprogrammer.in/tags/intermediate-language/</link>
-      <pubDate>Sun, 30 Apr 2023 15:05:44 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/tags/intermediate-language/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>overflow-carry</title>
       <link>https://brightprogrammer.in/tags/overflow-carry/</link>
       <pubDate>Sun, 30 Apr 2023 15:05:44 +0530</pubDate>
       
       <guid>https://brightprogrammer.in/tags/overflow-carry/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rizin</title>
-      <link>https://brightprogrammer.in/tags/rizin/</link>
-      <pubDate>Sun, 30 Apr 2023 15:05:44 +0530</pubDate>
-      
-      <guid>https://brightprogrammer.in/tags/rizin/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en"><head>
+    <title>Project Blue</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
+    <link rel="canonical" href="https://brightprogrammer.in">
+
+</head>
+<body>
+
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+
+        
+        <a href="https://brightprogrammer.in"
+           class="navbar-brand">Project Blue
+        </a>
+
+        
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                href="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse"
+             id="navbarResponsive">
+
+            
+            <ul class="navbar-nav">
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="filemenu">
+                        File <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="filemenu">
+                        <a class="dropdown-item" href="/posts/">Posts</a>
+                        <a class="dropdown-item" href="/notes/">Notes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/projects/">Projects<a>
+                        <a class="dropdown-item" href="/publication/">
+                            Publications
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/bookmarks/">
+                            Bookmarks
+                        </a>
+                    </div>
+                    
+                </li>
+                
+
+                
+                <li class="nav-item dropdown">
+                    
+                    <a class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#" id="helpmenu">
+                        Help <span class="caret"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="helpmenu">
+                        <a class="dropdown-item" href="/about-me">About Me</a>
+                        <a class="dropdown-item" href="/about-project-blue">
+                            About Project Blue
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/copyright">
+                            Copyright
+                        </a>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+<div id="content" class="bs-component container-fluid">
+
+<br>
+<br>
+
+<div class="bs-component">
+    <h3 align="center">
+        <strong> GSoC 2023 Rizin </strong> <br>
+        The Technical Intro<br><br>
+        published on Thu, May 18, 2023 |
+        12 minutes read <br>
+    </h3>
+</div>
+
+<div class="bs-component" style="padding-bottom: 10px;">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
+        <li class="breadcrumb-item inactive" >GSoC 2023 Rizin</li>
+
+    </ul>
+</div>
+
+<p>Here&rsquo;s <a href="/documents/letters/gsoc-proposal-rizin-letter.pdf">My GSoC proposal</a> and <a href="/documents/letters/acceptance_letter_2023_Siddharth-Mishra.pdf">Acceptance Letter</a> if you just want to take a look at that.</p>
+<h3 id="some-background">Some Background</h3>
+<p>I got my eyes on Rizin after a friend told me there&rsquo;s a project that I might be interested in. I was working on my own x86 disassembler at that time and I wanted to convert that to an Intermediate Language that I wanted to create. This language would then be used to analyze binaries and decompile it. I was able to write a basic (very bad, but superb working, now that I see it) disassembler. I was still very very far away from creating the Intermediate Language of my dreams and I started reading books on program analysis, thesis papers on decompilation and SSA etc&hellip; just to give me enough headstart before I start the real work. All this was good but I still lacked one thing! &ldquo;Experience&rdquo;. I had no experience in working with an IL before and from experience I can tell you this :</p>
+<blockquote>
+<p>&ldquo;If you every try to create something new, from scratch, without any prior knowledge, you will end up doing it iteratively!&rdquo;</p>
+</blockquote>
+<p>Why iteratively is bad in this case? Well because creating a whole new IL is a big thing. It&rsquo;s a mathematical abstraction (langauge) in the first place of some very well defined language. You&rsquo;ll be able to do it &ldquo;eventually&rdquo; but this will be so long in time that you&rsquo;ll feel you wasted too much of it! You could have just learned to work with an already present IL, learned how it works from inside out and then tried creating your own, but you didn&rsquo;t and now you failed. You atleast need a formal course at the minimum if you don&rsquo;t want to follow the former approach.</p>
+<p>Since I knew this, I used to discuss this with my friend and then he pointed out one day that Rizin has it&rsquo;s own IL. A new one and they are looking for contributors to work on it! I knew nothing about how rizin worked before I started working on it. That&rsquo;s how all other contributions happen. One day you don&rsquo;t know anything and another you start learning things.</p>
+<h3 id="contribtionsmicrotasks">Contribtions/Microtasks</h3>
+<p>My first <a href="https://github.com/rizinorg/rizin/pull/3421">PR in Rizin</a> is on March 10 2023 (iirc) with a <a href="https://rizin.re/gsoc/2023/#use-internal-api-instead-of-commands">microtask</a> that was mentioned in <a href="https://rizin.re/gsoc/2023">Rizin&rsquo;s 2023 GSoC page</a>. This is about 1 month before proposal submission deadline and about two months before getting selected. What started out as a very very very basic refactoring, turned out to be a very big one! You can judge that by the size of that PR. I expected it to be over in about a week but it continued for about a month. But I now see why there are microtasks. I easily separates those who can work on the project and those who are not able to or don&rsquo;t have enough motivation. During this microtask, I learned development coding styles and got to interact with my mentors. This was the first time I was looking at how compiler/interepret grammars can be written in code because Rizin has it&rsquo;s own RzShell language now to parse your commands. The grammar will help another tool, tree-sitter map from commands to the corresponding handler. This method of handling commands is highly scalable and is very easy to maintain. I got chance to re-implement the command syntax for a complete family group! This was huge! I got a change to play with the grammar file itself! I wrote some regression tests too.</p>
+<p>So if you are a GSoC aspirant then I&rsquo;d recommend you to start working on your project atleast one to two months before you actually submit your proposal. Even if your PR isn&rsquo;t merged yet, you should start writing your proposal and discussing it with your mentors! It&rsquo;s very important because you can plan your work timeline with them. Rizin mentors explicitly asked us fellow contributors to show them their proposals so they can review and give feedback early.</p>
+<p>There are contributors out there who&rsquo;ve started working about 6-7 months before submission deadline. Early bird get&rsquo;s most of the benifits. Early contributors already have a good level of bonding and communication set up with the development commnunity and they are likely to be selected in preference over you! There are still lots of factors involved but yea, consider this as a rule of thumb.</p>
+<h3 id="current-work">Current Work</h3>
+<p>My current work revolves around RzIL (Rizin Intermediate Language). I already wrote a blog post about it <a href="/posts/rzil-intro-notes/">here</a> in which I explained how uplifters are written. It&rsquo;s better if you read it and come back to this post but I&rsquo;ll try to re-explain things in a better way this time because I have little bit more clarity.</p>
+<h3 id="syntax--semantics">Syntax &amp; Semantics</h3>
+<p>In easy words &ldquo;syntax&rdquo; deals with how a language is written. I&rsquo;m talking about languages in general here so you can compare it with your native language too! So, &ldquo;syntax&rdquo; is the grammar! It only deals with how it must be written. A statement (or sentence) might be written correctly (syntactically correct) and still have no meaning at all! Now if you pause for a moment here and think about what we mean by the word &ldquo;meaning&rdquo; itself?</p>
+<p>If I ask you to &ldquo;read this blog post completely&rdquo;. What do I mean by it? Don&rsquo;t pfffh me by repeating the sentence again in your head. Think about it! What does it mean? It means you should take the &ldquo;action&rdquo; that is assigned for reading! or in other words, you must do certain &ldquo;sequence&rdquo; (not a set) of operations that we&rsquo;ve assigned to the word &ldquo;read&rdquo;. What does completely mean? &ldquo;completely&rdquo; will determine how long it&rsquo;ll take you to &ldquo;read&rdquo; it and how you should &ldquo;read&rdquo; it! Every word in that sentence has a &ldquo;meaning&rdquo;.</p>
+<p>So, we an easily extrapolate this simple idea to the fact that every language evaluates to some set of actions/operations that the &ldquo;understanding object&rdquo; must do. This object we are talking about would be able to &ldquo;understand the meaning&rdquo; of the statements formed in the selected language and take actions accordingly!</p>
+<h3 id="introducing-intermediate-languages">Introducing Intermediate Languages</h3>
+<p>There can be infinite number of languages out there (mathematically). To understand each and every single one, you need to understand it&rsquo;s grammar first and then understand what each word/alphabet means, i.e. how you can map these words/alphabets to a &ldquo;sequence&rdquo; of operations. This is a very big, very less scalable and not much maintainable task. Why? If you have n languages then you need to understand those &ldquo;n&rdquo; langauges! What if you only had to understand one language? We can write a translator from every other language to the language that you understand the most.</p>
+<p>In this case we are dealing with CPU architectures and their assembly language. I think I know x86 the most as compared to other architectures, so if I can write a translator to convert all other languages to x86 then voila! My task is done and I can easily study and analyze them! Simple? No! When you translate a language to another, your main goal is to capture it&rsquo;s semantics properly! What if your langauge didn&rsquo;t have a word or a sequence of words that evaluate to same semantics as target language? It&rsquo;s true, this is possible in all languages! Even the ones we speak and read!</p>
+<p>So, we need a language that can capture the sematics well and a language the we understand it best possible way!. Now we are engineers and we want automation everywhere so we need a language that can be processed by computers easily too! This is where Intermediate Languages come in. Since we create these languages, we know exactly how they work and if need comes, we can extend them too! Remember the end goal here is to capture the semantics in best way possible!</p>
+<h3 id="rizin-intermediate-language">Rizin Intermediate Language</h3>
+<p>In computer world, all actions can be broken down into two types :</p>
+<ul>
+<li><code>Pure</code> actions, i.e. they are pure values and hence they don&rsquo;t affect the state of system.</li>
+<li><code>Effect</code> actions, which by name means they change the state of system and hence affect the state.</li>
+</ul>
+<p>Note that both are operations that &ldquo;ANY&rdquo; CPU performs! This is a very high level description but if you subdivide these actions to further types, you&rsquo;ll be able to capture semantics of almost any language out there! Even English, if you extend it enough! XD.</p>
+<h3 id="my-work-this-summer">My Work This Summer</h3>
+<p>I need to write uplifters (convertors) from MIPS assembly language to Rizin intermediate language. What do I mean by uplifters? Well as I said, RzIL is easier and at a high level from MIPS low level assembly language. MIPS langauge precisely defines what the machine will do but RzIL will tell the RzIL VM what the machine will do and the VM will try to emulate the same thing inside itself.</p>
+<h3 id="what-have-i-done-up-until-now">What Have I Done Up Until Now?</h3>
+<p>I started my work almost three weeks prior to the official starting date in hopes of completing it early, still 26 weeks, i.e about 6 and a half months in total. I&rsquo;ve started writing uplifters and at the time of writing I&rsquo;m converting MIPS32 ISA to</p>
+<p>Everything I mention here, I did them incrementally and not directly! I&rsquo;m just stating the final result here and I&rsquo;ll try to describe how I reached here.</p>
+<p>First keep in mind these typedefs :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// typedefs for shorter name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> RzILOpPure Pure;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> RzILOpEffect Effect;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> RzILOpBool Bool;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> RzILOpBitVector BitVector;
+</span></span></code></pre></div><p><code>Bool</code> and <code>BitVector</code> are <code>Pure</code> values too, so you can use them interchangeably, but it&rsquo;ll be more readable like this.</p>
+<p>My work began with reading the <a href="https://s3-eu-west-1.amazonaws.com/downloads-mips/documents/MD00082-2B-MIPS32INT-AFP-06.01.pdf">introductory manual</a> and understand register types, names, count etc&hellip; and different types of operations. I&rsquo;ll be using <a href="https://github.com/capstone-engine/capstone">Capstone</a> to process the assembly using structs and enums. Capstone has enums defined for registers and differnt instructions that I can use to map from enum to it&rsquo;s corresponding name! So I created an array to map register enum to register name and instruction enum to corresponding uplifter function. Recall the map I was talking about in &ldquo;Introducing Intermediate Languages&rdquo; section. This is that map! Convert from MIPS to RzIL using this map.</p>
+<p>Before any of these I needed some macro defines to help me get things out of <code>cs_insn</code> struct</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// get instruction operand count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define OPND_COUNT() ((insn)-&gt;detail-&gt;mips.op_count)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// get instruction operand at given index type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define OPND_TYPE(idx) ((insn)-&gt;detail-&gt;mips.operands[(idx)].type)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get instruction operand at given index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define OPND_IS_REG(idx) INSN_OPND_TYPE(insn, idx) == MIPS_OP_REG
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define REG_OPND(idx)    REG_NAME((insn)-&gt;detail-&gt;mips.operands[(idx)].reg)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get instruction operand at given index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define OPND_IS_MEM(insn, idx) INSN_OPND_TYPE(insn, idx) == MIPS_OP_MEM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define MEM_OPND(idx)          ((insn)-&gt;detail-&gt;mips.operands[(idx)].mem)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get instruction operand at given index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define OPND_IS_IMM(insn, idx) INSN_OPND_TYPE(insn, idx) == MIPS_OP_IMM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IMM_OPND(idx)          ((insn)-&gt;detail-&gt;mips.operands[(idx)].imm)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get instruction ID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define INSN_ID(insn) (insn)-&gt;id
+</span></span></span></code></pre></div><p>I then created a register enum to register name map</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// register names to  map from enum to strings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cpu_reg_enum_to_name_map[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>	[MIPS_REG_PC] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pc&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	[MIPS_REG_0] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;zero&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	[MIPS_REG_1] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;r1&#34;</span>,
+</span></span><span style="display:flex;"><span>	[MIPS_REG_2] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;r2&#34;</span>,
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . (fill in the blanks)
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>	[MIPS_REG_30] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;r30&#34;</span>,
+</span></span><span style="display:flex;"><span>	[MIPS_REG_31] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;r31&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	[MIPS_REG_HI] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi&#34;</span>,
+</span></span><span style="display:flex;"><span>	[MIPS_REG_LO] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lo&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	[MIPS_REG_F0] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f0&#34;</span>,
+</span></span><span style="display:flex;"><span>	[MIPS_REG_F1] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f1&#34;</span>,
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . (fill in the blanks)
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>	[MIPS_REG_F30] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f30&#34;</span>,
+</span></span><span style="display:flex;"><span>	[MIPS_REG_F31] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f31&#34;</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// char*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define REG_PC()   REG_NAME(MIPS_REG_PC)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define REG_HI()   REG_NAME(MIPS_REG_HI)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define REG_LO()   REG_NAME(MIPS_REG_LO)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define REG_R(idx) REG_NAME(MIPS_REG_##idx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// Pure*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define IL_REG_PC()   VARG(REG_PC())
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_REG_HI()   VARG(REG_HI())
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_REG_LO()   VARG(REG_LO())
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_REG_R(idx) VARG(REG_R(idx))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// char*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define REG_F(idx) REG_NAME(MIPS_REG_F##idx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// Pure*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define IL_REG_F(idx) VARG(REG_F(idx))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// returns Pure*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define REG_NAME(regenum)    cpu_reg_enum_to_name_map[regenum]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_REG_OPND(opndidx) VARG(REG_OPND(opndidx))
+</span></span></span></code></pre></div><p>So when I do <code>REG_R(31)</code>, I&rsquo;ll get the string <code>&quot;r31&quot;</code> and when I do <code>IL_REG_R(31)</code>, I&rsquo;ll get the <code>Pure</code> value for RzIL. <code>VARG</code> let&rsquo;s the VM know that it&rsquo;s a global variable. Similarly there&rsquo;s <code>VARL</code> to let it know that this is a local variable.</p>
+<p>The next task was to map from instruction enums to corresponding uplifter</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Lifter function prototype.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param insn
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param pc Position of current instruction insn
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param delay_slot Is this instruction in a delay slot
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * and will the next instruction be in the delay slot?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return Effect*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> Effect <span style="color:#f92672">*</span>(<span style="color:#f92672">*</span>MipsILLifterFunction)(cs_insn <span style="color:#f92672">*</span>, ut32);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_LIFTER(name)      static Effect *MipsLifter_##name(cs_insn *insn, ut32 pc)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define IL_LIFTER_NAME(name) MipsLifter_##name
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format off
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>MipsILLifterFunction mips_lifters[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    [MIPS_INS_ABSQ_S]      <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(ABSQ_S),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_ADD]         <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(ADD),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_ADDIUPC]     <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(ADDIUPC),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_ADDIUR1SP]   <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(ADDIUR1SP),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_ADDIUR2]     <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(ADDIUR2),
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    . (lots of it here)
+</span></span><span style="display:flex;"><span>    .
+</span></span><span style="display:flex;"><span>    [MIPS_INS_NEGU]        <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(NEGU),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_JALR_HB]     <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(JALR_HB),
+</span></span><span style="display:flex;"><span>    [MIPS_INS_JR_HB]       <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_LIFTER_NAME</span>(JR_HB),
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// clang-format on
+</span></span></span></code></pre></div><p>And now we can map them using a simple function :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Mips lifter dispatch function.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param cs_insn
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \param pc Instruction address of current instruction.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * \return Valid RzILOpEffect* on success, NULL otherwise.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> **/</span>
+</span></span><span style="display:flex;"><span>RZ_IPI Effect <span style="color:#f92672">*</span><span style="color:#a6e22e">mips32_il</span>(RZ_NONNULL cs_insn <span style="color:#f92672">*</span>insn, ut32 pc) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">rz_return_val_if_fail</span>(insn, NULL);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	MipsILLifterFunction fn <span style="color:#f92672">=</span> mips_lifters[<span style="color:#a6e22e">INSN_ID</span>(insn)];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (fn) {
+</span></span><span style="display:flex;"><span>		Effect <span style="color:#f92672">*</span>op <span style="color:#f92672">=</span> <span style="color:#a6e22e">fn</span>(insn, pc);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> op;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">rz_warn_if_reached</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I also need to define the initial config of VM eventually but I&rsquo;ll describe them in some later blog post because I haven&rsquo;t dealt with them up until now. This config will define the initial state of VM.</p>
+<p>The next task is to go through the <a href="https://s3-eu-west-1.amazonaws.com/downloads-mips/documents/MD00086-2B-MIPS32BIS-AFP-6.06.pdf">ISA manual</a>, instruction by instruction and convert the instruction to equivalent RzIL effect sequences. Up until now I&rsquo;ve written uplifters for <code>ADD</code> instruction and <code>ADD</code> instruction family, <code>BRANCH</code> and corresponding family and <code>JUMP</code> and corresponding family and some others too. I took printout of these manuals and I&rsquo;m using them and the PDFs on my laptop together to work efficiently, although I do believe it can be done without the printouts.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Add word.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Format : ADD rd, rs, rt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Description: GPR[rd] &lt;- GPR[rs] + GPR[rt]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Exceptions: IntegerOverflow
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">IL_LIFTER</span>(ADD) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// get operand registers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>rd <span style="color:#f92672">=</span> <span style="color:#a6e22e">REG_OPND</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	Pure <span style="color:#f92672">*</span>rs <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_REG_OPND</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	Pure <span style="color:#f92672">*</span>rt <span style="color:#f92672">=</span> <span style="color:#a6e22e">IL_REG_OPND</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// perform addition and set to destination register
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	BitVector <span style="color:#f92672">*</span>sum <span style="color:#f92672">=</span> <span style="color:#a6e22e">ADD</span>(rs, rt);
+</span></span><span style="display:flex;"><span>    Effect <span style="color:#f92672">*</span>set_rd <span style="color:#f92672">=</span> <span style="color:#a6e22e">SETG</span>(rd, sum);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Bool *overflow = IL_CHECK_OVERFLOW(&#34;rs&#34;, &#34;rt&#34;, REG_OPND(0));
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	Effect <span style="color:#f92672">*</span>update_status_op <span style="color:#f92672">=</span> <span style="color:#a6e22e">NOP</span>(); <span style="color:#75715e">// TODO: set status flag
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">SEQ2</span>(set_rd, update_status_op);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>It&rsquo;s easy to understand that in first three lines I&rsquo;m getting the first three operands in their order. Only for <code>GPR[rd]</code> I&rsquo;m getting the name in a <code>char*</code> but for others I&rsquo;m getting a <code>VARG(name)</code>. Then you see there&rsquo;s an <code>ADD</code> which is a pure operation because it evaluates to a value! It is not changing state of VM (yet) and then we set the sum to <code>GPR[rd]</code>. This is an effect because we made a change to state of the VM. I haven&rsquo;t yet figured out how I&rsquo;ll update the overflow status because in MIPS there are no such flags. It just straightaway throws exceptions! My mentors suggested me to store it somewhere instead of caring for exceptions at the moment.</p>
+<p>Also, note that eventually the <code>ADD</code> operation in MIPS got converted to a sequence of <code>Effect</code> operations in RzIL. This is what capturing semantics in an intermediate languages look like!</p>
+<p>This was an example and you can take a look at my <a href="https://github.com/rizinorg/rizin/pull/3508">RzIL MIPS Uplifting PR</a> to read other uplifter functions. You can also ping me using the message section and I&rsquo;ll try to reply back with an explanation of whatever uplifter you ask for! If your question is good I might even update this post with your question.</p>
+<p>Let&rsquo;s mark this as end of this post and I&rsquo;ll try to explain one different type of uplifter in every post I make on RzIL :-)</p>
+
+
+<h3>See Also</h3>
+<ul>
+  
+  <li><a href="/posts/overflow-and-carry/">Overflow and Carry</a></li>
+  
+  <li><a href="/posts/writing-pic-uplifters/">Writing Pic Uplifters</a></li>
+  
+  <li><a href="/posts/rzil-pic-uplifting/">Rzil PIC Uplifting</a></li>
+  
+  <li><a href="/posts/rzil-intro-notes/">RzIL Introductory Notes</a></li>
+  
+  <li><a href="/posts/programming-joureny-to-gsoc/">My Programming Journey To GSoC</a></li>
+  
+</ul>
+
+<h4 align="center">
+    <a href="https://brightprogrammer.in">
+        Project Blue Main Page
+    </a>
+</h4>
+<br>
+
+<br><div style="border: 1px solid #ffffff;">
+
+<form action="https://formsubmit.co/30fe378dd2a9a7a6f563c0e7365b145c"
+      method="POST"
+      style="padding: 50px">
+
+  <h4 align="center"> Message Me! </h4>
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailName">Your Name</label>
+      <input type="text" class="col-10 form-control"
+             name="name"
+             id="emailName" placeholder="Shri Krishna Vasudev Yadav" reqyured>
+    </div>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <div class="row">
+      <label class="col-2" for="emailID">Email address</label>
+      <input type="email" class="col-10 form-control"
+             id="emailID" aria-describedby="emailHelp"
+             name="emailID"
+             placeholder="user@email.com" required>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">Your email will never be shared with anyone without your explicit permission!</small>
+  </div>
+
+  <br>
+
+  
+  <div class="form-group">
+    <label for="commentBox"> What do you wanna say? </label>
+    <textarea class="form-control" id="exampleTextarea" rows="4"
+              name="message"
+              placeholder="Please write something sweet, I'm sensitive (˵ ͡° ͜ʖ ͡°˵)" required></textarea>
+  </div>
+
+  
+  <div class="form-group" align="right">
+    <input type="submit" class="btn btn-outline-primary" value="Send">
+  </div>
+
+</form>
+</div>
+
+        </div><footer class="container">
+    <hr class="soften">
+    <p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 align="center" style="padding-top:40px"> Copyright (c) 2023 Siddharth Mishra</h4>
+<p align="center" style="font-size:14px"> YOU ARE IN NO SITUATION ALLOWED TO USE ANY CONTENT ON THIS BLOG TO TRAIN AN AI! </p>
+</p>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
+
+
+
+
+
+
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+</script>
+
+
+<script>
+    _386 = { 
+        fastLoad: false ,
+        onePass: false , 
+        speedFactor: 1 
+    };
+    
+    
+    function ThisYear() {
+        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
+    };
+</script>
+
+
+<script>
+    (function(){
+        _386.magicCursor();
+        _386.scrollLock();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if(top > 50)
+                $('#home > .navbar').removeClass('navbar-transparent');
+            else
+                $('#home > .navbar').addClass('navbar-transparent');
+        });
+
+        $("a[href='#']").click(function(e) {
+            e.preventDefault();
+        });
+    })();
+</script>
+
+
+</body>
+</html>

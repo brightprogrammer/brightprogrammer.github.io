@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>achievement on Project Blue</title>
+    <link>https://brightprogrammer.in/tags/achievement/</link>
+    <description>Recent content in achievement on Project Blue</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 18 May 2023 18:27:35 +0530</lastBuildDate><atom:link href="https://brightprogrammer.in/tags/achievement/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSoC 2023 Rizin</title>
+      <link>https://brightprogrammer.in/posts/gsoc-2023-rizin-the-technical-intro/</link>
+      <pubDate>Thu, 18 May 2023 18:27:35 +0530</pubDate>
+      
+      <guid>https://brightprogrammer.in/posts/gsoc-2023-rizin-the-technical-intro/</guid>
+      <description>Here&amp;rsquo;s My GSoC proposal and Acceptance Letter if you just want to take a look at that.
+Some Background I got my eyes on Rizin after a friend told me there&amp;rsquo;s a project that I might be interested in. I was working on my own x86 disassembler at that time and I wanted to convert that to an Intermediate Language that I wanted to create. This language would then be used to analyze binaries and decompile it.</description>
+    </item>
+    
+  </channel>
+</rss>
