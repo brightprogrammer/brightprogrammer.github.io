@@ -133,6 +133,7 @@ dl {
 
 li {
   padding-left: 8px;
+  padding-bottom: 2px
 }
 
 ol ol,
@@ -460,6 +461,7 @@ h3, .h3 {
 
 h4, .h4 {
   color: #fff;
+  padding-bottom: 4px;
 }
 
 h4::before, .h4::before {
