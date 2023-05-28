@@ -1,392 +1,145 @@
 <!doctype html>
-<html lang="en"><head>
-    <title>Project Blue</title>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" href="https://brightprogrammer.in/favicon.ico">
-    <link rel="canonical" href="https://brightprogrammer.in">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: overflow-carry - ProjectBlue</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="night"><meta name="application-name" content="ProjectBlue"><meta name="msapplication-TileImage" content="https://avatars.githubusercontent.com/u/37365905?v=4"><meta name="msapplication-TileColor" content="night"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ProjectBlue"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="brightprogrammer&amp;#96;s blog"><meta property="og:type" content="blog"><meta property="og:title" content="ProjectBlue"><meta property="og:url" content="http://brightprogrammer.in/"><meta property="og:site_name" content="ProjectBlue"><meta property="og:description" content="brightprogrammer&amp;#96;s blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://brightprogrammer.in/img/og_image.png"><meta property="article:author" content="Siddharth Mishra"><meta property="article:tag" content="reverse engineering"><meta property="article:tag" content="software"><meta property="article:tag" content="development"><meta property="article:tag" content="brightprogrammer"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://brightprogrammer.in/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://brightprogrammer.in"},"headline":"ProjectBlue","image":["http://brightprogrammer.in/img/og_image.png"],"author":{"@type":"Person","name":"Siddharth Mishra"},"publisher":{"@type":"Organization","name":"ProjectBlue","logo":{"@type":"ImageObject","url":{"light":"https://avatars.githubusercontent.com/u/37365905?v=4","dark":"https://avatars.githubusercontent.com/u/37365905?v=4"}}},"description":"brightprogrammer&#96;s blog"}</script><link rel="icon" href="https://avatars.githubusercontent.com/u/37365905?v=4"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-HNB6BFVRV9');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-</head>
-<body>
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-    <div class="container">
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-        
-        <a href="https://brightprogrammer.in"
-           class="navbar-brand">Project Blue
-        </a>
-
-        
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                href="#navbarResponsive">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        
-        <div class="collapse navbar-collapse"
-             id="navbarResponsive">
-
-            
-            <ul class="navbar-nav">
-
-                
-                <li class="nav-item dropdown">
-                    
-                    <a class="nav-link dropdown-toggle"
-                       data-toggle="dropdown"
-                       href="#" id="filemenu">
-                        File <span class="caret"></span>
-                    </a>
-                    
-                    <div class="dropdown-menu" aria-labelledby="filemenu">
-                        <a class="dropdown-item" href="/posts/">Posts</a>
-                        <a class="dropdown-item" href="/notes/">Notes</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/projects/">Projects<a>
-                        <a class="dropdown-item" href="/publication/">
-                            Publications
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/bookmarks/">
-                            Bookmarks
-                        </a>
-                    </div>
-                    
-                </li>
-                
-
-                
-                <li class="nav-item dropdown">
-                    
-                    <a class="nav-link dropdown-toggle"
-                       data-toggle="dropdown"
-                       href="#" id="helpmenu">
-                        Help <span class="caret"></span>
-                    </a>
-                    
-                    <div class="dropdown-menu" aria-labelledby="helpmenu">
-                        <a class="dropdown-item" href="/about-me">About Me</a>
-                        <a class="dropdown-item" href="/about-project-blue">
-                            About Project Blue
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/copyright">
-                            Copyright
-                        </a>
-                    </div>
-                    
-                </li>
-                
-            </ul>
-        </div>
-        
-    </div>
-</div>
-<div id="content" class="bs-component container-fluid">
-
-<br>
-<br>
-
-<h3 align="center">TAG : [overflow-carry]</h3>
-
-
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/brightprogrammer.github.io"><i class="fab fa-github"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">overflow-carry</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-04-30T04:05:44.000Z" title="4/30/2023, 4:05:44 AM">Sun, 30th April, 2023</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-05-28T20:39:36.267Z" title="5/28/2023, 8:39:36 PM">Mon, 29th May, 2023</time></span><span class="level-item"><a class="link-muted" href="/categories/alu-design/">alu-design</a><span> / </span><a class="link-muted" href="/categories/alu-design/intermediate-language/">intermediate-language</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/04/30/Overflow-and-Carry/">Overflow and Carry</a></p><div class="content"><p>I’ve been working on uplifting PIC Mid-Range device assemblies to Rizin’s RzIL. This has been quite interesting work so far but I encountered a conceptual blockage just when I started uplifting arithmetic instructions. I won’t talk much about my work in Rizin here but you can seach around the blog to find related posts. I want this post to be as short as possible for those who just want the concept and not my story!</p>
+<h5 id="ALL-THE-DISCUSSIONS-HERE-ARE-MOST-APPLICABLE-TO-ADDITION-OPERATION"><a href="#ALL-THE-DISCUSSIONS-HERE-ARE-MOST-APPLICABLE-TO-ADDITION-OPERATION" class="headerlink" title="ALL THE DISCUSSIONS HERE ARE MOST APPLICABLE TO ADDITION OPERATION"></a>ALL THE DISCUSSIONS HERE ARE MOST APPLICABLE TO ADDITION OPERATION</h5><h3 id="Concept-of-Carry"><a href="#Concept-of-Carry" class="headerlink" title="Concept of Carry"></a>Concept of Carry</h3><p>A carry bit is flagged only when certain conditions are met while treating the arithmetic operations as unsigned operation. By unsigned operations I mean that there’s no differentiation between negative and positive numbers and all numbers are treated as positive numbers only!</p>
+<p>When a carry bit is flagged, it states that the final result of operation is wrong! The area wasn’t enough to fit the result and hence I’m flagging this to let you know that the result is wrong! Let’s try to understand this by studying a one bit adder : </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">| x | y | res | carry? |</span><br><span class="line">|---|---|-----|--------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>   | no     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>   | no     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>   | no     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">10</span>  | yes    | &lt;---- This resulted in a carry because we had only <span class="number">1</span> bit sized storage but it needed two!</span><br></pre></td></tr></table></figure>
+<p>In your system, the final result of last operation will be 0 instead of 10 if there’s only one bit storage (talking hypothetically) and that’s where the carry flag will tell you, hey! your result is wrong! go kick yourself!</p>
+<p>But that’s not all! Once we move to higher bits, things change slightly and one more concept is added :</p>
 <ul>
-    
-    <li>
-        <a href="/posts/overflow-and-carry/">2023-04-30 | Overflow and Carry</a>
-    </li>
-    
+<li>A <code>carry-in</code> is to tell that when <strong>last</strong> bits were added, that resulted in a carry!</li>
+<li>A <code>carry-out</code> is to tell that when <strong>current</strong> bits were added, that resulted in a carry!</li>
 </ul>
-
-<h3 align="center">All Tags</h3>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/achievement/ title="All pages with tag <i>achievement</i>">achievement</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/achievements/ title="All pages with tag <i>achievements</i>">achievements</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/alu-design/ title="All pages with tag <i>alu-design</i>">alu-design</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/dummy/ title="All pages with tag <i>dummy</i>">dummy</a> <sup>3</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/garbage-collector/ title="All pages with tag <i>garbage-collector</i>">garbage-collector</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/gsoc/ title="All pages with tag <i>gsoc</i>">gsoc</a> <sup>2</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/http/ title="All pages with tag <i>http</i>">http</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/il-uplifter/ title="All pages with tag <i>il-uplifter</i>">il-uplifter</a> <sup>4</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/index/ title="All pages with tag <i>index</i>">index</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/intermediate-langauge/ title="All pages with tag <i>intermediate-langauge</i>">intermediate-langauge</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/intermediate-language/ title="All pages with tag <i>intermediate-language</i>">intermediate-language</a> <sup>5</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/life-update/ title="All pages with tag <i>life-update</i>">life-update</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/linux/ title="All pages with tag <i>linux</i>">linux</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/maths/ title="All pages with tag <i>maths</i>">maths</a> <sup>2</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/network-programming/ title="All pages with tag <i>network-programming</i>">network-programming</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/note/ title="All pages with tag <i>note</i>">note</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/notes/ title="All pages with tag <i>notes</i>">notes</a> <sup>6</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/numerical-techniques/ title="All pages with tag <i>numerical-techniques</i>">numerical-techniques</a> <sup>2</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/overflow-carry/ title="All pages with tag <i>overflow-carry</i>">overflow-carry</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/project-blue/ title="All pages with tag <i>project-blue</i>">project-blue</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/reverse-engineering/ title="All pages with tag <i>reverse-engineering</i>">reverse-engineering</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/rizin/ title="All pages with tag <i>rizin</i>">rizin</a> <sup>6</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/rzil/ title="All pages with tag <i>rzil</i>">rzil</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/server/ title="All pages with tag <i>server</i>">server</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/socket/ title="All pages with tag <i>socket</i>">socket</a> <sup>1</sup>
-</div>
-
- 
-
-<div class="btn btn-outline-warning">
-    <a href=/tags/story/ title="All pages with tag <i>story</i>">story</a> <sup>1</sup>
-</div>
-
-
-
-<br>
-<br>
-
-
-        </div><footer class="container">
-    <hr class="soften">
-    <p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h4 align="center" style="padding-top:40px"> Copyright (c) 2023 Siddharth Mishra</h4>
-<p align="center" style="font-size:14px"> YOU ARE IN NO SITUATION ALLOWED TO USE ANY CONTENT ON THIS BLOG TO TRAIN AN AI! </p>
-</p>
-</footer>
-<script src="/js/jquery.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
-<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
-<link rel="stylesheet" href="/css/bootstrap.css">
-
-
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/qtcreator-dark.min.css">
-
-
-
-
-
-
-
-
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<script>
-    hljs.highlightAll();
-</script>
-
-
-<script>
-    _386 = { 
-        fastLoad: false ,
-        onePass: false , 
-        speedFactor: 1 
-    };
-    
-    
-    function ThisYear() {
-        document.getElementById('thisyear').innerHTML = new Date().getFullYear();
-    };
-</script>
-
-
-<script>
-    (function(){
-        _386.magicCursor();
-        _386.scrollLock();
-        $('[data-toggle="tooltip"]').tooltip();
-        $('[data-toggle="popover"]').popover();
-
-        $(window).scroll(function() {
-            var top = $(document).scrollTop();
-            if(top > 50)
-                $('#home > .navbar').removeClass('navbar-transparent');
-            else
-                $('#home > .navbar').addClass('navbar-transparent');
-        });
-
-        $("a[href='#']").click(function(e) {
-            e.preventDefault();
-        });
-    })();
-</script>
-
-
-</body>
-</html>
+<p>The carry flag is set if there’s a carry out from most significant bit. In one bit added we didn’t have any concept of <code>carry-in</code> and there was only <code>carry-out</code> but here we need that. Let’s take an example with 4-bit addition. I’ll truncate the result to only 4 bits this time.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">| x    | y    | res  | carry |</span><br><span class="line">|------|------|------|-------|</span><br><span class="line">| <span class="number">0100</span> | <span class="number">0001</span> | <span class="number">0101</span> | no    |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0100</span> | <span class="number">1100</span> | no    |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0111</span> | <span class="number">1111</span> | no    |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1000</span> | <span class="number">0000</span> | yes   |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1111</span> | <span class="number">0111</span> | yes   |</span><br><span class="line">| <span class="number">1111</span> | <span class="number">0010</span> | <span class="number">0001</span> | yes   |</span><br></pre></td></tr></table></figure>
+<p>Notice how the carry-in is moved from adding last two bits to next bits to perform addition. In most significant bit, since there’s nowhere else to propagate this carry-in, it’s used to flag the carry flag. Keep reading, we’ll discuss later how to flag carry bit!!</p>
+<h3 id="Concept-of-Overflow"><a href="#Concept-of-Overflow" class="headerlink" title="Concept of Overflow"></a>Concept of Overflow</h3><p>Overflow flag is concerned only with signed operations! This will also tell you that your result is wrong (like carry flag). Again we take example of 1 bit adder to understand it</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">| x | y | res | carry? |</span><br><span class="line">|---|---|-----|--------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>   | no     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>   | no     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>   | no     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">10</span>  | yes    | &lt;---- This resulted in an overflow because we added two negative numbers and got a positive result</span><br></pre></td></tr></table></figure>
+
+<p>This looks much similar to carry right?! Yes for the moment but let’s take a look at 4 bit adder to see how things change. There’s same concept of carry-in and carry-out here but the overflow flag is not flagged if there’s a carry out. Overflow flag is flagged only when the sign of result is different from the sign of operands. If both operands are of different signs then overflow is never flagged but if they are same and result is of different sign then overflow is flagged.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">| x    | y    | res  | overflow                                        |</span><br><span class="line">|------|------|------|-------------------------------------------------|</span><br><span class="line">| <span class="number">0100</span> | <span class="number">0001</span> | <span class="number">0101</span> | no  (same sign operands, same sign result)      |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0100</span> | <span class="number">1100</span> | no  (operands of different sign)                |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0111</span> | <span class="number">1111</span> | no  (same)                                      |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1000</span> | <span class="number">0000</span> | yes (same sign operands, different sign result) |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1111</span> | <span class="number">0111</span> | yes (same)                                      |</span><br><span class="line">| <span class="number">1111</span> | <span class="number">0010</span> | <span class="number">0001</span> | no                                              | &lt;---- notice how this <span class="keyword">case</span> is different from carry<span class="number">&#x27;</span>s table</span><br></pre></td></tr></table></figure>
+
+<p>Hence I proved it to you that overflow and carry are different. I picked cases at random so only one difference came out but there are lot more differences.</p>
+<h3 id="Merging-The-Concepts"><a href="#Merging-The-Concepts" class="headerlink" title="Merging The Concepts"></a>Merging The Concepts</h3><p>Your ALU doesn’t differentiate between signed and unsigned and hence will flag both of these bits at the same time! Carry bit will be flagged if there was a carry-out from MSB and overflow bit will be flagged in STATUS register if there is a change of signs. Let’s take a few more examples including the last ones : </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x    | y    | res  | carry | overflow |</span><br><span class="line">|------|------|------|-------|----------|</span><br><span class="line">| <span class="number">0100</span> | <span class="number">0001</span> | <span class="number">0101</span> | no    | no       |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0100</span> | <span class="number">1100</span> | no    | no       |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">0111</span> | <span class="number">1111</span> | no    | no       |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1000</span> | <span class="number">0000</span> | yes   | yes      |</span><br><span class="line">| <span class="number">1000</span> | <span class="number">1111</span> | <span class="number">0111</span> | yes   | yes      |</span><br><span class="line">| <span class="number">1111</span> | <span class="number">0010</span> | <span class="number">0001</span> | yes   | no       |</span><br><span class="line">| <span class="number">1111</span> | <span class="number">1101</span> | <span class="number">1100</span> | yes   | no       |</span><br><span class="line">| <span class="number">1111</span> | <span class="number">1111</span> | <span class="number">1110</span> | yes   | no       |</span><br></pre></td></tr></table></figure>
+
+<p>I think that’s enough examples for now.</p>
+<h3 id="Detecting-Overflow"><a href="#Detecting-Overflow" class="headerlink" title="Detecting Overflow"></a>Detecting Overflow</h3><p>Detecting overflow is the easiest part here. We just need to check for sign of result and operands. How can we check if the sign of any two numbers are same or not? Think about it for a bit on your own! No? Let’s analyze the following table for different cases of MSB of both operands and result.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x | y | res | overflow? |</span><br><span class="line">|---|---|-----|-----------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>   | no        |</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">1</span>   | yes       | &lt;---\</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">0</span>   | no        |     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>   | no        |     |________ (only these two result in an overflow)</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">0</span>   | no        |     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>   | no        |     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">0</span>   | yes       | &lt;---/</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">1</span>   | no        |</span><br></pre></td></tr></table></figure>
+
+<p>Got some idea? No? Stare at it for 5 mins! Still no? Continue reading…</p>
+<p>To check whether two operands are same or not, we can use the <code>XOR</code> operation. Result of a XOR is true if operands are different and false if both are same. Now, we want the result to have same sign as that of both the operands. </p>
+<p><img src="/images/spiderman-mem-xor-xyres.jpg" alt="meme">  </p>
+<p>What about taking logical <code>AND</code> of result of <code>XOR</code> between MSB or result and both operands at a time? Like this : <code>AND(XOR(MSB(x), MSB(res)), XOR(MSB(x), MSB(res)))</code>? Let’s check if this works or not</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x | y | res | overflow? | XOR(x, res) | XOR(y, res) | AND(XOR(x, res), XOR(y, res)) |</span><br><span class="line">|---|---|-----|-----------|-------------|-------------|-------------------------------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>   | no        | <span class="number">0</span>           | <span class="number">0</span>           | <span class="number">0</span>                             |</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">1</span>   | yes       | <span class="number">1</span>           | <span class="number">1</span>           | <span class="number">1</span>                             |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">0</span>   | no        | <span class="number">0</span>           | <span class="number">1</span>           | <span class="number">0</span>                             |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>   | no        | <span class="number">1</span>           | <span class="number">0</span>           | <span class="number">0</span>                             |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">0</span>   | no        | <span class="number">1</span>           | <span class="number">0</span>           | <span class="number">0</span>                             |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>   | no        | <span class="number">0</span>           | <span class="number">1</span>           | <span class="number">0</span>                             |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">0</span>   | yes       | <span class="number">1</span>           | <span class="number">1</span>           | <span class="number">1</span>                             |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">1</span>   | no        | <span class="number">0</span>           | <span class="number">0</span>           | <span class="number">0</span>                             |</span><br></pre></td></tr></table></figure>
+
+<p>This seems to align properly! But can we make this check shorter? We need the uplifted IL to be as small and precise as possible! Think about it and do message me ツ</p>
+<h3 id="Detecting-Carry"><a href="#Detecting-Carry" class="headerlink" title="Detecting Carry"></a>Detecting Carry</h3><p>This can be quite challenging to understand on your own, but I’m here to help you ¬‿¬ Similar to overflow’s case we should make a table to see what we are expecting from your magical carry detector but here a few things change. We need to think about cases when there is a carry-in from last bit’s addition too, and we only need to think about last bit’s carry in. Why? Think about it ( ͡° ͜ °)</p>
+<p>I’ll consider only MSB of the operands and result.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x | y | carry-in | res | res (truncated) | carry? |</span><br><span class="line">|---|---|----------|-----|-----------------|--------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">0</span>   | <span class="number">0</span>               | no     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">11</span>  | <span class="number">1</span>               | yes    |</span><br></pre></td></tr></table></figure>
+
+<p>Nice, now we only need to think about which set of logical operations will give us this result. We’ll there is a case where adding <code>1</code> and <code>1</code> gives <code>1</code> and a case whre adding <code>1</code> and <code>1</code> gives <code>0</code>. My personal way of finding the operations in cases like this is to start with basic operations like <code>AND</code> or <code>OR</code> or <code>XOR</code> between just two operands at a time and think how many predictions using this operations are true. If I make large number of successful predictions then that means I’m on right path and I try doing more logical operations over that result!</p>
+<ul>
+<li>If you took a logical <code>OR</code> and you are getting most cases correct but are predicting some more cases wrong then you probably need to take <code>AND</code> for this result with some other paramter</li>
+<li>If you took logical <code>AND</code> and you are getting some less cases correct then you probably need to take <code>OR</code> with some other variables.</li>
+</ul>
+<p>Here I see that when I do <code>AND(MSB(x), MSB(y))</code> then I get only last two cases correct and rest fail. Next I notice that if I take <code>OR</code> of this result with the negation of <code>MSB(res)</code> then one more cases are predicted correctly! but not all! Why <code>OR</code>? Start reading this paragraph from top again ツ Also, please don’t take carry-in into consideration while performing these operations because let’s assume we don’t have that at the moment! Just use <code>x</code>, <code>y</code> and <code>res</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x | y | carry-in | res | res (truncated) | carry? | AND(x, y) | NEG(res) | OR(AND(x, y), NEG(res)) |</span><br><span class="line">|---|---|----------|-----|-----------------|--------|-----------|----------|-------------------------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">0</span>   | <span class="number">0</span>               | no     | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">1</span>                       | &lt;---- wrong here</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     | <span class="number">0</span>         | <span class="number">0</span>        | <span class="number">0</span>                       |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     | <span class="number">0</span>         | <span class="number">0</span>        | <span class="number">0</span>                       |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">1</span>                       |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">1</span>   | <span class="number">1</span>               | no     | <span class="number">0</span>         | <span class="number">0</span>        | <span class="number">0</span>                       |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">0</span>                       | &lt;---- wrong here</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">10</span>  | <span class="number">0</span>               | yes    | <span class="number">1</span>         | <span class="number">1</span>        | <span class="number">1</span>                       |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">11</span>  | <span class="number">1</span>               | yes    | <span class="number">1</span>         | <span class="number">0</span>        | <span class="number">1</span>                       |</span><br></pre></td></tr></table></figure>
+
+<p>Next, I after some more hit and trial, I find that the end operation is <code>OR(AND(MSB(x), MSB(y)), AND(OR(MSB(x), MSB(y)), NEG(MSB(res))))</code> and it predicts all results correctly! Let’s verify this too.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">| x | y | carry-in | res | carry? | AND(x, y) | OR(x, y) | NEG(res) | AND(OR(x, y), NEG(res)) | OR(AND(x, y), AND(OR(x, y), NEG(res))) |</span><br><span class="line">|---|---|----------|-----|--------|-----------|----------|----------|-------------------------|----------------------------------------|</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">0</span>   | no     | <span class="number">0</span>         | <span class="number">0</span>        | <span class="number">1</span>        | <span class="number">0</span>                       | <span class="number">0</span>                                      |</span><br><span class="line">| <span class="number">0</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">1</span>   | no     | <span class="number">0</span>         | <span class="number">0</span>        | <span class="number">0</span>        | <span class="number">0</span>                       | <span class="number">0</span>                                      |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">1</span>   | no     | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">0</span>        | <span class="number">0</span>                       | <span class="number">0</span>                                      |</span><br><span class="line">| <span class="number">0</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">0</span>   | yes    | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">1</span>        | <span class="number">1</span>                       | <span class="number">1</span>                                      |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">0</span>        | <span class="number">1</span>   | no     | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">0</span>        | <span class="number">0</span>                       | <span class="number">0</span>                                      |</span><br><span class="line">| <span class="number">1</span> | <span class="number">0</span> | <span class="number">1</span>        | <span class="number">0</span>   | yes    | <span class="number">0</span>         | <span class="number">1</span>        | <span class="number">1</span>        | <span class="number">1</span>                       | <span class="number">1</span>                                      |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">0</span>        | <span class="number">0</span>   | yes    | <span class="number">1</span>         | <span class="number">1</span>        | <span class="number">1</span>        | <span class="number">1</span>                       | <span class="number">1</span>                                      |</span><br><span class="line">| <span class="number">1</span> | <span class="number">1</span> | <span class="number">1</span>        | <span class="number">1</span>   | yes    | <span class="number">1</span>         | <span class="number">1</span>        | <span class="number">0</span>        | <span class="number">0</span>                       | <span class="number">1</span>                                      |</span><br></pre></td></tr></table></figure>
+
+<h3 id="Carry-Flag-As-Borrow-Bit"><a href="#Carry-Flag-As-Borrow-Bit" class="headerlink" title="Carry Flag As Borrow Bit?"></a>Carry Flag As Borrow Bit?</h3><p>Using similar approach you can get an expression to deduce whether there was a borrow or not. Let me give you some hints here : </p>
+<ul>
+<li>Draw a table with all possible values of MSB of <code>x</code>. <code>y</code> and <code>res</code> (total 8 rows : <code>2*2*2</code>)</li>
+<li>Think about possible cases where there can be a borrow. You don’t need to worry about carry-in here! There will be only 4 such cases!</li>
+<li>Then find some operations that include predict some results correctly and some results wrong and try taking <code>AND</code> or <code>OR</code> of these to find the end result.</li>
+</ul>
+<p>My answer is : <code>OR(OR(AND(NOT(x), r), AND(NOT(x), b)), AND(x, AND(y, r)))</code></p>
+<h3 id="Some-Background"><a href="#Some-Background" class="headerlink" title="Some Background"></a>Some Background</h3><p>I had my difficulties reaching this result. I already had some reference code in Rizin to take look and just copy paste them but I didn’t want that for me! I need to understand whatever I’m doing because I’m here to learn. After struggling for a while, I created a python script to help me test these results because I didn’t want to create these tables before writing this post.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get most significant bit of 4 bit number</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">msb4</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> (n&amp;(<span class="number">1</span>&lt;&lt;<span class="number">3</span>))&gt;&gt;<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get lower 4 bits of given number</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get4</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> n&amp;<span class="number">0xf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># convert given number to</span></span><br><span class="line"><span class="comment"># corresponding binary string</span></span><br><span class="line"><span class="comment"># bin4 means nibble (4bits)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bin4tostr</span>(<span class="params">n</span>):</span><br><span class="line">    s = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">if</span>(n &amp; (<span class="number">1</span> &lt;&lt; (<span class="number">3</span>-i))): s += <span class="string">&quot;1&quot;</span></span><br><span class="line">        <span class="keyword">else</span>: s += <span class="string">&quot;0&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">AND</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a&amp;b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">OR</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a|b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">XOR</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a^b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">NOT</span>(<span class="params">a</span>):</span><br><span class="line">    <span class="keyword">return</span> ~a</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_carry4</span>(<span class="params">a, b</span>):</span><br><span class="line">    msba = msb4(a)</span><br><span class="line">    msbb = msb4(b)</span><br><span class="line">    msbr = msb4(a+b)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> OR(AND(msba, msbb), AND(OR(msba, msbb), NOT(msbr)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_overflow4</span>(<span class="params">a, b</span>):</span><br><span class="line">    msba = msb4(a)</span><br><span class="line">    msbb = msb4(b)</span><br><span class="line">    msbr = msb4(a+b)</span><br><span class="line">    <span class="keyword">return</span> AND(XOR(msba, msbr), XOR(msbb, msbr))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">        msbi = msb4(i)</span><br><span class="line">        msbj = msb4(j)</span><br><span class="line">        res = get4(i+j)</span><br><span class="line">        msbr = msb4(res)</span><br><span class="line">       </span><br><span class="line">        ostr = <span class="string">&#x27;carry&#x27;</span> <span class="keyword">if</span> check_carry4(i, j) <span class="keyword">else</span> <span class="string">&#x27;overflow&#x27;</span> <span class="keyword">if</span> check_overflow4(i, j) <span class="keyword">else</span> <span class="string">&#x27;none&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;msb(i) = <span class="subst">&#123;msbi&#125;</span> | msb(j) = <span class="subst">&#123;msbj&#125;</span> | msb(res) = <span class="subst">&#123;msbr&#125;</span> | <span class="subst">&#123;bin4tostr(i)&#125;</span> + <span class="subst">&#123;bin4tostr(j)&#125;</span> = <span class="subst">&#123;bin4tostr(res)&#125;</span> | <span class="subst">&#123;ostr&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Check it’s output and compare the result for yourselves.</p>
+<p>That was all for this post, I hope to see you in some other post again. If you liked it please write me a review ツ</p>
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="Siddharth Mishra"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Siddharth Mishra</p><p class="title is-size-7 is-blog">Reverse Engineer, Software Developer, Modern Mathematics Enthusiast</p></div></div></nav><div class="has-text-centered flex-shrink-1"><p class="is-flex justify-content-center"><i class="fas fa-map-marker-alt"></i>India, Earth, Milkiway Galaxy, Krishna&#039;s Mouth</p></div><br><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">13</p></a></div></div></nav><nav class="level is-mobile"><a class="level-item button is-primary is-rounded" href="https://github.com/brightprogrammer" target="_blank" rel="noopener"><i class="fab fa-github" style="padding-right: 4px"></i>Follow</a><a class="level-item button is-primary is-rounded" href="https://github.com/sponsors/brightprogrammer" target="_blank" rel="noopener"><i class="fas fa-heart" style="padding-right: 4px"></i>Sponsor Me</a></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/brightprogrammer"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/brightprogramer"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="YouTube" href="https://youtube.com/@brightprogrammer"><i class="fab fa-youtube"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Discord" href="https://discord.gg/vx7tdRntRM"><i class="fab fa-discord"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="LinkedIn" href="https://linkedin.com/in/brightprogrammer"><i class="fab fa-linkedin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Spotify" href="https://open.spotify.com/user/5xl6nvezwbu0zb7zyt5j4y5rn?si=qdaY-WrLT7y6Xk9XoAkkVA"><i class="fab fa-spotify"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://brightprogrammer.netlify.app" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Old Blog</span></span><span class="level-right"><span class="level-item tag">brightprogrammer.netlify.app</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/"><span class="level-start"><span class="level-item">2023</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/alu-design/"><span class="level-start"><span class="level-item">alu-design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/alu-design/intermediate-language/"><span class="level-start"><span class="level-item">intermediate-language</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/network-programming/"><span class="level-start"><span class="level-item">network-programming</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/network-programming/web-server/"><span class="level-start"><span class="level-item">web-server</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/open-source/"><span class="level-start"><span class="level-item">open-source</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/open-source/rizin/"><span class="level-start"><span class="level-item">rizin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-30T04:05:44.000Z">Sun, 30th April, 2023</time></p><p class="title"><a href="/2023/04/30/Overflow-and-Carry/">Overflow and Carry</a></p><p class="categories"><a href="/categories/alu-design/">alu-design</a> / <a href="/categories/alu-design/intermediate-language/">intermediate-language</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-14T16:12:25.000Z">Fri, 14th April, 2023</time></p><p class="title"><a href="/2023/04/14/Writing-A-HTTP-Web-Server-In-C/">Writing A HTTP Web Server In C</a></p><p class="categories"><a href="/categories/network-programming/">network-programming</a> / <a href="/categories/network-programming/web-server/">web-server</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-11T21:11:25.000Z">Wed, 12th April, 2023</time></p><p class="title"><a href="/2023/04/11/RzIL-Introductory-Notes/">RzIL Introductory Notes</a></p><p class="categories"><a href="/categories/open-source/">open-source</a> / <a href="/categories/open-source/rizin/">rizin</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/alu-design/"><span class="tag">alu-design</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/http/"><span class="tag">http</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/il-uplifter/"><span class="tag">il-uplifter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intermediate-language/"><span class="tag">intermediate-language</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network-programming/"><span class="tag">network-programming</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/notes/"><span class="tag">notes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/overflow-carry/"><span class="tag">overflow-carry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/project-blue/"><span class="tag">project-blue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rizin/"><span class="tag">rizin</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/server/"><span class="tag">server</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a><p class="is-size-7"><span>&copy; 2023 Siddharth Mishra</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">Made with 💖 by Siddharth Mishra © 2023, Some Rights Reserved.</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>
