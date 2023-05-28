@@ -124,10 +124,8 @@ int main() {
 ```
 
 and here's the output :   
-<p align="center">
   <img src="/images/working-server.png" />
   Working image of server
-</p>
 
 ## Background
 I created this blog but it's static because it's being served on hugo. Now I have this urge to make this site dynamic for some reason and I wanna do it in C. I can use python easily since I already have experience with Django as I created a site using that last year. It was hosted on a free hosting service which got converted to paid later previous year. I can use Python or if I wanna look more cool (or fool to some people) I can use C++ but I just wanna create this whole backend in C and that too from scratch.  
@@ -148,7 +146,7 @@ We start of with this guy here :
  * accept() an incoming connection
  * send() your HTML file with an HTTP header.
  * */
-```  
+```
 Just follow everything in exact same manner and you'll have your basic web server running in no time.
 
 First thing you need to understand is use of `struct addrinfo` and `getaddrinfo()`. I'll explain you this from two point of views : 
@@ -179,7 +177,7 @@ STATUS status = getaddrinfo(NULL, SERVER_PORT, &hints, &res);
 if(status != 0) {
     ERROR_AND_EXIT("getaddrinfo failed : %s\n", gai_strerror(status));
 }
-```  
+```
 
 If you already have exact data like IP version, IP address and port number then you don't need to perform this step. But in case of clients like web browsers, we need this step to get as much details about target as possible. The returned `res` struct is a linked list of returned details.  
 
@@ -194,7 +192,7 @@ Running this program as it is will get us addr info of local host like this :
 ```
 IPv4 : 0.0.0.0
 IPv6 : ::
-```  
+```
 
 and changing the first parameter in `getaddrinfo` returns :  
 ```
@@ -206,7 +204,8 @@ IPv6 : 0:0:2606:50c0:8000::
 IPv6 : 0:0:2606:50c0:8001::
 IPv6 : 0:0:2606:50c0:8003::
 IPv6 : 0:0:2606:50c0:8002::
-```  
+```
+
 Which are IP addresses that GitHub asks you to set when attaching your github pages site with your domain name. Interesting isn't it?  
 
 ### Sockets Sockets Sockets!
@@ -229,7 +228,7 @@ struct addrinfo {
     char    *ai_canonname;     /* canonical name */
     struct  addrinfo *ai_next; /* this struct can form a linked list */
 };
-```  
+```
 
 Now we have all the information we want about our target.
 - IP Address
@@ -268,7 +267,7 @@ if(status != 0) {
 // listen/wait for connections
 // this queue size is sometimes called backlog
 listen(sock_desc, SERVER_INCOMING_CONNECTION_QUEUE_SIZE);
-```  
+```
 
 This way we are waiting for connections on a specific port. Note that if you are a client, you'll use the same port that the server bound to, to get information!
 
@@ -283,7 +282,7 @@ SOCKET_DESC new_conn = accept(sock_desc, (struct sockaddr *)&conn_addr, &addr_si
 if(!new_conn) {
     ERROR_AND_EXIT("accept : failed to accept connection\n");
 }
-```  
+```
 
 Yay! we accepted connection, now if there's no error, we can just `send()`/`recv()` data to/from the socket descriptor. If this is a stream socket connection then this socket will act like a pipe where whatever you write on the server end will reach on the client end in same exact order.  
 
