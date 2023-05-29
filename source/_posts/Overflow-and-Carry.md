@@ -8,6 +8,8 @@ categories: [alu-design, intermediate-language]
 
 I've been working on uplifting PIC Mid-Range device assemblies to Rizin's RzIL. This has been quite interesting work so far but I encountered a conceptual blockage just when I started uplifting arithmetic instructions. I won't talk much about my work in Rizin here but you can seach around the blog to find related posts. I want this post to be as short as possible for those who just want the concept and not my story!
 
+<!-- more -->
+
 ##### ALL THE DISCUSSIONS HERE ARE MOST APPLICABLE TO ADDITION OPERATION
 
 ### Concept of Carry

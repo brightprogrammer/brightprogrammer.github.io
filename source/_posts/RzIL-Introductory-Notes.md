@@ -12,6 +12,9 @@ categories: [open-source, rizin]
 - RzIL is based on [**BAP's Core Theory**](http://binaryanalysisplatform.github.io/bap/api/odoc/bap-core-theory/Bap_core_theory/index.html) so do read about that too.
 - Analysis code is present in [`librz/include/rz_analysis.h`](https://github.com/rizinorg/rizin/tree/dev/librz/include/rz_analysis.h) and [`librz/analysis`](https://github.com/rizinorg/rizin/tree/dev/librz/analysis).  
 - ESIL uplifters are present in [`librz/analysis/p`](https://github.com/rizinorg/rizin/tree/dev/librz/analysis/p) and the new RzIL uplifters are present in [`librz/analysis/arch`](https://github.com/rizinorg/rizin/tree/dev/librz/analysis/arch).  
+
+<!-- more -->
+
 - Each of these intermediate languages can be emulated so there must be a VM to interpret these ILs and run them. That code can be found in [`librz/analysis/il`](https://github.com/rizinorg/rizin/tree/dev/librz/analysis/il).  
 - RzIL related headers can be found in [`librz/include/rz_il`](https://github.com/rizinorg/rizin/blob/dev/librz/include/rz_il) and definitions can be found in [`librz/il`](https://github.com/rizinorg/rizin/tree/dev/librz/il)  
 - RzIL Opcodes are declared in [`rz_il_opcodes.h`](https://github.com/rizinorg/rizin/blob/dev/librz/include/rz_il/rz_il_opcodes.h) and defined in [`il_opcodes.c`](https://github.com/rizinorg/rizin/tree/dev/librz/il/il_opcodes.c)  

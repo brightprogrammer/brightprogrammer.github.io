@@ -6,10 +6,14 @@ tags: [project-blue, server, network-programming, socket, linux, http, note]
 categories: [network-programming, 'web-server']
 ---
 
-##### I PORTED THIS POST FROM MY OLD BLOG. CONTENT MIGHT BE OUTDATED BUT PROGRAM IS UP TO DATE SINCE IT'S WRITTEN RECENTLY.
+This post will be about creating a simple HTTP web server using only C (and HTML ofcourse XD). We'll learn about the Linux sockets API and see how can we read an HTML file and serve it on localhost at a specific post.
+
+<!-- more -->
 
 ## First Things First!   
 For those who are here just for code and hack it to make it their own, please have it :  
+
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,6 +64,7 @@ int main() {
     if(status != 0) {
         ERROR_AND_EXIT("getaddrinfo failed : %s\n", gai_strerror(status));
     }
+
 
     // iterate over all entries in the linked list
     // and print information.
