@@ -165,10 +165,8 @@ donates:
         currency_code: USD
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
-#share:
-#    type: sharethis
-#    # URL to the ShareThis share plugin script
-#    install_url: ''
+share:
+    type: addtoany
 # Sidebar configurations.
 # Please be noted that a sidebar is only visible when it has at least one widget
 sidebar:
@@ -264,25 +262,16 @@ widgets:
         amount: 
         # Whether to show tags count, i.e. number of posts in the tag.
         show_count: true
-    # Google FeedBurner email subscription widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: subscribe_email
-        # Hint text under the email input
-        description: 
-        # Feedburner ID
-        feedburner_id: ''
     -
         # Where should the widget be placed, left sidebar or right sidebar
         position: left
         type: followit
         # Hint text under the email input
-        description: 
+        description: Subscribe to latest Feed
         # Subscription form action URL
-        action_url: ''
+        action_url: 'https://api.follow.it/subscription-form/dmtSWUtlTzlDRG1pZExiSnRPOG1PM1ZSaXNqbUozTEZMTlAzT2g1K2hOcVU5MWxKQmNXZXdpSyt2Z2NYWlFrNFNVd3lsbjRpOGZGeGxBSDB4UWp5ODdiakpwS052T3Vlbnc3RHB5d2F1SkZIMUVNaGtWdFpHb1Q1a3E0WHE3QTh8cVA3OEJFeUF1N1oyN3F2QWRPampWMk9VVmJwcWFPTFUyRklVaFdZY2pYUT0=/8'
         # Feed claiming verification code
-        verification_code: ''
+        verification_code: 'sLuN166jVfMjW3VUzq7h'
 # Plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/
 plugins:
