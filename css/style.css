@@ -10262,6 +10262,12 @@ body {
 body > .section {
   flex-grow: 1;
 }
+img {
+  display: block;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
 @media screen and (min-width: 1266px) {
   ::-webkit-scrollbar {
     width: 8px;
