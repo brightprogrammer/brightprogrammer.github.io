@@ -6,6 +6,8 @@ tags: [project-blue, server, network-programming, socket, linux, http, note]
 categories: [network-programming, 'web-server']
 ---
 
+![served webpage](/images/working-server.png)
+
 This post will be about creating a simple HTTP web server using only C (and HTML ofcourse XD). We'll learn about the Linux sockets API and see how can we read an HTML file and serve it on localhost at a specific post.
 
 <!-- more -->
@@ -129,8 +131,7 @@ int main() {
 ```
 
 and here's the output :   
-  <img src="/images/working-server.png" />
-  Working image of server
+![Screenshot of served webpage](/images/working-server.png)
 
 ## Background
 I created this blog but it's static because it's being served on hugo. Now I have this urge to make this site dynamic for some reason and I wanna do it in C. I can use python easily since I already have experience with Django as I created a site using that last year. It was hosted on a free hosting service which got converted to paid later previous year. I can use Python or if I wanna look more cool (or fool to some people) I can use C++ but I just wanna create this whole backend in C and that too from scratch.  
