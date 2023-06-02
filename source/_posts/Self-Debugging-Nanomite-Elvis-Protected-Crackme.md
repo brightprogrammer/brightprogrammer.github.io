@@ -1,7 +1,7 @@
 ---
 title: Self Debugging (Nanomite) - Elvis Protected Crackme
-date: 2023-01-06 02:10:20
-tags: ['crackmes', 'reverse-engineering, 'windows', 'nanomite', 'xorenc', 'anti-debug']
+date: 2023-01-16 02:10:20
+tags: ['crackmes', 'reverse-engineering', 'windows', 'nanomite', 'xorenc', 'anti-debug']
 categories: ['crackmes', 'windows']
 ---
 
