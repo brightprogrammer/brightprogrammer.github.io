@@ -1,7 +1,8 @@
 ---
 title: Manual Decompilation - How Real Men Do It!
 date: 2021-09-03 14:58:58
-tags:
+tags: ['crackmes', 'reverse-engineering', 'vm']
+categories: ['crackmes']
 ---
 ![](/images/xvm-preview.png)
 
