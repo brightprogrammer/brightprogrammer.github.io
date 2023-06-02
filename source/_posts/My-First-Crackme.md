@@ -4,6 +4,9 @@ date: 2021-08-04 14:55:23
 tags: ['crackmes', 'reverse-engineering', 'linux']
 categories : ['crackmes']
 ---
+
+![](/images/firstcm-preview.jpg)
+
 In this post, I will write about how I solved my very first crackme.
 
 Tools you will need are : 
