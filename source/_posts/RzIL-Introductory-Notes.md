@@ -6,7 +6,7 @@ tags: [rizin, intermediate-language, notes, il-uplifter]
 categories: [open-source, rizin]
 ---
 
-### References First
+## References First
 
 - Some idea about how RzIL works can be found here : [https://github.com/rizinorg/rizin/blob/dev/doc/rzil.md](https://github.com/rizinorg/rizin/blob/dev/doc/rzil.md)
 - RzIL is based on [**BAP's Core Theory**](http://binaryanalysisplatform.github.io/bap/api/odoc/bap-core-theory/Bap_core_theory/index.html) so do read about that too.
@@ -20,7 +20,7 @@ categories: [open-source, rizin]
 - RzIL Opcodes are declared in [`rz_il_opcodes.h`](https://github.com/rizinorg/rizin/blob/dev/librz/include/rz_il/rz_il_opcodes.h) and defined in [`il_opcodes.c`](https://github.com/rizinorg/rizin/tree/dev/librz/il/il_opcodes.c)  
 - There are multiple helper macros to help writing uplifters easily defined in [`rz_il_opbuilder_begin.h`](https://github.com/rizinorg/rizin/blob/dev/librz/include/rz_il/rz_il_opbuilder_begin.h)  
 
-### Pure & Effect Operations in RzIL  
+## Pure & Effect Operations in RzIL  
 
 * `RzILOpEffect` is to reperesent an instruction/operation that changes the VM state from one to another. This means instructions like **`ADD`**, **`SUB`** etc… should be treated as `RzILOpEffect`! But that’s not the complete story, keep reading…  
 * `RzILOpPure` is to represent operations/instructions that don’t change the CPU state but evaluate to a pure expression. By pure, we mean, it will be a constant expression. So the result of instructions like **`ADD`**, **`SUB`**, etc… can now be treated like an `RzILOpPure`!  
@@ -153,19 +153,21 @@ Now, the above code does following things :
 * In different cases, very similar things are done since only the size of operation is changing.  
 * Now before you start reading from top, take a look at the `_src`, a `RzILOpPure` created in last line and loading value into `_src` operation in second last line as an effect.  
 * Now, in each of the cases, instruction like this is present :
+
 ```c
 RzILOpEffect *dxax = SETL("_dxax", LOGOR(SHIFTL0(UNSIGNED(32, x86_il_get_reg(X86_REG_DX)), UN(8, 16)), UNSIGNED(32, x86_il_get_reg(X86_REG_AX))));
-```  
-This is getting the value from registers and shifting and taking or. Please take a look at how defines like `LOGOR`, `SHIFTR0`, `SHIFTL0` etc are defined.Since this is again a load operation, this will be treated as an effect.  
-4 But, notice there’s one direct `RzILOpPure` this time in the code! All division operations must be checked whether the divide resulted in some invalid result and for that we have  
+```
+
+* This is getting the value from registers and shifting and taking or. Please take a look at how defines like `LOGOR`, `SHIFTR0`, `SHIFTL0` etc are defined.Since this is again a load operation, this will be treated as an effect, but, notice there’s one direct `RzILOpPure` this time in the code! All division operations must be checked whether the divide resulted in some invalid result and for that we have  
+
 ```c
 RzILOpPure *cond = UGT(VARL("_temp"), UN(16, 0xffff));
-```  
+```
 This is condition for **Unsigned Greater Than (UGT)**. Notice also that here is the definition of pure value `_temp`.
 
 Now, you can understand basic instuction lifters, but we won’t know until unless we actually write one!
 
-### Understanding Already Present Uplifters
+## Understanding Already Present Uplifters
 
 All already present uplifters have atleast two functions in their head files as an `RZ_API` (meaning to be exposed to and used by other modules)
 
