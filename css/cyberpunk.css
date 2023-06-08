@@ -11703,71 +11703,113 @@ figure.highlight.foldable div.level-left {
 }
 body.night {
   background: #0e1225;
+/*
+     * Theme: IR Black
+     * Author: Timothée Poisot (http://timotheepoisot.fr)
+     * License: ~ MIT (or more permissive) [via base16-schemes-source]
+     * Maintainer: @highlightjs/core-team
+     * Version: 2021.09.0
+     * */
 }
-body.night .hljs {
+/*
+     * Theme: IR Black
+     * Author: Timothée Poisot (http://timotheepoisot.fr)
+     * License: ~ MIT (or more permissive) [via base16-schemes-source]
+     * Maintainer: @highlightjs/core-team
+     * Version: 2021.09.0
+     * */
+body.night .hljs-meta .hljs-keyword,
+body.night .hljs-meta-keyword,
+body.night .hljs-strong {
+  font-weight: 700;
+}
+body.night pre code.hljs {
   display: block;
   overflow-x: auto;
-  padding: 0.5em;
-  color: #abb2bf;
-  background: #282c34;
+  padding: 1em;
 }
-body.night .hljs-comment,
-body.night .hljs-quote {
-  color: #5c6370;
-  font-style: italic;
+body.night code.hljs {
+  padding: 3px 5px;
 }
-body.night .hljs-doctag,
-body.night .hljs-keyword,
-body.night .hljs-formula {
-  color: #c678dd;
+body.night .hljs {
+  color: #b5b3aa;
+  background: #000;
 }
-body.night .hljs-section,
+body.night .hljs ::selection,
+body.night .hljs::selection {
+  background-color: #484844;
+  color: #b5b3aa;
+}
+body.night .hljs-comment {
+  color: #6c6c66;
+}
+body.night .hljs-tag {
+  color: #918f88;
+}
+body.night .hljs-operator,
+body.night .hljs-punctuation,
+body.night .hljs-subst {
+  color: #b5b3aa;
+}
+body.night .hljs-operator {
+  opacity: 0.7;
+}
+body.night .hljs-bullet,
+body.night .hljs-deletion,
 body.night .hljs-name,
 body.night .hljs-selector-tag,
-body.night .hljs-deletion,
-body.night .hljs-subst {
-  color: #e06c75;
-}
-body.night .hljs-literal {
-  color: #56b6c2;
-}
-body.night .hljs-string,
-body.night .hljs-regexp,
-body.night .hljs-addition,
-body.night .hljs-attribute,
-body.night .hljs-meta-string {
-  color: #98c379;
-}
-body.night .hljs-built_in,
-body.night .hljs-class .hljs-title {
-  color: #e6c07b;
+body.night .hljs-template-variable,
+body.night .hljs-variable {
+  color: #ff6c60;
 }
 body.night .hljs-attr,
-body.night .hljs-variable,
-body.night .hljs-template-variable,
-body.night .hljs-type,
-body.night .hljs-selector-class,
-body.night .hljs-selector-attr,
-body.night .hljs-selector-pseudo,
-body.night .hljs-number {
-  color: #d19a66;
-}
-body.night .hljs-symbol,
-body.night .hljs-bullet,
 body.night .hljs-link,
-body.night .hljs-meta,
-body.night .hljs-selector-id,
-body.night .hljs-title {
-  color: #61aeee;
+body.night .hljs-literal,
+body.night .hljs-number,
+body.night .hljs-symbol,
+body.night .hljs-variable.constant_ {
+  color: #e9c062;
+}
+body.night .hljs-class .hljs-title,
+body.night .hljs-strong,
+body.night .hljs-title,
+body.night .hljs-title.class_ {
+  color: #ffffb6;
+}
+body.night .hljs-addition,
+body.night .hljs-code,
+body.night .hljs-string,
+body.night .hljs-title.class_.inherited__ {
+  color: #a8ff60;
+}
+body.night .hljs-built_in,
+body.night .hljs-doctag,
+body.night .hljs-keyword.hljs-atrule,
+body.night .hljs-quote,
+body.night .hljs-regexp {
+  color: #c6c5fe;
+}
+body.night .hljs-attribute,
+body.night .hljs-function .hljs-title,
+body.night .hljs-section,
+body.night .hljs-title.function_,
+body.night .ruby .hljs-property {
+  color: #96cbfe;
+}
+body.night .diff .hljs-meta,
+body.night .hljs-keyword,
+body.night .hljs-template-tag,
+body.night .hljs-type {
+  color: #ff73fd;
 }
 body.night .hljs-emphasis {
+  color: #ff73fd;
   font-style: italic;
 }
-body.night .hljs-strong {
-  font-weight: bold;
-}
-body.night .hljs-link {
-  text-decoration: underline;
+body.night .hljs-meta,
+body.night .hljs-meta .hljs-keyword,
+body.night .hljs-meta .hljs-string {
+  color: #b18a3d;
 }
 body.night .content code {
   color: #cbba7d;
@@ -12058,71 +12100,113 @@ body.night .twikoo code {
 @media (prefers-color-scheme: dark) {
   body:not(.light) {
     background: #0e1225;
+/*
+     * Theme: IR Black
+     * Author: Timothée Poisot (http://timotheepoisot.fr)
+     * License: ~ MIT (or more permissive) [via base16-schemes-source]
+     * Maintainer: @highlightjs/core-team
+     * Version: 2021.09.0
+     * */
   }
-  body:not(.light) .hljs {
+  /*
+     * Theme: IR Black
+     * Author: Timothée Poisot (http://timotheepoisot.fr)
+     * License: ~ MIT (or more permissive) [via base16-schemes-source]
+     * Maintainer: @highlightjs/core-team
+     * Version: 2021.09.0
+     * */
+  body:not(.light) .hljs-meta .hljs-keyword,
+  body:not(.light) .hljs-meta-keyword,
+  body:not(.light) .hljs-strong {
+    font-weight: 700;
+  }
+  body:not(.light) pre code.hljs {
     display: block;
     overflow-x: auto;
-    padding: 0.5em;
-    color: #abb2bf;
-    background: #282c34;
+    padding: 1em;
   }
-  body:not(.light) .hljs-comment,
-  body:not(.light) .hljs-quote {
-    color: #5c6370;
-    font-style: italic;
+  body:not(.light) code.hljs {
+    padding: 3px 5px;
   }
-  body:not(.light) .hljs-doctag,
-  body:not(.light) .hljs-keyword,
-  body:not(.light) .hljs-formula {
-    color: #c678dd;
+  body:not(.light) .hljs {
+    color: #b5b3aa;
+    background: #000;
   }
-  body:not(.light) .hljs-section,
+  body:not(.light) .hljs ::selection,
+  body:not(.light) .hljs::selection {
+    background-color: #484844;
+    color: #b5b3aa;
+  }
+  body:not(.light) .hljs-comment {
+    color: #6c6c66;
+  }
+  body:not(.light) .hljs-tag {
+    color: #918f88;
+  }
+  body:not(.light) .hljs-operator,
+  body:not(.light) .hljs-punctuation,
+  body:not(.light) .hljs-subst {
+    color: #b5b3aa;
+  }
+  body:not(.light) .hljs-operator {
+    opacity: 0.7;
+  }
+  body:not(.light) .hljs-bullet,
+  body:not(.light) .hljs-deletion,
   body:not(.light) .hljs-name,
   body:not(.light) .hljs-selector-tag,
-  body:not(.light) .hljs-deletion,
-  body:not(.light) .hljs-subst {
-    color: #e06c75;
-  }
-  body:not(.light) .hljs-literal {
-    color: #56b6c2;
-  }
-  body:not(.light) .hljs-string,
-  body:not(.light) .hljs-regexp,
-  body:not(.light) .hljs-addition,
-  body:not(.light) .hljs-attribute,
-  body:not(.light) .hljs-meta-string {
-    color: #98c379;
-  }
-  body:not(.light) .hljs-built_in,
-  body:not(.light) .hljs-class .hljs-title {
-    color: #e6c07b;
+  body:not(.light) .hljs-template-variable,
+  body:not(.light) .hljs-variable {
+    color: #ff6c60;
   }
   body:not(.light) .hljs-attr,
-  body:not(.light) .hljs-variable,
-  body:not(.light) .hljs-template-variable,
-  body:not(.light) .hljs-type,
-  body:not(.light) .hljs-selector-class,
-  body:not(.light) .hljs-selector-attr,
-  body:not(.light) .hljs-selector-pseudo,
-  body:not(.light) .hljs-number {
-    color: #d19a66;
-  }
-  body:not(.light) .hljs-symbol,
-  body:not(.light) .hljs-bullet,
   body:not(.light) .hljs-link,
-  body:not(.light) .hljs-meta,
-  body:not(.light) .hljs-selector-id,
-  body:not(.light) .hljs-title {
-    color: #61aeee;
+  body:not(.light) .hljs-literal,
+  body:not(.light) .hljs-number,
+  body:not(.light) .hljs-symbol,
+  body:not(.light) .hljs-variable.constant_ {
+    color: #e9c062;
+  }
+  body:not(.light) .hljs-class .hljs-title,
+  body:not(.light) .hljs-strong,
+  body:not(.light) .hljs-title,
+  body:not(.light) .hljs-title.class_ {
+    color: #ffffb6;
+  }
+  body:not(.light) .hljs-addition,
+  body:not(.light) .hljs-code,
+  body:not(.light) .hljs-string,
+  body:not(.light) .hljs-title.class_.inherited__ {
+    color: #a8ff60;
+  }
+  body:not(.light) .hljs-built_in,
+  body:not(.light) .hljs-doctag,
+  body:not(.light) .hljs-keyword.hljs-atrule,
+  body:not(.light) .hljs-quote,
+  body:not(.light) .hljs-regexp {
+    color: #c6c5fe;
+  }
+  body:not(.light) .hljs-attribute,
+  body:not(.light) .hljs-function .hljs-title,
+  body:not(.light) .hljs-section,
+  body:not(.light) .hljs-title.function_,
+  body:not(.light) .ruby .hljs-property {
+    color: #96cbfe;
+  }
+  body:not(.light) .diff .hljs-meta,
+  body:not(.light) .hljs-keyword,
+  body:not(.light) .hljs-template-tag,
+  body:not(.light) .hljs-type {
+    color: #ff73fd;
   }
   body:not(.light) .hljs-emphasis {
+    color: #ff73fd;
     font-style: italic;
   }
-  body:not(.light) .hljs-strong {
-    font-weight: bold;
-  }
-  body:not(.light) .hljs-link {
-    text-decoration: underline;
+  body:not(.light) .hljs-meta,
+  body:not(.light) .hljs-meta .hljs-keyword,
+  body:not(.light) .hljs-meta .hljs-string {
+    color: #b18a3d;
   }
   body:not(.light) .content code {
     color: #cbba7d;
