@@ -4,12 +4,12 @@ version: 5.1.0
 variant: default
 # Path or URL to the website's logo
 logo:
-  light: https://avatars.githubusercontent.com/u/37365905?v=4
-  dark: https://avatars.githubusercontent.com/u/37365905?v=4
+  light: /images/logo.jpeg
+  dark: /images/logo.jpeg
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: https://avatars.githubusercontent.com/u/37365905?v=4
+    favicon: /images/logo.jpeg
     # Web application manifests configuration
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
