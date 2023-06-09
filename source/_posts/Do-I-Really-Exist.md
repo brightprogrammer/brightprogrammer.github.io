@@ -100,3 +100,8 @@ This adds on another definition to address to next, time : What does "ability" m
 
 Well, now I have some definitions to live on with for now. I now have a new goal to improve the language I use to express myself, or just switch to other superior language like Sanskrit. If you have any recommendations or suggestions to the definitions I provided, I'd like to read about them. You can either email me or drop a comment below. What do I mean by dropping a comment? XD bye bye for now :-)
 
+# Updates
+
+I also started a discussion on [r/Existentialism](https://www.reddit.com/r/Existentialism/) on reddit.
+
+<blockquote class="reddit-embed-bq" style="height:316px" data-embed-height="316">      <a href="https://www.reddit.com/r/Existentialism/comments/144lnlo/the_answer_to_do_i_really_exist/">The Answer To "Do I Really Exist?"</a><br> by      <a href="https://www.reddit.com/user/_brightprogrammer_">u/_brightprogrammer_</a> in      <a href="https://www.reddit.com/r/Existentialism/">Existentialism</a>    </blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
