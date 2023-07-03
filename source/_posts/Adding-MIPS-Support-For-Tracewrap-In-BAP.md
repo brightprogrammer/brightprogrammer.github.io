@@ -904,3 +904,76 @@ void HELPER(trace_store_reg64)(uint32_t reg, uint64_t val) { STORE_REG(reg, val)
 I have to admit, after working with Rizin and reading their codebase with extensive usage of macros, I've learned some things to make the compiler generate code your you instead of you writing everything. Here you see a small example of such usage!
 <!-- endtab -->
 {% endtabs %}
+
+Next, to load/store from/to a memory region, `load_store_mem` was already defined like this :
+
+```c (slightly modified)
+/**
+ * Load/Store a value from/to a memory region
+ *
+ * @param reg is index into the @c regs array declared at top
+ * @param val is value to be stored
+ * @param len is length (size) in bytes of val
+ * @param ls if 0 means this is a LOAD operation, otherwise STORE operation
+ *
+ * @return OperandInfo
+ * */
+OperandInfo * load_store_mem(uint32_t addr, const void *memptr, int ls, int len) {
+    // create new memory operand
+    MemOperand * mo = g_new(MemOperand,1);
+    mem_operand__init(mo);
+    mo->address = addr;
+
+    // reg operand? memory operand?
+    OperandInfoSpecific *ois = g_new(OperandInfoSpecific,1);
+    operand_info_specific__init(ois);
+    ois->mem_operand = mo;
+
+    // did we just wrote a value or read value?
+    OperandUsage *ou = g_new(OperandUsage,1);
+    operand_usage__init(ou);
+    if (ls == 0) {
+        ou->read = 1;
+    } else {
+        ou->written = 1;
+    }
+
+    // sum up all information
+    OperandInfo *oi = g_new(OperandInfo,1);
+    operand_info__init(oi);
+    oi->bit_length = len*8;
+    oi->operand_info_specific = ois;
+    oi->operand_usage = ou;
+    oi->value.len = len;
+    oi->value.data = g_malloc(oi->value.len);
+    memcpy(oi->value.data, memptr, len);
+
+    return oi;
+}
+```
+
+I updated `helper_trace_load/store_mem` again in following way : 
+
+{% tabs helper_trace_load_store_mem, 1%}
+<!-- tab initially -->
+```c
+void HELPER(trace_ld)(CPUMIPSState *env, uint32_t val, uint32_t addr)
+{
+    qemu_log("This was a read 0x%x addr:0x%x value:0x%x\n", env->active_tc.PC, addr, val);
+    OperandInfo *oi = load_store_mem(addr, val, 0, 4);
+    qemu_trace_add_operand(oi, 0x1);
+}
+
+void HELPER(trace_st)(CPUMIPSState *env, uint32_t val, uint32_t addr)
+{
+    qemu_log("This was a store 0x%x addr:0x%x value:0x%x\n", env->active_tc.PC, addr, val);
+    OperandInfo *oi = load_store_mem(addr, val, 1, 4);
+    qemu_trace_add_operand(oi, 0x2);
+}
+```
+<!-- endtab -->
+<!-- tab finally -->
+```c
+```
+<!-- endtab -->
+{% endtabs %}
