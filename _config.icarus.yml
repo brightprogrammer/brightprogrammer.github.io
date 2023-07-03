@@ -323,3 +323,12 @@ providers:
     fontcdn: google
     # Name or URL of the fontawesome icon font CDN provider
     iconcdn: fontawesome
+
+      # mermaid chart
+mermaid: ## mermaid url https://github.com/knsv/mermaid
+    enable: true  # default true
+    version: "10.2.4" # default v7.1.2
+    options:
+      theme: "dark"
+        # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
+    #startOnload: true  // default true

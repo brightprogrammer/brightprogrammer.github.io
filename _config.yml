@@ -23,7 +23,7 @@ new_post_name: ':title.md'
 default_layout: post
 titlecase: false
 external_link:
-    enable: true
+    enable: false
     field: site
     exclude: ''
 filename_case: 0
@@ -60,7 +60,7 @@ pagination_dir: page
 include: null
 exclude: null
 ignore: null
-theme: icarus
+theme: next
 deploy:
     type: ''
 feed:
@@ -71,3 +71,9 @@ feed:
     content_limit_delim: ' '
     order_by: -date
     autodiscovery: true
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
