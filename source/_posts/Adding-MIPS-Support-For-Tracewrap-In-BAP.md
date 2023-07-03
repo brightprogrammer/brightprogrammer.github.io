@@ -9,11 +9,14 @@ tags:
 - testing
 - rzil
 - OpenSource
+- qemu
+- internals
 categories:
 - rizin
 - rzil
 - BinaryAnalysisPlatform
 - trace
+- qemu
 ---
 
 # BAP MIPS Trace Testing Support
@@ -287,7 +290,7 @@ void HELPER(trace_endframe)(CPUARMState *env, uint32_t old_pc, uint32_t size) {
 
 These functions can be called to start and end a frame. Next we need to see, where and how these functions are called. Why again? because that's the only lead I have at the moment to further understand the working.
 
-# Capturing Traces
+# Starting & Stopping TraceFrame Recording
 
 To start and stop capturing traces, I see, we have two functions. `gen_trace_newframe` and `gen_trace_endframe`. Notice how they eventually call the `gen_helper_xyz` functions and not the `helper_xyz` ones.
 
@@ -561,3 +564,343 @@ TR_LOOP_END --> |no| EXIT((exit));
 ```
 
 This looks like an interesting flowchart!
+
+# Capturing TracesFrames
+
+The next thing we need to understand is how to actually capture frames. Intuitively, all loads and stores must have a capture instruction where we log the load and store. Something like this :
+
+```c
+static inline void gen_load_reg(u32 reg, TCGv val) {
+    // perform tcg operations...
+
+    // create trace
+    if(mips32) {
+        // this function will be defined by us
+        // which will eventually call a `gen_helper` function...
+        // this is how it looks like in other architectures
+        gen_trace_load_reg32(reg, val);
+    } else {
+        gen_trace_load_reg64(reg, val);
+    }
+}
+```
+
+When this `load_read` will be called, due to our placement of `newframe` and `endframe` function, a new frame would've already begun and this trace will be a part of that new created frame.
+
+We now know, how the `gen_helper_trace_newframe` and `gen_helper_trace_endframe` functions are created and used. We need to check how and where such `gen_trace_xyz` functions are used. Along with `HELPER(trace_newframe)` and `HELPER(trace_endframe)`, some other functions are also defined in ppc and arm architectures :
+
+{% tabs view_all_helper_traces, 1 %}
+<!-- tab /target/ppc/helper.h -->
+```c
+#ifdef HAS_TRACEWRAP
+DEF_HELPER_1(trace_newframe, void, i64)
+DEF_HELPER_2(trace_endframe, void, env, i64)
+DEF_HELPER_3(trace_load_mem, void, i32, i32, i32)
+DEF_HELPER_3(trace_store_mem, void, i32, i32, i32)
+DEF_HELPER_3(trace_load_mem_i64, void, i32, i64, i32)
+DEF_HELPER_3(trace_store_mem_i64, void, i32, i64, i32)
+DEF_HELPER_2(trace_load_reg, void, i32, i32)
+DEF_HELPER_2(trace_store_reg, void, i32, i32)
+DEF_HELPER_2(trace_store_crf, void, i32, i32)
+DEF_HELPER_2(trace_load_crf, void, i32, i32)
+DEF_HELPER_4(trace_load_spr_reg, void, env, i32, i32, i32)
+DEF_HELPER_4(trace_store_spr_reg, void, env, i32, i32, i32)
+DEF_HELPER_1(trace_mode, void, ptr)
+DEF_HELPER_2(trace_dcbz_i32, void, env, i32)
+#ifdef TARGET_PPC64
+DEF_HELPER_2(trace_load_reg64, void, i32, i64)
+DEF_HELPER_2(trace_store_reg64, void, i32, i64)
+DEF_HELPER_3(trace_load_mem64, void, i64, i64, i32)
+DEF_HELPER_3(trace_store_mem64, void, i64, i64, i32)
+DEF_HELPER_4(trace_load_spr_reg64, void, env, i32, i32, i64)
+DEF_HELPER_4(trace_store_spr_reg64, void, env, i32, i32, i64)
+DEF_HELPER_2(trace_dcbz_i64, void, env, i64)
+#endif
+#endif /* HAS_TRACEWRAP */
+```
+<!-- endtab -->
+
+<!-- tab /target/arm/helper.h -->
+```c
+#ifdef HAS_TRACEWRAP
+DEF_HELPER_1(trace_newframe, void, i32)
+DEF_HELPER_3(trace_endframe, void, env, i32, i32)
+DEF_HELPER_4(trace_ld, void, env, i32, i32, i32)
+DEF_HELPER_4(trace_st, void, env, i32, i32, i32)
+DEF_HELPER_4(trace_ld64, void, env, i64, i32, i32)
+DEF_HELPER_4(trace_st64, void, env, i64, i32, i32)
+DEF_HELPER_2(trace_load_reg, void, i32, i32)
+DEF_HELPER_2(trace_store_reg, void, i32, i32)
+DEF_HELPER_2(trace_load_reg64, void, i32, i64)
+DEF_HELPER_2(trace_store_reg64, void, i32, i64)
+DEF_HELPER_1(trace_mode, void, ptr)
+DEF_HELPER_2(trace_read_cpsr, void, env, i32)
+DEF_HELPER_2(trace_store_cpsr, void, env, i32)
+#ifdef TARGET_AARCH64
+DEF_HELPER_1(trace_newframe_64, void, i64)
+DEF_HELPER_2(trace_endframe_64, void, env, i64)
+DEF_HELPER_4(trace_ld64_64, void, env, i64, i64, i32)
+DEF_HELPER_4(trace_st64_64, void, env, i64, i64, i32)
+#endif
+#endif //HAS_TRACEWRAP
+```
+<!-- endtab -->
+{% endtabs %}
+
+I notice the following types of function :
+- load/store mem (32 and 64 bits)
+- load/store reg (32 and 64 bits)
+- trace mode
+- load/store for some special type of registers
+
+We'll also implement such functions but first I'd like to see, where and how these functions are used. We already know which function to search for (`gen_helper_<name>` functions).
+
+{% tabs gen_helper_functions_usage, 1 %}
+<!-- tab /target/ppc/translate.c -->
+PPC has `load/store_mem` functions also, not shown here
+```c
+static void gen_trace_load_reg(int reg, TCGv_i32 var)
+{
+    TCGv_i32 t = tcg_const_i32(reg);
+    gen_helper_trace_load_reg(t, var); // <<<< GEN HELPER FN
+    tcg_temp_free_i32(t);
+}
+
+static void gen_trace_store_reg(int reg, TCGv_i32 var)
+{
+    TCGv_i32 t = tcg_const_i32(reg);
+    gen_helper_trace_store_reg(t, var); // <<<< GEN HELPER FN
+    tcg_temp_free_i32(t);
+}
+```
+<!-- endtab -->
+
+<!-- tab /target/arm/translate.c -->
+But ARM doesn't seem to have `load/store_mem` functions. 
+```c
+static void gen_trace_load_reg(int reg, TCGv_i32 var)
+{
+    TCGv_i32 t = tcg_const_i32(reg);
+    gen_helper_trace_load_reg(t, var); // <<<< GEN HELPER FN
+    tcg_temp_free_i32(t);
+}
+
+static void gen_trace_store_reg(int reg, TCGv_i32 var)
+{
+    TCGv_i32 t = tcg_const_i32(reg);
+    gen_helper_trace_store_reg(t, var); // <<<< GEN HELPER FN
+    tcg_temp_free_i32(t);
+}
+```
+<!-- endtab -->
+{% endtabs %}
+
+Wow! those two look exactly same! I promise you they're from different sources. 
+
+These two functions are used at quite different functions with different name and functions in each architecutre's `translate.c` files. This means we're independent to design this ourselves. Also on searching further I notice that the way the load operations occur is completely different both ARM and PCC architecture.
+
+{% tabs how_are_registers_loaded, 1 %}
+<!-- tab Usage of <code>gen_trace_load_reg</code> in PPC -->
+In PPC, there's a global array of `TCGv` values :
+```c
+static TCGv cpu_gpr[32]; // <<<< Here
+static TCGv cpu_gprh[32];
+static TCGv_i32 cpu_crf[8];
+static TCGv cpu_nip;
+static TCGv cpu_msr;
+static TCGv cpu_ctr;
+.
+. /* more global defines like this */
+.
+```
+And to load a register `rx`, there's a wrapper function around `gen_trace_load_reg` called `log_load_gpr` :
+```c
+static inline void log_load_gpr(uint32_t rx) {
+    #ifdef HAS_TRACEWRAP
+    gen_trace_load_reg(rx, cpu_gpr[rx]);
+    #endif
+}
+```
+This looks like a cache like system. The actual register values are stored in an array and then when there's a need for loading register values : `tcg_mem[reg_idx] := local_mem[reg_idx]`. This doesn't make much sense to me because I don't know how the PPC architecture works.
+
+Then this `log_load_gpr` function is used multiple (98) times in `translate.c` file.
+<!-- endtab -->
+
+<!-- tab Usage of <code>gen_trace_load_reg</code> in ARM -->
+Unlike heavy usage of `load_load_gpr` function in PPC, ARM places very few calls to it's register loader function. Effectively two.
+
+```c
+/* Set a variable to the value of a CPU register.  */
+void load_reg_var(DisasContext *s, TCGv_i32 var, int reg)
+{
+    if (reg == 15) {
+        tcg_gen_movi_i32(var, read_pc(s));
+    } else {
+        tcg_gen_mov_i32(var, cpu_R[reg]);
+    }
+#ifdef HAS_TRACEWRAP
+    gen_trace_load_reg(reg, var); // <<<< HERE
+#endif //HAS_TRACEWRAP
+}
+
+/*
+ * Create a new temp, REG + OFS, except PC is ALIGN(PC, 4).
+ * This is used for load/store for which use of PC implies (literal),
+ * or ADD that implies ADR.
+ */
+TCGv_i32 add_reg_for_lit(DisasContext *s, int reg, int ofs)
+{
+    TCGv_i32 tmp = tcg_temp_new_i32();
+
+    if (reg == 15) {
+        tcg_gen_movi_i32(tmp, (read_pc(s) & ~3) + ofs);
+#ifdef HAS_TRACEWRAP
+        TCGv_i32 pc_tmp = tcg_const_i32(read_pc(s));
+        gen_trace_load_reg(reg, pc_tmp); // <<<< HERE
+        tcg_temp_free_i32(pc_tmp);
+#endif //HAS_TRACEWRAP
+    } else {
+        tcg_gen_addi_i32(tmp, cpu_R[reg], ofs);
+#ifdef HAS_TRACEWRAP
+        gen_trace_load_reg(reg, cpu_R[reg]); // <<<< and HERE
+#endif //HAS_TRACEWRAP
+    }
+    return tmp;}
+```
+<!-- endtab -->
+{% endtabs %}
+
+If you open these files and notice how they're used, you'll find similar to our idea of how to capture traces. Whenever there's  a load/store operation, we need to capture it.  We'll now start implementing capture functions ourselves for MIPS.
+
+# Writing Our Own Capture Functions For MIPS
+
+We'll begin by writing our own capture functions like `trace_load_reg32/64` or `trace_load_mem32/64` etc... Fist we need to declare the function in `/target/mips/helper.h`.
+
+```c
+#ifdef HAS_TRACEWRAP
+DEF_HELPER_1(trace_newframe, void, tl) // <<<< ALREADY IMPLEMENTED
+DEF_HELPER_3(trace_endframe, void, env, tl, i32) // <<<< ALREADY IMPLEMENTED
+DEF_HELPER_2(trace_load_reg32, void, i32, i32)
+DEF_HELPER_2(trace_store_reg32, void, i32, i32)
+DEF_HELPER_3(trace_load_mem32, void, env, i32, i32)
+DEF_HELPER_3(trace_store_mem32, void, env, i32, i32)
+#ifdef TARGET_MIPS64
+DEF_HELPER_2(trace_load_reg64, void, i32, i64)
+DEF_HELPER_2(trace_store_reg64, void, i32, i64)
+DEF_HELPER_2(trace_load_mem64, void, i32, i64)
+DEF_HELPER_2(trace_store_mem64, void, i32, i64)
+#endif // TARGET_MIPS64
+#endif // HAS_TRACEWRAP
+```
+
+Now to be clear about it, I'm not writing everything from scratch in `helper.h` and `trace_helper.c`. Some functions were already implemented like `newframe` and `endframe` and `load/store_reg` (which I renamed to `load/store_reg32`). I'm just modifying some of the already present functions and then adding some functions that I think I'll need.
+
+Having these functions declared (and some defined), let's define the `helper_trace_xyz` functions in `/target/mips/trace_helper.c`.
+
+```c these were already implemented
+void HELPER(trace_newframe)(target_ulong pc)
+{
+    qemu_trace_newframe(pc, 0);
+}
+
+void HELPER(trace_endframe)(CPUMIPSState *env, target_ulong old_pc, uint32_t size)
+{
+    qemu_trace_endframe(env, old_pc, size);
+}
+```
+
+```c to load/store from/to registers, there's one common interface already defined (locally)
+/**
+ * Load/Store a value from/to a register
+ *
+ * @param reg is index into the @c regs array declared at top
+ * @param val is value to be stored
+ * @param len is length (size) in bytes of val
+ * @param ls if 0 means this is a LOAD operation, otherwise STORE operation
+ *
+ * @return OperandInfo
+ * */
+OperandInfo * load_store_reg(uint32_t reg, uint64_t val, size_t len, int ls)
+{
+    RegOperand * ro = g_new(RegOperand,1);
+    reg_operand__init(ro);
+    ro->name = g_strdup(reg < reg_max ? regs[reg] : "UNKOWN");
+
+    OperandInfoSpecific *ois = g_new(OperandInfoSpecific,1);
+    operand_info_specific__init(ois);
+    ois->reg_operand = ro;
+
+    OperandUsage *ou = g_new(OperandUsage,1);
+    operand_usage__init(ou);
+    if (ls == 0)
+    {
+        ou->read = 1;
+    } else {
+        ou->written = 1;
+    }
+
+    OperandInfo *oi = g_new(OperandInfo,1);
+    operand_info__init(oi);
+    oi->bit_length = 0;
+    oi->operand_info_specific = ois;
+    oi->operand_usage = ou;
+    oi->value.len = len;
+    oi->value.data = g_malloc(oi->value.len);
+
+    // if reg == 0 (means r0), it should always read 0
+    if(reg == 0) {
+        memset(oi->value.data, 0, sizeof(val));
+    } else {
+        memcpy(oi->value.data, &val, len);
+    }
+
+    return oi;
+}
+```
+
+Users of the <code>load_store_reg</code> functions were modified
+{% tabs load_store_regs_diff, 1 %}
+<!-- tab initially -->
+```c
+void HELPER(trace_load_reg)(uint32_t reg, uint32_t val)
+{
+    qemu_log("This register (r%d) was read. Value 0x%x\n", reg, val);
+
+    //r0 always reads 0
+    OperandInfo *oi = load_store_reg(reg, (reg != 0) ? val : 0, 0);
+
+    qemu_trace_add_operand(oi, 0x1);
+}
+
+void HELPER(trace_store_reg)(uint32_t reg, uint32_t val)
+{
+    qemu_log("This register (r%d) was written. Value: 0x%x\n", reg, val);
+
+    OperandInfo *oi = load_store_reg(reg, val, 1);
+
+    qemu_trace_add_operand(oi, 0x2);
+}
+```
+<!-- endtab -->
+
+<!-- tab finally -->
+```c
+#define LOAD_REG(reg, val)                                              \
+    qemu_log("Read from (r%d) register. Val = (u%zu)0x%x\n", reg, val, sizeof(val)*8);       \
+    OperandInfo *oi = load_store_reg(reg, val, sizeof(val),  0);        \
+    qemu_trace_add_operand(oi, 0x1)
+
+#define STORE_REG(reg, val)                                             \
+    qemu_log("Write into (r%d) register. Val = (u%zu)0x%x\n", reg, val, sizeof(val)*8);     \
+    OperandInfo *oi = load_store_reg(reg, val, sizeof(val), 1);         \
+    qemu_trace_add_operand(oi, 0x2)
+
+void HELPER(trace_load_reg)(uint32_t reg, uint32_t val) { LOAD_REG(reg, val); }
+void HELPER(trace_store_reg)(uint32_t reg, uint32_t val) { STORE_REG(val, val); }
+
+void HELPER(trace_load_reg64)(uint32_t reg, uint64_t val) { LOAD_REG(reg, val); }
+void HELPER(trace_store_reg64)(uint32_t reg, uint64_t val) { STORE_REG(reg, val); }
+```
+I have to admit, after working with Rizin and reading their codebase with extensive usage of macros, I've learned some things to make the compiler generate code your you instead of you writing everything. Here you see a small example of such usage!
+<!-- endtab -->
+{% endtabs %}
