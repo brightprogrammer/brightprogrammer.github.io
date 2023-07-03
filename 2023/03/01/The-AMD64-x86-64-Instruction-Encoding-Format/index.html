@@ -1,54 +1,336 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>The AMD64 (x86_64) Instruction Encoding Format - ProjectBlue</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="night"><meta name="application-name" content="ProjectBlue"><meta name="msapplication-TileImage" content="https://avatars.githubusercontent.com/u/37365905?v=4"><meta name="msapplication-TileColor" content="night"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ProjectBlue"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="For past few days I’ve been working on a personal program&amp;#x2F;binary analysis tool which I’m calling Katana. I’ve made a simple Elf file loader for now but for it to have more utilities while working"><meta property="og:type" content="blog"><meta property="og:title" content="The AMD64 (x86_64) Instruction Encoding Format"><meta property="og:url" content="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/"><meta property="og:site_name" content="ProjectBlue"><meta property="og:description" content="For past few days I’ve been working on a personal program&amp;#x2F;binary analysis tool which I’m calling Katana. I’ve made a simple Elf file loader for now but for it to have more utilities while working"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-42-24.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-21-21.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-19-02-58.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-39-34.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-48-48.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-49-09.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-50-23.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-56-19.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-57-59.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-01-10-02.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-18-42-05.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-15-40.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-23-13.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-26-45.png"><meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-34-12.png"><meta property="article:published_time" content="2023-03-01T13:14:09.000Z"><meta property="article:modified_time" content="2023-06-09T05:36:58.957Z"><meta property="article:author" content="Siddharth Mishra"><meta property="article:tag" content="x86_64"><meta property="article:tag" content="amd64"><meta property="article:tag" content="instruction-set"><meta property="article:tag" content="intel"><meta property="article:tag" content="amd"><meta property="article:tag" content="disassembler"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-42-24.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/"},"headline":"The AMD64 (x86_64) Instruction Encoding Format","image":["http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-42-24.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-21-21.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-19-02-58.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-39-34.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-48-48.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-49-09.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-50-23.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-56-19.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-57-59.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-01-10-02.png","http://brightprogrammer.in/images/screenshot-from-2023-03-01-18-42-05.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-15-40.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-23-13.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-26-45.png","http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-34-12.png"],"datePublished":"2023-03-01T13:14:09.000Z","dateModified":"2023-06-09T05:36:58.957Z","author":{"@type":"Person","name":"Siddharth Mishra"},"publisher":{"@type":"Organization","name":"ProjectBlue","logo":{"@type":"ImageObject","url":{"light":"https://avatars.githubusercontent.com/u/37365905?v=4","dark":"https://avatars.githubusercontent.com/u/37365905?v=4"}}},"description":"For past few days I’ve been working on a personal program&#x2F;binary analysis tool which I’m calling Katana. I’ve made a simple Elf file loader for now but for it to have more utilities while working"}</script><link rel="canonical" href="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/"><link rel="alternate" href="/atom.xml" title="ProjectBlue" type="application/atom+xml"><link rel="icon" href="https://avatars.githubusercontent.com/u/37365905?v=4"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9" async></script><script>window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="mask-icon" href="https://avatars.githubusercontent.com/u/37365905?v=4" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"brightprogrammer.in","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="For past few days I’ve been working on a personal program&#x2F;binary analysis tool which I’m calling Katana. I’ve made a simple Elf file loader for now but for it to have more utilities while working">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="The AMD64 (x86_64) Instruction Encoding Format">
+<meta property="og:url" content="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">
+<meta property="og:site_name" content="ProjectBlue">
+<meta property="og:description" content="For past few days I’ve been working on a personal program&#x2F;binary analysis tool which I’m calling Katana. I’ve made a simple Elf file loader for now but for it to have more utilities while working">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-42-24.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-21-21.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-19-02-58.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-39-34.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-48-48.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-23-32-13.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-49-09.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-50-23.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-56-19.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-57-59.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-01-10-02.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-01-18-42-05.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-15-40.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-23-13.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-26-45.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-34-12.png">
+<meta property="article:published_time" content="2023-03-01T13:14:09.000Z">
+<meta property="article:modified_time" content="2023-07-03T09:08:25.696Z">
+<meta property="article:author" content="Siddharth Mishra">
+<meta property="article:tag" content="x86_64">
+<meta property="article:tag" content="amd64">
+<meta property="article:tag" content="instruction-set">
+<meta property="article:tag" content="intel">
+<meta property="article:tag" content="amd">
+<meta property="article:tag" content="disassembler">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://brightprogrammer.in/images/screenshot-from-2023-03-02-00-42-24.png">
+
+
+<link rel="canonical" href="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/","path":"2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/","title":"The AMD64 (x86_64) Instruction Encoding Format"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>The AMD64 (x86_64) Instruction Encoding Format | ProjectBlue</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-HNB6BFVRV9","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="ProjectBlue" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ProjectBlue</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The Blue Place</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-rchitecture-Programmer-Manual"><span class="nav-number">1.</span> <span class="nav-text">A﻿rchitecture Programmer Manual</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-eneral-Instruction-Layout"><span class="nav-number">2.</span> <span class="nav-text">G﻿eneral Instruction Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P-refixes"><span class="nav-number">3.</span> <span class="nav-text">P﻿refixes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-pcode-Bytes"><span class="nav-number">4.</span> <span class="nav-text">O﻿pcode Bytes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-scape-Sequences"><span class="nav-number">5.</span> <span class="nav-text">E﻿scape Sequences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-he-ModRM-Byte"><span class="nav-number">6.</span> <span class="nav-text">T﻿he ModRM Byte</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-M-odRM-mod-Field"><span class="nav-number">6.1.</span> <span class="nav-text">The M﻿odRM.mod Field</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-he-ModRM-r-Field"><span class="nav-number">6.2.</span> <span class="nav-text">T﻿he ModRM.r Field</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-he-ModRM-rm-Field"><span class="nav-number">6.3.</span> <span class="nav-text">T﻿he ModRM.rm Field</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-he-Combination-Of-REX-and-ModRM-Byte"><span class="nav-number">7.</span> <span class="nav-text">T﻿he Combination Of REX and ModRM Byte</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-he-SIB-Scale-Index-Base-Byte"><span class="nav-number">8.</span> <span class="nav-text">T﻿he SIB (Scale Index Base) Byte</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-he-Legacy-Prefixes-In-Combination-With-REX-and-ModRM"><span class="nav-number">9.</span> <span class="nav-text">T﻿he Legacy Prefixes In Combination With REX and ModRM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#T-he-Operand-Size-Override-Prefix-0x66"><span class="nav-number">9.1.</span> <span class="nav-text">T﻿he Operand Size Override Prefix (0x66)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-he-Address-Size-Override-Prefix-0x67"><span class="nav-number">9.2.</span> <span class="nav-text">T﻿he Address Size Override Prefix (0x67)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-he-Segment-Override"><span class="nav-number">9.3.</span> <span class="nav-text">T﻿he Segment Override</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-mmediate-and-Displacement-Fields"><span class="nav-number">10.</span> <span class="nav-text">I﻿mmediate and Displacement Fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-he-Instruction-Decoding-Algorithm"><span class="nav-number">11.</span> <span class="nav-text">T﻿he Instruction Decoding Algorithm</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Siddharth Mishra"
+      src="https://avatars.githubusercontent.com/u/37365905?v=i4">
+  <p class="site-author-name" itemprop="name">Siddharth Mishra</p>
+  <div class="site-description" itemprop="description">brightprogrammer`s blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/brightprogrammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@brightprogrammer.in" title="E-Mail → mailto:admin@brightprogrammer.in" rel="noopener me"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/brightprogramer" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;brightprogramer" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/c/brightprogrammer" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;c&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
     
-        gtag('config', 'G-HNB6BFVRV9');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+        <div class="pjax">
+        </div>
+  </aside>
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    </div>
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/blog">Blog</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/brightprogrammer.github.io"><i class="fab fa-github"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-03-01T13:14:09.000Z" title="3/1/2023, 1:14:09 PM">Wed, 1st March, 2023</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-06-09T05:36:58.957Z" title="6/9/2023, 5:36:58 AM">Fri, 9th June, 2023</time></span><span class="level-item"><a class="link-muted" href="/categories/disassembler/">disassembler</a><span> / </span><a class="link-muted" href="/categories/disassembler/amd64/">amd64</a></span><span class="level-item">19 minutes read (About 2873 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">The AMD64 (x86_64) Instruction Encoding Format</h1><div class="content"><p>For past few days I’ve been working on a personal program&#x2F;binary analysis tool which I’m calling <strong>Katana</strong>. I’ve made a simple Elf file loader for now but for it to have more utilities while working, and for me to learn something more, I’ve started working on my own disassembler for Katana. For now I want to support only <code>AMD64</code> and <code>x86</code> Instruction formats but in future I want to add support for <code>ARM</code>, <code>MIPS</code>, <code>RISCV</code> etc… I’ve also been doing live streams but the progress is really really slow! I have no guidance and I’m just reading the manuals and working on my own which is quite difficult. But! I won’t complain and I think I’ve found a solution for this! and the solution is to write a blog on the instruction encoding format so that this will act like notes for me.</p>
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="The AMD64 (x86_64) Instruction Encoding Format | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The AMD64 (x86_64) Instruction Encoding Format
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Wed, 1st March, 2023 18:44:09" itemprop="dateCreated datePublished" datetime="2023-03-01T18:44:09+05:30">Wed, 1st March, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Mon, 3rd July, 2023 14:38:25" itemprop="dateModified" datetime="2023-07-03T14:38:25+05:30">Mon, 3rd July, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/disassembler/" itemprop="url" rel="index"><span itemprop="name">disassembler</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/disassembler/amd64/" itemprop="url" rel="index"><span itemprop="name">amd64</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>For past few days I’ve been working on a personal program&#x2F;binary analysis tool which I’m calling <strong>Katana</strong>. I’ve made a simple Elf file loader for now but for it to have more utilities while working, and for me to learn something more, I’ve started working on my own disassembler for Katana. For now I want to support only <code>AMD64</code> and <code>x86</code> Instruction formats but in future I want to add support for <code>ARM</code>, <code>MIPS</code>, <code>RISCV</code> etc… I’ve also been doing live streams but the progress is really really slow! I have no guidance and I’m just reading the manuals and working on my own which is quite difficult. But! I won’t complain and I think I’ve found a solution for this! and the solution is to write a blog on the instruction encoding format so that this will act like notes for me.</p>
 <span id="more"></span>
 
 <p>P﻿lease consider this post as a primer before digging into the manual yourself, and this post is in no way a replacement for the detailed manual that you have!</p>
 <h2 id="A-rchitecture-Programmer-Manual"><a href="#A-rchitecture-Programmer-Manual" class="headerlink" title="A﻿rchitecture Programmer Manual"></a>A﻿rchitecture Programmer Manual</h2><p>T﻿his manual describes all the workings on an AMD64 CPU, like it’s an interface. Whatever’s in the manual must be (assumed) to be true because it is provided by the CPU vendor! T﻿here are two versions of AMD64 architecture programmer manual. One is given by Intel and other my AMD itself. I personally find AMD much easier to read because it has less content, better diagrams and it’s precise. Other’s might find Intel to be more precise and complete. Here are the two versions :</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://cdrdv2.intel.com/v1/dl/getContent/671200">Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.amd.com/system/files/TechDocs/40332.pdf">amd64-architecture-programmers-manual-volumes-1-5</a></li>
+<li><a href="https://cdrdv2.intel.com/v1/dl/getContent/671200">Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4</a></li>
+<li><a href="https://www.amd.com/system/files/TechDocs/40332.pdf">amd64-architecture-programmers-manual-volumes-1-5</a></li>
 </ul>
 <p>P﻿lease keep taking reference from this while reading this blog post. But before I can tell you anything about instruction encoding, I have to instroduce you to some basic terms that will be used a lot.</p>
-<h2 id="G-eneral-Instruction-Layout"><a href="#G-eneral-Instruction-Layout" class="headerlink" title="G﻿eneral Instruction Layout"></a>G﻿eneral Instruction Layout</h2><p><img src="/images/screenshot-from-2023-03-02-00-42-24.png" alt="Figure 1-2 (AMD Vol3 Page5)" title="Figure showing general layout of an AMD64 Instruction (AMD Vol3 Page5)"></p>
+<h2 id="G-eneral-Instruction-Layout"><a href="#G-eneral-Instruction-Layout" class="headerlink" title="G﻿eneral Instruction Layout"></a>G﻿eneral Instruction Layout</h2><p><img data-src="/images/screenshot-from-2023-03-02-00-42-24.png" alt="Figure 1-2 (AMD Vol3 Page5)" title="Figure showing general layout of an AMD64 Instruction (AMD Vol3 Page5)"></p>
 <h2 id="P-refixes"><a href="#P-refixes" class="headerlink" title="P﻿refixes"></a>P﻿refixes</h2><p>A﻿ prefix is a byte that comes at the very beginning of instruction. All prefixes are optional! This means there are instructions that don’t have prefixes at all! They are used to modify the basic instruction’s register&#x2F;memory size, change segment’s being used, change behaviour by making the instruction repeat multiple times (in string instructions) and give it other magical powers!</p>
 <p>T﻿here are three types of prefixes :</p>
 <ol>
 <li><strong>L﻿egacy Prefixes</strong> : These prefixes were present in older architectures also (before <code>AMD64</code>). There can be maximum of four legacy prefix bytes in an instruction. There are five different types of legacy prefixes.</li>
-<li><strong>R﻿EX Prefix</strong> : This is a single byte prefix and there can be maximum one REX prefix in an instruction. They allow access to R-Extended and new registers added to AMD64 architecture. Value of REX prefix ranges from 0x40 to 0x4f. So to detect whether this prefix is a REX prefix or not, we can check whether upper nibble is 0x4 or not.<br><img src="/images/screenshot-from-2023-03-01-23-21-21.png" alt="Fig 1-3 (AMD Vol3 Page15)" title="Layout of REX prefix byte (AMD Vol3 Page15)"></li>
+<li><strong>R﻿EX Prefix</strong> : This is a single byte prefix and there can be maximum one REX prefix in an instruction. They allow access to R-Extended and new registers added to AMD64 architecture. Value of REX prefix ranges from 0x40 to 0x4f. So to detect whether this prefix is a REX prefix or not, we can check whether upper nibble is 0x4 or not.<br><img data-src="/images/screenshot-from-2023-03-01-23-21-21.png" alt="Fig 1-3 (AMD Vol3 Page15)" title="Layout of REX prefix byte (AMD Vol3 Page15)"></li>
 <li><strong>V﻿EX&#x2F;XOP Prefix</strong> : I’ll cover this in a later part maybe, ignore this for now.</li>
 </ol>
 <p>I﻿ will explain legacy prefixes in more detail later, for now let’s just skim through each name so that you have the names in mind and have an abstract idea of what they do.</p>
@@ -60,7 +342,7 @@
 <li>R﻿ field (next three bits, 0x38 mask)</li>
 <li>R﻿M field (lower three bits, 0x07 mask)</li>
 </ul>
-<p><img src="/images/screenshot-from-2023-03-01-19-02-58.png" alt="(AMD Vol3 Page17)" title="Diagram of the ModRM byte (AMD Vol3 Page17)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-19-02-58.png" alt="(AMD Vol3 Page17)" title="Diagram of the ModRM byte (AMD Vol3 Page17)"></p>
 <h3 id="The-M-odRM-mod-Field"><a href="#The-M-odRM-mod-Field" class="headerlink" title="The M﻿odRM.mod Field"></a>The <code>M﻿odRM.mod</code> Field</h3><p>T﻿he <code>ModRM.mod</code> field is short for form Mode or to be more precise, it stands for different <strong>Register Addressing Modes</strong>. A register addressing mode, tells us whether the operands stay in the register or in a memory. Any instruction that takes operands, needs it’s operands to exist somewhere! This can be in either registers (meaning all operands are registers) or atleast one of the operand is a memory operand. We know that there can’t be instructions where all operands (both in case of instructions that take two operands) are memory operands. This means there are two types of addressing modes : </p>
 <ul>
 <li><strong>R﻿egister Direct Addressing Mode</strong> (<code>ModRM.mod = 11b</code>) :  All operands are in registers.</li>
@@ -85,26 +367,26 @@
 <h3 id="T-he-ModRM-r-Field"><a href="#T-he-ModRM-r-Field" class="headerlink" title="T﻿he ModRM.r Field"></a>T﻿he <code>ModRM.r</code> Field</h3><p>T﻿his specifies the register being used in the instruction. Three bits means total of 8 different values. Remind me, how many GPRs are there in x86 instruction set? (<code>eax</code>, <code>ebx</code>, <code>ecx</code>, <code>edx</code>, <code>esi</code>, <code>edi</code>, <code>esp</code>, <code>ebp</code>). Total 8 right? How do we access the extended <code>rXX</code> counterparts of these registers in <code>AMD64</code> architecture? Take your time and recall what you’ve learned up until now in this post. The answer is by using <code>REX</code> prefix. There’s a specific bit (<code>REX.W</code>) in the lower nibble of <code>REX</code> prefix that is used in combination to this <code>ModRM.r</code> field and another bit in <code>REX</code> (<code>REX.B</code>) to allow it 16 different registers . If <code>REX.R</code> is zero then you won’t be able to access the complete R-Extended registers but instead lower parts like lower double-word or just a word. The <code>REX.B</code> bit is placed as the most significant bit in front of <code>ModRM.r</code> field to create the whole field of 4 bits and hence get 16 different values to access 16 different GPRs.</p>
 <h3 id="T-he-ModRM-rm-Field"><a href="#T-he-ModRM-rm-Field" class="headerlink" title="T﻿he ModRM.rm Field"></a>T﻿he <code>ModRM.rm</code> Field</h3><p>T﻿his specifies the register&#x2F;memory operand based on the register addressing mode we talked about. If the mode is register direct addressing mode then this will refer to a register, else a memory operand. Here instead of <code>REX.W</code> and <code>REX.R</code>, there is <code>REX.X</code> and <code>REX.B</code> respectively. The rest of the working is pretty much same as <code>ModRM.r</code> field except a few places that we will discuss later.</p>
 <h2 id="T-he-Combination-Of-REX-and-ModRM-Byte"><a href="#T-he-Combination-Of-REX-and-ModRM-Byte" class="headerlink" title="T﻿he Combination Of REX and ModRM Byte"></a>T﻿he Combination Of <code>REX</code> and <code>ModRM</code> Byte</h2><p>A﻿s I mentioned, <code>REX</code> byte is used in combination with <code>ModRM</code> byte to give access to all 16 R-Extended registers. Before we continue, I’d like to give you values of the <code>ModRM.r</code> and <code>ModRM.r/m</code> field that index different registers.</p>
-<p><img src="/images/screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD Vol3 Page18)" title="Table showing different values of ModRM fields to index different registers (AMD Vol3 Page18)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD Vol3 Page18)" title="Table showing different values of ModRM fields to index different registers (AMD Vol3 Page18)"></p>
 <p>P﻿lease ignore the fourth column for now and only refer to first, second and third one. For given 8 values using only <code>ModRM.r</code> or <code>ModRM.rm</code> field and no <code>REX</code> prefix byte, we can have access to only these registers, but if we flag the <code>REX.R</code> bit as 1 then we 8 more different values which are used to index registers <code>r8</code> to <code>r15</code>. There are instructions that access only a part of these registers, like only the lower byte, or word, or double word. In those cases the <code>REX.W</code> prefix will be ignored. <code>REX.W</code> prefix is taken into account only where it’s possible to increaase the size of registers to their maximum.</p>
-<p><img src="/images/screenshot-from-2023-03-01-23-39-34.png" alt="Figure 2-3 (AMD Vol3 Page39)" title="Table displaying the GPRs and their format (AMD Vol3 Page39)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-23-39-34.png" alt="Figure 2-3 (AMD Vol3 Page39)" title="Table displaying the GPRs and their format (AMD Vol3 Page39)"></p>
 <p>S﻿o, let’s say the <code>REX.R</code> bit is flagged and the <code>ModRM.r</code> field is set to 0, then the effective value (which is 8) will index to r8 register and it’s smaller parts depending on the instruction. For example <code>00</code> and <code>03</code> are two instruction opcodes  that belong to the <code>ADD</code> instruction family.</p>
-<p><img src="/images/screenshot-from-2023-03-01-23-48-48.png" alt="(AMD Vol3 Page83)" title="Table showing all possible ADD opcodes and their description (AMD Vol3 Page83)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-23-48-48.png" alt="(AMD Vol3 Page83)" title="Table showing all possible ADD opcodes and their description (AMD Vol3 Page83)"></p>
 <p>D﻿on’t pay attention to the specific opcodes and just pay attention to the first byte in opcode and the size of operands in the instruction. I’ll now give a few examples here and let you figure out how this work</p>
 <p>F﻿or adding r8b (lower byte of r8 register) and al (lower byte of rax register), and storing the result back to al, we have the instruction : <code>add al, r8b</code> which assembles to <code>44 00 c0</code>.</p>
 <p>F﻿or adding <code>r15</code> and <code>rax</code> and storing result back to <code>r8</code>, we have instruction : <code>add rax, r15</code> which assembles to <code>4c 03 f8</code>.</p>
 <p>H﻿aving problems assembling this? We’ll we’re writing a disassembler, so maybe first try decoding the opcodes I gave you. First try to identify whether there is a <code>REX</code> prefix or not, then identify the opcode, then decode the value of <code>ModRM</code> fields and try to get operands.</p>
 <p>N﻿ow, if you are a keen observer, then you might have noticed something here! We’ve never specified the order in which the operands will appear! This operands are specified by the ModRM byte right? Where did we specify the order in which the operands encoded in this ModRM byte will be? This is given by the instruction you are using! If the operand in the instruction mnemonic is written as <code>regXX/memXX</code> where <code>XX</code> is the size of register or memory then that means that operand is indexed using the <code>ModRM.rm</code> field. For operand encoded just as <code>regXX</code> we have <code>ModRM.r</code> field. Obviously this means the extended versions of these fields also if <code>REX</code> prefix is present. This means while writing disassembler, you have to take references from these tables also! Phew!!</p>
 <h2 id="T-he-SIB-Scale-Index-Base-Byte"><a href="#T-he-SIB-Scale-Index-Base-Byte" class="headerlink" title="T﻿he SIB (Scale Index Base) Byte"></a>T﻿he <code>SIB</code> (Scale Index Base) Byte</h2><p>T﻿his is a special form of register-indirect memory addressing for accessing an array like memory region.</p>
-<p><img src="/images/screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD64 Vol3 Page18)" title="Table displaying different values of ModRM.r or ModRM.rm field (AMD64 Vol3 Page18)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD64 Vol3 Page18)" title="Table displaying different values of ModRM.r or ModRM.rm field (AMD64 Vol3 Page18)"></p>
 <p>A﻿n <code>SIB</code> byte is present only if the mode is register-indirect and <code>ModRM.rm</code> value is <code>100b</code>. </p>
-<p><img src="/images/screenshot-from-2023-03-02-00-49-09.png" alt="Figure 1-5 (AMD Vol3 Page19)" title="Diagram displaying different fields of SIB byte (AMD Vol3 Page19)"></p>
-<p><img src="/images/screenshot-from-2023-03-02-00-50-23.png" alt="Table 1-11 (AMD Vol3 Page19)" title="Table showing different SIB.sacle value encodings (AMD Vol3 Page19)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-49-09.png" alt="Figure 1-5 (AMD Vol3 Page19)" title="Diagram displaying different fields of SIB byte (AMD Vol3 Page19)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-50-23.png" alt="Table 1-11 (AMD Vol3 Page19)" title="Table showing different SIB.sacle value encodings (AMD Vol3 Page19)"></p>
 <p>T﻿hen the <code>SIB.index</code> field is used to specify the index of register containing the index into array and the <code>SIB.base</code> field is used to specify the index of register containing base address of this register-indirect addressing mode.</p>
 <p>N﻿ote that here <code>ModRM.rm</code> is fixed to <code>100b</code> so all index is done by <code>SIB</code> byte. For second operand, <code>ModRM.r</code> can index to other registers. Due to this configuration, the <code>REX.X</code> and <code>REX.B</code> bits were given to extend this <code>SIB.base</code> and <code>SIB.index</code> fields.</p>
-<p><img src="/images/screenshot-from-2023-03-02-00-56-19.png" alt="Table 1-12 (AMD Vol3 Page20)" title="SIB.index and SIB.base Field Encodings (AMD Vol3 Page20)"></p>
-<p><img src="/images/screenshot-from-2023-03-02-00-57-59.png" alt="Table 1-13 (AMD Vol3 Page20)" title="SIB.base encodings for ModRM.r/m = 100b (AMD Vol3 Page20)"></p>
-<p><img src="/images/screenshot-from-2023-03-02-01-10-02.png" alt="Table 1-14 (AMD Vol3 Page21)" title="Operand Addressing Using ModRM and SIB Bytes (AMD Vol3 Page21)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-56-19.png" alt="Table 1-12 (AMD Vol3 Page20)" title="SIB.index and SIB.base Field Encodings (AMD Vol3 Page20)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-57-59.png" alt="Table 1-13 (AMD Vol3 Page20)" title="SIB.base encodings for ModRM.r/m = 100b (AMD Vol3 Page20)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-01-10-02.png" alt="Table 1-14 (AMD Vol3 Page21)" title="Operand Addressing Using ModRM and SIB Bytes (AMD Vol3 Page21)"></p>
 <p>A﻿s examples</p>
 <ul>
 <li><code>03 84 c1 00 00 00 00</code> decodes to <code>add eax, dword ptr ds:[rcx+rax*8]</code> in 64 bit mode. This is because for <code>84</code>, we have <code>ModRM.mod = 10b</code> and <code>ModRM.r = 00b</code> and <code>ModRM.rm = 100b</code> and then since <code>ModRM.rm</code> is <code>100b</code>, we have an <code>SIB</code> byte <code>c1</code> which after you decode, you’ll get <code>SIB.scale = 11b</code>, <code>SIB.index = 000b</code> and <code>SIB.base = 001b</code>. Refer to the above tables and try to decode this!</li>
@@ -117,9 +399,9 @@
 <li><code>4c 03 84 d3 00 00 00 01</code> decodes to <code>add r8, qword ptr ds:[rbx+rdx*8+0x1000000]</code></li>
 </ul>
 <h2 id="T-he-Legacy-Prefixes-In-Combination-With-REX-and-ModRM"><a href="#T-he-Legacy-Prefixes-In-Combination-With-REX-and-ModRM" class="headerlink" title="T﻿he Legacy Prefixes In Combination With REX and ModRM"></a>T﻿he Legacy Prefixes In Combination With REX and ModRM</h2><p>L﻿egacy prefixes are of five types and each type has specific byte assigned. Comparing the first few bytes of instruction with these special bytes, we can check whether this byte is a legacy prefix byte or not.</p>
-<p><img src="/images/screenshot-from-2023-03-01-18-42-05.png" alt="Table 1-1 (AMD Vol3 Page7)" title="Table showing all legacy prefix bytes with their meaning and names (AMD Vol3 Page7)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-01-18-42-05.png" alt="Table 1-1 (AMD Vol3 Page7)" title="Table showing all legacy prefix bytes with their meaning and names (AMD Vol3 Page7)"></p>
 <h3 id="T-he-Operand-Size-Override-Prefix-0x66"><a href="#T-he-Operand-Size-Override-Prefix-0x66" class="headerlink" title="T﻿he Operand Size Override Prefix (0x66)"></a>T﻿he Operand Size Override Prefix (<code>0x66</code>)</h3><p>T﻿his prefix is used to override and select the non default operand size. If REX prefix byte is present along with this  prefix byte then, REX is always given preference! Also, this byte has some other meanings too which is used to extend the instruction set. More on that in later parts of this post (series).</p>
-<p><img src="/images/screenshot-from-2023-03-02-00-15-40.png" alt="Table 1-2 (AMD Vol3 Page8)" title="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-15-40.png" alt="Table 1-2 (AMD Vol3 Page8)" title="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)"></p>
 <p>T﻿ake a look at this table and closely understand the meaning and then try to decode&#x2F;assemble the following opcodes&#x2F;instructions.</p>
 <ul>
 <li><code>66 03 f8</code></li>
@@ -133,71 +415,224 @@
 <li><code>a﻿dd dh, al</code></li>
 </ul>
 <h3 id="T-he-Address-Size-Override-Prefix-0x67"><a href="#T-he-Address-Size-Override-Prefix-0x67" class="headerlink" title="T﻿he Address Size Override Prefix (0x67)"></a>T﻿he Address Size Override Prefix (0x67)</h3><p>T﻿his prefix is used to change the address size when accessing an address. For example in instructions <code>mov byte ptr ds:[rax]</code> and <code>mov qword ptr ds:[rax]</code> has different address sizes. This is also changing the default address size just like address size override.</p>
-<p><img src="/images/screenshot-from-2023-03-02-00-23-13.png" alt="Table 1-3 (AMD Vol3 Page9)" title="Table showing effective address size in different cases (AMD Vol3 Page9)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-23-13.png" alt="Table 1-3 (AMD Vol3 Page9)" title="Table showing effective address size in different cases (AMD Vol3 Page9)"></p>
 <h3 id="T-he-Segment-Override"><a href="#T-he-Segment-Override" class="headerlink" title="T﻿he Segment Override"></a>T﻿he Segment Override</h3><p>T﻿his is used to override default segment being used when getting values from a memory address. For example, you can use address size override prefix to change from ds to cs segment, like <code>mov word ptr ds:[rdi*4 + base]</code> to <code>mov word ptr cs:[rdi*4+base]</code>.</p>
-<p><img src="/images/screenshot-from-2023-03-02-00-26-45.png" alt="Table 1-5 (AMD Vol3 Page11)" title="Table showing different segment override prefixes (AMD Vol3 Page11)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-26-45.png" alt="Table 1-5 (AMD Vol3 Page11)" title="Table showing different segment override prefixes (AMD Vol3 Page11)"></p>
 <p>S﻿imilarly you can take reference for <code>LOCK</code> and <code>REP</code>, <code>REPE/REPZ</code> and <code>REPNE/REPNZ</code> prefixes from the manual.</p>
 <h2 id="I-mmediate-and-Displacement-Fields"><a href="#I-mmediate-and-Displacement-Fields" class="headerlink" title="I﻿mmediate and Displacement Fields"></a>I﻿mmediate and Displacement Fields</h2><p>T﻿hese two values depend on the instruction you’re trying to decode. You can refer to the instruction reference in the manual. If the instruction wants an immediate value as one of it’s operands, then it’ll surely be there!</p>
 <h2 id="T-he-Instruction-Decoding-Algorithm"><a href="#T-he-Instruction-Decoding-Algorithm" class="headerlink" title="T﻿he Instruction Decoding Algorithm"></a>T﻿he Instruction Decoding Algorithm</h2><p>T﻿his writeup is no replacement for the 3000+ pages architecture manual given by the CPU vendor themselves to you. Ending this post with an awesome diagram from the manual itself to help you understand step wise how to decode the <code>AMD64</code> instruction.</p>
-<p><img src="/images/screenshot-from-2023-03-02-00-34-12.png" alt="Figure 1-1 (AMD Vol3 Page2)" title="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)"></p>
+<p><img data-src="/images/screenshot-from-2023-03-02-00-34-12.png" alt="Figure 1-1 (AMD Vol3 Page2)" title="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)"></p>
 <center>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">As promised, I did a writeup for introducing you to the AMD64 Instruction Encoding format<a target="_blank" rel="noopener" href="https://t.co/KVOBKG5KLb">https://t.co/KVOBKG5KLb</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a target="_blank" rel="noopener" href="https://twitter.com/brightprogramer/status/1631008375898099713?ref_src=twsrc%5Etfw">March 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">As promised, I did a writeup for introducing you to the AMD64 Instruction Encoding format<a href="https://t.co/KVOBKG5KLb">https://t.co/KVOBKG5KLb</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1631008375898099713?ref_src=twsrc%5Etfw">March 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <center >
-</div><div class="article-licensing box"><div class="licensing-title"><p>The AMD64 (x86_64) Instruction Encoding Format</p><p><a href="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Siddharth Mishra</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>Wed, 1st March, 2023</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>Fri, 9th June, 2023</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/x86-64/">x86_64</a><a class="link-muted mr-2" rel="tag" href="/tags/amd64/">amd64</a><a class="link-muted mr-2" rel="tag" href="/tags/instruction-set/">instruction-set</a><a class="link-muted mr-2" rel="tag" href="/tags/intel/">intel</a><a class="link-muted mr-2" rel="tag" href="/tags/amd/">amd</a><a class="link-muted mr-2" rel="tag" href="/tags/disassembler/">disassembler</a></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a><a class="a2a_button_facebook"></a><a class="a2a_button_twitter"></a><a class="a2a_button_telegram"></a><a class="a2a_button_whatsapp"></a><a class="a2a_button_reddit"></a></div><script src="https://static.addtoany.com/menu/page.js" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/brightprogramer" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="https://www.patreon.com/brightprogrammer" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><a class="button donate" data-type="paypal" onclick="document.getElementById(&#039;paypal-donate-form&#039;).submit()"><span class="icon is-small"><i class="fab fa-paypal"></i></span><span>Paypal</span></a><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form"><input type="hidden" name="cmd" value="_donations"><input type="hidden" name="business" value="brightprogrammer"><input type="hidden" name="currency_code" value="USD"></form></div></div></div><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/04/11/RzIL-Introductory-Notes/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">RzIL Introductory Notes</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/29/One-Instruction-Set-Computers-OISC-Elvis-Magic-Box/"><span class="level-item">One Instruction Set Computers (OISC) - Elvis Magic Box</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/';
-            this.page.identifier = '2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');  
-            s.src = '//' + 'projectblue' + '.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/alu-design/"><span class="level-start"><span class="level-item">alu-design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/alu-design/intermediate-language/"><span class="level-start"><span class="level-item">intermediate-language</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/contest/"><span class="level-start"><span class="level-item">contest</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/crackmes/"><span class="level-start"><span class="level-item">crackmes</span></span><span class="level-end"><span class="level-item tag">6</span></span></a><ul><li><a class="level is-mobile" href="/categories/crackmes/windows/"><span class="level-start"><span class="level-item">windows</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/disassembler/"><span class="level-start"><span class="level-item">disassembler</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/disassembler/amd64/"><span class="level-start"><span class="level-item">amd64</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/mathematics/"><span class="level-start"><span class="level-item">mathematics</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/mathematics/game-theory/"><span class="level-start"><span class="level-item">game-theory</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/network-programming/"><span class="level-start"><span class="level-item">network-programming</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/network-programming/web-server/"><span class="level-start"><span class="level-item">web-server</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/open-source/"><span class="level-start"><span class="level-item">open-source</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/open-source/rizin/"><span class="level-start"><span class="level-item">rizin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/philosophy/"><span class="level-start"><span class="level-item">philosophy</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-08T17:48:11.000Z">Thu, 8th June, 2023</time></p><p class="title"><a href="/2023/06/08/Do-I-Really-Exist/">Do I Really Exist?</a></p><p class="categories"><a href="/categories/philosophy/">philosophy</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-30T04:05:44.000Z">Sun, 30th April, 2023</time></p><p class="title"><a href="/2023/04/30/Overflow-and-Carry/">Overflow and Carry</a></p><p class="categories"><a href="/categories/alu-design/">alu-design</a> / <a href="/categories/alu-design/intermediate-language/">intermediate-language</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-14T16:12:25.000Z">Fri, 14th April, 2023</time></p><p class="title"><a href="/2023/04/14/Writing-A-HTTP-Web-Server-In-C/">Writing A HTTP Web Server In C</a></p><p class="categories"><a href="/categories/network-programming/">network-programming</a> / <a href="/categories/network-programming/web-server/">web-server</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-11T21:11:25.000Z">Wed, 12th April, 2023</time></p><p class="title"><a href="/2023/04/11/RzIL-Introductory-Notes/">RzIL Introductory Notes</a></p><p class="categories"><a href="/categories/open-source/">open-source</a> / <a href="/categories/open-source/rizin/">rizin</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-01T13:14:09.000Z">Wed, 1st March, 2023</time></p><p class="title"><a href="/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">The AMD64 (x86_64) Instruction Encoding Format</a></p><p class="categories"><a href="/categories/disassembler/">disassembler</a> / <a href="/categories/disassembler/amd64/">amd64</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/alu-design/"><span class="tag">alu-design</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/amd/"><span class="tag">amd</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/amd64/"><span class="tag">amd64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/analytics/"><span class="tag">analytics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/anti-debug/"><span class="tag">anti-debug</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/assembly/"><span class="tag">assembly</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/conference/"><span class="tag">conference</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/contest/"><span class="tag">contest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crackmes/"><span class="tag">crackmes</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/definition/"><span class="tag">definition</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/disassembler/"><span class="tag">disassembler</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/existence/"><span class="tag">existence</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/food-for-thought/"><span class="tag">food-for-thought</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/free-will/"><span class="tag">free-will</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/game-theory/"><span class="tag">game-theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/http/"><span class="tag">http</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/il-uplifter/"><span class="tag">il-uplifter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/instruction-set/"><span class="tag">instruction-set</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intel/"><span class="tag">intel</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intermediate-language/"><span class="tag">intermediate-language</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mathematics/"><span class="tag">mathematics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nanomite/"><span class="tag">nanomite</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network-programming/"><span class="tag">network-programming</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/notes/"><span class="tag">notes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/oisc/"><span class="tag">oisc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/overflow-carry/"><span class="tag">overflow-carry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/philosophy/"><span class="tag">philosophy</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/project-blue/"><span class="tag">project-blue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/radare/"><span class="tag">radare</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/reverse-engineering/"><span class="tag">reverse-engineering</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rizin/"><span class="tag">rizin</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/server/"><span class="tag">server</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vm/"><span class="tag">vm</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/windows/"><span class="tag">windows</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/x86-64/"><span class="tag">x86_64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xorenc/"><span class="tag">xorenc</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a><p class="is-size-7"><span>&copy; 2023 Siddharth Mishra</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">Made with 💖 by Siddharth Mishra © 2023, Some Rights Reserved.</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
-            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
-                renderMathInElement(element);
-            });
-        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Siddharth Mishra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/" title="The AMD64 (x86_64) Instruction Encoding Format">http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/brightprogramer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://youtube.com/@brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-youtube"></i>
+            </span>
+
+            <span class="label">YouTube</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://linkedin.com/in/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+
+            <span class="label">LinkedIn</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:admin@brightprogrammer.in">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+
+            <span class="label">Mail</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/x86-64/" rel="tag"># x86_64</a>
+              <a href="/tags/amd64/" rel="tag"># amd64</a>
+              <a href="/tags/instruction-set/" rel="tag"># instruction-set</a>
+              <a href="/tags/intel/" rel="tag"># intel</a>
+              <a href="/tags/amd/" rel="tag"># amd</a>
+              <a href="/tags/disassembler/" rel="tag"># disassembler</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_linkedin"></a>
+      <a class="a2a_button_mastodon"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_email"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/29/One-Instruction-Set-Computers-OISC-Elvis-Magic-Box/" rel="prev" title="One Instruction Set Computers (OISC) - Elvis Magic Box">
+                  <i class="fa fa-chevron-left"></i> One Instruction Set Computers (OISC) - Elvis Magic Box
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/11/RzIL-Introductory-Notes/" rel="next" title="RzIL Introductory Notes">
+                  RzIL Introductory Notes <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Siddharth Mishra</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/brightprogrammer" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.25" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","integrity":"sha256-JFptYy4KzJ5OQP+Q9fubNf3cxpPPmZKqUOovyEONKrQ="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"projectblue","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

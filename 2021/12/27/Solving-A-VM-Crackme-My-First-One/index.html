@@ -1,54 +1,334 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Solving A VM Crackme - My First One! - ProjectBlue</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="night"><meta name="application-name" content="ProjectBlue"><meta name="msapplication-TileImage" content="https://avatars.githubusercontent.com/u/37365905?v=4"><meta name="msapplication-TileColor" content="night"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ProjectBlue"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( h4x5p4c3 ), another helpful team-mate. He"><meta property="og:type" content="blog"><meta property="og:title" content="Solving A VM Crackme - My First One!"><meta property="og:url" content="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/"><meta property="og:site_name" content="ProjectBlue"><meta property="og:description" content="I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( h4x5p4c3 ), another helpful team-mate. He"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-abasiccomputer.gif"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-entry.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-main.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-overview.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-1.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-2.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-3.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-4.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-5.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-6.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-7.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-8.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-9.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-10.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-11.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-12.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-13.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-14.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-16.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-17.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-18.png"><meta property="og:image" content="http://brightprogrammer.in/images/firstcm-19.png"><meta property="article:published_time" content="2021-12-27T08:43:01.000Z"><meta property="article:modified_time" content="2023-06-09T05:36:58.957Z"><meta property="article:author" content="Siddharth Mishra"><meta property="article:tag" content="crackmes"><meta property="article:tag" content="reverse-engineering"><meta property="article:tag" content="vm"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://brightprogrammer.in/images/firstcm-abasiccomputer.gif"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/"},"headline":"Solving A VM Crackme - My First One!","image":["http://brightprogrammer.in/images/firstcm-abasiccomputer.gif","http://brightprogrammer.in/images/firstcm-entry.png","http://brightprogrammer.in/images/firstcm-main.png","http://brightprogrammer.in/images/firstcm-overview.png","http://brightprogrammer.in/images/firstcm-1.png","http://brightprogrammer.in/images/firstcm-2.png","http://brightprogrammer.in/images/firstcm-3.png","http://brightprogrammer.in/images/firstcm-4.png","http://brightprogrammer.in/images/firstcm-5.png","http://brightprogrammer.in/images/firstcm-6.png","http://brightprogrammer.in/images/firstcm-7.png","http://brightprogrammer.in/images/firstcm-8.png","http://brightprogrammer.in/images/firstcm-9.png","http://brightprogrammer.in/images/firstcm-10.png","http://brightprogrammer.in/images/firstcm-11.png","http://brightprogrammer.in/images/firstcm-12.png","http://brightprogrammer.in/images/firstcm-13.png","http://brightprogrammer.in/images/firstcm-14.png","http://brightprogrammer.in/images/firstcm-16.png","http://brightprogrammer.in/images/firstcm-17.png","http://brightprogrammer.in/images/firstcm-18.png","http://brightprogrammer.in/images/firstcm-19.png"],"datePublished":"2021-12-27T08:43:01.000Z","dateModified":"2023-06-09T05:36:58.957Z","author":{"@type":"Person","name":"Siddharth Mishra"},"publisher":{"@type":"Organization","name":"ProjectBlue","logo":{"@type":"ImageObject","url":{"light":"https://avatars.githubusercontent.com/u/37365905?v=4","dark":"https://avatars.githubusercontent.com/u/37365905?v=4"}}},"description":"I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( h4x5p4c3 ), another helpful team-mate. He"}</script><link rel="canonical" href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/"><link rel="alternate" href="/atom.xml" title="ProjectBlue" type="application/atom+xml"><link rel="icon" href="https://avatars.githubusercontent.com/u/37365905?v=4"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9" async></script><script>window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="mask-icon" href="https://avatars.githubusercontent.com/u/37365905?v=4" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"brightprogrammer.in","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( h4x5p4c3 ), another helpful team-mate. He">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Solving A VM Crackme - My First One!">
+<meta property="og:url" content="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/">
+<meta property="og:site_name" content="ProjectBlue">
+<meta property="og:description" content="I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( h4x5p4c3 ), another helpful team-mate. He">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-abasiccomputer.gif">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-entry.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-main.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-overview.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-1.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-2.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-3.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-4.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-5.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-6.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-7.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-8.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-9.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-10.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-11.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-12.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-13.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-14.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-16.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-17.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-18.png">
+<meta property="og:image" content="http://brightprogrammer.in/images/firstcm-19.png">
+<meta property="article:published_time" content="2021-12-27T08:43:01.000Z">
+<meta property="article:modified_time" content="2023-07-03T09:08:25.696Z">
+<meta property="article:author" content="Siddharth Mishra">
+<meta property="article:tag" content="crackmes">
+<meta property="article:tag" content="reverse-engineering">
+<meta property="article:tag" content="vm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://brightprogrammer.in/images/firstcm-abasiccomputer.gif">
+
+
+<link rel="canonical" href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/","path":"2021/12/27/Solving-A-VM-Crackme-My-First-One/","title":"Solving A VM Crackme - My First One!"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Solving A VM Crackme - My First One! | ProjectBlue</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-HNB6BFVRV9","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="ProjectBlue" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ProjectBlue</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The Blue Place</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Is-A-VM"><span class="nav-number">1.</span> <span class="nav-text">What Is A VM?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Do-Virtual-Machines-Work"><span class="nav-number">2.</span> <span class="nav-text">How Do Virtual Machines Work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-FeDeX-Loop"><span class="nav-number">3.</span> <span class="nav-text">The FeDeX Loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#First-Contact"><span class="nav-number">4.</span> <span class="nav-text">First Contact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">5.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-A-Disassembler"><span class="nav-number">6.</span> <span class="nav-text">Writing A Disassembler</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Siddharth Mishra"
+      src="https://avatars.githubusercontent.com/u/37365905?v=i4">
+  <p class="site-author-name" itemprop="name">Siddharth Mishra</p>
+  <div class="site-description" itemprop="description">brightprogrammer`s blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/brightprogrammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@brightprogrammer.in" title="E-Mail → mailto:admin@brightprogrammer.in" rel="noopener me"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/brightprogramer" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;brightprogramer" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/c/brightprogrammer" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;c&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
     
-        gtag('config', 'G-HNB6BFVRV9');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+        <div class="pjax">
+        </div>
+  </aside>
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    </div>
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/blog">Blog</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/brightprogrammer.github.io"><i class="fab fa-github"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-27T08:43:01.000Z" title="12/27/2021, 8:43:01 AM">Mon, 27th December, 2021</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-06-09T05:36:58.957Z" title="6/9/2023, 5:36:58 AM">Fri, 9th June, 2023</time></span><span class="level-item"><a class="link-muted" href="/categories/crackmes/">crackmes</a></span><span class="level-item">27 minutes read (About 4006 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Solving A VM Crackme - My First One!</h1><div class="content"><p>I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( <a target="_blank" rel="noopener" href="https://twitter.com/h4x5p4c3">h4x5p4c3</a> ), another helpful team-mate.</p>
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Solving A VM Crackme - My First One! | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Solving A VM Crackme - My First One!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Mon, 27th December, 2021 14:13:01" itemprop="dateCreated datePublished" datetime="2021-12-27T14:13:01+05:30">Mon, 27th December, 2021</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Mon, 3rd July, 2023 14:38:25" itemprop="dateModified" datetime="2023-07-03T14:38:25+05:30">Mon, 3rd July, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/crackmes/" itemprop="url" rel="index"><span itemprop="name">crackmes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/12/27/Solving-A-VM-Crackme-My-First-One/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/27/Solving-A-VM-Crackme-My-First-One/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( <a href="https://twitter.com/h4x5p4c3">h4x5p4c3</a> ), another helpful team-mate.</p>
 <p>Here are a few resources before we begin : </p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://youtu.be/b6udPT79itk">Analysis Of Virtualization-based Obfuscation</a></li>
-<li><a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1Yc54_ogPcVUpFICXVPOnFLsGvS8Xq668/view?usp=sharing">The challenge</a></li>
+<li><a href="https://youtu.be/b6udPT79itk">Analysis Of Virtualization-based Obfuscation</a></li>
+<li><a href="https://drive.google.com/file/d/1Yc54_ogPcVUpFICXVPOnFLsGvS8Xq668/view?usp=sharing">The challenge</a></li>
 </ul>
 <span id="more"></span>
 
 <p>As I mentioned earlier, I am not good with VM crackmes but when I started following that video (first), just 40 minutes into the video and I’m able to detect the dispatcher function. I highly recommend anyone who really wants to learn. I’ll be solving a few VM crackmes to improve my skills. I have basic reversing skills but I have a bad habit of getting stuck in useless functions or parts of code like we did with XVM. Our goal was to solve the crackme and I started to reconstruct the whole code. I won’t be doing such things in this one. Although we might go into detail.</p>
-<p>At the time of writing I’m only 52 minutes into that <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=b6udPT79itk&t=3278s">video</a> and still I was able to solve this challenge. Maybe the challenge is easier but I also feel that the video is effective too.  This video was recommended by a new friend I made while we participated in hxp CTF. Some of the top Indian CTF teams collaborated to participate in this heavy weight CTF. He also gave me few other resources to work on.</p>
+<p>At the time of writing I’m only 52 minutes into that <a href="https://www.youtube.com/watch?v=b6udPT79itk&t=3278s">video</a> and still I was able to solve this challenge. Maybe the challenge is easier but I also feel that the video is effective too.  This video was recommended by a new friend I made while we participated in hxp CTF. Some of the top Indian CTF teams collaborated to participate in this heavy weight CTF. He also gave me few other resources to work on.</p>
 <p>I’ve already partially solved this crackme and this’ll be a detailed explanation on my struggles and all. Recently we participated in xmas ctf and I really felt like an impostor. I have two options : either I fight this and learn all about VMs (well, most of the stuffs) or I can just stay an impostor. I’ll walk on the path less travelled by.</p>
 <h2 id="What-Is-A-VM"><a href="#What-Is-A-VM" class="headerlink" title="What Is A VM?"></a>What Is A VM?</h2><p>VM is short form of Virtual Machine. A virtual machine is exactly what it’s name is, it’s virtual!.</p>
 <p>An example of physical machine is your CPU. Your CPU is executing real instructions. When you do a <code>mov</code> instruction, your CPU will take minimum number of steps to complete that instruction. That instruction will have effect on real registers and memory. </p>
 <p>When it comes to a virtual CPU (machine), it may or may not have a move instruction in the first place! Even if it has a mov instruction, it’ll be moving data to&#x2F;from variables declared within the program. So the virtual cpu doesn’t directly use anything real (registers&#x2F;memory) and all the resources that it’ll use will be stored in a variable that is already allocated on either the stack or the heap. All the (virtual) instructions that a virtual machine will run will ultimately be converted to machine code. Because of this conversion, a virtual CPU takes much more number of steps than a physical CPU to execute a single (virtual) instruction and because of this, virtual machines are slower too.</p>
 <h2 id="How-Do-Virtual-Machines-Work"><a href="#How-Do-Virtual-Machines-Work" class="headerlink" title="How Do Virtual Machines Work?"></a>How Do Virtual Machines Work?</h2><p>Since a virtual machine is trying to emulate some new instruction set, it’ll need to have a CPU that will be able to decode those set of instructions and for that all virtual machines implement their own virtual CPU. How do we do that? Well, a CPU is just a bunch of registers and some helper units.</p>
-<p><img src="/images/firstcm-abasiccomputer.gif" alt="working of basic computer"></p>
+<p><img data-src="/images/firstcm-abasiccomputer.gif" alt="working of basic computer"></p>
 <p>A virtual CPU is much similar to a physical CPU. It’ll have it’s own set of registers and cache and all. A simple implementation in code will look something like this</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">reg_id</span> &#123; </span><br><span class="line">    rax = <span class="number">0</span>, rbx, rcx, ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="type">cpu_t</span>&#123;</span><br><span class="line">    <span class="type">int64_t</span> registers[X]; <span class="comment">// X number of registers</span></span><br><span class="line">    <span class="type">int64_t</span>* stack;</span><br><span class="line">  </span><br><span class="line">    <span class="type">size_t</span> pc; <span class="comment">// program counter register</span></span><br><span class="line">    <span class="type">uint32_t</span>* bytecode;</span><br><span class="line">    <span class="type">size_t</span> code_sz;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    <span class="comment">// some other things needed for this vm</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -59,31 +339,31 @@
 
 <p>Instead of if-else statements, switch-case statements can be used too! Now, this is where the interesting part comes : In all normal, not crazy VMs you’ll find a FeDeX loop like this one.  This function is what we need to find if it’s a VM challenge. Generally it’s easy to find because of the code structure here! When you’ll see this code in a graph like format, you’ll notice that almost all similar VMs (with a FeDeX loop) will have similar structure. Let’s try that in this crackme.</p>
 <h2 id="First-Contact"><a href="#First-Contact" class="headerlink" title="First Contact"></a>First Contact</h2><p>We’ll use a new tool <strong>Iaito</strong>. Iaito is the GUI version of radare. We’ll use this to quickly get to the dispatcher function and then we can switch to any other tool.</p>
-<p><img src="/images/firstcm-entry.png" alt="entry point"></p>
+<p><img data-src="/images/firstcm-entry.png" alt="entry point"></p>
 <p>This is doing a simple call to <code>libc_start_main</code> which will eventually call <code>main</code>.</p>
 <blockquote>
 <p>At this point I’d like to highlight that reversing XVM from scratch wasn’t a complete waste as I can do normal reversing like this very easily. I can now read the assembly very easily and understand what the code is trying to do!</p>
 </blockquote>
 <p>Instead of going to main and following the code sequentially, we’ll now go through all those functions and check the graph structure from a high level perspective.</p>
-<p><img src="/images/firstcm-main.png" alt="main cfg" title="high level view of main"></p>
+<p><img data-src="/images/firstcm-main.png" alt="main cfg" title="high level view of main"></p>
 <p>Simple and short. The head block is big and is most probably reading input and doing some initializations. On going through functions one by one, you’ll see a function like this</p>
-<p><img src="/images/firstcm-overview.png" alt="overview"></p>
+<p><img data-src="/images/firstcm-overview.png" alt="overview"></p>
 <p>Looks like this one has lots of conditional jumps. Let’s analyse this one. Spoiler : This is is indeed the dispatcher function.</p>
 <h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>Now we can go to main and look where this function is being called and then analyze what’s being passed to this. We’ll try to do as less reversing as possible in functions outside this one. I’ll name this function to <em>dispatcher</em> to increase readability.</p>
-<p><img src="/images/firstcm-1.png" title="call to dispatcher in main"></p>
+<p><img data-src="/images/firstcm-1.png" title="call to dispatcher in main"></p>
 <p>Clearly this is taking three arguments, first one is some value in <code>rax</code>, second value looks like some address, and third one is some number. Let’s check the value in rax.</p>
-<p><img src="/images/firstcm-2.png"></p>
+<p><img data-src="/images/firstcm-2.png"></p>
 <p>That function looks like it’s creating something  (some data structure), let’s check it out XD.</p>
-<p><img src="/images/firstcm-3.png"></p>
+<p><img data-src="/images/firstcm-3.png"></p>
 <p>Looks like it’s memsetting a huge array (0x118 bytes) to 0. So, we don’t get any idea of what it is. But since this is the only constructor and is called in the initialization stage, most probably it’s either building a context data structure or something similar to CPU. A context data structure will contain everything important for current execution, eg : handle to bytecode file, bytecode buffer in memory, cpu that’ll execute the bytecode. Don’t mind that for now as we’ll see how it’s being used (i.e if it’s being used). We’ll name that variable as ctx and continue.</p>
 <p>Let’s check the dispatcher function now.</p>
-<p><img src="/images/firstcm-4.png" title="head block of dispatcher function"></p>
+<p><img data-src="/images/firstcm-4.png" title="head block of dispatcher function"></p>
 <p>Name the first parameter as ctx, other two variables as arg2, arg3 and keep an eye on how the other two variables are being used from now on.</p>
-<p><img src="/images/firstcm-5.png"></p>
+<p><img data-src="/images/firstcm-5.png"></p>
 <p>If you take a high level view, this is the basic working condition for the FeDeX loop. This means this can be either a normal iterator or a program counter or something similar. Let’s keep an eye on that variable too. If this field is being increased again and again in before some conditional jumps then it must be the program counter. Let’s confirm that suspicion first. Scroll through the graph and check when and how it’s being altered.</p>
-<p><img src="/images/firstcm-6.png"></p>
+<p><img data-src="/images/firstcm-6.png"></p>
 <p>Looks like a2 is indeed an address. We can see that value is being fetched from it at an offeset. This happens when the bytecode for the vm is stored in the program itself in a global variable. Here a fixed address is being passed so let’s check what’s at that address.</p>
-<p><img src="/images/firstcm-7.png"></p>
+<p><img data-src="/images/firstcm-7.png"></p>
 <p>Size of this array is 16*5 + 5 &#x3D; 85 bytes which is 0x55 in hex. Remember this is the third argument to dispatcher and also used in loop condition. This means this is our bytecode and a3 is the size of this bytecode. It’s completely normal if you didn’t get it in first glance (even I didn’t get it but I feel experienced individuals will see it instantly!)</p>
 <p>This might be a good time to start making our disassembler!</p>
 <h2 id="Writing-A-Disassembler"><a href="#Writing-A-Disassembler" class="headerlink" title="Writing A Disassembler"></a>Writing A Disassembler</h2><p>This is the most important and interesting part of reversing a vm challenge. A part where I never reached before watching that video. You can write your disassembler in any language. I’ll be using C++ here as that’s what I’m most comfortable with.</p>
@@ -95,44 +375,44 @@
 <p>Now that we know the usage of all the arguments, we shoud start following each node one by one. First let’s also create a dispatcher function and create that loop that we found near the first node of dispatcher function.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint8_t</span> bytecode = &#123;</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="built_in">dispatch</span>(context&amp; ctx)&#123;</span><br><span class="line">    ctx.program_counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(ctx.program_counter &lt; <span class="built_in">sizeof</span>(bytecode))&#123;</span><br><span class="line">        <span class="comment">// dispatchers</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/firstcm-8.png"></p>
+<p><img data-src="/images/firstcm-8.png"></p>
 <p>In the end it’s comparing current instruction with value at some address. Let’s what’s at that address.</p>
-<p><img src="/images/firstcm-9.png"></p>
+<p><img data-src="/images/firstcm-9.png"></p>
 <p>Why I selected only 16 bytes of data? Check how many similar conditional jumps are there. You’ll notice only 16 such jumps are present! And logic implies this must be the total number of instructions and also we got all the opcodes! This is just a trickery to make it hard to reverse, but we are smart XD.</p>
-<p><img src="/images/firstcm-10.png"></p>
+<p><img data-src="/images/firstcm-10.png"></p>
 <p>This type of graph occurs with a code flow like this</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(condition1)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(condition2)&#123; </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// all edges join to end node here</span></span><br></pre></td></tr></table></figure>
 
 <p>Similar you’ll see 2 more node sets like this below this one. Let’s reverse this set first.</p>
-<p><img src="/images/firstcm-11.png"></p>
+<p><img data-src="/images/firstcm-11.png"></p>
 <p>This one looks like it’s moving op2 into *(ctx+op1). This bevaiour looks similar to a mov instruction : <code>mov &lt;reg&gt; &lt;const&gt;</code>. Let’s check other node.</p>
-<p><img src="/images/firstcm-12.png"></p>
+<p><img data-src="/images/firstcm-12.png"></p>
 <p>Let’s analyze these two functions.</p>
-<p><img src="/images/firstcm-13.png" title="this gets high nibble from a byte"></p>
-<p><img src="/images/firstcm-14.png" title="getting lower 4 bits of given byte"></p>
+<p><img data-src="/images/firstcm-13.png" title="this gets high nibble from a byte"></p>
+<p><img data-src="/images/firstcm-14.png" title="getting lower 4 bits of given byte"></p>
 <p>We’ll also rename these functions accordingly. We noticed that values returned by these functions is used as an offset in ctx array. This means that each nibble here represents as a register and this is also a mov instruction. This node is moving value from one register to another. This also means that maximum number of registers are 16 and program counter is separate from those registers. This is a huge coincidence!</p>
 <p>Here is how this will look in C++ </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dispatch</span><span class="params">(context&amp; ctx)</span></span>&#123;</span><br><span class="line">    ctx.program_counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(ctx.program_counter &lt; <span class="built_in">sizeof</span>(bytecode))&#123;</span><br><span class="line">        <span class="type">uint8_t</span> current_instruction = bytecode + ctx.program_counter;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(current_instruction == <span class="number">0x01</span>)&#123;</span><br><span class="line">            <span class="comment">// mov instruction constant to register</span></span><br><span class="line">            <span class="type">int32_t</span> r1 = bytecode + ctx.program_counter + <span class="number">1</span>; <span class="comment">// register to place op2 into</span></span><br><span class="line">            <span class="type">int32_t</span> op2 = bytecode + ctx.program_counter + <span class="number">2</span>; <span class="comment">// value to be placed</span></span><br><span class="line">            context.registers[r1] = op2; <span class="comment">// mov</span></span><br><span class="line">            context.program_counter += <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(current_instruction == <span class="number">0x02</span>)&#123;</span><br><span class="line">                <span class="comment">// move value from one register to another</span></span><br><span class="line">                <span class="type">int32_t</span> op1 = bytecode + ctx.program_counter + <span class="number">1</span>;</span><br><span class="line">                <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                context.registers[r2] = context.registers[r1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>This wraps up mov instructions.</p>
 <p>Set of another if-elseif-else statements</p>
-<p><img src="/images/firstcm-16.png"></p>
+<p><img data-src="/images/firstcm-16.png"></p>
 <p>This one decodes to</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br><span class="line">        <span class="keyword">if</span>(current_instruction == <span class="number">0x03</span>)&#123;</span><br><span class="line">            <span class="comment">// add values in two instructions</span></span><br><span class="line">            <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">            <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">            context.registers[r2] += context.registers[r1];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(current_instruction == <span class="number">0x04</span>)&#123;</span><br><span class="line">                <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                context.registers[r2] -= context.registers[r1];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(current_instruction == <span class="number">0x05</span>)&#123;</span><br><span class="line">                    <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                    <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                    context.registers[r2] *= context.registers[r1];</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(current_instruction == <span class="number">0x06</span>)&#123;</span><br><span class="line">                        <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                        <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                        context.registers[r2] /= context.registers[r1];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <p>I trust you can reverse this part easily. You must spend some time to analyze this if you’re doing this for the first time. This set was for arithmetic operations. Let’s jump to next set.</p>
 <p>I feel like I need to explain this if you’re new to reversing.</p>
-<p><img src="/images/firstcm-17.png"></p>
+<p><img data-src="/images/firstcm-17.png"></p>
 <p>This will check if first register is 0 or not, if it’s 0 then it’ll set second register to 1, otherwise 0.</p>
 <p>So, this set decodes to</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(current_instruction == <span class="number">0x07</span>)&#123;</span><br><span class="line">            <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">            <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">            context.registers[r2] ^= context.registers[r1];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(current_instruction == <span class="number">0x08</span>)&#123;</span><br><span class="line">                <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                context.registers[r2] |= context.registers[r1];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(current_instruction == <span class="number">0x09</span>)&#123;</span><br><span class="line">                    <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                    <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                    context.registers[r2] &amp;= context.registers[r1];</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(current_instruction == <span class="number">0x0a</span>)&#123;</span><br><span class="line">                        <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                        <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                        <span class="comment">// mind order of registers here</span></span><br><span class="line">                        context.registers[r1] = context.registers[r2] == <span class="number">0</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">if</span>(current_instruction == <span class="number">0x0b</span>)&#123;</span><br><span class="line">                            <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                            <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                            context.registers[r2] = context.registers[r2] &lt;&lt; context.registers[r1];</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            <span class="keyword">if</span>(current_instruction == <span class="number">0x0c</span>)&#123;</span><br><span class="line">                                <span class="type">int32_t</span> r1 = op1 &amp; <span class="number">0x0f</span>;</span><br><span class="line">                                <span class="type">int32_t</span> r2 = op1 &gt;&gt; <span class="number">4</span>;</span><br><span class="line">                                context.registers[r2] = context.registers[r2] &gt;&gt; context.registers[r1];</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>This one was for bitwise logical operations.</p>
-<p><img src="/images/firstcm-18.png" title="This set looks completely different"></p>
+<p><img data-src="/images/firstcm-18.png" title="This set looks completely different"></p>
 <p>Decompilation to that red circle looks like this</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span>(current_instruction == <span class="number">0x0d</span>)&#123;</span><br><span class="line">           <span class="keyword">if</span>(ctx.registers[<span class="number">15</span>] != <span class="number">0</span>)&#123;</span><br><span class="line">               ctx.program_counter = op1 - <span class="number">2</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(current_instruction == <span class="number">0x0e</span>)&#123;</span><br><span class="line">               <span class="keyword">if</span>(ctx.registers[<span class="number">15</span>] != <span class="number">0</span>)&#123;</span><br><span class="line">                   ctx.program_counter = op1 - <span class="number">2</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               <span class="keyword">if</span>(current_instruction == <span class="number">0x0f</span>)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(ctx.r16 != <span class="number">0</span>)&#123;</span><br><span class="line">                       ctx.program_counter = op1 - <span class="number">2</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                   <span class="keyword">if</span>(current_instruction == <span class="number">0x10</span>)&#123;</span><br><span class="line">                       <span class="keyword">if</span>(ctx.r16 != <span class="number">0</span>)&#123;</span><br><span class="line">                           ctx.program_counter = op1 <span class="number">-2</span>;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                       <span class="keyword">if</span>(current_instruction == <span class="number">0x11</span>)&#123;</span><br><span class="line">                           <span class="keyword">if</span>(ctx.r17 != <span class="number">0</span>)&#123;</span><br><span class="line">                               ctx.program_counter = op1 - <span class="number">2</span>;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                           <span class="keyword">if</span>(current_instruction == <span class="number">0x12</span>)&#123;</span><br><span class="line">                               <span class="keyword">if</span>(ctx.r17 != <span class="number">0</span>)&#123;</span><br><span class="line">                                   ctx.program_counter = op2 - <span class="number">2</span>;</span><br><span class="line">                               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                                   <span class="keyword">if</span>(current_instruction == <span class="number">0x13</span>)&#123;</span><br><span class="line">                                       <span class="comment">// continue</span></span><br><span class="line">                                       ...</span><br><span class="line">                                   &#125;</span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line"><span class="comment">// other code</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/firstcm-19.png" title="some new fields are used here"></p>
+<p><img data-src="/images/firstcm-19.png" title="some new fields are used here"></p>
 <p>I’ll add some new fields to the context struct in order to understand this. This doesn’t mean we understand the meaining of those fields. This part is a bit tricky.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">context</span>&#123;</span><br><span class="line">    <span class="type">uint8_t</span> registers[<span class="number">16</span>];</span><br><span class="line">    <span class="type">uint8_t</span> r16, r17;</span><br><span class="line">    <span class="type">int8_t</span> arr[<span class="number">0x100</span>]; <span class="comment">// ctx + 0x12</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> dummy; <span class="comment">// because there is a 2 byte gap</span></span><br><span class="line">    <span class="type">uint32_t</span> var114;</span><br><span class="line">    <span class="type">int32_t</span> program_counter = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -150,63 +430,213 @@
 <p>- Steve Wozniak</p>
 </blockquote>
 <center>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">New post!! 😋😋<br><br>Solving a VM CrackMe <a target="_blank" rel="noopener" href="https://t.co/0IkHDWxvx2">https://t.co/0IkHDWxvx2</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a target="_blank" rel="noopener" href="https://twitter.com/brightprogramer/status/1474820700393246720?ref_src=twsrc%5Etfw">December 25, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">New post!! 😋😋<br><br>Solving a VM CrackMe <a href="https://t.co/0IkHDWxvx2">https://t.co/0IkHDWxvx2</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1474820700393246720?ref_src=twsrc%5Etfw">December 25, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </center>
-</div><div class="article-licensing box"><div class="licensing-title"><p>Solving A VM Crackme - My First One!</p><p><a href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/">http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Siddharth Mishra</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>Mon, 27th December, 2021</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>Fri, 9th June, 2023</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/crackmes/">crackmes</a><a class="link-muted mr-2" rel="tag" href="/tags/reverse-engineering/">reverse-engineering</a><a class="link-muted mr-2" rel="tag" href="/tags/vm/">vm</a></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a><a class="a2a_button_facebook"></a><a class="a2a_button_twitter"></a><a class="a2a_button_telegram"></a><a class="a2a_button_whatsapp"></a><a class="a2a_button_reddit"></a></div><script src="https://static.addtoany.com/menu/page.js" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/brightprogramer" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="https://www.patreon.com/brightprogrammer" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><a class="button donate" data-type="paypal" onclick="document.getElementById(&#039;paypal-donate-form&#039;).submit()"><span class="icon is-small"><i class="fab fa-paypal"></i></span><span>Paypal</span></a><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form"><input type="hidden" name="cmd" value="_donations"><input type="hidden" name="business" value="brightprogrammer"><input type="hidden" name="currency_code" value="USD"></form></div></div></div><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/08/20/Game-Theory-Race-To-Zero/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Game Theory : Race To Zero</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/"><span class="level-item">Participating in R2Wars 2021 in R2Con</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/';
-            this.page.identifier = '2021/12/27/Solving-A-VM-Crackme-My-First-One/';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');  
-            s.src = '//' + 'projectblue' + '.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/alu-design/"><span class="level-start"><span class="level-item">alu-design</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/alu-design/intermediate-language/"><span class="level-start"><span class="level-item">intermediate-language</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/contest/"><span class="level-start"><span class="level-item">contest</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/crackmes/"><span class="level-start"><span class="level-item">crackmes</span></span><span class="level-end"><span class="level-item tag">6</span></span></a><ul><li><a class="level is-mobile" href="/categories/crackmes/windows/"><span class="level-start"><span class="level-item">windows</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/disassembler/"><span class="level-start"><span class="level-item">disassembler</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/disassembler/amd64/"><span class="level-start"><span class="level-item">amd64</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/mathematics/"><span class="level-start"><span class="level-item">mathematics</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/mathematics/game-theory/"><span class="level-start"><span class="level-item">game-theory</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/network-programming/"><span class="level-start"><span class="level-item">network-programming</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/network-programming/web-server/"><span class="level-start"><span class="level-item">web-server</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/open-source/"><span class="level-start"><span class="level-item">open-source</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/open-source/rizin/"><span class="level-start"><span class="level-item">rizin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/philosophy/"><span class="level-start"><span class="level-item">philosophy</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-08T17:48:11.000Z">Thu, 8th June, 2023</time></p><p class="title"><a href="/2023/06/08/Do-I-Really-Exist/">Do I Really Exist?</a></p><p class="categories"><a href="/categories/philosophy/">philosophy</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-30T04:05:44.000Z">Sun, 30th April, 2023</time></p><p class="title"><a href="/2023/04/30/Overflow-and-Carry/">Overflow and Carry</a></p><p class="categories"><a href="/categories/alu-design/">alu-design</a> / <a href="/categories/alu-design/intermediate-language/">intermediate-language</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-14T16:12:25.000Z">Fri, 14th April, 2023</time></p><p class="title"><a href="/2023/04/14/Writing-A-HTTP-Web-Server-In-C/">Writing A HTTP Web Server In C</a></p><p class="categories"><a href="/categories/network-programming/">network-programming</a> / <a href="/categories/network-programming/web-server/">web-server</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-04-11T21:11:25.000Z">Wed, 12th April, 2023</time></p><p class="title"><a href="/2023/04/11/RzIL-Introductory-Notes/">RzIL Introductory Notes</a></p><p class="categories"><a href="/categories/open-source/">open-source</a> / <a href="/categories/open-source/rizin/">rizin</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-01T13:14:09.000Z">Wed, 1st March, 2023</time></p><p class="title"><a href="/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/">The AMD64 (x86_64) Instruction Encoding Format</a></p><p class="categories"><a href="/categories/disassembler/">disassembler</a> / <a href="/categories/disassembler/amd64/">amd64</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/alu-design/"><span class="tag">alu-design</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/amd/"><span class="tag">amd</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/amd64/"><span class="tag">amd64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/analytics/"><span class="tag">analytics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/anti-debug/"><span class="tag">anti-debug</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/assembly/"><span class="tag">assembly</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/conference/"><span class="tag">conference</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/contest/"><span class="tag">contest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crackmes/"><span class="tag">crackmes</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/definition/"><span class="tag">definition</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/disassembler/"><span class="tag">disassembler</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/existence/"><span class="tag">existence</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/food-for-thought/"><span class="tag">food-for-thought</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/free-will/"><span class="tag">free-will</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/game-theory/"><span class="tag">game-theory</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/http/"><span class="tag">http</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/il-uplifter/"><span class="tag">il-uplifter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/instruction-set/"><span class="tag">instruction-set</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intel/"><span class="tag">intel</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intermediate-language/"><span class="tag">intermediate-language</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mathematics/"><span class="tag">mathematics</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nanomite/"><span class="tag">nanomite</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/network-programming/"><span class="tag">network-programming</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/notes/"><span class="tag">notes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/oisc/"><span class="tag">oisc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/overflow-carry/"><span class="tag">overflow-carry</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/philosophy/"><span class="tag">philosophy</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/project-blue/"><span class="tag">project-blue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/radare/"><span class="tag">radare</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/reverse-engineering/"><span class="tag">reverse-engineering</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rizin/"><span class="tag">rizin</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/server/"><span class="tag">server</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/socket/"><span class="tag">socket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vm/"><span class="tag">vm</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/windows/"><span class="tag">windows</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/x86-64/"><span class="tag">x86_64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xorenc/"><span class="tag">xorenc</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"><img class="logo-img-dark" src="https://avatars.githubusercontent.com/u/37365905?v=4" alt="ProjectBlue" height="28"></a><p class="is-size-7"><span>&copy; 2023 Siddharth Mishra</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">Made with 💖 by Siddharth Mishra © 2023, Some Rights Reserved.</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/brightprogrammer/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
-            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
-                renderMathInElement(element);
-            });
-        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Siddharth Mishra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/" title="Solving A VM Crackme - My First One!">http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/brightprogramer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://youtube.com/@brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-youtube"></i>
+            </span>
+
+            <span class="label">YouTube</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://linkedin.com/in/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+
+            <span class="label">LinkedIn</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:admin@brightprogrammer.in">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+
+            <span class="label">Mail</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/crackmes/" rel="tag"># crackmes</a>
+              <a href="/tags/reverse-engineering/" rel="tag"># reverse-engineering</a>
+              <a href="/tags/vm/" rel="tag"># vm</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_linkedin"></a>
+      <a class="a2a_button_mastodon"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_email"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/" rel="prev" title="Participating in R2Wars 2021 in R2Con">
+                  <i class="fa fa-chevron-left"></i> Participating in R2Wars 2021 in R2Con
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/20/Game-Theory-Race-To-Zero/" rel="next" title="Game Theory : Race To Zero">
+                  Game Theory : Race To Zero <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Siddharth Mishra</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/brightprogrammer" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.25" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","integrity":"sha256-JFptYy4KzJ5OQP+Q9fubNf3cxpPPmZKqUOovyEONKrQ="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"projectblue","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
