@@ -236,13 +236,13 @@ To sum it up :
 ```mermaid
 graph TD;
 
-TCG{helper-tcg.h};
-PROTO{helper-proto.h};
-GEN{helper-gen.h};
-HLPR{helper.h};
-TRC{trace_helper.c};
+TCG([helper-tcg.h]);
+PROTO([helper-proto.h]);
+GEN([helper-gen.h]);
+HLPR([helper.h]);
+TRC([trace_helper.c]);
 
-TR[translate.c];
+TR([translate.c]);
 TR --> |include| PROTO;
 TR --> |include| GEN;
 
@@ -947,14 +947,16 @@ OperandInfo * load_store_mem(uint32_t addr, const void *memptr, int ls, int len)
     oi->operand_info_specific = ois;
     oi->operand_usage = ou;
     oi->value.len = len;
-    oi->value.data = g_malloc(oi->value.len);
-    memcpy(oi->value.data, memptr, len);
+    oi->value.data = g_malloc(oi->value.len); // <<<< NOTE HERE
+    memcpy(oi->value.data, memptr, len); // <<<< NOTE HERE
 
     return oi;
 }
 ```
 
-I updated `helper_trace_load/store_mem` again in following way : 
+I think the marked out lines in above code shouldn't be there when there's a load operation. They make sense to be present there only when there's a store opeartion. But that's not my major concern at the moment, because if I'm guessing it's internal working correctly then it still shouldn't be a problem. But I'll raise this as an issue in BAP community.
+
+Next, I updated `helper_trace_load/store_mem` again in following way : 
 
 {% tabs helper_trace_load_store_mem, 1%}
 <!-- tab initially -->
@@ -977,6 +979,7 @@ void HELPER(trace_st)(CPUMIPSState *env, uint32_t val, uint32_t addr)
 
 <!-- tab finally -->
 ```c
+
 ```
 <!-- endtab -->
 {% endtabs %}
