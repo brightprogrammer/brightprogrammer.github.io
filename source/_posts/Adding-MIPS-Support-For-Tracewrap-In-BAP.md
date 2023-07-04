@@ -776,6 +776,8 @@ If you open these files and notice how they're used, you'll find similar to our 
 
 # Writing Our Own Capture Functions For MIPS
 
+## Declaring Capture Helper Functions
+
 We'll begin by writing our own capture functions like `trace_load_reg32/64` or `trace_load_mem32/64` etc... Fist we need to declare the function in `/target/mips/helper.h`.
 
 ```c
@@ -797,6 +799,8 @@ DEF_HELPER_2(trace_store_mem64, void, i32, i64)
 
 Now to be clear about it, I'm not writing everything from scratch in `helper.h` and `trace_helper.c`. Some functions were already implemented like `newframe` and `endframe` and `load/store_reg` (which I renamed to `load/store_reg32`). I'm just modifying some of the already present functions and then adding some functions that I think I'll need.
 
+## Starting And Ending A New Frame
+
 Having these functions declared (and some defined), let's define the `helper_trace_xyz` functions in `/target/mips/trace_helper.c`.
 
 ```c these were already implemented
@@ -810,6 +814,8 @@ void HELPER(trace_endframe)(CPUMIPSState *env, target_ulong old_pc, uint32_t siz
     qemu_trace_endframe(env, old_pc, size);
 }
 ```
+
+## Capsture Register Load/Store(s)
 
 ```c to load/store from/to registers, there's one common interface already defined (locally)
 /**
@@ -907,6 +913,8 @@ I have to admit, after working with Rizin and reading their codebase with extens
 <!-- endtab -->
 {% endtabs %}
 
+## Capture Memory Load/Store(s)
+
 Next, to load/store from/to a memory region, `load_store_mem` was already defined like this :
 
 ```c (slightly modified)
@@ -979,7 +987,123 @@ void HELPER(trace_st)(CPUMIPSState *env, uint32_t val, uint32_t addr)
 
 <!-- tab finally -->
 ```c
+#define LOAD_MEM(addr, data)                                            \
+    qemu_log("Read at addr=0x%x, val=0x%x\n", addr, data);              \
+    OperandInfo *oi = load_store_mem(addr, &data, 0, sizeof(data));     \
+    qemu_trace_add_operand(oi, 0x1)
 
+#define STORE_MEM(addr, data)                                           \
+    qemu_log("Write at addr=0x%x, val=0x%x\n", addr, data);             \
+    OperandInfo *oi = load_store_mem(addr, &data, 1, sizeof(data));     \
+    qemu_trace_add_operand(oi, 0x1)
+
+void HELPER(trace_load_mem32)(uint64_t  addr, uint32_t val) { LOAD_MEM(addr, val); }
+void HELPER(trace_load_mem64)(uint64_t  addr, uint64_t val) { LOAD_MEM(addr, val); }
+
+void HELPER(trace_store_mem32)(uint64_t addr, uint32_t val) { STORE_MEM(addr, val); }
+void HELPER(trace_store_mem64)(uint64_t addr, uint64_t val) { STORE_MEM(addr, val); }
 ```
 <!-- endtab -->
 {% endtabs %}
+
+## Creating Helpers in `translate.c`
+
+Nice, clearly the load/store operations above are dependent on architecture. A `MIPS` architecture will always perform load/store of 32 bit values and `MIPS64` will do a 64 bit load/store. This means we need to write helpers to handle this architecture switch automatically, keeping the interface uniform and neat (not confusing).
+
+So, like other architectures I'll also implement wrappers around load/store reg/mem operations.
+
+{% tabs defining_load_store_helpers_in_translate_c, 1 %}
+<!-- tab load/store reg helper -->
+```c
+static void gen_trace_load_reg(int reg, TCGv var) {
+#ifdef HAS_TRACEWRAP
+
+    TCGv_i32 r = tcg_const_i32(reg);
+#ifdef TARGET_MIPS64
+    gen_helper_trace_load_reg64(r, var);
+#else
+    gen_helper_trace_load_reg32(r, var);
+#endif
+    tcg_temp_free_i32(r);
+
+#endif // HAS_TRACEWRAP
+}
+
+static void gen_trace_store_reg(int reg, TCGv var) {
+#ifdef HAS_TRACEWRAP
+
+    TCGv_i32 r = tcg_const_i32(reg);
+#ifdef TARGET_PPC64
+    gen_helper_trace_store_reg64(r, var);
+#else
+    gen_helper_trace_store_reg32(r, var);
+#endif
+    tcg_temp_free_i32(r);
+
+#endif // HAS_TRACEWRAP
+}
+```
+<!-- endtab -->
+
+<!-- tab load/store mem helper -->
+```c
+static void gen_trace_load_mem(int reg, TCGv var) {
+#ifdef HAS_TRACEWRAP
+
+    TCGv_i32 r = tcg_const_i32(reg);
+#ifdef TARGET_MIPS64
+    gen_helper_trace_load_mem64(r, var);
+#else
+    gen_helper_trace_load_mem32(r, var);
+#endif
+    tcg_temp_free_i32(r);
+
+#endif // HAS_TRACEWRAP
+}
+
+static void gen_trace_store_mem(int reg, TCGv var) {
+#ifdef HAS_TRACEWRAP
+
+    TCGv_i32 r = tcg_const_i32(reg);
+#ifdef TARGET_PPC64
+    gen_helper_trace_store_mem64(r, var);
+#else
+    gen_helper_trace_store_mem32(r, var);
+#endif
+    tcg_temp_free_i32(r);
+
+#endif // HAS_TRACEWRAP
+}
+```
+<!-- endtab -->
+{% endtabs %}
+
+The next task is just figuring out where to place these helpers. Here's a start : 
+
+```c
+
+/* General purpose registers moves. */
+void gen_load_gpr(TCGv t, int reg)
+{
+    if (reg == 0) {
+        tcg_gen_movi_tl(t, 0);
+    } else {
+        tcg_gen_mov_tl(t, cpu_gpr[reg]);
+    }
+
+    gen_trace_load_reg(reg, t);
+}
+
+void gen_store_gpr(TCGv t, int reg)
+{
+    if (reg != 0) {
+        tcg_gen_mov_tl(cpu_gpr[reg], t);
+    }
+
+    gen_trace_store_reg(reg, t);
+}
+```
+
+# Ending Notes
+
+I think this covers almost all important topics. For further view into this for those who are interested, they can take a look at [My PR in BinaryAnalysisPlatform/qemu](https://github.com/BinaryAnalysisPlatform/qemu/pull/26).
