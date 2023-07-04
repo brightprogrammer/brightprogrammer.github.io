@@ -28,6 +28,8 @@ I've been tasked to add mips support for trace testing in BAP. These are my note
 
 There are very few PRs in BAP's Qemu repository. I'll use these three PRs as a reference by looking at their diffs and try to understand what and why of additions and deletions. It's almost like a reverse engineering task, just that here I'm provided with direct source code :) Let's begin!
 
+<!-- more -->
+
 # What is BAP?
 
 BAP (Binary Analysis Platform) as I've mentioned in some of my previous posts, especially in [RzIL Notes](https://brightprogrammer.in/2023/04/11/RzIL-Introductory-Notes/), is a framework written for binary analysis. It has it's own modified version of OCaml language that's used to write their modules. Anyone can write a binary analysis module using BAP! They have a nice, one and only but extensive tutorial [here](https://github.com/BinaryAnalysisPlatform/bap-tutorial).

@@ -97,6 +97,7 @@ open_graph:
 # External url should start with http:// or https://
 menu:
   home: / || fa fa-home
+  posts: /posts/ || fa fa-blog
   about: /about/ || fa fa-user
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
@@ -137,6 +138,7 @@ sidebar:
   padding: 18
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
   offset: 12
+  wrap: false
 
 # Sidebar Avatar
 avatar:
@@ -162,6 +164,8 @@ social:
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
   #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
   YouTube: https://youtube.com/@brightprogrammer || fab fa-youtube
+  LinkedIn: https://linkedin.com/in/brightprogrammer || fab fa-linkedin
+  RSS: /atom.xml || fa fa-light fa-rss
   #Instagram: https://instagram.com/yourname || fab fa-instagram
   #Skype: skype:yourname?call|chat || fab fa-skype
 
@@ -369,8 +373,8 @@ codeblock:
     light: default
     dark: stackoverflow-dark
   prism:
-    light: prism
-    dark: prism-dark
+    light: prism-coldark-cold
+    dark: prism-gruvbox-dark
   # Add copy button on codeblock
   copy_button:
     enable: true
