@@ -29,69 +29,6 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/2023/01/15/Self-Debugging-Nanomite-Elvis-Protected-Crackme/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2023/04/14/Writing-A-HTTP-Web-Server-In-C/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/comment-policy.html</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/about/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://brightprogrammer.in/2023/07/02/Adding-MIPS-Support-For-Tracewrap-In-BAP/</loc>
     
     <lastmod>2023-08-03</lastmod>
@@ -191,7 +128,70 @@
   </url>
   
   <url>
+    <loc>http://brightprogrammer.in/2023/01/15/Self-Debugging-Nanomite-Elvis-Protected-Crackme/</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2023/04/14/Writing-A-HTTP-Web-Server-In-C/</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://brightprogrammer.in/404.html</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/comment-policy.html</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/about/</loc>
+    
+    <lastmod>2023-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/</loc>
     
     <lastmod>2023-08-03</lastmod>
     
@@ -603,6 +603,13 @@
   </url>
   
   <url>
+    <loc>http://brightprogrammer.in/categories/tips/</loc>
+    <lastmod>2023-08-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://brightprogrammer.in/categories/mathematics/game-theory/</loc>
     <lastmod>2023-08-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -638,13 +645,6 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/categories/tips/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://brightprogrammer.in/categories/open-source/</loc>
     <lastmod>2023-08-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -659,14 +659,14 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/categories/network-programming/</loc>
+    <loc>http://brightprogrammer.in/categories/open-source/rizin/</loc>
     <lastmod>2023-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/categories/open-source/rizin/</loc>
+    <loc>http://brightprogrammer.in/categories/network-programming/</loc>
     <lastmod>2023-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
