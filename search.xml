@@ -809,12 +809,12 @@ TR_LOOP_END --> |no| EXIT((exit));</pre>
 <li>The forest is unforgiving.</li>
 <li>Flag not correct.</li>
 <li>Please enter the flag:</li>
-<li><a href="mailto:&#x70;&#117;&#x74;&#115;&#64;&#71;&#76;&#73;&#66;&#67;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;">&#x70;&#117;&#x74;&#115;&#64;&#71;&#76;&#73;&#66;&#67;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;</a></li>
-<li><a href="mailto:&#x70;&#114;&#105;&#x6e;&#x74;&#102;&#64;&#x47;&#x4c;&#x49;&#66;&#67;&#95;&#50;&#x2e;&#x32;&#x2e;&#x35;">&#x70;&#114;&#105;&#x6e;&#x74;&#102;&#64;&#x47;&#x4c;&#x49;&#66;&#67;&#95;&#50;&#x2e;&#x32;&#x2e;&#x35;</a></li>
+<li><a href="mailto:&#112;&#117;&#116;&#115;&#x40;&#x47;&#x4c;&#73;&#x42;&#x43;&#95;&#x32;&#x2e;&#x32;&#46;&#x35;">&#112;&#117;&#116;&#115;&#x40;&#x47;&#x4c;&#73;&#x42;&#x43;&#95;&#x32;&#x2e;&#x32;&#46;&#x35;</a></li>
+<li><a href="mailto:&#x70;&#114;&#105;&#x6e;&#x74;&#102;&#64;&#71;&#76;&#x49;&#66;&#67;&#x5f;&#x32;&#46;&#50;&#46;&#53;">&#x70;&#114;&#105;&#x6e;&#x74;&#102;&#64;&#71;&#76;&#x49;&#66;&#67;&#x5f;&#x32;&#46;&#50;&#46;&#53;</a></li>
 <li>sqrt</li>
 <li>puts</li>
 <li>printf</li>
-<li><a href="mailto:&#x73;&#113;&#114;&#x74;&#64;&#x47;&#76;&#73;&#x42;&#67;&#95;&#x32;&#x2e;&#50;&#x2e;&#x35;">&#x73;&#113;&#114;&#x74;&#64;&#x47;&#76;&#73;&#x42;&#67;&#95;&#x32;&#x2e;&#50;&#x2e;&#x35;</a></li>
+<li><a href="mailto:&#x73;&#x71;&#114;&#x74;&#x40;&#71;&#x4c;&#73;&#x42;&#67;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;">&#x73;&#x71;&#114;&#x74;&#x40;&#71;&#x4c;&#73;&#x42;&#67;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;</a></li>
 </ul>
 <p>We can see that the program is using functions <code>sqrt</code>, <code>puts</code> and <code>printf</code>. Strings starting with a <code>.</code> represent a section in assembly, like for eg : <code>.rodata</code> means <em>read only data</em> section and <code>.text</code> is where our functions are stored. So, after taking a look at the strings above, it is clear that there is nothing important in here.</p>
 <p>The next step is to disassemble &#x2F; decompile the program and try to understand what it’s doing. I will use Ghidra for that but you can use other tools too if you like. Some people also use debuggers to solve these types of crackmes. Ghidra is an awesome tool writen by the <strong>NSA</strong> that can both disassemble and <em><strong>decompile</strong></em> your code.</p>
@@ -1245,6 +1245,44 @@ TR_LOOP_END --> |no| EXIT((exit));</pre>
         <tag>assembly</tag>
         <tag>radare</tag>
         <tag>conference</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Permanently Mounting Drives In Linux</title>
+    <url>/2023/08/03/Permanently-Mounting-Drives-In-Linux/</url>
+    <content><![CDATA[<p>After installing (or re-installing) Linux, your drives other than root may not be already mounted even if they are in <code>ext4</code> format. To make them mount permanently to some location even after you reboot, you need to add them to <code>/etc/fstab</code>. First we need to get a few things before we modify this file.</p>
+<h1 id="Step-1-Create-A-Mount-Point"><a href="#Step-1-Create-A-Mount-Point" class="headerlink" title="Step 1 : Create A Mount Point"></a>Step 1 : Create A Mount Point</h1><p>First you need to create a <code>mount-point</code> by creating an empty folder where your drive will be mounted.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="variable">$HOME</span>/BigMan</span><br></pre></td></tr></table></figure>
+
+<h1 id="Step-2-Find-Drive-ID-x2F-Name"><a href="#Step-2-Find-Drive-ID-x2F-Name" class="headerlink" title="Step 2 : Find Drive ID&#x2F;Name"></a>Step 2 : Find Drive ID&#x2F;Name</h1><p>Drives in Linux start with names like <code>/dev/sda</code>, <code>/dev/sdb</code>, <code>/dev/sdc</code>, etc… They’ll have multiple partitions later on that look like <code>/dev/sda1</code>, <code>/dev/sda2</code>, etc…</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo lsblk -f | grep <span class="string">&quot;sd&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Output :</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sda                                                                            </span><br><span class="line">├─sda1 swap   1            58d805bb-6947-4070-8d79-c8ee3f40b6ab                </span><br><span class="line">└─sda2 btrfs        BigMan 58060b51-f5cd-4228-b066-56974a3bef81   27.4G    96% /home/brightprogrammer/BigMan</span><br><span class="line">sdb                                                                            </span><br><span class="line">├─sdb1 vfat   FAT32        8431-E667                             299.1M     0% /boot/efi</span><br><span class="line">└─sdb2 ext4   1.0          28768223-d4c3-4937-843a-ec2ce5481c8e   97.4G    11% /</span><br></pre></td></tr></table></figure>
+
+<p>This will list all devices starting with name <code>sd</code>. I need to mount <code>/dev/sda2</code> which is a partition of <code>/dev/sda</code> device. Please note the <code>UUID</code> and partition type. In my case, partition type is <code>btrfs</code>.</p>
+<h1 id="Step-3-Mount-Drive"><a href="#Step-3-Mount-Drive" class="headerlink" title="Step 3 : Mount Drive"></a>Step 3 : Mount Drive</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mount /dev/sda2 <span class="variable">$HOME</span>/BigMan</span><br></pre></td></tr></table></figure>
+
+<p>I need to be able to access this drive as fast as possible so I’ll mount it at <code>$HOME/BigMan</code>.</p>
+<h1 id="Step-4-Edit-etc-fstab"><a href="#Step-4-Edit-etc-fstab" class="headerlink" title="Step 4 : Edit /etc/fstab"></a>Step 4 : Edit <code>/etc/fstab</code></h1><p>Open your favorite editor with <code>sudo</code> powers and add the following line to <code>/etc/fstab</code> file</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UUID=58060b51-f5cd-4228-b066-56974a3bef81 /home/brightprogrammer/BigMan 	btrfs	defaults,noatime 0 1</span><br></pre></td></tr></table></figure>
+
+<p>You need to place your own <code>UUID</code> and partition type here.</p>
+<h1 id="Step-5-Verify-etc-fstab"><a href="#Step-5-Verify-etc-fstab" class="headerlink" title="Step 5 : Verify /etc/fstab"></a>Step 5 : Verify <code>/etc/fstab</code></h1><p>You made some changes to a very important file and hence you need to verify whether you made correct changes, otherwise, your system might become un-bootable. To do this, run the following command :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo findmnt --verify</span><br></pre></td></tr></table></figure>
+
+<p>This will tell you about the errors you’ve made in your <code>/etc/fstab</code> and possible warn you about your file being changed and <code>systemctl</code> needs to know about it. Perform the required steps and then you’re done! Next time you boot, your drive will be automatically mounted to this location!</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a href="https://devconnected.com/how-to-mount-and-unmount-drives-on-linux/#Prerequisites">How To Mount And Unmount Drives On Linux</a></li>
+<li><a href="https://sleeplessbeastie.eu/2019/01/21/how-to-verify-fstab-file/">How To Verify fstab File</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>tips</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>tips</tag>
       </tags>
   </entry>
   <entry>
