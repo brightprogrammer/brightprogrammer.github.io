@@ -4,7 +4,7 @@
   <url>
     <loc>http://brightprogrammer.in/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +13,7 @@
   <url>
     <loc>http://brightprogrammer.in/posts/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,43 +22,7 @@
   <url>
     <loc>http://brightprogrammer.in/tags/</loc>
     
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2023/07/02/Adding-MIPS-Support-For-Tracewrap-In-BAP/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2022/12/09/Defeating-Anti-Debug-Part-1/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2023/06/08/Do-I-Really-Exist/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -67,16 +31,7 @@
   <url>
     <loc>http://brightprogrammer.in/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/</loc>
     
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2021/08/04/My-First-Crackme/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +40,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/01/29/One-Instruction-Set-Computers-OISC-Elvis-Magic-Box/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -94,7 +49,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/04/30/Overflow-and-Carry/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -103,7 +58,7 @@
   <url>
     <loc>http://brightprogrammer.in/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,7 +67,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/08/03/Permanently-Mounting-Drives-In-Linux/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -121,16 +76,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/04/11/RzIL-Introductory-Notes/</loc>
     
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/2023/01/15/Self-Debugging-Nanomite-Elvis-Protected-Crackme/</loc>
-    
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -139,7 +85,7 @@
   <url>
     <loc>http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -148,7 +94,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/03/01/The-AMD64-x86-64-Instruction-Encoding-Format/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -157,16 +103,7 @@
   <url>
     <loc>http://brightprogrammer.in/2023/04/14/Writing-A-HTTP-Web-Server-In-C/</loc>
     
-    <lastmod>2023-08-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/404.html</loc>
-    
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -175,7 +112,7 @@
   <url>
     <loc>http://brightprogrammer.in/comment-policy.html</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -184,7 +121,7 @@
   <url>
     <loc>http://brightprogrammer.in/about/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -193,7 +130,43 @@
   <url>
     <loc>http://brightprogrammer.in/categories/</loc>
     
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2023/07/02/Adding-MIPS-Support-For-Tracewrap-In-BAP/</loc>
+    
+    <lastmod>2023-08-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2023/06/08/Do-I-Really-Exist/</loc>
+    
+    <lastmod>2023-08-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/</loc>
+    
+    <lastmod>2023-08-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/404.html</loc>
+    
+    <lastmod>2023-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -202,7 +175,7 @@
 
   <url>
     <loc>http://brightprogrammer.in/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -210,336 +183,315 @@
   
   <url>
     <loc>http://brightprogrammer.in/tags/BinaryAnalysisPlatform/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/GSoC/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/rizin/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/trace/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/testing/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/rzil/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/OpenSource/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/qemu/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/internals/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/crackmes/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/reverse-engineering/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/windows/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/anti-debug/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/food-for-thought/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/philosophy/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/free-will/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/definition/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/existence/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/game-theory/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/analytics/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/mathematics/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/crackmes/</loc>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/reverse-engineering/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/vm/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/tags/linux/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <loc>http://brightprogrammer.in/tags/windows/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/oisc/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/overflow-carry/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/alu-design/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/intermediate-language/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/contest/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/assembly/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/radare/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/conference/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/tips/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/linux/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/notes/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/il-uplifter/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/nanomite/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/xorenc/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/x86-64/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/amd64/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/instruction-set/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/intel/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/amd/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/disassembler/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/project-blue/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/server/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/network-programming/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/socket/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/http/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/tags/note/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -548,140 +500,140 @@
   
   <url>
     <loc>http://brightprogrammer.in/categories/rizin/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/crackmes/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/philosophy/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/mathematics/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/crackmes/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/rizin/rzil/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/crackmes/windows/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/alu-design/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/contest/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/tips/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/mathematics/game-theory/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/alu-design/intermediate-language/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/trace/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/trace/qemu/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/open-source/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/disassembler/</loc>
-    <lastmod>2023-08-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/categories/open-source/rizin/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/network-programming/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/</loc>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/crackmes/windows/</loc>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/alu-design/intermediate-language/</loc>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/open-source/rizin/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/disassembler/amd64/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://brightprogrammer.in/categories/network-programming/web-server/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/trace/</loc>
+    <lastmod>2023-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/trace/qemu/</loc>
+    <lastmod>2023-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
