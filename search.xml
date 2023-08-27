@@ -243,6 +243,34 @@ TR_LOOP_END --> |no| EXIT((exit));</pre>
       </tags>
   </entry>
   <entry>
+    <title>Building GLSL Shaders In Vulkan CMAKE Project</title>
+    <url>/2023/08/27/Building-GLSL-Shaders-In-Vulkan-CMAKE-Project/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Every graphics rendering project need a build system to compile shaders. I usually encounter some problems while trying to setup this build system. This time I created a CMake script (by compiling from different sources that I do not remember about) to compile all shaders in a given directory. This compiled output will then be placed in <code>bin/Shaders</code> (if your output directory is <code>bin</code>).</p>
+<span id="more"></span>
+
+<p>C23 now provides a way to embed binary files in source, so you can just compile your shaders first and then embed the binary files to your source files as byte array. Then when you release your program, you won’t need to worry about finding the proper path of shaders and other complications related to that.</p>
+<h1 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h1><p>Here’s the code :</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">find_program</span>(GLSL_VALIDATOR glslangValidator HINTS /usr/bin /usr/local/bin $ENV&#123;VULKAN_SDK&#125;/Bin/ $ENV&#123;VULKAN_SDK&#125;/Bin32/)</span><br><span class="line"><span class="keyword">find_program</span>(GLSLC_EXECUTABLE glslc HINTS /usr/bin /usr/local/bin $ENV&#123;VULKAN_SDK&#125;/Bin/ $ENV&#123;VULKAN_SDK&#125;/Bin32/)</span><br><span class="line"></span><br><span class="line"><span class="comment">#==============================================================================</span></span><br><span class="line"><span class="comment"># COMPILE SHADERS</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(SHADER_SOURCE_DIR <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(SHADER_BINARY_DIR <span class="variable">$&#123;CMAKE_CURRENT_BINARY_DIR&#125;</span>/Build)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Using SHADER_SOURCE_DIR = $&#123;SHADER_SOURCE_DIR&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Using SHADER_BUILD_DIR = $&#123;SHADER_BUILD_DIR&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">file</span>(GLOB SHADERS</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.vert</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.frag</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.comp</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.geom</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.tesc</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.tese</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.mesh</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.task</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.rgen</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.rchit</span><br><span class="line">  <span class="variable">$&#123;SHADER_SOURCE_DIR&#125;</span>/*.rmiss)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_command</span>(</span><br><span class="line">  <span class="keyword">COMMAND</span></span><br><span class="line">    <span class="variable">$&#123;CMAKE_COMMAND&#125;</span> -E <span class="keyword">make_directory</span> <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span></span><br><span class="line">  OUTPUT <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span></span><br><span class="line">  COMMENT <span class="string">&quot;Creating $&#123;SHADER_BINARY_DIR&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(source IN LISTS SHADERS)</span><br><span class="line">  <span class="keyword">get_filename_component</span>(FILENAME <span class="variable">$&#123;source&#125;</span> NAME)</span><br><span class="line">  <span class="keyword">add_custom_command</span>(</span><br><span class="line">    <span class="keyword">COMMAND</span></span><br><span class="line">      <span class="variable">$&#123;GLSLC_EXECUTABLE&#125;</span></span><br><span class="line">      -o <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span>/<span class="variable">$&#123;FILENAME&#125;</span>.spv</span><br><span class="line">      <span class="variable">$&#123;source&#125;</span></span><br><span class="line">    OUTPUT <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span>/<span class="variable">$&#123;FILENAME&#125;</span>.spv</span><br><span class="line">    DEPENDS <span class="variable">$&#123;source&#125;</span> <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span></span><br><span class="line">    COMMENT <span class="string">&quot;Compiling $&#123;FILENAME&#125;&quot;</span></span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">list</span>(APPEND SPV_SHADERS <span class="variable">$&#123;SHADER_BINARY_DIR&#125;</span>/<span class="variable">$&#123;FILENAME&#125;</span>.spv)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_target</span>(shaders ALL DEPENDS <span class="variable">$&#123;SPV_SHADERS&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="How-To-Use"><a href="#How-To-Use" class="headerlink" title="How To Use?"></a>How To Use?</h1><p>I’ll explain how I’m using this at the moment. I have created a directory called <code>Shaders</code> that contains all the shaders that I’m going to use in my Vulkan project. I then place this <code>CMakeLists.txt</code> file in the <code>Shaders</code> directory and then just include this as a sub directory.</p>
+<p>Every compiled shader will have an extra <code>.spv</code> appended to it’s name. This will denote that it’s a compiled <code>SPIR-V</code> shader program. Now I already know the name of shader I compiled so I know the name of compiled program and it’s path. I can now use any trivial method to include the compiled shader and create <code>VkShaderModule</code> objects for it.</p>
+]]></content>
+      <categories>
+        <category>vulkan</category>
+        <category>glsl</category>
+        <category>cmake</category>
+      </categories>
+      <tags>
+        <tag>short-post</tag>
+        <tag>vulkan</tag>
+        <tag>building</tag>
+        <tag>shaders</tag>
+        <tag>glsl</tag>
+        <tag>cmake-project</tag>
+        <tag>urumi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Defeating Anti-Debug Part 1</title>
     <url>/2022/12/09/Defeating-Anti-Debug-Part-1/</url>
     <content><![CDATA[<p><img data-src="/images/revme3cm-crackme-page-ss.png" alt="crackme page"></p>
@@ -839,12 +867,12 @@ TR_LOOP_END --> |no| EXIT((exit));</pre>
 <li>The forest is unforgiving.</li>
 <li>Flag not correct.</li>
 <li>Please enter the flag:</li>
-<li><a href="mailto:&#x70;&#x75;&#x74;&#115;&#64;&#71;&#x4c;&#73;&#66;&#x43;&#95;&#50;&#x2e;&#x32;&#46;&#x35;">&#x70;&#x75;&#x74;&#115;&#64;&#71;&#x4c;&#73;&#66;&#x43;&#95;&#50;&#x2e;&#x32;&#46;&#x35;</a></li>
-<li><a href="mailto:&#112;&#x72;&#105;&#110;&#116;&#x66;&#x40;&#x47;&#x4c;&#73;&#66;&#67;&#95;&#50;&#46;&#50;&#x2e;&#53;">&#112;&#x72;&#105;&#110;&#116;&#x66;&#x40;&#x47;&#x4c;&#73;&#66;&#67;&#95;&#50;&#46;&#50;&#x2e;&#53;</a></li>
+<li><a href="mailto:&#x70;&#x75;&#x74;&#x73;&#x40;&#x47;&#76;&#x49;&#66;&#67;&#95;&#50;&#x2e;&#50;&#x2e;&#53;">&#x70;&#x75;&#x74;&#x73;&#x40;&#x47;&#76;&#x49;&#66;&#67;&#95;&#50;&#x2e;&#50;&#x2e;&#53;</a></li>
+<li><a href="mailto:&#112;&#114;&#x69;&#110;&#116;&#102;&#x40;&#71;&#76;&#x49;&#x42;&#67;&#x5f;&#x32;&#46;&#x32;&#46;&#53;">&#112;&#114;&#x69;&#110;&#116;&#102;&#x40;&#71;&#76;&#x49;&#x42;&#67;&#x5f;&#x32;&#46;&#x32;&#46;&#53;</a></li>
 <li>sqrt</li>
 <li>puts</li>
 <li>printf</li>
-<li><a href="mailto:&#x73;&#x71;&#x72;&#116;&#64;&#x47;&#76;&#73;&#66;&#67;&#x5f;&#50;&#46;&#x32;&#x2e;&#x35;">&#x73;&#x71;&#x72;&#116;&#64;&#x47;&#76;&#73;&#66;&#67;&#x5f;&#50;&#46;&#x32;&#x2e;&#x35;</a></li>
+<li><a href="mailto:&#x73;&#113;&#114;&#x74;&#64;&#71;&#76;&#x49;&#66;&#x43;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;">&#x73;&#113;&#114;&#x74;&#64;&#71;&#76;&#x49;&#66;&#x43;&#x5f;&#x32;&#x2e;&#50;&#46;&#53;</a></li>
 </ul>
 <p>We can see that the program is using functions <code>sqrt</code>, <code>puts</code> and <code>printf</code>. Strings starting with a <code>.</code> represent a section in assembly, like for eg : <code>.rodata</code> means <em>read only data</em> section and <code>.text</code> is where our functions are stored. So, after taking a look at the strings above, it is clear that there is nothing important in here.</p>
 <p>The next step is to disassemble &#x2F; decompile the program and try to understand what it’s doing. I will use Ghidra for that but you can use other tools too if you like. Some people also use debuggers to solve these types of crackmes. Ghidra is an awesome tool writen by the <strong>NSA</strong> that can both disassemble and <em><strong>decompile</strong></em> your code.</p>
