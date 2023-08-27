@@ -29,15 +29,6 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/</loc>
-    
-    <lastmod>2023-08-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://brightprogrammer.in/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/</loc>
     
     <lastmod>2023-08-27</lastmod>
@@ -209,6 +200,15 @@
   </url>
   
   <url>
+    <loc>http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://brightprogrammer.in/404.html</loc>
     
     <lastmod>2023-08-27</lastmod>
@@ -290,6 +290,20 @@
   </url>
   
   <url>
+    <loc>http://brightprogrammer.in/tags/short-post/</loc>
+    <lastmod>2023-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/building/</loc>
+    <lastmod>2023-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://brightprogrammer.in/tags/editor/</loc>
     <lastmod>2023-08-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -311,21 +325,7 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/tags/short-post/</loc>
-    <lastmod>2023-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://brightprogrammer.in/tags/vulkan/</loc>
-    <lastmod>2023-08-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://brightprogrammer.in/tags/building/</loc>
     <lastmod>2023-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -508,6 +508,20 @@
   
   <url>
     <loc>http://brightprogrammer.in/tags/conference/</loc>
+    <lastmod>2023-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/drives/</loc>
+    <lastmod>2023-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://brightprogrammer.in/tags/fstab/</loc>
     <lastmod>2023-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -712,7 +726,7 @@
   </url>
   
   <url>
-    <loc>http://brightprogrammer.in/categories/tips/</loc>
+    <loc>http://brightprogrammer.in/categories/linux/</loc>
     <lastmod>2023-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

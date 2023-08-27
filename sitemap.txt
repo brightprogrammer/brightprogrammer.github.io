@@ -1,7 +1,6 @@
 http://brightprogrammer.in/
 http://brightprogrammer.in/posts/
 http://brightprogrammer.in/tags/
-http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/
 http://brightprogrammer.in/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/
 http://brightprogrammer.in/2021/08/04/My-First-Crackme/
 http://brightprogrammer.in/2023/01/29/One-Instruction-Set-Computers-OISC-Elvis-Magic-Box/
@@ -21,6 +20,7 @@ http://brightprogrammer.in/2023/08/26/Building-Emacs-From-Source/
 http://brightprogrammer.in/2023/08/27/Building-GLSL-Shaders-In-Vulkan-CMAKE-Project/
 http://brightprogrammer.in/2022/12/09/Defeating-Anti-Debug-Part-1/
 http://brightprogrammer.in/2023/06/08/Do-I-Really-Exist/
+http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/
 http://brightprogrammer.in/404.html
 http://brightprogrammer.in/
 http://brightprogrammer.in/tags/BinaryAnalysisPlatform/
@@ -32,12 +32,12 @@ http://brightprogrammer.in/tags/rzil/
 http://brightprogrammer.in/tags/OpenSource/
 http://brightprogrammer.in/tags/qemu/
 http://brightprogrammer.in/tags/internals/
+http://brightprogrammer.in/tags/short-post/
+http://brightprogrammer.in/tags/building/
 http://brightprogrammer.in/tags/editor/
 http://brightprogrammer.in/tags/emacs/
 http://brightprogrammer.in/tags/build-from-source/
-http://brightprogrammer.in/tags/short-post/
 http://brightprogrammer.in/tags/vulkan/
-http://brightprogrammer.in/tags/building/
 http://brightprogrammer.in/tags/shaders/
 http://brightprogrammer.in/tags/glsl/
 http://brightprogrammer.in/tags/cmake-project/
@@ -64,6 +64,8 @@ http://brightprogrammer.in/tags/contest/
 http://brightprogrammer.in/tags/assembly/
 http://brightprogrammer.in/tags/radare/
 http://brightprogrammer.in/tags/conference/
+http://brightprogrammer.in/tags/drives/
+http://brightprogrammer.in/tags/fstab/
 http://brightprogrammer.in/tags/tips/
 http://brightprogrammer.in/tags/notes/
 http://brightprogrammer.in/tags/il-uplifter/
@@ -92,7 +94,7 @@ http://brightprogrammer.in/categories/vulkan/glsl/
 http://brightprogrammer.in/categories/alu-design/
 http://brightprogrammer.in/categories/contest/
 http://brightprogrammer.in/categories/crackmes/windows/
-http://brightprogrammer.in/categories/tips/
+http://brightprogrammer.in/categories/linux/
 http://brightprogrammer.in/categories/open-source/
 http://brightprogrammer.in/categories/rizin/rzil/BinaryAnalysisPlatform/
 http://brightprogrammer.in/categories/disassembler/
