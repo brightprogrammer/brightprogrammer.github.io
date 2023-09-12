@@ -163,17 +163,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,6 +224,442 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2022/01/08/osdev/system-boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/08/osdev/system-boot/" class="post-title-link" itemprop="url">Operating System - System Boot</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Sat, 8th January, 2022 12:00:00" itemprop="dateCreated datePublished" datetime="2022-01-08T12:00:00+05:30">Sat, 8th January, 2022</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/osdev/" itemprop="url" rel="index"><span itemprop="name">osdev</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2022/01/08/osdev/system-boot/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/01/08/osdev/system-boot/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="System-Boot"><a href="#System-Boot" class="headerlink" title="System Boot"></a>System Boot</h1><h6 id="8th-January-2022-Siddharth-Mishra"><a href="#8th-January-2022-Siddharth-Mishra" class="headerlink" title="8th January 2022 | Siddharth Mishra"></a>8th January 2022 | Siddharth Mishra</h6><p>This will be a post on what actually happens when a system boots up.</p>
+<p>When system boots up motherboard first checks if all necessary components  are attached or not. If they are not then it shows it’s tantrums that one needs to debug. Motherboard first initialises it’s firmware, i.e the chipset and other things needed for normal startup.</p>
+<p>Then the control is sent to the bootloader that is responsible for further initialisation of kernel which ultimately loads the complete OS. If on a multicore processor, one of the core is chosen dynamically (the bootstrap processor : BSP) and is given the responsibility to run the code for bootloader and kernel. The remaining cores remain halted unless being used explicitly by kernel or bootloader.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/08/osdev/system-boot/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2021/12/27/Solving-A-VM-Crackme-My-First-One/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/27/Solving-A-VM-Crackme-My-First-One/" class="post-title-link" itemprop="url">Solving A VM Crackme - My First One!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Mon, 27th December, 2021 14:13:01" itemprop="dateCreated datePublished" datetime="2021-12-27T14:13:01+05:30">Mon, 27th December, 2021</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/crackmes/" itemprop="url" rel="index"><span itemprop="name">crackmes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/12/27/Solving-A-VM-Crackme-My-First-One/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/27/Solving-A-VM-Crackme-My-First-One/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>I’m always having problems solving a VM obfucscation challenge in any CTF. This time I plan to end this by solving a VM CrackMe. I got this from a team-mate ( <a href="https://twitter.com/h4x5p4c3">h4x5p4c3</a> ), another helpful team-mate.</p>
+<p>Here are a few resources before we begin : </p>
+<ul>
+<li><a href="https://youtu.be/b6udPT79itk">Analysis Of Virtualization-based Obfuscation</a></li>
+<li><a href="https://drive.google.com/file/d/1Yc54_ogPcVUpFICXVPOnFLsGvS8Xq668/view?usp=sharing">The challenge</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/12/27/Solving-A-VM-Crackme-My-First-One/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/" class="post-title-link" itemprop="url">Participating in R2Wars 2021 in R2Con</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Fri, 3rd September, 2021 19:21:06" itemprop="dateCreated datePublished" datetime="2021-09-03T19:21:06+05:30">Fri, 3rd September, 2021</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/contest/" itemprop="url" rel="index"><span itemprop="name">contest</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/09/03/Participating-in-R2Wars-2021-in-R2Con/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img data-src="/images/r2con21-poster.jpg"></p>
+<p>So I participated in this year’s online <a href="https://rada.re/con/2021/">r2con</a>‘s <a href="https://rada.re/con/2021/#r2wars">r2wars</a> event. Online, because of COVID19. It was amazing. Me and my friend (<strong><a href="https://twitter.com/X3eRo0">X3eRo0</a></strong>) participated in this years <a href="https://rada.re/con/2021/">r2con</a>. I never heard of this event before and it was introduced to me by <strong><a href="https://twitter.com/X3eRo0">X3eRo0</a></strong> himself. Also this type of event was completely new to me.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/03/Participating-in-R2Wars-2021-in-R2Con/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/" class="post-title-link" itemprop="url">Manual Decompilation - How Real Men Do It!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Fri, 3rd September, 2021 14:58:58" itemprop="dateCreated datePublished" datetime="2021-09-03T14:58:58+05:30">Fri, 3rd September, 2021</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/crackmes/" itemprop="url" rel="index"><span itemprop="name">crackmes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img data-src="/images/xvm-preview.png"></p>
+<blockquote>
+<p>“Arguing that you don’t care about the right to privacy because you have nothing to hide is no different than saying you don’t care about free speech because you have nothing to say.”<br>― Edward Snowden </p>
+</blockquote>
+<p>In this post, I will make an attempt to solve <a href="https://crackmes.one/user/X3eRo0">X3eRo0</a>‘s crackme named <a href="https://crackmes.one/crackme/60be2a6033c5d410b8842c91">Pyaz</a>. Below is the information provided on crackme’s page</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/03/Manual-Decompilation-How-Real-Men-Do-It/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2021/08/04/My-First-Crackme/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -260,7 +696,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Sun, 27th August, 2023 20:13:07" itemprop="dateModified" datetime="2023-08-27T20:13:07+05:30">Sun, 27th August, 2023</time>
+      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
