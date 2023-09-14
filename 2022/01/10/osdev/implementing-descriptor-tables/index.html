@@ -17,9 +17,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"brightprogrammer.in","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"wrap":false},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"brightprogrammer.in","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"wrap":false},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="WARNING : From here onwards you need some experience with x86_64 assembly. I’ve done some reverse engineering stuffs so I have some basic knowledge to find my way out of this. You’ll need something s">
 <meta property="og:type" content="blog">
@@ -59,7 +59,7 @@
 <meta property="og:image" content="http://brightprogrammer.in/res/osdev/callGateDescriptorLongMode.png">
 <meta property="og:image" content="http://brightprogrammer.in/res/osdev/interruptAndTrapGateDescriptorLongMode.png">
 <meta property="article:published_time" content="2022-01-10T06:30:00.000Z">
-<meta property="article:modified_time" content="2023-09-12T17:53:06.296Z">
+<meta property="article:modified_time" content="2023-09-14T11:49:20.930Z">
 <meta property="article:author" content="Siddharth Mishra">
 <meta property="article:tag" content="osdev">
 <meta property="article:tag" content="series">
@@ -178,7 +178,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segmentation-Data-Structures-amp-Registers"><span class="nav-number">2.</span> <span class="nav-text">Segmentation Data Structures &amp; Registers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Registers"><span class="nav-number">3.</span> <span class="nav-text">Segment Registers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Registers-In-64-Bit-Mode"><span class="nav-number">4.</span> <span class="nav-text">Segment Registers In 64-Bit Mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Descriptor-Tables"><span class="nav-number">5.</span> <span class="nav-text">Descriptor Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Descriptor-Table"><span class="nav-number">5.1.</span> <span class="nav-text">Global Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Descriptor-Table-Register-GDTR"><span class="nav-number">5.2.</span> <span class="nav-text">Global Descriptor Table Register (GDTR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Descriptor-Table"><span class="nav-number">5.3.</span> <span class="nav-text">Local Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Descriptor-Table-Register-LDTR"><span class="nav-number">5.4.</span> <span class="nav-text">Local Descriptor Table Register (LDTR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-Descriptor-Table"><span class="nav-number">5.5.</span> <span class="nav-text">Interrupt Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-Descriptor-Table-Register-IDTR"><span class="nav-number">5.6.</span> <span class="nav-text">Interrupt Descriptor Table Register (IDTR)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Legacy-Segment-Descriptors"><span class="nav-number">6.</span> <span class="nav-text">Legacy Segment Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Segment-Descriptors"><span class="nav-number">6.1.</span> <span class="nav-text">Code Segment Descriptors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Segment-Descriptors"><span class="nav-number">6.2.</span> <span class="nav-text">Data Segment Descriptors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Descriptors"><span class="nav-number">7.</span> <span class="nav-text">System Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gate-Descriptors"><span class="nav-number">7.1.</span> <span class="nav-text">Gate Descriptors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Long-Mode-Segment-Descriptors"><span class="nav-number">8.</span> <span class="nav-text">Long Mode Segment Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Segment-Descriptor-In-Long-Mode"><span class="nav-number">8.1.</span> <span class="nav-text">Code Segment Descriptor In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Segment-Descriptor-In-Long-Mode"><span class="nav-number">8.2.</span> <span class="nav-text">Data Segment Descriptor In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Segment-Descriptor-Types-In-Long-Mode"><span class="nav-number">8.3.</span> <span class="nav-text">System Segment Descriptor Types In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gate-Descriptors-1"><span class="nav-number">8.4.</span> <span class="nav-text">Gate Descriptors</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segmentation-Data-Structures-Registers"><span class="nav-number">2.</span> <span class="nav-text">Segmentation Data Structures &amp; Registers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Registers"><span class="nav-number">3.</span> <span class="nav-text">Segment Registers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segment-Registers-In-64-Bit-Mode"><span class="nav-number">4.</span> <span class="nav-text">Segment Registers In 64-Bit Mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Descriptor-Tables"><span class="nav-number">5.</span> <span class="nav-text">Descriptor Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Descriptor-Table"><span class="nav-number">5.1.</span> <span class="nav-text">Global Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Descriptor-Table-Register-GDTR"><span class="nav-number">5.2.</span> <span class="nav-text">Global Descriptor Table Register (GDTR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Descriptor-Table"><span class="nav-number">5.3.</span> <span class="nav-text">Local Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Descriptor-Table-Register-LDTR"><span class="nav-number">5.4.</span> <span class="nav-text">Local Descriptor Table Register (LDTR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-Descriptor-Table"><span class="nav-number">5.5.</span> <span class="nav-text">Interrupt Descriptor Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-Descriptor-Table-Register-IDTR"><span class="nav-number">5.6.</span> <span class="nav-text">Interrupt Descriptor Table Register (IDTR)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Legacy-Segment-Descriptors"><span class="nav-number">6.</span> <span class="nav-text">Legacy Segment Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Segment-Descriptors"><span class="nav-number">6.1.</span> <span class="nav-text">Code Segment Descriptors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Segment-Descriptors"><span class="nav-number">6.2.</span> <span class="nav-text">Data Segment Descriptors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Descriptors"><span class="nav-number">7.</span> <span class="nav-text">System Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gate-Descriptors"><span class="nav-number">7.1.</span> <span class="nav-text">Gate Descriptors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Long-Mode-Segment-Descriptors"><span class="nav-number">8.</span> <span class="nav-text">Long Mode Segment Descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Segment-Descriptor-In-Long-Mode"><span class="nav-number">8.1.</span> <span class="nav-text">Code Segment Descriptor In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Segment-Descriptor-In-Long-Mode"><span class="nav-number">8.2.</span> <span class="nav-text">Data Segment Descriptor In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Segment-Descriptor-Types-In-Long-Mode"><span class="nav-number">8.3.</span> <span class="nav-text">System Segment Descriptor Types In Long Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gate-Descriptors-1"><span class="nav-number">8.4.</span> <span class="nav-text">Gate Descriptors</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -193,17 +193,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -308,7 +308,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Tue, 12th September, 2023 23:23:06" itemprop="dateModified" datetime="2023-09-12T23:23:06+05:30">Tue, 12th September, 2023</time>
+      <time title="Modified: Thu, 14th September, 2023 17:19:20" itemprop="dateModified" datetime="2023-09-14T17:19:20+05:30">Thu, 14th September, 2023</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -360,7 +360,7 @@
 <li>64-bit mode, segmentation is disabled, creating a flat 64-bit virtual-address space. As will be seen, certain functions of some segment registers, particularly the system-segment registers, continue to be used in 64-bit mode.</li>
 </ul>
 <p>The segment base is the lowest address in a given segment, and is equal to the segment selector * 16 (lshift by 4 bits). The <code>POP</code> and <code>MOV</code> instructions can be used to load a new segment selector into one of the segment registers. When this occurs, the selector is updated and the segment base is set to selector * 16. The segment limit and segment attributes are unchanged, but are normally 64K (the maximum allowable limit) and read&#x2F;write data, respectively</p>
-<h2 id="Segmentation-Data-Structures-amp-Registers"><a href="#Segmentation-Data-Structures-amp-Registers" class="headerlink" title="Segmentation Data Structures &amp; Registers"></a>Segmentation Data Structures &amp; Registers</h2><ul>
+<h2 id="Segmentation-Data-Structures-Registers"><a href="#Segmentation-Data-Structures-Registers" class="headerlink" title="Segmentation Data Structures &amp; Registers"></a>Segmentation Data Structures &amp; Registers</h2><ul>
 <li><p><em>Segment Descriptors</em> — As the name implies, a segment descriptor describes a segment, including its location in virtual-address space, its size, protection characteristics, and other attributes.</p>
 </li>
 <li><p><em>Descriptor Tables</em> - Segment descriptors are stored in memory in one of three tables. The Global Descriptor Table (<code>GDT</code>) holds segment descriptors that can be shared among all tasks. Multiple local-descriptor tables (<code>LDT</code>) can be defined to hold descriptors that are used by specific tasks and are not shared globally. The Interrupt Descriptor Table (<code>IDT</code>) holds gate descriptors that are used to access the segments where interrupt handlers are located.</p>
@@ -940,12 +940,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2022/01/09/osdev/creating-our-own-puts/" rel="prev" title="Operating System - Creating Our Own Puts">
-                  <i class="fa fa-chevron-left"></i> Operating System - Creating Our Own Puts
+                  <i class="fa fa-angle-left"></i> Operating System - Creating Our Own Puts
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2022/08/20/Game-Theory-Race-To-Zero/" rel="next" title="Game Theory : Race To Zero">
-                  Game Theory : Race To Zero <i class="fa fa-chevron-right"></i>
+                  Game Theory : Race To Zero <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -1006,8 +1006,7 @@
   <script size="300" alpha="0.25" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
@@ -1018,7 +1017,7 @@
   <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
   <script src="/js/third-party/tags/pdf.js"></script>
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","integrity":"sha256-JFptYy4KzJ5OQP+Q9fubNf3cxpPPmZKqUOovyEONKrQ="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
 

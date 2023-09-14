@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars.githubusercontent.com/u/37365905?v=4">
+  <link rel="mask-icon" href="https://avatars.githubusercontent.com/u/37365905?v=4" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.css" integrity="sha256-RvRHGSuWAxZpXKV9lLDt2e+rZ+btzn48Wp4ueS3NZKs=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"brightprogrammer.in","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"wrap":false},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Back StoryRecently I participated in a 24hr all night hackathon in my college where we had to address some machine learning problems. One of them was creating an attendance system where you just need">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Shortcut To Creating APIs In Python">
+<meta property="og:url" content="http://brightprogrammer.in/2023/09/14/Shortcut-To-Creating-APIs-In-Python/">
+<meta property="og:site_name" content="ProjectBlue">
+<meta property="og:description" content="Back StoryRecently I participated in a 24hr all night hackathon in my college where we had to address some machine learning problems. One of them was creating an attendance system where you just need">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-14T10:35:52.000Z">
+<meta property="article:modified_time" content="2023-09-14T11:49:20.930Z">
+<meta property="article:author" content="Siddharth Mishra">
+<meta property="article:tag" content="short-post">
+<meta property="article:tag" content="hackathon">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="api">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://brightprogrammer.in/2023/09/14/Shortcut-To-Creating-APIs-In-Python/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://brightprogrammer.in/2023/09/14/Shortcut-To-Creating-APIs-In-Python/","path":"2023/09/14/Shortcut-To-Creating-APIs-In-Python/","title":"Shortcut To Creating APIs In Python"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Shortcut To Creating APIs In Python | ProjectBlue</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNB6BFVRV9"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-HNB6BFVRV9","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="ProjectBlue" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ProjectBlue</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The Blue Place</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-posts"><a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>posts</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Back-Story"><span class="nav-number">1.</span> <span class="nav-text">Back Story</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-API"><span class="nav-number">3.</span> <span class="nav-text">The API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Virtual-Environment"><span class="nav-number">3.1.</span> <span class="nav-text">The Virtual Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Required-Packages"><span class="nav-number">3.2.</span> <span class="nav-text">Installing Required Packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-First-API"><span class="nav-number">3.3.</span> <span class="nav-text">Creating First API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recieving-Files"><span class="nav-number">3.4.</span> <span class="nav-text">Recieving Files</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extra-Stuffssss%E2%80%A6"><span class="nav-number">4.</span> <span class="nav-text">Extra Stuffssss…</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-Site-Public"><span class="nav-number">4.1.</span> <span class="nav-text">Making Site Public:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hosting-Frontend"><span class="nav-number">4.2.</span> <span class="nav-text">Hosting Frontend</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-End"><span class="nav-number">5.</span> <span class="nav-text">The End</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Siddharth Mishra"
+      src="https://avatars.githubusercontent.com/u/37365905?v=i4">
+  <p class="site-author-name" itemprop="name">Siddharth Mishra</p>
+  <div class="site-description" itemprop="description">brightprogrammer`s blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/brightprogrammer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@brightprogrammer.in" title="E-Mail → mailto:admin@brightprogrammer.in" rel="noopener me"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/brightprogramer" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;brightprogramer" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/@brightprogrammer" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;@brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://linkedin.com/in/brightprogrammer" title="LinkedIn → https:&#x2F;&#x2F;linkedin.com&#x2F;in&#x2F;brightprogrammer" rel="noopener me" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-light fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2023/09/14/Shortcut-To-Creating-APIs-In-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Shortcut To Creating APIs In Python | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shortcut To Creating APIs In Python
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: Thu, 14th September, 2023 16:05:52 / Modified: 17:19:20" itemprop="dateCreated datePublished" datetime="2023-09-14T16:05:52+05:30">Thu, 14th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hackathon/" itemprop="url" rel="index"><span itemprop="name">hackathon</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hackathon/short-post/" itemprop="url" rel="index"><span itemprop="name">short-post</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2023/09/14/Shortcut-To-Creating-APIs-In-Python/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/09/14/Shortcut-To-Creating-APIs-In-Python/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Back-Story"><a href="#Back-Story" class="headerlink" title="Back Story"></a>Back Story</h1><p>Recently I participated in a 24hr all night hackathon in my college where we had to address some machine learning problems. One of them was creating an attendance system where you just need an image or a video to mark that student as present for that day.</p>
+<p>We decided to create the machine learning backend in python and frontend in simple HTML and javascript. We would send responses in JSON format and receive requests through an API. Now we needed to create an API quick as we don’t want to spend much time on just creating the backend and frontend.</p>
+<p>So, this post will be on how I created a simple API in python quicky in less than 10 lines of code. This is for me for future references and also for those who need quick copy-paste like code to create simple API in an easy language for their backend.</p>
+<span id="more"></span>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>API (Application Progamming Inteface) is a term generally used for web interfaces. Basically, your whole application is divided into backend and frontend. The sole purpose of your frontend is to rendering things based on the data it recieves from backend. If backend gives you a 404 error, you show the <code>404.html</code> page, if backend gives you a <code>JSON</code> with entries to be filled in a table, you display that <code>JSON</code> in tabular format by appending to a <code>DOM</code> (Document Object Model) element.</p>
+<p>So, APIs are just what they sound like, they’re interfaces, they’re black objects that do spooky things. All you need to know about them is they’ll do what they say they can do. For eg, in my case, the frontend, when loaded, would request a specific URL that’ll fetch a <code>JSON</code> response containing information about attendance of all students enrolled in your college and then frontend will use that <code>JSON</code> to edit the DOM and append rows to a table element, something like this :</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;http://localhost:8000/get_database&quot;</span>)</span><br><span class="line">.<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">response</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> response.<span class="title function_">json</span>();</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">students</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> placeholder = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#data-output&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> out = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> product <span class="keyword">of</span> students)&#123;</span><br><span class="line">        out += <span class="string">`</span></span><br><span class="line"><span class="string">            &lt;tr id=&quot;student-table-row-<span class="subst">$&#123;id&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;td&gt;<span class="subst">$&#123;product.name&#125;</span>&lt;/td&gt;</span></span><br><span class="line"><span class="string">                &lt;td&gt;<span class="subst">$&#123;product.branch&#125;</span>&lt;/td&gt;</span></span><br><span class="line"><span class="string">                &lt;td&gt;<span class="subst">$&#123;product.dob&#125;</span>&lt;/td&gt;</span></span><br><span class="line"><span class="string">                &lt;td&gt;<span class="subst">$&#123;product.present&#125;</span>&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;/tr&gt;</span></span><br><span class="line"><span class="string">        `</span>;</span><br><span class="line">        id += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    placeholder.<span class="property">innerHTML</span> = out;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello!&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Don’t mind the names not making sense sometimes, we were in a hurry, so we tested the API first on a dummy data before setting up complete <code>MySql</code> database and using it.</p>
+</blockquote>
+<h1 id="The-API"><a href="#The-API" class="headerlink" title="The API"></a>The API</h1><p>Ok, so now we just jump to the API creation part first. We don’t usually need a frontend to verify that our API is working as expected. Your browser will usually render the <code>JSON</code> response automatically.</p>
+<h2 id="The-Virtual-Environment"><a href="#The-Virtual-Environment" class="headerlink" title="The Virtual Environment"></a>The Virtual Environment</h2><p>It’s best if we setup a virtual environment instead of installing packages globally. </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> DataHack23 &amp;&amp; <span class="built_in">cd</span> DataHack23</span><br><span class="line"><span class="built_in">mkdir</span> backend &amp;&amp; <span class="built_in">cd</span> backend</span><br><span class="line">python -m venv venv</span><br><span class="line"><span class="built_in">source</span> venv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<h2 id="Installing-Required-Packages"><a href="#Installing-Required-Packages" class="headerlink" title="Installing Required Packages"></a>Installing Required Packages</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install fastapi <span class="comment"># for api creation</span></span><br><span class="line">pip install uvicorn <span class="comment"># for web server configs</span></span><br></pre></td></tr></table></figure>
+
+<p>Just this, yes!</p>
+<h2 id="Creating-First-API"><a href="#Creating-First-API" class="headerlink" title="Creating First API"></a>Creating First API</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> File, UploadFile, Request, FastAPI</span><br><span class="line"><span class="keyword">import</span> uvicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># setup fastpi</span></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="comment"># simple api</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/get_database&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_database</span>():</span><br><span class="line">  <span class="keyword">return</span> dbhandler.get_database()</span><br><span class="line">  </span><br><span class="line"><span class="comment"># run server</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    uvicorn.run(app, host=<span class="string">&#x27;0.0.0.0&#x27;</span>, port=<span class="number">8000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Just this! (and that dbhandler code for handling our attendance database). All you need to do is create functions like this :</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/my_api&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">handle_api</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">f&quot;Hello <span class="subst">&#123;name&#125;</span>!&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>…and to request this API, you need to do go to <code>http://&lt;ip&gt;:&lt;port&gt;/my_api?name=bright</code> and this would send a response with json containing “Hello bright!”</p>
+<h2 id="Recieving-Files"><a href="#Recieving-Files" class="headerlink" title="Recieving Files"></a>Recieving Files</h2><p>You can also get uploaded files from frontend to backend by creating an <code>@app.post(...)</code> method like this :</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.post(<span class="params"><span class="string">&quot;/update_attendance&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_attendance</span>(<span class="params">file: UploadFile = File(<span class="params">...</span>)</span>):</span><br><span class="line">    <span class="comment"># create a random filename based on time</span></span><br><span class="line">    <span class="comment"># I created a separate folder named &quot;/tmp&quot; for this task</span></span><br><span class="line">    <span class="comment"># in DataHack23/backend folder</span></span><br><span class="line">    new_filename = new_name()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># download file and save it locally</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        contents = file.file.read()</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(new_filename, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(contents)</span><br><span class="line">        <span class="comment"># don&#x27;t do things here</span></span><br><span class="line">        <span class="comment"># try blocks are too slow to handle</span></span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;There was an error uploading the file&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        file.file.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># show status that we&#x27;ve started working</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Updating Attendance...&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># do attendance joo joo...</span></span><br><span class="line">    dbdata = dbhandler.get_complete_database()</span><br><span class="line">    roll = get_roll(dbdata, new_filename)</span><br><span class="line">    dbhandler.mark_present(roll)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># final status</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Attendance Updated for roll=<span class="subst">&#123;roll&#125;</span>!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>But, sadly, the way we setup the database, almost everytime, you’ll end up marking the wrong student. This is bad as it’ll always result in a proxy attendance XD XD. Everything other than the face recognition model was working as it should and our frontend was working super fast.</p>
+<h1 id="Extra-Stuffssss…"><a href="#Extra-Stuffssss…" class="headerlink" title="Extra Stuffssss…"></a>Extra Stuffssss…</h1><p>We created our fronted in less than 5 minutes using <a href="https://bulma.io/">Bulma CSS</a>. Also, you should consider going through <a href="https://fastapi.tiangolo.com/">FastAPI</a> documentation.</p>
+<h2 id="Making-Site-Public"><a href="#Making-Site-Public" class="headerlink" title="Making Site Public:"></a>Making Site Public:</h2><p>There’s a <code>CORS</code> variable that you need to setup, in order to allow others to access your backend (or even frontend for that matter). You can do that by adding this to your code :</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setup CORS</span></span><br><span class="line">app.add_middleware(</span><br><span class="line">    CORSMiddleware,</span><br><span class="line">    allow_origins=[<span class="string">&quot;*&quot;</span>], <span class="comment"># this is a regex</span></span><br><span class="line">    allow_credentials=<span class="literal">True</span>,</span><br><span class="line">    allow_methods=[<span class="string">&quot;*&quot;</span>],</span><br><span class="line">    allow_headers=[<span class="string">&quot;*&quot;</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>*</code> means it’ll allow all origins to pass, but you can be selective about it, like : <code>*.myfrontend.in</code>, meaning any website with name ending in <code>myfrontend.in</code> will be able to access your API calls. Being a cybersec guy, I can’t fail to notice one problem with this type of selection of origins. As an attacker, if I can get a domain with something ending in <code>myfrontend.in</code>, then I might be able to access your backend API and then try some evil things like using <code>SQLi</code>.</p>
+<h2 id="Hosting-Frontend"><a href="#Hosting-Frontend" class="headerlink" title="Hosting Frontend"></a>Hosting Frontend</h2><p>My beloved editor does not support easy features like hosting a HTML like a webserver (like in vscode), so I found a way to host it locally.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> DataHack23</span><br><span class="line"><span class="built_in">mkdir</span> frontend &amp;&amp; <span class="built_in">cd</span> frontend</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&lt;html&gt;&lt;title&gt;Project Blue&lt;/title&gt;&lt;body&gt;&lt;h1&gt;Awesome API&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span> &gt; index.html</span><br></pre></td></tr></table></figure>
+
+<p>and then install python http webserver package (if not installed) and then</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 1337 <span class="comment"># 1337 is the port number</span></span><br></pre></td></tr></table></figure>
+
+<p>This will create a simple http webserver and which you can visit using your browser like <code>http://localhost:1337</code>.</p>
+<h1 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h1><p>This marks the end of this post. I’ve shown (in a very brief manner) what I’ve done. See you in another post.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/brightprogramer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://youtube.com/@brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-youtube"></i>
+            </span>
+
+            <span class="label">YouTube</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://linkedin.com/in/brightprogrammer">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+
+            <span class="label">LinkedIn</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="mailto:admin@brightprogrammer.in">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+
+            <span class="label">Mail</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/short-post/" rel="tag"># short-post</a>
+              <a href="/tags/hackathon/" rel="tag"># hackathon</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/api/" rel="tag"># api</a>
+              <a href="/tags/web/" rel="tag"># web</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_whatsapp"></a>
+      <a class="a2a_button_linkedin"></a>
+      <a class="a2a_button_mastodon"></a>
+      <a class="a2a_button_telegram"></a>
+      <a class="a2a_button_email"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/27/Building-GLSL-Shaders-In-Vulkan-CMAKE-Project/" rel="prev" title="Building GLSL Shaders In Vulkan CMAKE Project">
+                  <i class="fa fa-angle-left"></i> Building GLSL Shaders In Vulkan CMAKE Project
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Siddharth Mishra</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/brightprogrammer" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.25" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.20/fancybox/fancybox.umd.js" integrity="sha256-q8XkJ6dj5VwSvzI8+nATCHHQG+Xv/dAZBCgqmu93zOY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js","integrity":"sha256-g2xji1rlE3KsGVClvuxTbcR0Kn2+wtQADSff2Tbb4zA="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.3.0/mermaid.min.js","integrity":"sha256-9y71g5Lz/KLsHjB8uXwnkuWDtAMDSzD/HdIbqhJfTAI="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" integrity="sha256-3574TpfThVfeAhg+I4+N39EJiLN3QUkuEsMVe8hWAR4=" crossorigin="anonymous">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://brightprogrammer.in/2023/09/14/Shortcut-To-Creating-APIs-In-Python/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"projectblue","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
