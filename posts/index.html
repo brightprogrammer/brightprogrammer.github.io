@@ -163,7 +163,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,6 +224,208 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2024/02/14/Deciding-Whether-Language-Set-Is-Empty-Or-Not/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/14/Deciding-Whether-Language-Set-Is-Empty-Or-Not/" class="post-title-link" itemprop="url">Deciding Whether Language Set Is Empty Or Not</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: Wed, 14th February, 2024 16:58:07 / Modified: 17:17:40" itemprop="dateCreated datePublished" datetime="2024-02-14T16:58:07+05:30">Wed, 14th February, 2024</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/02/14/Deciding-Whether-Language-Set-Is-Empty-Or-Not/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/02/14/Deciding-Whether-Language-Set-Is-Empty-Or-Not/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Given a context-free grammar, can we decide whether or not the language set is empty or not? I encountered this problem recently while writing a tool to describe grammar of other languages and use that grammar to generate random strings of that language. The parsing stage was done and now I needed to validate (to some extent) whether or not the given grammar is meaningfully correct. This includes things like :</p>
+<ul>
+<li>Checking no two rules have same names</li>
+<li>All the rules are reachable</li>
+<li>Identifiers used in rules refer to only existing rules in the grammar.</li>
+<li>Grammar can generate strings (a decidability problem : yes&#x2F;no answer).</li>
+</ul>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples :"></a>Examples :</h1><p>Here is an example of a context-free grammar that will never generate any string at all!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">START = S;</span><br><span class="line"></span><br><span class="line">S = A, B;</span><br><span class="line">A = &quot;a&quot;;</span><br><span class="line">B = &quot;a&quot;, C;</span><br><span class="line">C = &quot;a&quot;, B;</span><br></pre></td></tr></table></figure>
+
+<p>You see the generator once reaches the non-terminal <code>B</code>, it’ll enter into an infinite-mutual-recursion state which it’ll never be able to exit out of (on a theoretical machine, with infinite memory). To deal with these types of grammars, I needed an algorithm to decide beforehand, whether or not it’ll generate any string at all.  </p>
+<p>With slight modification, this grammar will be able to generate strings :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">START = S;</span><br><span class="line"></span><br><span class="line">S = A, B;</span><br><span class="line">A = &quot;a&quot;;</span><br><span class="line">B = &quot;a&quot;, C | &quot;b&quot;;</span><br><span class="line">C = &quot;a&quot;, B | &quot;c&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>But we’re not supposed to do modifications by ourselves. User must always fix the grammar if there’s an issue.</p>
+<h1 id="The-Algorithm"><a href="#The-Algorithm" class="headerlink" title="The Algorithm"></a>The Algorithm</h1><p>So, after some head-banging, I came up with an algorithm to decide whether or not a given grammar can generate a string. Meaning whether or not the language set of given grammar is empty or not.</p>
+<ul>
+<li>Mark every node as non-visited and language-set being empty.</li>
+<li>Visit every node (starting from START) in a DFS (Depth-First-Search) manner.</li>
+<li>For every node do : <ul>
+<li>Check if the node has been visited before.</li>
+<li>Check if the language-set is empty</li>
+<li>If the language-set is empty and node has been visited before, then there’s an infinite-mutual-recursion in the grammar. Exit!</li>
+<li>If the node has not been visited, then disregard whether the language-set being empty or not, and mark the node as visited.</li>
+</ul>
+</li>
+<li>In the end of DFS, if all rules are visited and are marked as non-empty, then the grammar is able to generate strings.</li>
+</ul>
+<p>To decide whether a node has non-empty language-set follow the following rules :<br>    - Check if it’s a terminal. Terminals are always non-empty.<br>    - An alternation is non-empty, if atleast one of the members of alternation is non-empty.<br>    - A concatenation is non-empty if all of the members of concatenation are non-empty.</p>
+<p>Try the above algorithm manually on some small grammars. I don’t have proof that this will cover all edge cases, but it looks correct for now…</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2023/09/30/The-GOT-and-PLT-of-ELF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
+      <meta itemprop="name" content="Siddharth Mishra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ProjectBlue">
+      <meta itemprop="description" content="brightprogrammer`s blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ProjectBlue">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/30/The-GOT-and-PLT-of-ELF/" class="post-title-link" itemprop="url">The GOT and PLT of ELF</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: Sat, 30th September, 2023 16:16:15" itemprop="dateCreated datePublished" datetime="2023-09-30T16:16:15+05:30">Sat, 30th September, 2023</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2023/09/30/The-GOT-and-PLT-of-ELF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/09/30/The-GOT-and-PLT-of-ELF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2023/09/24/Linking-Loading-Real-Example/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -260,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -371,7 +573,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -483,7 +685,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -597,7 +799,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -703,7 +905,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -811,7 +1013,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -939,7 +1141,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1046,7 +1248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1156,7 +1358,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1266,7 +1468,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1376,7 +1578,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1486,7 +1688,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1598,7 +1800,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1710,7 +1912,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
+      <time title="Modified: Wed, 14th February, 2024 17:17:40" itemprop="dateModified" datetime="2024-02-14T17:17:40+05:30">Wed, 14th February, 2024</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1778,226 +1980,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2022/08/20/Game-Theory-Race-To-Zero/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
-      <meta itemprop="name" content="Siddharth Mishra">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ProjectBlue">
-      <meta itemprop="description" content="brightprogrammer`s blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ProjectBlue">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/20/Game-Theory-Race-To-Zero/" class="post-title-link" itemprop="url">Game Theory : Race To Zero</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: Sat, 20th August, 2022 19:08:47" itemprop="dateCreated datePublished" datetime="2022-08-20T19:08:47+05:30">Sat, 20th August, 2022</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mathematics/" itemprop="url" rel="index"><span itemprop="name">mathematics</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mathematics/game-theory/" itemprop="url" rel="index"><span itemprop="name">game-theory</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2022/08/20/Game-Theory-Race-To-Zero/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/08/20/Game-Theory-Race-To-Zero/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img data-src="/images/chess-image.jpg"></p>
-<p>So, recently I conducted a small social experiment based on something I read in a Game Theory <a href="https://www.amazon.in/Game-Theory-Critical-Concepts-Sciences/dp/0415222400/ref=sr_1_1?crid=2DQJH8C3AMFK7&keywords=game+theory+critical+concepts&qid=1660931489&sprefix=game+theory+critical+concep,aps,304&sr=8-1">book</a> that I recently issued from library. Damn college libraries are awesome! especially the maths sections and biology ones! This blog post is about the experiment I conducted. Thanks to all my classmates who participated in this experiment.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/20/Game-Theory-Race-To-Zero/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://brightprogrammer.in/2022/01/10/osdev/implementing-descriptor-tables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37365905?v=i4">
-      <meta itemprop="name" content="Siddharth Mishra">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ProjectBlue">
-      <meta itemprop="description" content="brightprogrammer`s blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ProjectBlue">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/10/osdev/implementing-descriptor-tables/" class="post-title-link" itemprop="url">Operating System - Implementing Descriptor Tables</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: Mon, 10th January, 2022 12:00:00" itemprop="dateCreated datePublished" datetime="2022-01-10T12:00:00+05:30">Mon, 10th January, 2022</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: Mon, 9th October, 2023 23:59:28" itemprop="dateModified" datetime="2023-10-09T23:59:28+05:30">Mon, 9th October, 2023</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/osdev/" itemprop="url" rel="index"><span itemprop="name">osdev</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2022/01/10/osdev/implementing-descriptor-tables/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/01/10/osdev/implementing-descriptor-tables/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><strong>WARNING</strong> : From here onwards you need some experience with <code>x86_64</code> assembly. I’ve done some reverse engineering stuffs so I have some basic knowledge to find my way out of this. You’ll need something similar! You must have knowledge of what are registers, how many registers are there in amd64 architecture, what are the uses of those registers, etc… Knowledge of more low level concepts will be a cherry on the top.</p>
-</blockquote>
-<p>This page can be heavy on theory, but we actually need it. This is because I’ll be reading the amd64 architecture programmer’s manual and I’ll try to develop implementation code from there. This is fun because it feels like I’m actually getting a grasp of things and not just copy pasting code from somewhere. I’ve tried different posts on GDT and IDT but I feel like I’m missing some concept after reading them. I don’t understand why they did this and that. So, to overcome this, I plan to get to the problem’s root.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/10/osdev/implementing-descriptor-tables/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/posts/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/posts/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -2009,8 +1991,8 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
