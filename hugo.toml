@@ -1,0 +1,37 @@
+baseURL = "https://brightprogrammer.in/"
+disqusShortname = "brightprogrammer"
+enableGitInfo = true
+enableRobotsTXT = true
+hasCJKLanguage = true
+languageCode = "en"
+rssLimit = 10
+theme = "hugo-texify3"
+title = "Siddharth Mishra"
+enableEmoji = true
+
+[pagination]
+pagerSize = 10
+
+[taxonomies]
+tags = "tags"
+categories = "categories"
+
+[params]
+title="Siddharth Mishra"
+author = "Siddharth Mishra"
+description = "Personal blogging and note taking."
+footnote = """
+<center>
+Siddharth Mishra. All Rights Reserved.<br/>
+To search anything, just do a page find in <a href="/index.xml">here</a> 'cause I'm too lazy to implement a search widget for you ;-)
+</center>
+"""
+customCSS = []
+customJS = []
+dateFormat = "2 January 2006"
+emphasisWithDots = true
+toc = true
+rootFontSize = "105%"
+math = true
+enableDuckDuckGoSearchBox = false 
+numberedSubtitles = true

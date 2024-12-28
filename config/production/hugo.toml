@@ -1,0 +1,3 @@
+[services]
+  [services.googleAnalytics]
+    googleAnalytics = "G-T92QY70M21"
