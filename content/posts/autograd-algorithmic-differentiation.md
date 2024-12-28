@@ -213,7 +213,7 @@ typedef struct {
 } Variable;
 ```
 
-## Operators
+### Operators
 
 If you consider atoms as word of our language of mathematical expressions, then operators are connectives (like and, or, not,  etc...).
 There are two types of connectives in my language : 
@@ -257,7 +257,7 @@ typedef struct {
 } BinaryExpr;
 ```
 
-## Expression
+### Expression
 
 Using the analogy of languages again, 
 
@@ -303,7 +303,7 @@ String* ExprEmitXdot(Expr* expr, String* output);
 int     SubExprEmitXdot(String* output, Expr* subexpr, int* node_id);
 ```
 
-## Macro Magic
+### Macro Magic
 
 I love C macros, because if you use them smartly, they make the code more readable, and faster to write
 at the same time. You can do more my writing less. At the same time, it's very easy to
