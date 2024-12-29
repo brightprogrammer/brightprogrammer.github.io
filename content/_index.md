@@ -15,4 +15,8 @@ a care in the world.
 
 I've also recently started taking up contractual work to support myself and my endeavours. I'm good with writing
 software for any desktop platform, be it a web app or a desktop app. I got skills in lots of domains, you just gotta
-ask. Reach me at admin@brightprogrammer.in for a discussion.
+ask. Reach me at admin@brightprogrammer.in for a discussion.  
+
+<br>
+
+You can also reach me in [my discord server](https://discord.gg/J9b45jbAdH).

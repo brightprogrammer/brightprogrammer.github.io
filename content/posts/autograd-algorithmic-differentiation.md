@@ -14,7 +14,6 @@ tags:
     "machine-learning",
     "c"
   ]
-katex: true
 ---
 
 ## Background
