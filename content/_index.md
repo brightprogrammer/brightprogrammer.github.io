@@ -19,4 +19,4 @@ ask. Reach me at admin@brightprogrammer.in for a discussion.
 
 <br>
 
-You can also reach me in [my discord server](https://discord.gg/J9b45jbAdH).
+You can also reach me at [My self-hosted mattermost instance](chat.brightprogrammer.in).
