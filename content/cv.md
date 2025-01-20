@@ -55,12 +55,12 @@ was an internal craving to write one of my own.
 
 A native GUI implemented for an r2wars like game for a custom virtual machine `xvm` written my some random
 guy (whom now I know very well) on discord. Had lots of fun while writing, because my college entrance exams
-just ended then and was exploring really interesting tops and the idea of writing VMs and desktop applicaitons
+just ended then and was exploring really interesting tops and the idea of writing VMs and desktop applications
 was very new to me.
 
 ### [pwned](https://github.com/brightprogrammer/pwned)
 
-Some very basic exploit scripts I wrote while learning binary exploitation. Mostly filled with explots for
+Some very basic exploit scripts I wrote while learning binary exploitation. Mostly filled with exploits for
 `printf` and `stack-buffer-overflow` vulns.
 
 ## Education
