@@ -79,3 +79,15 @@ Bachelors (Hons.) in Mathematics & Computing (2021 - 2024)
 - Database & Management Systems
 - Object Oriented Programming (JAVA)
 - Probability & Statistics
+
+Recently while self-hosting some services for myself, I learned a lot about system administration.
+I already did know the "what", but this time I had to do the "how" of it. I now self host the following
+services :
+
+- [My own GIT service](https://git.brightprogrammer.in) - For hosting my own GIT repos, near and dear to my heart.
+- [Knowledge Base / Wiki](https://kb.brightprogrammer.in) - For taking notes, journaling, documentation, thoughts, research, etc...
+
+There were many other hosted before, like Uptime Kuma, Grist, etc..., but I realized
+that I don't really need those. To do all this, I learned docker, docker-compose, systemd services,
+nginx reverse proxy, postgresql, DDNS, user management, permission management, git bare repos and how to
+host my own git service. I use CGIT for web frontend, and a bare git repo for hosting repos.
