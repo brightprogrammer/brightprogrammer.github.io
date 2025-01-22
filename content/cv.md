@@ -43,7 +43,28 @@ Multiple contributions to RizinOrg's rizin reverse engineering command line tool
 and some of the PRs I'm working on. I still make occasional contributions to the project whenever required.
 Sometimes just to help the maintainers, and sometimes contributions are related to my contract works.
 
+I'm currently working on rewriting demanglers for [rz-libdemangle](https://github.com/rizinorg/rz-libdemangle) in
+[RizinOrg](https://github.com/rizinorg). I'm rewriting C++ demanglers for GNU v2 and GNU v3 ABI. The PR is a W.I.P
+and can be found [here](https://github.com/rizinorg/rz-libdemangle/pull/69)
+
 ## Projects
+
+## [Grammar Based Fuzz Input Generator](https://www.youtube.com/live/PTeJXdOCESE?si=h0YbrThhT7WtvVt6&t=166)
+
+Wrote a grammar based unsupervised fuzz case generator for fuzzing programs that take text input.
+This was a personal research project. No academics involved, completely separated from anyone's intrusion,
+for my own learning. I explored ideas and wrote a test case generator that would take arbitrary context-free-grammar
+in EBNF (Extended-Backus-Naur-Form) and generate random strings for that language.  
+
+Source code is not available, but a working proof is available on [My YouTube channel](https://youtube.com/@brightprogrammer), where I live streamed
+the development sessions. The live stream can be found [here](https://www.youtube.com/live/PTeJXdOCESE?si=h0YbrThhT7WtvVt6&t=166)
+
+The tool worked by taking any grammar file, parsing it and generating an internal representation of grammar, and then
+tranversing a graph, taking each route randomly. Everytime a terminal is expanded, the length of generated string is assumed
+to be increased by one, which allowed me to put soft length stops on the generated string. This feature is especially useful
+you only want to fuzz your program with small input sizes. With each increasing count, the probability of taking a non-terminal
+decreased, which in turn slowly brought the state machine to select only from terminals, and hence to a stop after some more
+iterations.
 
 ### [MisraOS](https://github.com/brightprogrammer/MisraOS)
 
