@@ -49,7 +49,7 @@ and can be found [here](https://github.com/rizinorg/rz-libdemangle/pull/69)
 
 ## Projects
 
-## [Grammar Based Fuzz Input Generator](https://www.youtube.com/live/PTeJXdOCESE?si=h0YbrThhT7WtvVt6&t=166)
+### [Grammar Based Fuzz Input Generator](https://www.youtube.com/live/PTeJXdOCESE?si=h0YbrThhT7WtvVt6&t=166)
 
 Wrote a grammar based unsupervised fuzz case generator for fuzzing programs that take text input.
 This was a personal research project. No academics involved, completely separated from anyone's intrusion,
