@@ -146,4 +146,31 @@ can take a look at the definitions here, it's easy to understand IMO :
 ```
 
 The `ccj` string stores the `compile_commands.json` output, which is passed to the actual build commands, and then 
-returned by them.
+returned back with updated contents. I needed the support for build commands, because I use `clangd` LSP for
+code completion in my setup.
+
+To dive more deeper, I suggest just looking at the [source code here](https://git.brightprogrammer.in/CompilerTech.git/tree).
+The source code for `SelfStart` is present in the `SelfStart` directory. If you want to use this build system in your project,
+you are on your own. Just copy the directory, and create a `SelfStartMain.c` file in your project root to get started.
+
+## Self Reflections & Comments
+ 
+I believe that no matter how many times you create a new build system, it won't always fit all needs of every project size.
+What we as developers need to do is to make sure that we don't complicate projects unconsciously. These decisions keep adding
+up one over the another, until the project just falls apart.
+
+In my case, I think `SelfStart` is a great solution for me, given my workflow. It may or may not be the best for you.
+If you're unsure, just go with the already available and popular ones, because of the level of support you get. In case of
+commercial projects, you don't really have time to iterate maintain the build system along with the code I guess, I haven't
+really worked on one, so I cannot comment there either. It is a fact by the way that most of the commercial projects, nowadays
+end up using a scripting language, or something like rust to automatically manage these platform dependent processes for them.
+
+Watching one stream by _Tsoding Daily_ on YouTube, I really liked this comment :
+
+> All build systems are bad, that's why there are so many!  
+> All languages are bad, that's why there are so many!  
+
+This is partially correct, in the sense that many are out there because people want to learn by creating their own versions.
+If you really want to learn the intrinsics from first-person experience, and not someone just reading the code, you _need_
+to work on projects from scratch. It's the only way! We can still learn from looking at the source code of already existing projects,
+but working on it first hand adds it to your experience, not your knowledge, the two are different.
