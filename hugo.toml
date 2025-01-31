@@ -23,7 +23,6 @@ description = "Personal blogging and note taking."
 footnote = """
 <center>
 Siddharth Mishra. All Rights Reserved.<br/>
-To search anything, just do a page find in <a href="/index.xml">here</a> 'cause I'm too lazy to implement a search widget for you ;-)
 </center>
 """
 customCSS = []

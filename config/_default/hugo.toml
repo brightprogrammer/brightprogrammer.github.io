@@ -51,6 +51,13 @@ identifier = "cv"
 name = "CV"
 url = "/cv/"
 pre = """
-<i class="fa-regular fa-file"></i>
 """
 weight = 4
+
+[[menu.main]]
+identifier = "lists"
+name = "Lists"
+url = "/lists/"
+pre = """
+"""
+weight = 5
