@@ -19,7 +19,7 @@ tags:
 ## Background
 
 Let's write an auto differentiation algorithm. We will take mathematical expressions
-in prefix notation, build an expression tree like the one below for \\(1338 * a + \frac{y^5}{x^{1335}}\\)
+in prefix notation, build an expression tree like the one below for $ 1338 * a + \frac{y^5}{x^{1335}} $
 
 ```c
 // expression in prefix notation
