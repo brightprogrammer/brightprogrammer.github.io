@@ -58,8 +58,8 @@ we've gather up until now, we can
  
 \\[
 \begin{align}
-\langle S \rangle &::= b \, \langle S' \rangle \\\\
-\langle S' \rangle &::= a \, \langle S' \rangle
+\langle S \rangle &::= b  \langle S' \rangle \\\\
+\langle S' \rangle &::= a  \langle S' \rangle
 \end{align}
 \\]
 
