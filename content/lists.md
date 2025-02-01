@@ -12,6 +12,10 @@ readers.
 - [Josh's Blog](https://lospi.net/)
 - [Nico Brailovsky's Thought Repository](https://nicolasbrailo.github.io/blog/index.html)
 
+## Interesting Talks & Debates/Conversations
+
+- [Faith, Reason & Inner Engineering : Jaggi Vasudev, Javed Akhtar at THiNK 2012](https://www.youtube.com/watch?v=FpL_kSEHOco)
+
 ## Podcasts
 
 I like audio drama a lot. Below is a list of podcasts I like. Contains a mix of some informative podcasts,
