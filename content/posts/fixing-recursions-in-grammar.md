@@ -7,6 +7,12 @@ tags: ["grammar", "language", "automata-theory", "theory-of-computing", "parsing
 math: true
 ---
 
+[\\[
+\text{A long-standing issue regarding algorithms that manipulate} \\\\
+\text{context-free grammars (CFGs) in a “top-down” left-to-right fashion} \\\\
+\text{is that left recursion can lead to nontermination.} ^\{\text{[1]}}
+\\]](#further-reading)
+
 # Fixing Left Recursion
 
 A grammar is left recursive if it comes in the following form 
@@ -127,12 +133,12 @@ so, I'll re-write the mutually left recursive grammar as follows
 \\[
 \begin{align}
 \langle S \rangle  & ::= & \langle S1 \rangle \mid \langle S2 \rangle \\\\
+\langle S1 \rangle & ::= & \langle A \rangle \mid \langle A \rangle \langle R1 \rangle \\\\
+\langle S2 \rangle & ::= & \langle B \rangle \mid \langle B \rangle \langle R2 \rangle \\\\
 \langle A \rangle  & ::= & X \mid Y k \\\\
 \langle B \rangle  & ::= & Y \mid X m \\\\
 \langle R1 \rangle & ::= & m k \langle R1 \rangle \\\\
-\langle R1 \rangle & ::= & k m \langle R2 \rangle \\\\
-\langle S1 \rangle & ::= & \langle A \rangle \mid \langle A \rangle \langle R1 \rangle \\\\
-\langle S2 \rangle & ::= & \langle B \rangle \mid \langle B \rangle \langle R2 \rangle
+\langle R2 \rangle & ::= & k m \langle R2 \rangle
 \end{align}
 \\]
 
@@ -484,3 +490,8 @@ to remove redundancy, and help the actual parsing algorithm make correct decisio
 
 Did you like the post? Drop in a comment! If you find any error in this post, I'm only a human,
 and I'll accept my mistakes, and make any changes if required.
+
+# Further Reading 
+
+- [[1]](https://www.microsoft.com/en-us/research/wp-content/uploads/2000/04/naacl2k-proc-rev.pdf) - Removing Left Recursion from Context-Free Grammars 
+- 
