@@ -77,12 +77,12 @@ a left recursive grammar.
 \\[
 \begin{align}
 \langle \text{prefix} \rangle &::= \langle \text{unqualified-name} \rangle \\\\
-&::= \langle \text{prefix} \rangle  \langle \text{unqualified-name} \rangle \\\\
-&::= \langle \text{template-prefix} \rangle  \langle \text{template-args} \rangle \\\\
-&::= \langle \text{closure-prefix} \rangle \\\\
-&::= \langle \text{template-param} \rangle \\\\
-&::= \langle \text{decltype} \rangle \\\\
-&::= \langle \text{substitution} \rangle
+\quad &\mid \langle \text{prefix} \rangle  \langle \text{unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-prefix} \rangle  \langle \text{template-args} \rangle \\\\
+\quad &\mid \langle \text{closure-prefix} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle \\\\
+\quad &\mid \langle \text{decltype} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle
 \end{align}
 \\]
 
@@ -145,28 +145,28 @@ recursive. Take a look at the following grammar, and comment what you see :
 \\[
 \begin{align}
 \langle \text{prefix} \rangle &::= \langle \text{unqualified-name} \rangle \\\\
-&::= \langle \text{prefix} \rangle  \langle \text{unqualified-name} \rangle \\\\
-&::= \langle \text{template-prefix} \rangle  \langle \text{template-args} \rangle \\\\
-&::= \langle \text{closure-prefix} \rangle \\\\
-&::= \langle \text{template-param} \rangle \\\\
-&::= \langle \text{decltype} \rangle \\\\
-&::= \langle \text{substitution} \rangle
+\quad &\mid \langle \text{prefix} \rangle  \langle \text{unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-prefix} \rangle  \langle \text{template-args} \rangle \\\\
+\quad &\mid \langle \text{closure-prefix} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle \\\\
+\quad &\mid \langle \text{decltype} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
 \langle \text{template-prefix} \rangle &::= \langle \text{template unqualified-name} \rangle \\\\
-&::= \langle \text{prefix} \rangle  \langle \text{template unqualified-name} \rangle \\\\
-&::= \langle \text{template-param} \rangle \\\\
-&::= \langle \text{substitution} \rangle
+\quad &\mid \langle \text{prefix} \rangle  \langle \text{template unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
 \langle \text{closure-prefix} \rangle &::= [ \langle \text{prefix} \rangle ]  \langle \text{variable or member unqualified-name} \rangle  M \\\\
-&::= \langle \text{variable template template-prefix} \rangle  \langle \text{template-args} \rangle  M
+\quad &\mid \langle \text{variable template template-prefix} \rangle  \langle \text{template-args} \rangle  M
 \end{align}
 \\]
 
@@ -282,7 +282,63 @@ DEFN_RULE (template_prefix, {
 ```
 
 This is my current fix. This fixed any recursion issues for now. Previously I was getting
-stack overflow, because the stack frames just kept getting growing up and up.
+stack overflow, because the stack frames just kept getting growing up and up. For those of you
+who are not comfortable with the code, here's the grammar form :
+
+\\[
+\begin{align}
+\langle \text{prefix-without-recursion} \rangle &::= \langle \text{unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle \\\\
+\quad &\mid \langle \text{decltype} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle \\\\
+\quad &\mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-args} \rangle \\\\
+\quad &\mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{prefix} \rangle &::= \langle \text{prefix-without-recursion} \rangle  \langle \text{unqualified-name} \rangle^* \\\\
+\quad &\mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-unqualified-name} \rangle  \langle \text{template-args} \rangle  \langle \text{prefix} \rangle \\\\
+\quad &\mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M  \langle \text{prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix-without-recursion-with-prefix} \rangle &::= \langle \text{variable-template-template-prefix} \rangle  \langle \text{template-args} \rangle  M \\\\
+\quad &\mid \langle \text{unqualified-name} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
+\quad &\mid \langle \text{template-param} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
+\quad &\mid \langle \text{decltype} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
+\quad &\mid \langle \text{substitution} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix} \rangle &::= \langle \text{closure-prefix-without-recursion-with-prefix} \rangle \\\\
+\quad &\mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M  \langle \text{closure-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix-without-recursion-with-prefix} \rangle &::= \langle \text{template-unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle \\\\
+\quad &\mid \langle \text{unqualified-name} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{template-param} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{decltype} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
+\quad &\mid \langle \text{substitution} \rangle  \langle \text{template-unqualified-name} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix} \rangle &::= \langle \text{template-prefix-without-recursion-with-prefix} \rangle \\\\
+\quad &\mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-args} \rangle  \langle \text{template-unqualified-name} \rangle  \langle \text{template-prefix} \rangle
+\end{align}
+\\]
 
 # Final Comments
 
