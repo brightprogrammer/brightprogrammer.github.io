@@ -15,7 +15,8 @@ A grammar is left recursive if it comes in the following form
 \langle S \rangle ::= \langle S \rangle \  a \mid b
 \\]
 
-When parsing or generating a string using this grammar, where $S$ is the start symbol, you
+When parsing or generating a string using this grammar (using a backtracking algorithm), 
+where $ \langle S \rangle $ is the start symbol, you
 are likely to enter a state of infinite recursion. Any ideas on how to fix this?  
 
 \\[
@@ -30,7 +31,7 @@ Before reading any further, give it a try yourself.
 ## Language Analysis
 
 Let's start by generating some sample strings in the given language, and try to discover
-a pattern. The following are expansion paths for $S$ :
+a pattern. The following are expansion paths for $ \langle S \rangle $ :
 
 \\[
 \begin{align}
@@ -476,7 +477,10 @@ The changes made for $ \langle \text{template-prefix} \rangle $ :
 Grammars are very hard to get right in the first try. You are basically developing your
 own language. It takes experience, which basically demands you beforehand about what you
 want and what you don't want. The other way is doing it iteratively, which is another
-name for trial-and-error (and as I said, hard to get right in first try).
+name for trial-and-error (and as I said, hard to get right in first try). The final grammar
+we see here can be further simplified using some normalization algorithms to generate a normalized
+form of this grammar. These normalized forms generally do transformations to original grammar
+to remove redundancy, and help the actual parsing algorithm make correct decisions faster.
 
 Did you like the post? Drop in a comment! If you find any error in this post, I'm only a human,
 and I'll accept my mistakes, and make any changes if required.
