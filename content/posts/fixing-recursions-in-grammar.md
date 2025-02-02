@@ -358,54 +358,21 @@ who are not comfortable with the code, here's the grammar form :
 \begin{align}
 \langle \text{prefix-Yk-template-prefix} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \ \langle \text{template-args} \rangle \\\\
                                                  & \quad \mid & \langle \text{template-param} \rangle \ \langle \text{template-args} \rangle \\\\
-                                                 & \quad \mid & \langle \text{substitution} \rangle \ \langle \text{template-args} \rangle
-\end{align}
-\\]
-
-\\[
-\begin{align}
+                                                 & \quad \mid & \langle \text{substitution} \rangle \ \langle \text{template-args} \rangle \\\\
 \langle \text{prefix-A-template-prefix} \rangle & ::= & \langle \text{prefix-X} \rangle \\\\
-                                                & \quad \mid & \langle \text{prefix-Yk-template-prefix} \rangle
+                                                & \quad \mid & \langle \text{prefix-Yk-template-prefix} \rangle \\\\
+\langle \text{prefix-mk-template-prefix} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \ \langle \text{template-args} \rangle \\\\
+\langle \text{prefix-S1-template-prefix} \rangle & ::= & \langle \text{prefix-A-template-prefix} \rangle \ \langle \text{prefix-mk-template-prefix} \rangle ^\* 
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{prefix-mk-template-prefix} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \ \langle \text{template-args} \rangle
-\end{align}
-\\]
-
-
-\\[
-\begin{align}
-\langle \text{prefix-S1-template-prefix} \rangle & ::= & \langle \text{prefix-A-template-prefix} \rangle \\\\
-                                                 & \quad \mid & \langle \text{prefix-A-template-prefix} \rangle \ \langle \text{prefix-mk-template-prefix} \rangle \ \langle \text{prefix-S1-template-prefix} \rangle
-\end{align}
-\\]
-
-\\[
-\begin{align}
-\langle \text{prefix-Yk-closure-prefix} \rangle & ::= & \langle \text{variable-template-template-prefix} \rangle \ \langle \text{template-args} \rangle \ M
-\end{align}
-\\]
-
-\\[
-\begin{align}
+\langle \text{prefix-Yk-closure-prefix} \rangle & ::= & \langle \text{variable-template-template-prefix} \rangle \ \langle \text{template-args} \rangle \ M \\\\
 \langle \text{prefix-A-closure-prefix} \rangle & ::= & \langle \text{prefix-X} \rangle \\\\
-                                               & \quad \mid & \langle \text{prefix-Yk-closure-prefix} \rangle
-\end{align}
-\\]
-
-\\[
-\begin{align}
-\langle \text{prefix-mk-closure-prefix} \rangle & ::= & \langle \text{variable-or-member-unqualified-name} \rangle \ M
-\end{align}
-\\]
-
-\\[
-\begin{align}
-\langle \text{prefix-S1-closure-prefix} \rangle & ::= & \langle \text{prefix-A-closure-prefix} \rangle \\\\
-                                                & \mid & \langle \text{prefix-A-closure-prefix} \rangle \ \langle \text{prefix-mk-closure-prefix} \rangle \ \langle \text{prefix-S1-closure-prefix} \rangle
+                                               & \quad \mid & \langle \text{prefix-Yk-closure-prefix} \rangle \\\\
+\langle \text{prefix-mk-closure-prefix} \rangle & ::= & \langle \text{variable-or-member-unqualified-name} \rangle \ M \\\\
+\langle \text{prefix-S1-closure-prefix} \rangle & ::= & \langle \text{prefix-A-closure-prefix} \rangle \ \langle \text{prefix-mk-closure-prefix} \rangle ^\*
 \end{align}
 \\]
 
@@ -450,8 +417,7 @@ The changes made for $ \langle \text{closure-prefix} \rangle $ :
 
 \\[
 \begin{align}
-\langle \text{closure-prefix-S2-prefix} \rangle & ::= & \langle \text{closure-prefix-B} \rangle \\\\
-                                                 & \quad \mid & \langle \text{closure-prefix-B} \rangle \ \langle \text{closure-prefix-km-prefix} \rangle ^\*
+\langle \text{closure-prefix-S2-prefix} \rangle & ::= & \langle \text{closure-prefix-B} \rangle \ \langle \text{closure-prefix-km-prefix} \rangle ^\*
 \end{align}
 \\]
 
@@ -495,8 +461,7 @@ The changes made for $ \langle \text{template-prefix} \rangle $ :
 
 \\[
 \begin{align}
-\langle \text{template-prefix-S2-prefix} \rangle & ::= & \langle \text{template-prefix-B} \rangle \\\\
-                                                 & \quad \mid & \langle \text{template-prefix-B} \rangle \ \langle \text{template-prefix-km-prefix} \rangle ^\*
+\langle \text{template-prefix-S2-prefix} \rangle & ::= & \langle \text{template-prefix-B} \rangle \ \langle \text{template-prefix-km-prefix} \rangle ^\*
 \end{align}
 \\]
 
