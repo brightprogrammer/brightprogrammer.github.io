@@ -221,122 +221,270 @@ that my theory is right.
 ## After The Changes
 
 ```c
-DECL_RULE (template_prefix_without_recursion_with_prefix);
-DECL_RULE (closure_prefix_without_recursion_with_prefix);
-
-DEFN_RULE (prefix_without_recursion, {
+DEFN_RULE (prefix_X, {
     MATCH (RULE (unqualified_name));
     MATCH (RULE (template_param));
     MATCH (RULE (decltype));
     MATCH (RULE (substitution));
+});
 
-    MATCH (RULE (template_prefix_without_recursion_with_prefix) && RULE (template_args));
+DEFN_RULE (prefix_Yk_template_prefix, {
+    MATCH (RULE (template_unqualified_name) && RULE (template_args));
+    MATCH (RULE (template_param) && RULE (template_args));
+    MATCH (RULE (substitution) && RULE (template_args));
+});
 
-    MATCH (RULE (closure_prefix_without_recursion_with_prefix));
+DEFN_RULE (prefix_A_template_prefix, {
+    MATCH (RULE (prefix_X));
+    MATCH (RULE (prefix_Yk_template_prefix));
+});
+
+DEFN_RULE (prefix_mk_template_prefix, {
+    MATCH (RULE (template_unqualified_name) && RULE (template_args));
+});
+
+DEFN_RULE (prefix_S1_template_prefix, {
+    MATCH (RULE (prefix_A_template_prefix));
+    MATCH (
+        RULE (prefix_A_template_prefix) && RULE (prefix_mk_template_prefix) &&
+        RULE (prefix_S1_template_prefix)
+    );
+});
+
+DEFN_RULE (prefix_Yk_closure_prefix, {
+    MATCH (RULE (variable_template_template_prefix) && RULE (template_args) && READ ('M'));
+});
+
+DEFN_RULE (prefix_A_closure_prefix, {
+    MATCH (RULE (prefix_X));
+    MATCH (RULE (prefix_Yk_closure_prefix));
+});
+
+DEFN_RULE (prefix_mk_closure_prefix, {
+    MATCH (RULE (variable_or_member_unqualified_name) && READ ('M'));
+});
+
+DEFN_RULE (prefix_S1_closure_prefix, {
+    MATCH (RULE (prefix_A_closure_prefix));
+    MATCH (
+        RULE (prefix_A_closure_prefix) && RULE (prefix_mk_closure_prefix) &&
+        RULE (prefix_S1_closure_prefix)
+    );
 });
 
 DEFN_RULE (prefix, {
-    MATCH (RULE (prefix_without_recursion) && RULE_MANY(unqualified_name));
+    // fix left-recursion
+    MATCH (RULE (prefix_X) && RULE_MANY (unqualified_name));
 
-    MATCH (RULE (template_prefix_without_recursion_with_prefix) && RULE (template_unqualified_name) && RULE (template_args) && RULE (prefix));
-
-    MATCH (RULE (closure_prefix_without_recursion_with_prefix) && RULE (variable_or_member_unqualified_name) && READ('M') && RULE (prefix));
+    // fix mutual-recursions
+    MATCH (RULE (prefix_S1_template_prefix));
+    MATCH (RULE (prefix_S1_closure_prefix));
 });
 
 
-
-DEFN_RULE (closure_prefix_without_recursion_with_prefix, {
+DEFN_RULE (closure_prefix_Y, {
     MATCH (RULE (variable_template_template_prefix) && RULE (template_args) && READ ('M'));
+});
 
+DEFN_RULE (closure_prefix_Xm_prefix, {
     MATCH (RULE (unqualified_name) && RULE (variable_or_member_unqualified_name) && READ ('M'));
     MATCH (RULE (template_param) && RULE (variable_or_member_unqualified_name) && READ ('M'));
     MATCH (RULE (decltype) && RULE (variable_or_member_unqualified_name) && READ ('M'));
     MATCH (RULE (substitution) && RULE (variable_or_member_unqualified_name) && READ ('M'));
 });
 
-DEFN_RULE (closure_prefix, {
-    MATCH (RULE (closure_prefix_without_recursion_with_prefix));
-    MATCH (RULE (closure_prefix_without_recursion_with_prefix) && RULE (variable_or_member_unqualified_name) && READ ('M') && RULE(closure_prefix));
+DEFN_RULE (closure_prefix_B, {
+    MATCH (RULE (closure_prefix_Y));
+    MATCH (RULE (closure_prefix_Xm_prefix));
 });
 
+DEFN_RULE (closure_prefix_S2_prefix, {
+    MATCH (RULE (closure_prefix_B));
+    MATCH (RULE (closure_prefix_B) && RULE (closure_prefix_S2_prefix));
+});
+
+DEFN_RULE (closure_prefix, { MATCH (RULE (closure_prefix_S2_prefix)); });
 
 
-DEFN_RULE (template_prefix_without_recursion_with_prefix, {
+
+
+DEFN_RULE (template_prefix_Y, {
     MATCH (RULE (template_unqualified_name));
     MATCH (RULE (template_param));
     MATCH (RULE (substitution));
+});
 
+DEFN_RULE (template_prefix_Xm_prefix, {
     MATCH (RULE (unqualified_name) && RULE (template_unqualified_name));
     MATCH (RULE (template_param) && RULE (template_unqualified_name));
     MATCH (RULE (decltype) && RULE (template_unqualified_name));
     MATCH (RULE (substitution) && RULE (template_unqualified_name));
 });
 
-DEFN_RULE (template_prefix, {
-    MATCH (RULE (template_prefix_without_recursion_with_prefix));
-    MATCH (
-        RULE (template_prefix_without_recursion_with_prefix) && RULE (template_args) &&
-        RULE (template_unqualified_name) && RULE (template_prefix)
-    );
+DEFN_RULE (template_prefix_B, {
+    MATCH (RULE (template_prefix_Y));
+    MATCH (RULE (template_prefix_Xm_prefix));
 });
+
+DEFN_RULE (template_prefix_S2_prefix, {
+    MATCH (RULE (template_prefix_B));
+    MATCH (RULE (template_prefix_B) && RULE (template_prefix_S2_prefix));
+});
+
+DEFN_RULE (template_prefix, { MATCH (RULE (template_prefix_S2_prefix)); });
 ```
 
 This is my current fix. This fixed any recursion issues for now. Previously I was getting
 stack overflow, because the stack frames just kept getting growing up and up. For those of you
 who are not comfortable with the code, here's the grammar form :
 
+
 \\[
 \begin{align}
-\langle \text{prefix-without-recursion} \rangle &::= \langle \text{unqualified-name} \rangle \\\\
-&\quad \mid \langle \text{template-param} \rangle \\\\
-&\quad \mid \langle \text{decltype} \rangle \\\\
-&\quad \mid \langle \text{substitution} \rangle \\\\
-&\quad \mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-args} \rangle \\\\
-&\quad \mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle
+\langle \text{prefix-X} \rangle & ::= & \langle \text{unqualified-name} \rangle \\\\
+                                & \quad \mid & \langle \text{template-param} \rangle \\\\
+                                & \quad \mid & \langle \text{decltype} \rangle \\\\
+                                & \quad \mid & \langle \text{substitution} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{prefix} \rangle &::= \langle \text{prefix-without-recursion} \rangle  \langle \text{unqualified-name} \rangle^* \\\\
-&\quad \mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-unqualified-name} \rangle  \langle \text{template-args} \rangle  \langle \text{prefix} \rangle \\\\
-&\quad \mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M  \langle \text{prefix} \rangle
+\langle \text{prefix-Yk-template-prefix} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \ \langle \text{template-args} \rangle \\\\
+                                                 & \quad \mid & \langle \text{template-param} \rangle \ \langle \text{template-args} \rangle \\\\
+                                                 & \quad \mid & \langle \text{substitution} \rangle \ \langle \text{template-args} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{closure-prefix-without-recursion-with-prefix} \rangle &::= \langle \text{variable-template-template-prefix} \rangle  \langle \text{template-args} \rangle  M \\\\
-&\quad \mid \langle \text{unqualified-name} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
-&\quad \mid \langle \text{template-param} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
-&\quad \mid \langle \text{decltype} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M \\\\
-&\quad \mid \langle \text{substitution} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M
+\langle \text{prefix-A-template-prefix} \rangle & ::= & \langle \text{prefix-X} \rangle \\\\
+                                                & \quad \mid & \langle \text{prefix-Yk-template-prefix} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{closure-prefix} \rangle &::= \langle \text{closure-prefix-without-recursion-with-prefix} \rangle \\\\
-&\quad \mid \langle \text{closure-prefix-without-recursion-with-prefix} \rangle  \langle \text{variable-or-member-unqualified-name} \rangle  M  \langle \text{closure-prefix} \rangle
+\langle \text{prefix-mk-template-prefix} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \ \langle \text{template-args} \rangle
+\end{align}
+\\]
+
+
+\\[
+\begin{align}
+\langle \text{prefix-S1-template-prefix} \rangle & ::= & \langle \text{prefix-A-template-prefix} \rangle \\\\
+                                                 & \quad \mid & \langle \text{prefix-A-template-prefix} \rangle \ \langle \text{prefix-mk-template-prefix} \rangle \ \langle \text{prefix-S1-template-prefix} \rangle
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{template-prefix-without-recursion-with-prefix} \rangle &::= \langle \text{template-unqualified-name} \rangle \\\\
-&\quad \mid \langle \text{template-param} \rangle \\\\
-&\quad \mid \langle \text{substitution} \rangle \\\\
-&\quad \mid \langle \text{unqualified-name} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
-&\quad \mid \langle \text{template-param} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
-&\quad \mid \langle \text{decltype} \rangle  \langle \text{template-unqualified-name} \rangle \\\\
-&\quad \mid \langle \text{substitution} \rangle  \langle \text{template-unqualified-name} \rangle
+\langle \text{prefix-Yk-closure-prefix} \rangle & ::= & \langle \text{variable-template-template-prefix} \rangle \ \langle \text{template-args} \rangle \ M
 \end{align}
 \\]
 
 \\[
 \begin{align}
-\langle \text{template-prefix} \rangle &::= \langle \text{template-prefix-without-recursion-with-prefix} \rangle \\\\
-&\quad \mid \langle \text{template-prefix-without-recursion-with-prefix} \rangle  \langle \text{template-args} \rangle  \langle \text{template-unqualified-name} \rangle  \langle \text{template-prefix} \rangle
+\langle \text{prefix-A-closure-prefix} \rangle & ::= & \langle \text{prefix-X} \rangle \\\\
+                                               & \quad \mid & \langle \text{prefix-Yk-closure-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{prefix-mk-closure-prefix} \rangle & ::= & \langle \text{variable-or-member-unqualified-name} \rangle \ M
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{prefix-S1-closure-prefix} \rangle & ::= & \langle \text{prefix-A-closure-prefix} \rangle \\\\
+                                                & \mid & \langle \text{prefix-A-closure-prefix} \rangle \ \langle \text{prefix-mk-closure-prefix} \rangle \ \langle \text{prefix-S1-closure-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{prefix} \rangle & ::= & \langle \text{prefix-X} \rangle \ \{\langle \text{unqualified-name} \rangle ^\*\} \\\\
+              & \mid & \langle \text{prefix-S1-template-prefix} \rangle \\\\
+              & \mid & \langle \text{prefix-S1-closure-prefix} \rangle 
+\end{align}
+\\]
+
+
+The changes made from $ \langle \text{closure-prefix} \rangle $ :
+
+\\[
+\begin{align}
+\langle \text{closure-prefix-Y} \rangle & ::= & \langle \text{variable-template-template-prefix} \rangle \ \langle \text{template-args} \rangle \ M 
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix-Xm-prefix} \rangle & ::= & \langle \text{unqualified-name} \rangle \ \langle \text{variable-or-member-unqualified-name} \rangle \ M \\\\
+                                                & \quad \mid & \langle \text{template-param} \rangle \ \langle \text{variable-or-member-unqualified-name} \rangle \ M \\\\
+                                                & \quad \mid & \langle \text{decltype} \rangle \ \langle \text{variable-or-member-unqualified-name} \rangle \ M \\\\
+                                                & \quad \mid & \langle \text{substitution} \rangle \ \langle \text{variable-or-member-unqualified-name} \rangle \ M
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix-B} \rangle & ::= & \langle \text{closure-prefix-Y} \rangle \\\\
+                                        & \quad \mid & \langle \text{closure-prefix-Xm-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix-S2-prefix} \rangle & ::= & \langle \text{closure-prefix-B} \rangle \\\\
+                                                & \quad \mid & \langle \text{closure-prefix-B} \rangle \ \langle \text{closure-prefix-S2-prefix} \rangle 
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{closure-prefix} \rangle & ::= & \langle \text{closure-prefix-S2-prefix} \rangle
+\end{align}
+\\]
+
+The changes made from $ \langle \text{template-prefix} \rangle $ :
+
+\\[
+\begin{align}
+\langle \text{template-prefix-Y} \rangle & ::= & \langle \text{template-unqualified-name} \rangle \\\\
+                                         & \quad \mid & \langle \text{template-param} \rangle \\\\
+                                         & \quad \mid & \langle \text{substitution} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix-Xm-prefix} \rangle & ::= & \langle \text{unqualified-name} \rangle \ \langle \text{template-unqualified-name} \rangle \\\\
+                                                 & \quad \mid & \langle \text{template-param} \rangle \ \langle \text{template-unqualified-name} \rangle \\\\
+                                                 & \quad \mid & \langle \text{decltype} \rangle \ \langle \text{template-unqualified-name} \rangle \\\\
+                                                 & \quad \mid & \langle \text{substitution} \rangle \ \langle \text{template-unqualified-name} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix-B} \rangle & ::= & \langle \text{template-prefix-Y} \rangle \\\\
+                                               & \quad \mid & \langle \text{template-prefix-Xm-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix-S2-prefix} \rangle & ::= & \langle \text{template-prefix-B} \rangle \\\\
+                                                 & \quad \mid & \langle \text{template-prefix-B} \rangle \ \langle \text{template-prefix-S2-prefix} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
+\langle \text{template-prefix} \rangle & ::= & \langle \text{template-prefix-S2-prefix} \rangle
 \end{align}
 \\]
 
