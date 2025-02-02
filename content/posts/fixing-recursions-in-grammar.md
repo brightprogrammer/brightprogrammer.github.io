@@ -125,11 +125,13 @@ so, I'll re-write the mutually left recursive grammar as follows
 
 \\[
 \begin{align}
-\langle S \rangle  &::= \langle S1 \rangle \mid \langle S2 \rangle \\\\
-\langle A \rangle  &::= X \mid Y k \\\\
-\langle B \rangle  &::= Y \mid X m \\\\
-\langle S1 \rangle &::= \langle A \rangle \mid \langle A \rangle m k \langle S1 \rangle \\\\
-\langle S2 \rangle &::= \langle B \rangle \mid \langle B \rangle k m \langle S2 \rangle
+\langle S \rangle  & ::= & \langle S1 \rangle \mid \langle S2 \rangle \\\\
+\langle A \rangle  & ::= & X \mid Y k \\\\
+\langle B \rangle  & ::= & Y \mid X m \\\\
+\langle R1 \rangle & ::= & m k \langle R1 \rangle \\\\
+\langle R1 \rangle & ::= & k m \langle R2 \rangle \\\\
+\langle S1 \rangle & ::= & \langle A \rangle \mid \langle A \rangle \langle R1 \rangle \\\\
+\langle S2 \rangle & ::= & \langle B \rangle \mid \langle B \rangle \langle R2 \rangle
 \end{align}
 \\]
 
@@ -244,11 +246,7 @@ DEFN_RULE (prefix_mk_template_prefix, {
 });
 
 DEFN_RULE (prefix_S1_template_prefix, {
-    MATCH (RULE (prefix_A_template_prefix));
-    MATCH (
-        RULE (prefix_A_template_prefix) && RULE (prefix_mk_template_prefix) &&
-        RULE (prefix_S1_template_prefix)
-    );
+    MATCH (RULE (prefix_A_template_prefix) && RULE_MANY (prefix_mk_template_prefix));
 });
 
 DEFN_RULE (prefix_Yk_closure_prefix, {
@@ -265,11 +263,7 @@ DEFN_RULE (prefix_mk_closure_prefix, {
 });
 
 DEFN_RULE (prefix_S1_closure_prefix, {
-    MATCH (RULE (prefix_A_closure_prefix));
-    MATCH (
-        RULE (prefix_A_closure_prefix) && RULE (prefix_mk_closure_prefix) &&
-        RULE (prefix_S1_closure_prefix)
-    );
+    MATCH (RULE (prefix_A_closure_prefix) && RULE_MANY (prefix_mk_closure_prefix));
 });
 
 DEFN_RULE (prefix, {
@@ -281,7 +275,12 @@ DEFN_RULE (prefix, {
     MATCH (RULE (prefix_S1_closure_prefix));
 });
 
+```
 
+The changes made for $ \langle \text{closure-prefix} \rangle $ :
+
+
+```c
 DEFN_RULE (closure_prefix_Y, {
     MATCH (RULE (variable_template_template_prefix) && RULE (template_args) && READ ('M'));
 });
@@ -293,21 +292,25 @@ DEFN_RULE (closure_prefix_Xm_prefix, {
     MATCH (RULE (substitution) && RULE (variable_or_member_unqualified_name) && READ ('M'));
 });
 
+DEFN_RULE (closure_prefix_km_prefix, {
+    MATCH (RULE (variable_template_template_prefix) && RULE (template_args) && READ ('M'));
+});
+
 DEFN_RULE (closure_prefix_B, {
     MATCH (RULE (closure_prefix_Y));
     MATCH (RULE (closure_prefix_Xm_prefix));
 });
 
 DEFN_RULE (closure_prefix_S2_prefix, {
-    MATCH (RULE (closure_prefix_B));
-    MATCH (RULE (closure_prefix_B) && RULE (closure_prefix_S2_prefix));
+    MATCH (RULE (closure_prefix_B) && RULE_MANY (closure_prefix_km_prefix));
 });
 
 DEFN_RULE (closure_prefix, { MATCH (RULE (closure_prefix_S2_prefix)); });
+```
 
+The changes made for $ \langle \text{template-prefix} \rangle $ :
 
-
-
+```c
 DEFN_RULE (template_prefix_Y, {
     MATCH (RULE (template_unqualified_name));
     MATCH (RULE (template_param));
@@ -321,14 +324,17 @@ DEFN_RULE (template_prefix_Xm_prefix, {
     MATCH (RULE (substitution) && RULE (template_unqualified_name));
 });
 
+DEFN_RULE (template_prefix_km_prefix, {
+    MATCH (RULE (template_args) && RULE (template_unqualified_name));
+});
+
 DEFN_RULE (template_prefix_B, {
     MATCH (RULE (template_prefix_Y));
     MATCH (RULE (template_prefix_Xm_prefix));
 });
 
 DEFN_RULE (template_prefix_S2_prefix, {
-    MATCH (RULE (template_prefix_B));
-    MATCH (RULE (template_prefix_B) && RULE (template_prefix_S2_prefix));
+    MATCH (RULE (template_prefix_B) && RULE_MANY (template_prefix_km_prefix));
 });
 
 DEFN_RULE (template_prefix, { MATCH (RULE (template_prefix_S2_prefix)); });
@@ -412,7 +418,7 @@ who are not comfortable with the code, here's the grammar form :
 \\]
 
 
-The changes made from $ \langle \text{closure-prefix} \rangle $ :
+The changes made for $ \langle \text{closure-prefix} \rangle $ :
 
 \\[
 \begin{align}
@@ -438,8 +444,14 @@ The changes made from $ \langle \text{closure-prefix} \rangle $ :
 
 \\[
 \begin{align}
+\langle \text{closure-prefix-km-prefix} \rangle ::= \langle \text{variable or member unqualified-name} \rangle  M
+\end{align}
+\\]
+
+\\[
+\begin{align}
 \langle \text{closure-prefix-S2-prefix} \rangle & ::= & \langle \text{closure-prefix-B} \rangle \\\\
-                                                & \quad \mid & \langle \text{closure-prefix-B} \rangle \ \langle \text{closure-prefix-S2-prefix} \rangle 
+                                                 & \quad \mid & \langle \text{closure-prefix-B} \rangle \ \langle \text{closure-prefix-km-prefix} \rangle ^\*
 \end{align}
 \\]
 
@@ -449,7 +461,7 @@ The changes made from $ \langle \text{closure-prefix} \rangle $ :
 \end{align}
 \\]
 
-The changes made from $ \langle \text{template-prefix} \rangle $ :
+The changes made for $ \langle \text{template-prefix} \rangle $ :
 
 \\[
 \begin{align}
@@ -477,8 +489,14 @@ The changes made from $ \langle \text{template-prefix} \rangle $ :
 
 \\[
 \begin{align}
+\langle \text{template-prefix-km-prefix} \rangle ::= \langle \text{template-args} \rangle \langle \text{template-unqualified-name} \rangle
+\end{align}
+\\]
+
+\\[
+\begin{align}
 \langle \text{template-prefix-S2-prefix} \rangle & ::= & \langle \text{template-prefix-B} \rangle \\\\
-                                                 & \quad \mid & \langle \text{template-prefix-B} \rangle \ \langle \text{template-prefix-S2-prefix} \rangle
+                                                 & \quad \mid & \langle \text{template-prefix-B} \rangle \ \langle \text{template-prefix-km-prefix} \rangle ^\*
 \end{align}
 \\]
 
