@@ -585,6 +585,6 @@ to remove redundancy, and help the actual parsing algorithm make correct decisio
 Did you like the post? Drop in a comment! If you find any error in this post, I'm only a human,
 and I'll accept my mistakes, and make any changes if required.
 
-# References & Further Reading 
+# Further Reading 
 
 - [[1]](https://www.microsoft.com/en-us/research/wp-content/uploads/2000/04/naacl2k-proc-rev.pdf) - Removing Left Recursion from Context-Free Grammars 
