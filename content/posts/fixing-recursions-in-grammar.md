@@ -126,8 +126,10 @@ so, I'll re-write the mutually left recursive grammar as follows
 \\[
 \begin{align}
 \langle S \rangle  &::= \langle S1 \rangle \mid \langle S2 \rangle \\\\
-\langle S1 \rangle &::=  X \mid Y k \mid m k \langle S1 \rangle \\\\
-\langle S2 \rangle &::=  Y \mid X m \mid k m \langle S2 \rangle
+\langle A \rangle  &::= X \mid Y k \\\\
+\langle B \rangle  &::= Y \mid X m \\\\
+\langle S1 \rangle &::= \langle A \rangle \mid \langle A \rangle m k \langle S1 \rangle \\\\
+\langle S2 \rangle &::= \langle B \rangle \mid \langle B \rangle k m \langle S2 \rangle
 \end{align}
 \\]
 
@@ -222,66 +224,60 @@ that my theory is right.
 DECL_RULE (template_prefix_without_recursion_with_prefix);
 DECL_RULE (closure_prefix_without_recursion_with_prefix);
 
-// X (mutual-left-recursion with template-prefix)
-// X (mutual-left-recursion with closure-prefix)
-// b (left-recursion context, leaving out closure-prefix)
 DEFN_RULE (prefix_without_recursion, {
     MATCH (RULE (unqualified_name));
     MATCH (RULE (template_param));
     MATCH (RULE (decltype));
     MATCH (RULE (substitution));
+
+    MATCH (RULE (template_prefix_without_recursion_with_prefix) && RULE (template_args));
+
+    MATCH (RULE (closure_prefix_without_recursion_with_prefix));
 });
 
-// S1 (mutual-left-recursion context)
 DEFN_RULE (prefix, {
-    // Takes care of both left-recursion and mutual-left-recursion at the same time
     MATCH (RULE (prefix_without_recursion) && RULE_MANY(unqualified_name));
 
-    // Fix for mutual-left-recursion with <template-prefix>
-    MATCH (RULE (template_prefix_without_recursion_with_prefix) && RULE (template_param));
-    MATCH (RULE (template_unqualified_name) && RULE (template_param) && RULE (template_prefix));
+    MATCH (RULE (template_prefix_without_recursion_with_prefix) && RULE (template_unqualified_name) && RULE (template_args) && RULE (prefix));
 
-    // Fix for mutual-left-recursion with <closure-prefix>
-    // k is empty string here
-    MATCH (RULE (closure_prefix_without_recursion_with_prefix));
-    MATCH (RULE (template_unqualified_name) && RULE (closure_prefix));
+    MATCH (RULE (closure_prefix_without_recursion_with_prefix) && RULE (variable_or_member_unqualified_name) && READ('M') && RULE (prefix));
 });
 
 
 
 DEFN_RULE (closure_prefix_without_recursion_with_prefix, {
     MATCH (RULE (variable_template_template_prefix) && RULE (template_args) && READ ('M'));
+
+    MATCH (RULE (unqualified_name) && RULE (variable_or_member_unqualified_name) && READ ('M'));
+    MATCH (RULE (template_param) && RULE (variable_or_member_unqualified_name) && READ ('M'));
+    MATCH (RULE (decltype) && RULE (variable_or_member_unqualified_name) && READ ('M'));
+    MATCH (RULE (substitution) && RULE (variable_or_member_unqualified_name) && READ ('M'));
 });
 
 DEFN_RULE (closure_prefix, {
     MATCH (RULE (closure_prefix_without_recursion_with_prefix));
-    MATCH (
-        RULE_OPTIONAL (prefix_without_recursion) &&
-        RULE (variable_or_member_unqualified_name) && READ ('M')
-    );
-    MATCH (RULE (variable_or_member_unqualified_name) && READ ('M') && RULE (prefix));
+    MATCH (RULE (closure_prefix_without_recursion_with_prefix) && RULE (variable_or_member_unqualified_name) && READ ('M') && RULE(closure_prefix));
 });
 
 
 
-// NOTE(brightprogrammer): A dummy rule to fix mutual-left-recursion of non-terminals
-// <prefix> and <template-prefix>
-// Y
 DEFN_RULE (template_prefix_without_recursion_with_prefix, {
     MATCH (RULE (template_unqualified_name));
     MATCH (RULE (template_param));
     MATCH (RULE (substitution));
+
+    MATCH (RULE (unqualified_name) && RULE (template_unqualified_name));
+    MATCH (RULE (template_param) && RULE (template_unqualified_name));
+    MATCH (RULE (decltype) && RULE (template_unqualified_name));
+    MATCH (RULE (substitution) && RULE (template_unqualified_name));
 });
 
-// S2
 DEFN_RULE (template_prefix, {
-    // NOTE(brightprogrammer): This rule is mutually left-recursive with non-terminal <prefix>
-    // MATCH (RULE (prefix) && RULE (template_unqualified_name)); /* mutual-left-recursion */
-    MATCH (RULE (template_prefix_without_recursion_with_prefix));                // Y
-    MATCH (RULE (prefix_without_recursion) && RULE (template_unqualified_name)); // Xm
+    MATCH (RULE (template_prefix_without_recursion_with_prefix));
     MATCH (
-        RULE (template_unqualified_name) && RULE (template_args) && RULE (template_prefix)
-    );                                                                                  // kmS2
+        RULE (template_prefix_without_recursion_with_prefix) && RULE (template_args) &&
+        RULE (template_unqualified_name) && RULE (template_prefix)
+    );
 });
 ```
 
