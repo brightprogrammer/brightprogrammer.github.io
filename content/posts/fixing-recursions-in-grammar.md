@@ -197,8 +197,8 @@ so, I'll re-write the mutually left recursive grammar as follows
 \langle S2 \rangle & ::= & \langle B \rangle \mid \langle B \rangle \langle R2 \rangle \\\\
 \langle A \rangle  & ::= & X \mid Y k \\\\
 \langle B \rangle  & ::= & Y \mid X m \\\\
-\langle R1 \rangle & ::= & m k \langle R1 \rangle \\\\
-\langle R2 \rangle & ::= & k m \langle R2 \rangle
+\langle R1 \rangle & ::= & m k \langle R1 \rangle \mid m k \\\\
+\langle R2 \rangle & ::= & k m \langle R2 \rangle \mid k m 
 \end{align}
 \\]
 
@@ -232,6 +232,12 @@ stateDiagram-v2
     Y --> [*]
     Yk --> [*]
     Xm --> [*]
+
+    R1 --> mk 
+    R2 --> km 
+
+    mk --> [*]
+    km --> [*]
 ```
 
 ## Real Life Example
