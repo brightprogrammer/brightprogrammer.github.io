@@ -74,7 +74,7 @@ More precisely, it can be defined inductively as follows :
 > \end{align}
 > \\]
 
-## Examples :
+## Examples
 
 - $xx$ is application of $x$ over $x$ (itself). This is like a constant term, $x$ already has a pre-defined value, and it cannot be changed.
 - $\lambda x . x x$ is an abstraction over $x$ that applies $x$ to itself. Considering $xx$ as $M$, this can be re-written as $\lambda x . M$
@@ -166,6 +166,31 @@ can also be used to break the domain of all possible lambda expressions to small
 
 The thing that I find interesting about lambda calculus is how logic appears out of combinations of terms. We can build all basic
 logic gates by some very basic abstractions.
+
+# Fixed Point Theorem
+
+> $ \forall F \quad \exists X \mid FX = X $  
+>
+> For all lambda expression $F$, there exists another lambda expression $X$, such that $FX = X$, meaning when $F$ is 
+> applied over $X$ we get $X$ (itself).
+
+- Let's take $F = \lambda x . x$ (the identity abstraction), Then any lambda expression can take place of $X$.  
+- Now consider $F = \lambda x . y$, then we have $X = y$, because $(\lambda x . y)y = y$.  
+- If $F = \lambda x . xy$, then? Then can use $\lambda y . X$ as $X$ itself, because $FX = (\lambda x . xy)(\lambda y . X) = (\lambda y . X) y = X$.
+- What if $F = \lambda x . xx$ then? We have $X = \lambda x . x$ or $X = I$ (the identity abstraction). Then $FX = FI = II = I$
+
+{{< notice type="info" >}}
+I don't know whether these fixed points are unique or not.
+{{< /notice >}}
+
+## Proof
+
+We basically need to prove existence of $X$ for all $F$. $F$ can be anything. If we can somehow devise
+an algorithm to create such $X$s, then it'll make our task easier. 
+
+{{< notice type="disclaimer" >}}
+Work In Progress. Going to do some other things, I'll come back to this.
+{{< /notice >}}
 
 # References
 
