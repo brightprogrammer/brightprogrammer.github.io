@@ -15,7 +15,7 @@ categories: [
 ]
 ---
 
-# Introduction
+## Introduction
 
 Lambda calculus, just like any other programming language out there is a programming language. In fact it's the simplest
 programming language there is. It's even simpler than assembly.
@@ -42,7 +42,7 @@ More on these later.
 Calculus is when you just play with symbols without any actual computation or expression evaluation.
 {{< /notice >}}
 
-## The Language
+### The Language
 
 Like any other programming language, lambda calculus has a grammar, which can be loosely written like this :
 
@@ -74,7 +74,7 @@ More precisely, it can be defined inductively as follows :
 > \end{align}
 > \\]
 
-## Examples
+### Examples
 
 - $xx$ is application of $x$ over $x$ (itself). This is like a constant term, $x$ already has a pre-defined value, and it cannot be changed.
 - $\lambda x . x x$ is an abstraction over $x$ that applies $x$ to itself. Considering $xx$ as $M$, this can be re-written as $\lambda x . M$
@@ -123,7 +123,7 @@ void l(void(*x)(), void(*y)(void(*)())) {
 
 I guess this is why lambda calculus was created, to write programs faster :rofl:.
 
-# Some Axioms Of Lambda Terms
+## Some Axioms Of Lambda Terms
 
 \\[
 \begin{align}
@@ -167,7 +167,149 @@ can also be used to break the domain of all possible lambda expressions to small
 The thing that I find interesting about lambda calculus is how logic appears out of combinations of terms. We can build all basic
 logic gates by some very basic abstractions.
 
-# Fixed Point Theorem
+## Equivalence
+
+When considering equivalence of two expressions, we can say they are equivalent in four ways
+
+- $\alpha$-equivalence - Renaming of bound variables
+- $\beta$-equivalence - Function application and reduction
+- $\eta$-equivalence - Function extensionality
+- syntactic equivalence
+
+### Syntactic Equivalence
+
+Two lambda expressions are $alpha$-equivalent if they differ only in the naming of
+their variables. If we are to rename the variables, then it's we can them to look
+identical.
+
+#### Examples
+
+- $\lambda x . x \stackrel{\alpha}{=} \lambda a . a$
+- $\lambda x . x \stackrel{\alpha}{\not =} \lambda a . b$
+
+### Beta ($\beta$) Equivalence
+
+If we have $\lambda x . M$ and $N$ as two lambda expressions then the $\beta$-conversion
+$(\lambda x . M)N \stackrel{\beta}{=} M[x:=N]$ is said to establish a $\beta$-equivalence
+between the expressions $(\lambda x . M)N$ can be replaced by $M[x:=N]$ without changing the
+meaning of original expression.
+
+This is mathematics equivalent of the simplification process.
+
+#### Examples :
+
+- $(\lambda x . x + 1)3 \stackrel{\beta}{=} 3 + 1$
+- $Iy \stackrel{\beta}{=} y$
+
+### Eta ($\eta$) Equivalence
+
+If two expressions always give same results when same input is provide to each, then
+they're said to be $\eta$-equivalent.
+
+#### Examples
+
+- $\lambda x . F x \stackrel{\eta}{=} F$
+- $\lambda x . yy \stackrel{\eta}{=} yy$ 
+
+## Syntactic Equivalence
+
+Two lambda expressions are syntactically equivalent when they are identical. All
+the arrangement, ordering, naming, everything is exactly same. When this happens,
+you can obviously replace one with the other without a doubt.
+
+#### Examples
+
+Consider the example $M \equiv \lambda x . Nx$. Now if we have another expression
+like $(\lambda f . f x) M$ then we can replace $M$ in here with $\lambda x . Nx$
+and rewrite the original expression as $(\lambda f . f x) M \stackrel{\beta}{=} M x \stackrel{\beta}{=} (\lambda x . Nx) x$
+which upon applying further $\beta$-reductions, we can simplify to simple $Nx$
+
+## Logic
+
+Let's build some boolean login out of power of pure combinations. Unlike usual logic, we won't get
+`true`/`false` as values. Here `true` and `false` are lambda abstractions itself.
+
+- $\text{True} \stackrel{\beta}{=} \lambda xy.x$ - Meaning, take two values, and evaluate to only the first one.
+- $\text{False}\stackrel{\beta}{=} \lambda xy.y$ - Take two, and evaluate to only the second one, discarding the first.
+
+These are often called $\text{First}$ and $\text{Second}$ correspondingly for these reasons. So we can write
+$\text{First} \equiv \text{True}$ and $\text{Second} \equiv \text{False}$.
+
+### AND Gate
+
+And of any two expressions is `true` if and only of both are `true` at the same time for same input, and is `false` otherwise.
+In here, again to remind, we don't deal with values, but lambda expressions, so we need the $\text{True}$ or $\text{False}$
+expression.
+
+Defining $\text{AND} \stackrel{\beta}{=} \lambda ab . aba$. Let's try it out with some values
+
+<center>
+
+|       $a$      |       $b$      |              $\text{AND} a b$              |                   $a b a$                    |     Result     |
+|----------------|----------------|--------------------------------------------|----------------------------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{AND} \ \text{True}  \ \text{True}$  | $\text{True}  \ \text{True}  \ \text{True} $ | $\text{True}$  |
+| $\text{True}$  | $\text{False}$ | $\text{AND} \ \text{True}  \ \text{False}$ | $\text{True}  \ \text{False} \ \text{True} $ | $\text{False}$ |
+| $\text{False}$ | $\text{True}$  | $\text{AND} \ \text{False} \ \text{True}$  | $\text{False} \ \text{True}  \ \text{False}$ | $\text{False}$ |
+| $\text{False}$ | $\text{False}$ | $\text{AND} \ \text{False} \ \text{False}$ | $\text{False} \ \text{False} \ \text{False}$ | $\text{False}$ |
+
+</center>
+
+Note how judiciously selecting value among $\text{First}$ or $\text{Second}$ helped us create an `AND` gate! Infact, if we can create `NAND` gate,
+then we can derive very other gate from it, becuase `NAND` is a turing complete instruction. Try searching "from nand to tetris" in your favorite
+search engine.
+
+### OR Gate
+
+This time we want it to return true whenever either of $a$ or $b$ is $\text{True}$. 
+Defining $\text{OR} \stackrel{\beta}{=} \lambda ab . aab$.
+
+<center>
+
+|       $a$      |       $b$      |              $\text{OR} a b$              |                   $a a b$                    |     Result     |
+|----------------|----------------|-------------------------------------------|----------------------------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{OR} \ \text{True}  \ \text{True}$  | $\text{True}  \ \text{True}  \ \text{True}$  | $\text{True}$  |
+| $\text{True}$  | $\text{False}$ | $\text{OR} \ \text{True}  \ \text{False}$ | $\text{True}  \ \text{True}  \ \text{False}$ | $\text{True}$  |
+| $\text{False}$ | $\text{True}$  | $\text{OR} \ \text{False} \ \text{True}$  | $\text{False} \ \text{False} \ \text{True}$  | $\text{True}$  |
+| $\text{False}$ | $\text{False}$ | $\text{OR} \ \text{False} \ \text{False}$ | $\text{False} \ \text{False} \ \text{False}$ | $\text{False}$ |
+</center>
+
+### NOT Gate
+
+A NOT gate will just flip the bits right? If it's $\text{True}$, it should evaluate to $\text{False}$, and if it's $\text{False}$,
+it shoud evaluate to $\text{True}$. This is easier than what we've seen before. 
+Defining $\text{NOT} \stackrel{\beta}{=} \lambda a . a \ \text{False} \ \text{true}$.
+
+<center>
+
+|        $a$     |        $\text{NOT} a$       |          $a \text{False} \text{True}$       |     Result     |
+|----------------|-----------------------------|---------------------------------------------|----------------|
+| $\text{True}$  | $\text{NOT} \ \text{True}$  | $\text{True}  \ \text{False} \ \text{True}$ | $\text{False}$ |
+| $\text{False}$ | $\text{NOT} \ \text{False}$ | $\text{False} \ \text{False} \ \text{True}$ | $\text{True}$  |
+
+</center>
+
+All of this is just from combinations of different selections performed. How about a bit more difficult gate then?
+How about XOR gate?
+
+### XOR Gate
+
+This is true only when both values are different. Defining $\text{XOR} \stackrel{\beta}{=} \lambda ab . a (b \ \text{False} \ \text{True}) b$.
+
+<center>
+
+|       $a$      |       $b$      |              $\text{XOR} a b$              |              $a (b \ \text{False} \ \text{True}) b$              |     Result     |
+|----------------|----------------|--------------------------------------------|------------------------------------------------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{XOR} \ \text{True}  \ \text{True}$  | $\text{True}  \ (\text{True} \ \text{False} \ \text{True}) \ \text{True}$  | $\text{False}$ |
+| $\text{True}$  | $\text{False}$ | $\text{XOR} \ \text{True}  \ \text{False}$ | $\text{True}  \ (\text{False} \ \text{False} \ \text{True}) \ \text{False}$ | $\text{True}$  |
+| $\text{False}$ | $\text{True}$  | $\text{XOR} \ \text{False} \ \text{True}$  | $\text{False} \ (\text{True} \ \text{False} \ \text{True}) \ \text{True}$  | $\text{True}$  |
+| $\text{False}$ | $\text{False}$ | $\text{XOR} \ \text{False} \ \text{False}$ | $\text{False} \ (\text{False} \ \text{False} \ \text{True}) \ \text{False}$ | $\text{False}$ |
+
+</center>
+
+If you see carefully, then in both the $\text{False}$ cases, taking not of $b$ is not really required, it can be anything there, but just to make it work
+with both cases of $\text{True}$, it has to be there.
+
+## Fixed Point Theorem
 
 > $ \forall F \quad \exists X \mid FX = X $  
 >
@@ -175,23 +317,19 @@ logic gates by some very basic abstractions.
 > applied over $X$ we get $X$ (itself).
 
 - Let's take $F = \lambda x . x$ (the identity abstraction), Then any lambda expression can take place of $X$.  
-- Now consider $F = \lambda x . y$, then we have $X = y$, because $(\lambda x . y)y = y$.  
-- If $F = \lambda x . xy$, then? Then can use $\lambda y . X$ as $X$ itself, because $FX = (\lambda x . xy)(\lambda y . X) = (\lambda y . X) y = X$.
-- What if $F = \lambda x . xx$ then? We have $X = \lambda x . x$ or $X = I$ (the identity abstraction). Then $FX = FI = II = I$
+- Now consider $F = \lambda x . y$, then we have $X \equiv y$, because $(\lambda x . y)y = y$.  
+- If $F = \lambda x . xy$, then? Then can use $X \stackrel{\beta}{=} \lambda y . X$, because $FX \equiv (\lambda x . xy)(\lambda y . X) \stackrel{\beta}{\rightarrow} (\lambda y . X) y \stackrel{\beta}{\rightarrow} X$.
+- What if $F = \lambda x . xx$ then? We have $X \stackrel{\beta}{=} \lambda x . x$ or $X \stackrel{\eta}{=} I$ (the identity abstraction). Then $FX = FI = II = I$.
 
 {{< notice type="info" >}}
-I don't know whether these fixed points are unique or not.
+These fixed points are not unique. Consider the lambda expression $F \stackrel{\beta}{\=} \lambda x . x$. Take any $X$ and, it'll be
+a fixed point of this.
 {{< /notice >}}
-
-## Proof
-
-We basically need to prove existence of $X$ for all $F$. $F$ can be anything. If we can somehow devise
-an algorithm to create such $X$s, then it'll make our task easier. 
 
 {{< notice type="disclaimer" >}}
-Work In Progress. Going to do some other things, I'll come back to this.
+Proofs for the fixed point theorem already exist. I do not understand some of th
 {{< /notice >}}
 
-# References
+## References
 
 - [1] - Chapter 2 - Lambda Calculus, it's Syntax and Semantics - Henk P. Barendregt
