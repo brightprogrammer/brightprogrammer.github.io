@@ -245,12 +245,12 @@ Defining $\text{AND} \stackrel{\beta}{=} \lambda ab . aba$. Let's try it out wit
 
 <center>
 
-|       $a$      |       $b$      |              $\text{AND} a b$              |                   $a b a$                    |     Result     |
-|----------------|----------------|--------------------------------------------|----------------------------------------------|----------------|
-| $\text{True}$  | $\text{True}$  | $\text{AND} \ \text{True}  \ \text{True}$  | $\text{True}  \ \text{True}  \ \text{True} $ | $\text{True}$  |
-| $\text{True}$  | $\text{False}$ | $\text{AND} \ \text{True}  \ \text{False}$ | $\text{True}  \ \text{False} \ \text{True} $ | $\text{False}$ |
-| $\text{False}$ | $\text{True}$  | $\text{AND} \ \text{False} \ \text{True}$  | $\text{False} \ \text{True}  \ \text{False}$ | $\text{False}$ |
-| $\text{False}$ | $\text{False}$ | $\text{AND} \ \text{False} \ \text{False}$ | $\text{False} \ \text{False} \ \text{False}$ | $\text{False}$ |
+|       $a$      |       $b$      |    $\text{AND} a b$      |    b a$                    |     Result     |
+|----------------|----------------|--------------------------|----------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{AND True True}$   | $\text{True True True}$    | $\text{True}$  |
+| $\text{True}$  | $\text{False}$ | $\text{AND True False}$  | $\text{True False True}$   | $\text{False}$ |
+| $\text{False}$ | $\text{True}$  | $\text{AND False True}$  | $\text{False True False}$  | $\text{False}$ |
+| $\text{False}$ | $\text{False}$ | $\text{AND False False}$ | $\text{False False False}$ | $\text{False}$ |
 
 </center>
 
@@ -265,12 +265,12 @@ Defining $\text{OR} \stackrel{\beta}{=} \lambda ab . aab$.
 
 <center>
 
-|       $a$      |       $b$      |              $\text{OR} a b$              |                   $a a b$                    |     Result     |
-|----------------|----------------|-------------------------------------------|----------------------------------------------|----------------|
-| $\text{True}$  | $\text{True}$  | $\text{OR} \ \text{True}  \ \text{True}$  | $\text{True}  \ \text{True}  \ \text{True}$  | $\text{True}$  |
-| $\text{True}$  | $\text{False}$ | $\text{OR} \ \text{True}  \ \text{False}$ | $\text{True}  \ \text{True}  \ \text{False}$ | $\text{True}$  |
-| $\text{False}$ | $\text{True}$  | $\text{OR} \ \text{False} \ \text{True}$  | $\text{False} \ \text{False} \ \text{True}$  | $\text{True}$  |
-| $\text{False}$ | $\text{False}$ | $\text{OR} \ \text{False} \ \text{False}$ | $\text{False} \ \text{False} \ \text{False}$ | $\text{False}$ |
+|       $a$      |       $b$      |     $\text{OR} a b$     |       $a a b$              |     Result     |
+|----------------|----------------|-------------------------|----------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{OR True True}$   | $\text{True True True}$    | $\text{True}$  |
+| $\text{True}$  | $\text{False}$ | $\text{OR True False}$  | $\text{True True False}$   | $\text{True}$  |
+| $\text{False}$ | $\text{True}$  | $\text{OR False True}$  | $\text{False False True}$  | $\text{True}$  |
+| $\text{False}$ | $\text{False}$ | $\text{OR False False}$ | $\text{False False False}$ | $\text{False}$ |
 </center>
 
 ### NOT Gate
@@ -281,10 +281,10 @@ Defining $\text{NOT} \stackrel{\beta}{=} \lambda a . a \ \text{False} \ \text{tr
 
 <center>
 
-|        $a$     |        $\text{NOT} a$       |          $a \text{False} \text{True}$       |     Result     |
-|----------------|-----------------------------|---------------------------------------------|----------------|
-| $\text{True}$  | $\text{NOT} \ \text{True}$  | $\text{True}  \ \text{False} \ \text{True}$ | $\text{False}$ |
-| $\text{False}$ | $\text{NOT} \ \text{False}$ | $\text{False} \ \text{False} \ \text{True}$ | $\text{True}$  |
+|        $a$     |   $\text{NOT } a$  |    $a \text{ False True}$    |     Result     |
+|----------------|--------------------|------------------------------|----------------|
+| $\text{True}$  | $\text{NOT True}$  | $\text{True False True}$     | $\text{False}$ |
+| $\text{False}$ | $\text{NOT False}$ | $\text{False False True}$    | $\text{True}$  |
 
 </center>
 
@@ -313,7 +313,19 @@ with both cases of $\text{True}$, it has to be there.
 
 If a condition is $\text{True}$, we execute the $\text{Then}$ case, otherwise, we execute the $\text{Else}$ case.
 This is basically selecting the $\text{First}$ or $\text{Second}$ of $\text{Then Else}$. Writing program
-for this is easy : $\text{ITE} \stackrel{\beta}{=} \lambda c t e . c t e$
+for this is easy : $\text{ITE} \stackrel{\beta}{=} \lambda c t e . c t e$. If $c$ is $\text{True}$ then
+$\text{ITE} cte$ will evaluate to $t$, and in the other case, it'll evaluate to $e$.
+
+### Loops?
+
+If you have some experience with The Haskell programming language, then you'd know that purely functional
+languages don't have a way to iterate over some statements like Turing Machines do. Recursion is the only
+way. So, we create loops using recursion. Let's try to build up the idea of how we can do recursion in
+lambda calculus.
+
+{{< notice type="disclaimber" >}}
+To be continued from here.
+{{< /notice >}}
 
 ## Fixed Point Theorem
 
@@ -333,7 +345,10 @@ a fixed point of this.
 {{< /notice >}}
 
 {{< notice type="disclaimer" >}}
-Proofs for the fixed point theorem already exist. I do not understand some of th
+Proofs for the fixed point theorem already exist. I do not understand the proofs right now, becuase I feel I
+need more familiarity with lambda calculus. I'll come back to this once I feel confident to prove this myself.
+I know for now that the key to proving this is recursion. I'm figuring out how can we do recursion in lambda
+calculus.
 {{< /notice >}}
 
 ## References
