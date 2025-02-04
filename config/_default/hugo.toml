@@ -51,6 +51,7 @@ identifier = "cv"
 name = "CV"
 url = "/cv/"
 pre = """
+<img class="icon-for-navbar-item" src="/tabler-icons/icons/outline/file-cv.svg"/>
 """
 weight = 4
 
@@ -59,5 +60,6 @@ identifier = "lists"
 name = "Lists"
 url = "/lists/"
 pre = """
+<img class="icon-for-navbar-item" src="/tabler-icons/icons/outline/list.svg"/>
 """
 weight = 5
