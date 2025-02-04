@@ -297,17 +297,23 @@ This is true only when both values are different. Defining $\text{XOR} \stackrel
 
 <center>
 
-|       $a$      |       $b$      |              $\text{XOR} a b$              |              $a (b \ \text{False} \ \text{True}) b$              |     Result     |
-|----------------|----------------|--------------------------------------------|------------------------------------------------------------------|----------------|
-| $\text{True}$  | $\text{True}$  | $\text{XOR} \ \text{True}  \ \text{True}$  | $\text{True}  \ (\text{True} \ \text{False} \ \text{True}) \ \text{True}$  | $\text{False}$ |
-| $\text{True}$  | $\text{False}$ | $\text{XOR} \ \text{True}  \ \text{False}$ | $\text{True}  \ (\text{False} \ \text{False} \ \text{True}) \ \text{False}$ | $\text{True}$  |
-| $\text{False}$ | $\text{True}$  | $\text{XOR} \ \text{False} \ \text{True}$  | $\text{False} \ (\text{True} \ \text{False} \ \text{True}) \ \text{True}$  | $\text{True}$  |
-| $\text{False}$ | $\text{False}$ | $\text{XOR} \ \text{False} \ \text{False}$ | $\text{False} \ (\text{False} \ \text{False} \ \text{True}) \ \text{False}$ | $\text{False}$ |
+|       $a$      |       $b$      |   $\text{XOR} a b$       | $a (b \ \text{False} \ \text{True}) b$  |     Result     |
+|----------------|----------------|--------------------------|-----------------------------------------|----------------|
+| $\text{True}$  | $\text{True}$  | $\text{XOR True True}$   | $\text{True (True False True) True}$    | $\text{False}$ |
+| $\text{True}$  | $\text{False}$ | $\text{XOR True False}$  | $\text{True (False False True) False}$  | $\text{True}$  |
+| $\text{False}$ | $\text{True}$  | $\text{XOR False True}$  | $\text{False (True False True) True}$   | $\text{True}$  |
+| $\text{False}$ | $\text{False}$ | $\text{XOR False False}$ | $\text{False (False False True) False}$ | $\text{False}$ |
 
 </center>
 
 If you see carefully, then in both the $\text{False}$ cases, taking not of $b$ is not really required, it can be anything there, but just to make it work
 with both cases of $\text{True}$, it has to be there.
+
+### If-Then-Else
+
+If a condition is $\text{True}$, we execute the $\text{Then}$ case, otherwise, we execute the $\text{Else}$ case.
+This is basically selecting the $\text{First}$ or $\text{Second}$ of $\text{Then Else}$. Writing program
+for this is easy : $\text{ITE} \stackrel{\beta}{=} \lambda c t e . c t e$
 
 ## Fixed Point Theorem
 
