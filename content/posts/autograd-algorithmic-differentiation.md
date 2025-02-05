@@ -40,10 +40,10 @@ graph TD
     node0["add"]
     node1["mul"]
     node2["1338"]
-    node3["a^1.000000"]
+    node3["$a^{1}$"]
     node4["div"]
-    node5["y^5.000000"]
-    node6["x^1337.000000"]
+    node5["$y^{5}$"]
+    node6["$x^{1337}$"]
 
     node0 --> node1
     node0 --> node4
@@ -63,7 +63,7 @@ graph TD
     node1["add"]
     node2["mul"]
     node3["0"]
-    node4["a^1.000000"]
+    node4["$a^{1}$"]
     node5["mul"]
     node6["1338"]
     node7["1"]
@@ -72,16 +72,16 @@ graph TD
     node10["mul"]
     node11["mul"]
     node12["5"]
-    node13["y^4.000000"]
-    node14["x^1337.000000"]
+    node13["$y^{4}$"]
+    node14["$x^{1337}$"]
     node15["mul"]
-    node16["y^5.000000"]
+    node16["$y^{5}$"]
     node17["mul"]
     node18["1337"]
-    node19["x^1336.000000"]
+    node19["$x^{1336}$"]
     node20["mul"]
-    node21["x^1337.000000"]
-    node22["x^1337.000000"]
+    node21["$x^{1337}$"]
+    node22["$x^{1337}$"]
 
     node0 --> node1
     node0 --> node8
@@ -130,16 +130,16 @@ graph TD
     node6["mul"]
     node7["mul"]
     node8["5"]
-    node9["y^4.000000"]
-    node10["x^1337.000000"]
+    node9["$y^{4}$"]
+    node10["$x^{1337}$"]
     node11["mul"]
-    node12["y^5.000000"]
+    node12["$y^{5}$"]
     node13["mul"]
     node14["1337"]
-    node15["x^1336.000000"]
+    node15["$x^{1336}$"]
     node16["mul"]
-    node17["x^1337.000000"]
-    node18["x^1337.000000"]
+    node17["$x^{1337}$"]
+    node18["$x^{1337}$"]
 
     node0 --> node3
     node1 --> node3
