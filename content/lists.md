@@ -16,6 +16,10 @@ readers.
 
 - [Faith, Reason & Inner Engineering : Jaggi Vasudev, Javed Akhtar at THiNK 2012](https://www.youtube.com/watch?v=FpL_kSEHOco)
 
+## Documents, Papers, PPTs, etc...
+
+- [Programming Languages - S. Arun-Kumar IITD](/documents/s-arun-kumar-iitd-pl.pdf)
+
 ## Podcasts
 
 I like audio drama a lot. Below is a list of podcasts I like. Contains a mix of some informative podcasts,
