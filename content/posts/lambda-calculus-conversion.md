@@ -127,13 +127,13 @@ I guess this is why lambda calculus was created, to write programs faster :rofl:
 
 \\[
 \begin{align}
-(\lambda x . M) N & = M[x := N]                                  & (\beta\text{-conversion}) \\\\
+(\lambda x . M) N & \stackrel{\beta}{=} M[x := N]                                  & (\beta\text{-conversion}) \\\\
 M                 & = M                                          & (\text{reflexivity}) \\\\
 M = N             & \implies N = M                               & (\text{symmetricity}) \\\\
 M = N, N = L      & \implies M = L                               & (\text{transitivity}) \\\\
 M = N             & \implies MZ = NZ \\\\
 M = N             & \implies ZM = ZN \\\\
-M = N             & \implies \lambda x . M = \lambda x . N       & (\text{rule}-\xi)
+M = N             & \implies \lambda x . M \stackrel{\eta}{=} \lambda x . N       & (\text{rule}-\xi)
 \end{align}
 \\]
 
@@ -315,6 +315,7 @@ If a condition is $\text{True}$, we execute the $\text{Then}$ case, otherwise, w
 This is basically selecting the $\text{First}$ or $\text{Second}$ of $\text{Then Else}$. Writing program
 for this is easy : $\text{ITE} \stackrel{\beta}{=} \lambda c t e . c t e$. If $c$ is $\text{True}$ then
 $\text{ITE} cte$ will evaluate to $t$, and in the other case, it'll evaluate to $e$.
+
 
 ### Loops?
 

@@ -19,7 +19,13 @@ tags:
 ## Background
 
 Let's write an auto differentiation algorithm. We will take mathematical expressions
-in prefix notation, build an expression tree like the one below for $ 1338 * a + \frac{y^5}{x^{1335}} $
+in prefix notation, build an expression tree like the one below for 
+
+\\[
+\begin{align}
+1338 * a + \frac{y^5}{x^{1335}}
+\end{align}
+\\]
 
 ```c
 // expression in prefix notation
@@ -103,7 +109,10 @@ graph TD
 
 which in a more mathematician-readable form is 
 
-\\[ \left( (0 \cdot a) + (1338 \cdot 1) \right) + \frac{ \left( (5 \cdot y^{4}) \cdot x^{1337} \right) - \left( y^{5} \cdot (1337 \cdot x^{1336}) \right) }{\left( x^{1337} \cdot x^{1337} \right) }
+\\[
+\begin{align}
+\left( (0 \cdot a) + (1338 \cdot 1) \right) + \frac{ \left( (5 \cdot y^{4}) \cdot x^{1337} \right) - \left( y^{5} \cdot (1337 \cdot x^{1336}) \right) }{\left( x^{1337} \cdot x^{1337} \right) }
+\end{align}
 \\]
 
 and we can also algorithmically simplify the above big expression tree, to a small one (if possible)
@@ -153,7 +162,11 @@ graph TD
 ```
 
 which is 
-\\[1338 + \frac{\left(5 \cdot y^4 \cdot x^{1337}\right) - \left(y^5 \cdot \left(1337 \cdot x^{1336}\right)\right)}{x^{1337}}\\]
+\\[
+\begin{align}
+1338 + \frac{\left(5 \cdot y^4 \cdot x^{1337}\right) - \left(y^5 \cdot \left(1337 \cdot x^{1336}\right)\right)}{x^{1337}}
+\end{align}
+\\]
 
 The simplification algorithm obiously is not working correctly for the root node for some reason, but
 in excitement to write this blog post and move ahead by trying some other cool things, I'll just
