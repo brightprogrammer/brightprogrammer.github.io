@@ -4,7 +4,7 @@
 
 ### RevEng.AI, Binary AI LTD
 
-Software Consultancy Contractor (2024.06 - present)
+Software Consultant (2024.06 - present)
 
 - Fully develop and maintain software plugins for Rizin, Cutter, Radare2 & Iaito reverse engineering tools
 - Keep up with fast ongoing chances in RevEng.AI’s API and features
