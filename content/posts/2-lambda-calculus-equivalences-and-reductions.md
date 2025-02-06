@@ -27,7 +27,7 @@ equivalent expression.
 
 # Equivalence
 
-When considering equivalence of two expressions, we can say they are equivalent in four ways
+When considering equivalence of two expressions, they can be equivalent in four ways
 
 - $\alpha$-equivalence - Renaming of bound variables
 - $\beta$-equivalence - Function application and reduction
