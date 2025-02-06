@@ -42,25 +42,6 @@ from a source expression.
 When just $=$ is used to show equivalence, then it means the two lambda expressions
 on either side have at least one of the above equivalence established.
 
-## Equivalences As Reductions 
-
-Denoting any of the equivalence relation ($\alpha$, $\beta$, $\eta$ or $\equiv$) with $\chi$,
-and a series of applications of it as $\overset{\chi}{\underset{*}{\longrightarrow}}$
-
-\\[
-\begin{aligned}
-{\beta}\text{-Basis } \frac{L \overset{\chi}{\underset{*}{\longrightarrow}} M}{L \stackrel{\chi}{=} M} & \quad &
-{\beta}\text{-Reflexivity } \frac{}{L \stackrel{\chi}{=} L} \\\\
-\\\\
-{\beta}\text{-Symmetry} \frac{L \stackrel{\chi}{=} M}{M \stackrel{\chi}{=} L} & \quad &
-{\beta}\text{-Transitivity} \frac{L \stackrel{\chi}{=} M, \quad M \stackrel{\chi}{=} N}{L \stackrel{\chi}{=} N} \\\\
-\end{aligned}
-\\]
-
-This means, using these rules, and properties of equivalences, we can rewrite expressions
-with the equivalent expression. Also for future reference, $\overset{\chi}{\underset{n}{\longrightarrow}}$
-means $\chi$ reduction applied $n$ times consecutively.
-
 ## Alpha ($\stackrel{\alpha}{=}$) Equivalence
 
 Two lambda expressions are $alpha$-equivalent if they differ only in the naming of
@@ -102,7 +83,24 @@ Two lambda expressions are syntactically equivalent when they are identical. All
 the arrangement, ordering, naming, everything is exactly same. When this happens,
 you can obviously replace one with the other without a doubt.
 
-# Equivalences As Reductions
+# Equivalences As Reductions 
+
+Denoting any of the equivalence relation ($\alpha$, $\beta$, $\eta$ or $\equiv$) with $\chi$,
+and a series of applications of it as $\overset{\chi}{\underset{*}{\longrightarrow}}$
+
+\\[
+\begin{aligned}
+{\beta}\text{-Basis } \frac{L \overset{\chi}{\underset{*}{\longrightarrow}} M}{L \stackrel{\chi}{=} M} & \quad &
+{\beta}\text{-Reflexivity } \frac{}{L \stackrel{\chi}{=} L} \\\\
+\\\\
+{\beta}\text{-Symmetry} \frac{L \stackrel{\chi}{=} M}{M \stackrel{\chi}{=} L} & \quad &
+{\beta}\text{-Transitivity} \frac{L \stackrel{\chi}{=} M, \quad M \stackrel{\chi}{=} N}{L \stackrel{\chi}{=} N} \\\\
+\end{aligned}
+\\]
+
+This means, using these rules, and properties of equivalences, we can rewrite expressions
+with the equivalent expression. Also for future reference, $\overset{\chi}{\underset{n}{\longrightarrow}}$
+means $\chi$ reduction applied $n$ times consecutively.
 
 Now that we have an understanding of what equivalence relations exist, we can
 apply these inductively to perform applications over provided lambda terms, and
