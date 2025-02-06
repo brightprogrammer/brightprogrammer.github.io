@@ -90,11 +90,11 @@ and a series of applications of it as $\overset{\chi}{\underset{*}{\longrightarr
 
 \\[
 \begin{aligned}
-{\beta}\text{-Basis } \frac{L \overset{\chi}{\underset{*}{\longrightarrow}} M}{L \stackrel{\chi}{=} M} & \quad &
-{\beta}\text{-Reflexivity } \frac{}{L \stackrel{\chi}{=} L} \\\\
+{\chi}\text{-Basis } \frac{L \overset{\chi}{\underset{*}{\longrightarrow}} M}{L \stackrel{\chi}{=} M} & \quad &
+{\chi}\text{-Reflexivity } \frac{}{L \stackrel{\chi}{=} L} \\\\
 \\\\
-{\beta}\text{-Symmetry} \frac{L \stackrel{\chi}{=} M}{M \stackrel{\chi}{=} L} & \quad &
-{\beta}\text{-Transitivity} \frac{L \stackrel{\chi}{=} M, \quad M \stackrel{\chi}{=} N}{L \stackrel{\chi}{=} N} \\\\
+{\chi}\text{-Symmetry} \frac{L \stackrel{\chi}{=} M}{M \stackrel{\chi}{=} L} & \quad &
+{\chi}\text{-Transitivity} \frac{L \stackrel{\chi}{=} M, \quad M \stackrel{\chi}{=} N}{L \stackrel{\chi}{=} N} \\\\
 \end{aligned}
 \\]
 
