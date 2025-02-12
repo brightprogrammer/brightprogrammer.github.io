@@ -7,6 +7,14 @@ tags: ["grammar", "language", "automata-theory", "theory-of-computing", "parsing
 math: true
 ---
 
+# Edit 12th Feb 2025
+
+{{< notice type="info" >}}
+So, it turns out the actual grammar is more complex than what I initially thought. There seems to be a kind-of ___induced recursion___
+due to mutual recursion between rule $\text{prefix}$, $\text{template-prefix}$ and $\text{prefix}$, $\text{closure-prefix}$. 
+If you're reading this post for the first time, just disregard this message.
+{{< /notice >}}
+
 [\\[
 \text{A long-standing issue regarding algorithms that manipulate} \\\\
 \text{context-free grammars (CFGs) in a “top-down” left-to-right fashion} \\\\
@@ -572,6 +580,374 @@ The changes made for $ \langle \text{template-prefix} \rangle $ :
 \end{align}
 \\]
 
+# EDIT : The Induced Problem & Solution
+
+So, the previous solution didn't work. The actual solution is one more level harder than what I
+perceived it to be. To be honest, I initially had a suspicion about this, but then I dismissed
+the thought and ignored it, without verifying. This was a bad choice and took hours of my debugging.
+If only there were a tool to directly debug grammars. It's also my foolishness to implement such
+a simple parser and not use one of those advanced tools or an algorithm to parse this complex grammar.
+
+## The Problem
+
+The problem arises because $\langle \text{template-prefix} \rangle$ and $\langle \text{closure-prefix} \rangle$
+are allowed to implicitly call each other, and while rewriting the grammar I did not consider this. I was
+under the impression that fixing the mutual left recursion for the pairs $\langle \text{prefix} \rangle$,
+$\langle \text{template-prefix} \rangle$ and $\langle \text{prefix} \rangle$, $\langle \text{closure-prefix} \rangle$
+independently would solve the issue, but this is clearly not the case. I've already talked about how
+mutual left recursion can be a problem, and the solution for that is completely correct! Now let's discuss
+this "induced recursion" problem. 
+
+This is a special case of mutual recursion actually, which can go deeper than just one single expansion.
+Let's consider the following grammar for an easier analysis and study :
+
+\\[
+\begin{align}
+\langle \text{S} \rangle ::=& \langle \text{A} \rangle \mid \langle \text{B} \rangle \mid \langle \text{C} \rangle \\\\
+\langle \text{A} \rangle ::=& \langle \text{B} \rangle b \\\\
+                         ::=& \langle \text{C} \rangle c \\\\
+                         ::=& X \\\\
+\langle \text{B} \rangle ::=& \langle \text{A} \rangle l \mid Y \\\\
+\langle \text{C} \rangle ::=& \langle \text{A} \rangle m \mid Z \\\\
+\end{align}
+\\]
+
+Now this mostly resembles our correct scenario at the moment. Here $\langle \text{prefix} \rangle$ is $\langle A \rangle$,
+$\langle \text{template-prefix} \rangle$ is $\langle B \rangle$, and $\langle \text{closure-prefix} \rangle$ is $\langle C \rangle$.
+Now, let's follow one expansion path of this grammar :
+
+```mermaid
+stateDiagram-v2
+    [*] --> S
+    S --> A
+    S --> B
+    S --> C
+
+    A --> Bb
+    A --> Cc
+    A --> X
+
+    B --> Al
+    B --> Y
+
+    C --> Am
+    C --> Z
+
+    Bb --> B
+    Cc --> C
+    Al --> A
+    Am --> A
+
+    X --> [*]
+    Y --> [*]
+    Z --> [*]
+```
+
+Can you see it? $\langle B \rangle$ and $\langle C \rangle$ being able to call each other? No?
+
+
+```mermaid
+stateDiagram-v2
+    [*] --> S
+    S --> A
+
+    A --> Bb
+    A --> Cc
+
+    B --> Al
+
+    C --> Am
+
+    Bb --> B
+    Cc --> C
+    Al --> A
+    Am --> A
+```
+
+How about now? And the grammar rewrite I made last time, didn't address this! So, the grammar rewrite
+will be a bit more complex than what we achieved last time. Also, notice this is only one level deep.
+$\langle A \rangle$ expands $\langle B \rangle$ which goes back to $\langle A \rangle$. This can be
+deep on multiple levels!
+
+Again I'll follow the simple path and try to generate all possible languages out of this, and then
+write a grammar that can generate the same language but without any of the problems here.
+
+```mermaid
+flowchart TD 
+    S(S) --> A(A)
+
+    A --> X((X))
+    A --> Bb(Bb)
+    A --> Cc(Cc)
+    Bb --> Yb((Yb))
+    Bb --> Alb(Alb)
+    Cc --> Zc((Zc))
+    Cc --> Amc(Amc)
+
+    Alb --> Xlb((Xlb))
+    Alb --> Bblb(Bblb) 
+    Alb --> Cclb(Cclb) 
+    Amc --> Xmc((Xmc))
+    Amc --> Ccmc(Ccmc) 
+    Amc --> Bbmc(Bbmc) 
+
+    Bblb --> Yblb((Yblb))
+    Bblb --> Alblb(Alblb)
+    Cclb --> Zclb((Zclb))
+    Cclb --> Amclb(Amclb)
+    Ccmc --> Zcmc((Zcmc))
+    Ccmc --> Amcmc(Amcmc)
+    Bbmc --> Ybmc((Ybmc))
+    Bbmc --> Albmc(Albmc)
+
+    Alblb --> Xlblb((Xlblb))
+    Alblb --> Bblblb(Bblblb)
+    Alblb --> Cclblb(Cclblb)
+    Amcmc --> Xmcmc((Xmcmc))
+    Amcmc --> Bbmcmc(Bbmcmc)
+    Amcmc --> Ccmcmc(Ccmcmc)
+    Amclb --> Xmclb((Xmclb))
+    Amclb --> Bbmclb(Bbmclb)
+    Amclb --> Ccmclb(Ccmclb)
+    Albmc --> Xlbmb((Xlbmc))
+    Albmc --> Bblbmc(Bblbmc)
+    Albmc --> Cclbmc(Cclbmc)
+    
+    Bblblb --> Yblblb((Yblblb))
+    Bblblb --> Alblblb(Alblblb)
+    Bbmclb --> Ybmclb((Ybmclb))
+    Bbmclb --> Albmclb(Albmclb)
+    Bbmcmc --> Ybmcmc((Ybmcmc))
+    Bbmcmc --> Albmcmc(Albmcmc)
+    Bblbmc --> Yblbmb((Yblbmc))
+    Bblbmc --> Alblbmc(Alblbmc)
+    Ccmcmc --> Zcmcmc((Zcmcmc))
+    Ccmcmc --> Amcmcmc(Amcmcmc)
+    Ccmclb --> Zcmclb((Zcmclb))
+    Ccmclb --> Amcmclb(Amcmclb)
+    Cclblb --> Zclblb((Zclblb))
+    Cclblb --> Amclblb(Amclblb)
+    Cclbmc --> Zclbmc((Zclbmc))
+    Cclbmc --> Amclbmc(Amclbmc)
+
+    Alblblb --> Xlblblb((Xlblblb))
+    Albmclb --> Xlbmclb((Xlbmclb)) 
+    Albmcmc --> Xlbmcmc((Xlbmcmc))
+    Alblbmc --> Xlblbmc((Xlblbmc))
+    Amcmcmc --> Xmcmcmc((Xmcmcmc))
+    Amcmclb --> Xmcmclb((Xmcmclb))
+    Amclblb --> Xmclblb((Xmclblb))
+    Amclbmc --> Xmclbmc((Xmclbmc)) 
+    Alblblb --> Bblblblb(Bblblblb)
+    Albmclb --> Bblbmclb(Bblbmclb)
+    Albmcmc --> Bblbmcmc(Bblbmcmc)
+    Alblbmc --> Bblblbmc(Bblblbmc)
+    Amcmcmc --> Bbmcmcmc(Bbmcmcmc)
+    Amcmclb --> Bbmcmclb(Bbmcmclb)
+    Amclblb --> Bbmclblb(Bbmclblb)
+    Amclbmc --> Bbmclbmc(Bbmclbmc) 
+    Alblblb --> Cclblblb(Cclblblb)
+    Albmclb --> Cclbmclb(Cclbmclb)
+    Albmcmc --> Cclbmcmc(Cclbmcmc)
+    Alblbmc --> Cclblbmc(Cclblbmc)
+    Amcmcmc --> Ccmcmcmc(Ccmcmcmc)
+    Amcmclb --> Ccmcmclb(Ccmcmclb)
+    Amclblb --> Ccmclblb(Ccmclblb)
+    Amclbmc --> Ccmclbmc(Ccmclbmc) 
+```
+
+Wow, that blew up very fast! Here are the generated strings if it's getting harder to read
+
+L(A) generated 
+
+- `X`
+- `Yb`
+- `Zc`
+- `Xlb`
+- `Xmc`
+- `Yblb`
+- `Ybmc`
+- `Zclb`
+- `Zcmc`
+- `Xlblb`
+- `Xmcmc`
+- `Xmclb`
+- `Xlbmb`
+- `Yblblb`
+- `Ybmclb`
+- `Ybmcmc`
+- `Yblbmb`
+- `Zcmcmc`
+- `Zcmclb`
+- `Zclblb`
+- `Zclbmc`
+- `Xlblblb`
+- `Xlbmclb`
+- `Xlbmcmc`
+- `Xlblbmc`
+- `Xmcmcmc`
+- `Xmcmclb`
+- `Xmclblb`
+- `Xmclbmc`
+
+To make it easier to interpret, I'll just write down the ones starting with `X`.
+1st iteration :
+
+- `X`
+
+2nd iteration :
+
+- `Xlb`
+- `Xmc`
+
+3rd iteration :
+
+- `Xlblb`
+- `Xmcmc`
+- `Xmclb`
+- `Xlbmb`
+
+4th iteration :
+
+- `Xlblblb`
+- `Xlbmclb`
+- `Xlbmcmc`
+- `Xlblbmc`
+- `Xmcmcmc`
+- `Xmcmclb`
+- `Xmclblb`
+- `Xmclbmc`
+
+Now in each of these rules, once replace it with `Yb` and once with `Zc`. Notice anything?
+You're getting the string just after rule `C` was expanded. Also to generate the next
+iteration whenever `A` was expanded, replace `X` once with `Xlb` and once with `Xmc`,
+or to go from a `B` to `A`, replace `Y` with `Xl` and `Z` with `Xm`. If we follow the
+pattern inductively like this. It looks like the language of `A` is trying to generate
+`X` followed by all permutation and combination of `lb` and `mc`. This can be generated
+by the grammar
+
+\\[
+\begin{align}
+\langle A \rangle ::=& X \mid X \langle T \rangle \\\\
+                  ::=& Yb \mid Yb \langle T \rangle \\\\
+                  ::=& Zc \mid Zc \langle T \rangle \\\\
+\langle T \rangle ::=& \text{lb} \langle T \rangle \mid \text{lb} \\\\
+                  ::=& \text{mc} \langle T \rangle \mid \text{mc} \\\\
+\end{align}
+\\]
+
+And this is grammar generated just for $A$. Let's do the same for $B$ and $C$
+
+```mermaid
+flowchart TD 
+    S(S) --> B(B)
+
+    B --> Y((Y))
+    B --> Al(Al)
+
+    Al --> Xl((Xl))
+    Al --> Bbl(Bbl) 
+    Al --> Ccl(Ccl) 
+
+    Bbl --> Ybl((Ybl))
+    Bbl --> Albl(Albl)
+    Ccl --> Zcl((Zcl))
+    Ccl --> Amcl(Amcl)
+
+    Albl --> Xlbl((Xlbl))
+    Albl --> Bblbl(Bblbl)
+    Albl --> Cclbl(Cclbl)
+    Amcl --> Xmcl((Xmcl))
+    Amcl --> Bbmcl(Bbmcl)
+    Amcl --> Ccmcl(Ccmcl)
+    
+    Bblbl --> Yblbl((Yblbl))
+    Bblbl --> Alblbl(Alblbl)
+    Bbmcl --> Ybmcl((Ybmcl))
+    Bbmcl --> Albmcl(Albmcl)
+    Ccmcl --> Zcmcl((Zcmcl))
+    Ccmcl --> Amcmcl(Amcmcl)
+    Cclbl --> Zclbl((Zclbl))
+    Cclbl --> Amclbl(Amclbl)
+
+    Alblbl --> Xlblbl((Xlblbl))
+    Alblbl --> Bblblbl(Bblblbl)
+    Alblbl --> Cclblbl(Cclblbl)
+    Albmcl --> Xlbmcl((Xlbmcl)) 
+    Albmcl --> Bblbmcl(Bblbmcl)
+    Albmcl --> Cclbmcl(Cclbmcl)
+    Amclbl --> Xmclbl((Xmclbl))
+    Amclbl --> Bbmclbl(Bbmclbl)
+    Amclbl --> Ccmclbl(Ccmclbl)
+    Amcmcl --> Xmcmcl((Xmcmcl))
+    Amcmcl --> Ccmcmcl(Ccmcmcl)
+    Amcmcl --> Bbmcmcl(Bbmcmcl)
+```
+
+Now, $L(B)$ is
+
+1st iteration :
+- `Y`
+
+2nd iteration :
+- `Xl` (replace $Y$ with $\text{Xl}$)
+
+3rd iteration :
+- `Ybl` (replace $X$ with $\text{Yb}$)
+- `Zcl`  (... or replace $X$ with $\text{Zc}$)
+
+4th iteration :
+- `Xlbl` (... and again replace $Y$ with $\text{Xl}$ )
+- `Xmcl` (and replace $Z$ with $\text{Xm}$)
+
+5th iteration :
+- `Yblbl`
+- `Ybmcl`
+- `Zcmcl`
+- `Zclbl`
+
+6th iteration :
+- `Xlblbl`
+- `Xlbmcl `
+- `Xmclbl`
+- `Xmcmcl`
+
+Notice the pattern for replacement of $X$ with $Yb$ or $Zc$ and $Y$ with $Xl$ and $Z$ with $Xm$, we
+observed when guessing the language of $A$ applies here as well. I'm pretty confident that this will
+work when generating language for $C$ as well, because nature loves symmetry. First, let's generate
+grammar for language of $B$. Few things to not first :
+
+- We have onyl once case of $Y$ (not having any $\text{lb}$ or $\text{mc}$)
+- Strings start with either $Yb$ or $Zc$ or $X$
+- Strings always end with $l$.
+- At any stage, removing $Yb$ or $Zc$ or $X$ from beginning and $l$ from end, leaves out a string
+that is generated by rule for $\langle T \rangle$ in equation number $89$.
+
+\\[
+\begin{align}
+\langle B \rangle ::=& Y \\\\
+                  ::=& X \langle T \rangle l \\\\
+                  ::=& Yb \langle T \rangle l \\\\
+                  ::=& Zc \langle T \rangle l \\\\
+\langle T \rangle ::=& \text{lb} \langle T \rangle \mid \text{lb} \\\\
+                  ::=& \text{mc} \langle T \rangle \mid \text{mc} \\\\
+\end{align}
+\\]
+
+... and now I have a gut feeling that following the same pattern, we'll get the grammar for
+language of $C$ to be
+
+\\[
+\begin{align}
+\langle C \rangle ::=& Z \\\\
+                  ::=& X \langle T \rangle m \\\\
+                  ::=& Yb \langle T \rangle m \\\\
+                  ::=& Zc \langle T \rangle m \\\\
+\langle T \rangle ::=& \text{lb} \langle T \rangle \mid \text{lb} \\\\
+                  ::=& \text{mc} \langle T \rangle \mid \text{mc} \\\\
+\end{align}
+\\]
+
 # Final Comments
 
 Grammars are very hard to get right in the first try. You are basically developing your
@@ -585,6 +961,32 @@ to remove redundancy, and help the actual parsing algorithm make correct decisio
 Did you like the post? Drop in a comment! If you find any error in this post, I'm only a human,
 and I'll accept my mistakes, and make any changes if required.
 
+## Edit
+
+I'm also sure that this grammar form will heavily change when the depth of this
+"induced recursion" increases, because then we won't only have $X$, $Y$, $Z$
+and $b$, $c$, $l$, $m$, but instead have a lot more terminals, and depending
+on how the rules appear, and how the recursion is performed (we took only one expansion per rule),
+the complexity will arise as well.
+
+So? Will we have to go through this process again? For every new grammar
+we encounter, can't we just use this as a formula? I don't know to be honest.
+Maybe from next time I'll just use a pre existing good parser generator,
+or just use a better algorithm. I also don't know whether it's always possible
+to rewrite the grammar like this or not. When it comes to this "inductive recursion",
+things can get a lot scary.
+
+One possible hack would be to first go through the grammar at hand, and look for
+any cases like this. This can be easily detectable by finding cycles in a graph.
+A graph where each node represents a rule or a terminal. I remember creating
+a tool for this on my stream, but sadly I don't have the code now, just the live streamed
+video on YT.
+
+So if you notice something like this, next time in your grammar, make sure to 
+fix it then and there if possible, otherwise maybe try a right to left parser,
+or some other advanced algorithm that does not use backtracking.
+
 # Further Reading 
 
 - [[1]](https://www.microsoft.com/en-us/research/wp-content/uploads/2000/04/naacl2k-proc-rev.pdf) - Removing Left Recursion from Context-Free Grammars 
+
