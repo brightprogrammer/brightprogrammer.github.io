@@ -1,5 +1,5 @@
 baseURL = "https://brightprogrammer.in/"
-disqusShortname = "brightprogrammer"
+disqusShortname = ""
 enableGitInfo = true
 enableRobotsTXT = true
 hasCJKLanguage = true
