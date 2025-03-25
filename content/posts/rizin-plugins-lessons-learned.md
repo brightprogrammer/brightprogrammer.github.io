@@ -181,7 +181,7 @@ to allow users to try your plugin without actually changing anything on their ho
 
 Building anything native on Windows is an absolute PITA. Microsoft expects you to download a 25GB toolchain
 just to get a compiler. Thanks to open source you can always ditch MSVC (Microsoft's own C/C++ Compiler toolchain).
-On windows and mac, your IDE is your terminal. Windows, even though surprisingly has a really powerful scripting language
+On Linux and Mac, your IDE is your terminal. Windows, even though surprisingly has a really powerful scripting language
 and a great terminal, fails to do anything for the developers here.
 
 ### Introspection
