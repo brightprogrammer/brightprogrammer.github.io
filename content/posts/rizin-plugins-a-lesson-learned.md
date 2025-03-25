@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "Creating Rizin Plugins - A Lesson Learned"
+title: "Creating Rizin Plugins - Lessons Learned"
 date: "2025-03-25"
 description: "Nectar of lessons learned after working on a Rizin plugin for past ten months"
 tags:
