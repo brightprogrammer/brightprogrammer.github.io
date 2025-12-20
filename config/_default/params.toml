@@ -1,0 +1,50 @@
+baseURL = "https://brightprogrammer.in/"
+keywords = ["brightprogrammer", "siddharth", "mishra", "misrastdc", "reverse-engineering"]
+customCSS = []
+customJS = []
+dateFormat = "2 January 2006"
+emphasisWithDots = true
+since = "2023"
+toc = true
+showWordCount = true
+showReadingTime = true
+rootFontSize = "100%"
+math = true
+enableDuckDuckGoSearchBox = true
+numberedSubtitles = true
+enableInlineShortcodes = true
+
+[commentEngine]
+code = """
+<script src="https://giscus.app/client.js"
+        data-repo="brightprogrammer/Blog-Comments"
+        data-repo-id="R_kgDON6Esgg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDON6Esgs4Cm_w9"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+"""
+
+[buymeacoffee]
+code = """
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="brightprogrammer" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FFFF5f" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+"""
+
+[sharingbuttons]
+facebook = true
+twitter = true
+email = true
+linkedin = true
+reddit = true
+whatsapp = true
+hackernews = true
+telegram = true

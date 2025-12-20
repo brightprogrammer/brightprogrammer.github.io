@@ -1,0 +1,6 @@
+[submodule "themes/hugo-texify3"]
+	path = themes/hugo-texify3
+	url = git@github.com:brightprogrammer/hugo-texify3.git
+[submodule "static/tabler-icons"]
+	path = static/tabler-icons
+	url = git@github.com:tabler/tabler-icons.git
