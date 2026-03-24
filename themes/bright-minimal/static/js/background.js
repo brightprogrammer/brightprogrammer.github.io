@@ -36,12 +36,17 @@
     const bg = parseRGB(styles.getPropertyValue("--bg-rgb"), [245, 245, 245]);
     const text = parseRGB(styles.getPropertyValue("--text-rgb"), [25, 25, 25]);
     const accent = parseRGB(styles.getPropertyValue("--accent-rgb"), [120, 80, 200]);
+    const theme = document.documentElement.getAttribute("data-theme") || "light";
+    const strengths =
+      theme === "light"
+        ? [0.35, 0.55, 0.2, 0.7]
+        : [0.22, 0.38, 0.1, 0.55];
 
     colors = [
-      mix(bg, accent, 0.22),
-      mix(bg, accent, 0.38),
-      mix(bg, text, 0.1),
-      mix(bg, accent, 0.55),
+      mix(bg, accent, strengths[0]),
+      mix(bg, accent, strengths[1]),
+      mix(bg, text, strengths[2]),
+      mix(bg, accent, strengths[3]),
     ];
   };
 

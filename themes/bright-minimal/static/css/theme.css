@@ -171,6 +171,13 @@ body {
   mix-blend-mode: screen;
 }
 
+.ambient-bg[data-theme="light"],
+[data-theme="light"] .ambient-bg {
+  opacity: 0.9;
+  filter: blur(10px) saturate(165%);
+  mix-blend-mode: multiply;
+}
+
 .ambient-glass {
   position: fixed;
   inset: 0;
@@ -179,6 +186,12 @@ body {
   backdrop-filter: blur(18px) saturate(135%);
   -webkit-backdrop-filter: blur(18px) saturate(135%);
   pointer-events: none;
+}
+
+[data-theme="light"] .ambient-glass {
+  background: rgba(var(--bg-rgb), 0.3);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
 .ambient-grain {
@@ -193,6 +206,10 @@ body {
   mix-blend-mode: soft-light;
   pointer-events: none;
   z-index: 2;
+}
+
+[data-theme="light"] .ambient-grain {
+  opacity: 0.18;
 }
 
 ::selection {
