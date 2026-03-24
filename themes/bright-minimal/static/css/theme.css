@@ -1023,7 +1023,7 @@ a:hover {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 720px), (pointer: coarse) {
   .page {
     padding: 0;
   }
