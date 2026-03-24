@@ -5,7 +5,7 @@ enableRobotsTXT = true
 hasCJKLanguage = true
 languageCode = "en"
 rssLimit = 10
-theme = "hugo-texify3"
+theme = "bright-minimal"
 title = "Siddharth Mishra"
 enableEmoji = true
 

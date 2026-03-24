@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <section class="list-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="list-intro">{{ . }}</div>
+    {{ end }}
+  </section>
+
+  {{ $isPosts := eq .Section "posts" }}
+  {{ if $isPosts }}
+    <section class="list list-line">
+      {{ range $index, $page := .Pages.ByDate.Reverse }}
+        <article class="list-item list-item-line" style="--stagger: {{ add $index 1 }}">
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <div class="list-meta">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</div>
+        </article>
+      {{ end }}
+    </section>
+  {{ else }}
+    {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
+    <section class="list">
+      {{ range $index, $page := $paginator.Pages }}
+        <article class="list-item" style="--stagger: {{ add $index 1 }}">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <div class="list-meta">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</div>
+        {{ with .Params.description | default .Summary }}
+          <p class="list-summary">{{ . | plainify }}</p>
+        {{ end }}
+        </article>
+      {{ end }}
+    </section>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      <nav class="pagination" aria-label="Pagination">
+        {{ if $paginator.HasPrev }}
+          <a class="page-link" href="{{ $paginator.Prev.URL }}">← Newer</a>
+        {{ end }}
+        <span class="page-count">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+        {{ if $paginator.HasNext }}
+          <a class="page-link" href="{{ $paginator.Next.URL }}">Older →</a>
+        {{ end }}
+      </nav>
+    {{ end }}
+  {{ end }}
+{{ end }}

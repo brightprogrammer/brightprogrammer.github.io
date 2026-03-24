@@ -1,0 +1,10 @@
+name = "bright-minimal"
+license = "MIT"
+licenselink = ""
+description = "Minimal modern theme for brightprogrammer"
+homepage = ""
+min_version = "0.120.0"
+
+[author]
+  name = "brightprogrammer"
+  homepage = "https://brightprogrammer.in"

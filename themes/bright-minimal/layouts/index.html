@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <section class="hero">
+    <div class="hero-card">
+      {{ if .Site.Params.homeTitle }}
+        <h1>{{ .Site.Params.homeTitle }}</h1>
+      {{ else if .Site.Params.description }}
+        <h1>{{ .Site.Params.description }}</h1>
+      {{ end }}
+      {{ with .Site.Params.homeSubtitle }}
+        <p class="hero-subtitle">{{ . }}</p>
+      {{ end }}
+      {{ with .Content }}
+        <div class="hero-content">{{ . }}</div>
+      {{ end }}
+    </div>
+  </section>
+
+  {{ $posts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+  <section class="home-latest">
+    <div class="section-head">
+      <h2>Latest writing</h2>
+      <a class="section-link" href="{{ "/posts/" | relURL }}">View all</a>
+    </div>
+    <div class="list list-line">
+      {{ range $index, $post := first 6 $posts }}
+        <article class="list-item list-item-line" style="--stagger: {{ add $index 1 }}">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <div class="list-meta">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

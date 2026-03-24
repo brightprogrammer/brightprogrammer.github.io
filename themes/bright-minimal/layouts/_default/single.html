@@ -1,0 +1,32 @@
+{{ define "main" }}
+  <section class="content-grid">
+    <article class="content {{ if .Site.Params.numberedSubtitles }}numbered-subtitles{{ end }}">
+      <header class="post-header">
+        {{ with .Section }}
+          <span class="post-kicker">{{ . | title }}</span>
+        {{ end }}
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}
+          <p class="post-summary">{{ . }}</p>
+        {{ end }}
+        {{ if .Params.date }}
+          {{ partial "post-meta.html" . }}
+        {{ end }}
+      </header>
+
+      <div class="content-body">
+        {{ .Content }}
+      </div>
+
+    </article>
+
+    {{ if and .Site.Params.toc (gt (len .TableOfContents) 0) }}
+      <aside class="toc">
+        <div class="toc-inner">
+          <span class="toc-title">On this page</span>
+          {{ .TableOfContents }}
+        </div>
+      </aside>
+    {{ end }}
+  </section>
+{{ end }}

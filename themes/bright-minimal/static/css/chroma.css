@@ -1,0 +1,117 @@
+/* Minimal Chroma palette with theme-aware tokens */
+.highlight {
+  margin: 1.4rem 0;
+  border-radius: 12px;
+  border: 1px solid var(--code-border);
+  background: var(--code-bg);
+  overflow-x: auto;
+}
+
+.highlight pre {
+  margin: 0;
+  padding: 1.1rem 1.3rem;
+  background: transparent;
+  color: var(--text);
+}
+
+.chroma {
+  background: transparent;
+  color: var(--text);
+}
+
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr,
+.chroma .kt {
+  color: var(--accent);
+}
+
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .sd,
+.chroma .se,
+.chroma .sh,
+.chroma .si,
+.chroma .sr,
+.chroma .ss,
+.chroma .sx,
+.chroma .s1,
+.chroma .s2 {
+  color: var(--accent);
+}
+
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo {
+  color: var(--accent);
+}
+
+.chroma .na,
+.chroma .nb,
+.chroma .nc,
+.chroma .nd,
+.chroma .ne,
+.chroma .nf,
+.chroma .nl,
+.chroma .nn,
+.chroma .nt,
+.chroma .nv,
+.chroma .nx {
+  color: var(--text);
+}
+
+.chroma .nd,
+.chroma .ni,
+.chroma .nt {
+  color: var(--accent);
+}
+
+.chroma .no,
+.chroma .vc,
+.chroma .vg,
+.chroma .vi {
+  color: var(--text);
+}
+
+.chroma .o,
+.chroma .ow {
+  color: var(--text);
+}
+
+.chroma .gd {
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.12);
+}
+
+.chroma .gi {
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.12);
+}
+
+.chroma .gh,
+.chroma .gu {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.chroma .w {
+  color: var(--text);
+}

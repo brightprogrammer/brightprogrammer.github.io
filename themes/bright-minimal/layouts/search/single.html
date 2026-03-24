@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <section class="search-page">
+    <header class="search-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="search-intro">{{ . }}</div>
+      {{ end }}
+    </header>
+
+    <div class="search-box">
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        placeholder="Search articles, notes, and tags"
+        aria-label="Search"
+        data-index="{{ "lunr.json" | relURL }}"
+      />
+    </div>
+
+    <div id="search-status" class="search-status">Type to search.</div>
+    <div id="search-results" class="search-results"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js" defer></script>
+  <script src="{{ "js/search.js" | relURL }}" defer></script>
+{{ end }}

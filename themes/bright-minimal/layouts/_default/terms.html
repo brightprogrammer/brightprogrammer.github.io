@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <section class="list-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="list-intro">{{ . }}</div>
+    {{ end }}
+  </section>
+
+  <section class="terms">
+    {{ range .Data.Terms.Alphabetical }}
+      <a class="term-item" href="{{ .Page.RelPermalink }}">
+        <span>{{ .Page.Title }}</span>
+        <span class="term-count">{{ .Count }}</span>
+      </a>
+    {{ end }}
+  </section>
+{{ end }}

@@ -1,0 +1,85 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+
+{{- $title := .Site.Title -}}
+{{- $pageTitle := .Title | default $title -}}
+<title>{{ if .IsHome }}{{ $title }}{{ else }}{{ $pageTitle }} · {{ $title }}{{ end }}</title>
+
+{{- $description := .Description | default .Site.Params.description | default .Summary -}}
+{{- if $description }}
+  <meta name="description" content="{{ $description | plainify }}" />
+{{- end }}
+{{- with .Site.Params.author }}
+  <meta name="author" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.keywords }}
+  <meta name="keywords" content="{{ delimit . ", " }}" />
+{{- end }}
+
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicon-32x32.png" | relURL }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicon-16x16.png" | relURL }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}" />
+<link rel="manifest" href="{{ "images/site.webmanifest" | relURL }}" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}" />
+<link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}" />
+
+{{- with .Site.Params.customCSS }}
+  {{- range . }}
+    <link rel="stylesheet" href="{{ . | relURL }}" />
+  {{- end }}
+{{- end }}
+
+{{- with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}" />
+{{- end }}
+
+{{- if .Site.Params.math }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.js" integrity="sha384-H6s1ZrH2CKpFpqR680poRdStIRJGXty7fSkxAcIfxwl9iu6A4BOPtTk7vQ58Ovio" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof renderMathInElement !== "undefined") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+          ],
+          throwOnError: false,
+          minRuleThickness: 0.09
+        });
+      }
+    });
+  </script>
+{{- end }}
+
+<script>
+  (function () {
+    const storageKey = "bp-theme";
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const systemTheme = () => (media.matches ? "dark" : "light");
+    let stored = null;
+    try {
+      stored = localStorage.getItem(storageKey);
+    } catch (err) {
+      stored = null;
+    }
+    const theme = stored || systemTheme();
+    document.documentElement.setAttribute("data-theme", theme);
+    if (document.body) {
+      document.body.setAttribute("data-theme", theme);
+    } else {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body?.setAttribute("data-theme", theme);
+      });
+    }
+  })();
+</script>

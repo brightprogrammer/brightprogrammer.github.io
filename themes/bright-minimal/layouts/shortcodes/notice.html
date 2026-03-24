@@ -1,0 +1,15 @@
+{{- $type := (.Get "type" | default "note") | lower -}}
+{{- $labels := dict
+  "info" "Info"
+  "tip" "Tip"
+  "warning" "Warning"
+  "disclaimer" "Disclaimer"
+  "disclaimber" "Disclaimer"
+  "note" "Note"
+-}}
+{{- $label := index $labels $type | default (title $type) -}}
+
+<div class="notice notice-{{ $type }}">
+  <div class="notice-title">{{ $label }}</div>
+  <div class="notice-body">{{ .Inner | markdownify }}</div>
+</div>
