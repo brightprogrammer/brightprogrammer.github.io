@@ -13,6 +13,7 @@
   let colors = [];
   let raf = null;
   let lastTime = 0;
+  let resizeTimer = null;
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -50,8 +51,10 @@
     ];
   };
 
-  const resize = () => {
+  const resize = ({ preserve = false } = {}) => {
     const dpr = window.devicePixelRatio || 1;
+    const prevGridW = gridW || 1;
+    const prevGridH = gridH || 1;
     width = window.innerWidth;
     height = window.innerHeight;
     canvas.width = Math.floor(width * dpr);
@@ -60,17 +63,45 @@
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    gridW = Math.max(90, Math.floor(width / 12));
-    gridH = Math.max(60, Math.floor(height / 12));
+    const nextGridW = Math.max(80, Math.floor(width / 10));
+    const nextGridH = Math.max(60, Math.floor(height / 10));
 
     const count = Math.max(12, Math.floor(Math.min(width, height) / 120));
-    points = Array.from({ length: count }, () => ({
-      x: Math.random() * gridW,
-      y: Math.random() * gridH,
-      vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-      vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-      color: colors[Math.floor(Math.random() * colors.length)],
-    }));
+    if (preserve && points.length) {
+      const scaleX = nextGridW / prevGridW;
+      const scaleY = nextGridH / prevGridH;
+      points = points.map((p) => ({
+        ...p,
+        x: Math.max(0, Math.min(nextGridW, p.x * scaleX)),
+        y: Math.max(0, Math.min(nextGridH, p.y * scaleY)),
+      }));
+
+      if (points.length < count) {
+        const addCount = count - points.length;
+        points = points.concat(
+          Array.from({ length: addCount }, () => ({
+            x: Math.random() * nextGridW,
+            y: Math.random() * nextGridH,
+            vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
+            vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
+            color: colors[Math.floor(Math.random() * colors.length)],
+          }))
+        );
+      } else if (points.length > count) {
+        points = points.slice(0, count);
+      }
+    } else {
+      points = Array.from({ length: count }, () => ({
+        x: Math.random() * nextGridW,
+        y: Math.random() * nextGridH,
+        vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
+        vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
+        color: colors[Math.floor(Math.random() * colors.length)],
+      }));
+    }
+
+    gridW = nextGridW;
+    gridH = nextGridH;
   };
 
   const update = (dt) => {
@@ -124,6 +155,9 @@
 
     ctx.clearRect(0, 0, width, height);
     ctx.imageSmoothingEnabled = true;
+    if ("imageSmoothingQuality" in ctx) {
+      ctx.imageSmoothingQuality = "high";
+    }
     ctx.drawImage(offscreen, 0, 0, width, height);
   };
 
@@ -157,8 +191,14 @@
   };
 
   window.addEventListener("resize", () => {
-    resize();
-    render();
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+    resizeTimer = window.setTimeout(() => {
+      resizeTimer = null;
+      resize({ preserve: true });
+      render();
+    }, 120);
   });
 
   window.addEventListener("theme-change", () => {

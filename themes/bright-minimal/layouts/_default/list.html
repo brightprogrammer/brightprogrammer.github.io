@@ -10,7 +10,8 @@
   {{ if $isPosts }}
     <section class="list list-line">
       {{ range $index, $page := .Pages.ByDate.Reverse }}
-        <article class="list-item list-item-line" style="--stagger: {{ add $index 1 }}">
+        {{- $stagger := add $index 1 -}}
+        <article class="list-item list-item-line" style="--stagger: {{ if gt $stagger 6 }}6{{ else }}{{ $stagger }}{{ end }}">
           <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
           <div class="list-meta">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</div>
         </article>
@@ -20,7 +21,8 @@
     {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
     <section class="list">
       {{ range $index, $page := $paginator.Pages }}
-        <article class="list-item" style="--stagger: {{ add $index 1 }}">
+        {{- $stagger := add $index 1 -}}
+        <article class="list-item" style="--stagger: {{ if gt $stagger 6 }}6{{ else }}{{ $stagger }}{{ end }}">
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         <div class="list-meta">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</div>
         {{ with .Params.description | default .Summary }}

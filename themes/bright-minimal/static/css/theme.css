@@ -167,14 +167,14 @@ body {
   z-index: 0;
   pointer-events: none;
   opacity: 0.75;
-  filter: blur(12px) saturate(140%);
+  filter: blur(20px) saturate(145%);
   mix-blend-mode: screen;
 }
 
 .ambient-bg[data-theme="light"],
 [data-theme="light"] .ambient-bg {
   opacity: 0.9;
-  filter: blur(10px) saturate(165%);
+  filter: blur(18px) saturate(170%);
   mix-blend-mode: multiply;
 }
 
@@ -541,8 +541,8 @@ a:hover {
 .list-item {
   border-bottom: 1px solid var(--border);
   padding: 1.2rem 0;
-  animation: rise 0.6s ease both;
-  animation-delay: calc(var(--stagger) * 80ms);
+  animation: rise 0.35s ease both;
+  animation-delay: calc(var(--stagger) * 30ms);
 }
 
 .list-item h2,
