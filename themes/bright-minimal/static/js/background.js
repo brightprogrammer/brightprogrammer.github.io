@@ -14,6 +14,8 @@
   let raf = null;
   let lastTime = 0;
   let resizeTimer = null;
+  let offscreen = null;
+  let offCtx = null;
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -51,12 +53,30 @@
     ];
   };
 
-  const resize = ({ preserve = false } = {}) => {
+  const getViewportSize = () => {
+    const viewport = window.visualViewport;
+    return {
+      width: viewport ? viewport.width : window.innerWidth,
+      height: viewport ? viewport.height : window.innerHeight,
+    };
+  };
+
+  const ensureOffscreen = () => {
+    if (!offscreen || offscreen.width !== gridW || offscreen.height !== gridH) {
+      offscreen = document.createElement("canvas");
+      offscreen.width = gridW;
+      offscreen.height = gridH;
+      offCtx = offscreen.getContext("2d");
+    }
+  };
+
+  const resize = ({ preserve = false, targetWidth, targetHeight } = {}) => {
     const dpr = window.devicePixelRatio || 1;
     const prevGridW = gridW || 1;
     const prevGridH = gridH || 1;
-    width = window.innerWidth;
-    height = window.innerHeight;
+    const viewport = getViewportSize();
+    width = targetWidth ?? viewport.width;
+    height = targetHeight ?? viewport.height;
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
     canvas.style.width = `${width}px`;
@@ -102,6 +122,7 @@
 
     gridW = nextGridW;
     gridH = nextGridH;
+    ensureOffscreen();
   };
 
   const update = (dt) => {
@@ -147,10 +168,7 @@
       }
     }
 
-    const offscreen = document.createElement("canvas");
-    offscreen.width = gridW;
-    offscreen.height = gridH;
-    const offCtx = offscreen.getContext("2d");
+    ensureOffscreen();
     offCtx.putImageData(image, 0, 0);
 
     ctx.clearRect(0, 0, width, height);
@@ -166,8 +184,14 @@
       lastTime = time;
     }
     const delta = (time - lastTime) / 1000;
+    if (delta > 0.2) {
+      lastTime = time;
+      raf = requestAnimationFrame(frame);
+      return;
+    }
     if (delta >= 0.03) {
-      update(delta * 5);
+      const step = Math.min(delta, 0.05);
+      update(step * 5);
       render();
       lastTime = time;
     }
@@ -196,7 +220,17 @@
     }
     resizeTimer = window.setTimeout(() => {
       resizeTimer = null;
-      resize({ preserve: true });
+      const viewport = getViewportSize();
+      const widthDelta = Math.abs(viewport.width - width);
+      const heightDelta = Math.abs(viewport.height - height);
+      if (width && widthDelta < 1 && heightDelta < 80) {
+        return;
+      }
+      resize({
+        preserve: true,
+        targetWidth: viewport.width,
+        targetHeight: viewport.height,
+      });
       render();
     }, 120);
   });
