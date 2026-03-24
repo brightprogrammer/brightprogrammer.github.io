@@ -35,7 +35,7 @@ using the static site generator Hugo and on GitHub Pages, because
 - internet connection is slow, so it takes a bit longer for pages to load, although it's not noticeable,
 - and because now, after exploring self-hosting, I think it's best to use a static site generator for a blog. 
 
-![](/images/working-server.png)
+{{< img src="/images/working-server.png" >}}
 
 Other than that I think I'll be implementing some kind of API to make some of the things easier on my local
 network, maybe something like a self-hosted cloud storage, but for local network only! Now also, one thing to
@@ -820,7 +820,7 @@ And, now maybe you get the idea... This is how it all looked, just to give an im
 to build an entire web app in C, both frontend AND backend, without using complex libraries. And, if you add some
 WASM support, you can build something like leptos-rs for C.
 
-![](/images/beam-working-old-website.png)
+{{< img src="/images/beam-working-old-website.png" >}}
 
 ## Hosting
 

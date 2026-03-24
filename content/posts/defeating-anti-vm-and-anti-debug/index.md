@@ -4,7 +4,7 @@ description: Solution for ReverseMe3 from crackmes[.]one
 date: 2022-12-09T13:18:43.322Z
 draft: false
 ---
-![](joel-filipe-rg1lnufgjhi-unsplash.jpg)
+{{< img src="joel-filipe-rg1lnufgjhi-unsplash.jpg" >}}
 
 You can get the challenge binary from [here](https://crackmes.one/crackme/5fb1642933c5d424269a1850).
 

@@ -32,7 +32,7 @@ So, the next day I tried searching on how to start binary exploitation and I fou
 
 After a few days I was frustrated and directly asked 4n0nym4us how to begin binary exploitation.
 
-![chat with anonymous](selection_022.png "me asking 4n0nym4u5")
+{{< img src="selection_022.png" alt="chat with anonymous" caption="me asking 4n0nym4u5" title="me asking 4n0nym4u5" >}}
 
 Then he asked me some questions to know how much I already know and then the next day in approximately 2hrs video session he taught me many concepts : 
 
@@ -107,9 +107,9 @@ It is called a canary because of the use of canary birds in the mines before. Mi
 
 The stack canary fullfills a similar purpose! In the beginning of a function, just after function epilogue, a secret value is stored on the stack that is different for every function and at the end, just before epilogue, this value on stack is matched with the special value and if it's not same then this means that there was an overwrite and the program exits with a stack overflow error.
 
-![](selection_025.png "the magical value being placed in the stack")
+{{< img src="selection_025.png" caption="the magical value being placed in the stack" title="the magical value being placed in the stack" >}}
 
-![](selection_026.png "magical value being checked again")
+{{< img src="selection_026.png" caption="magical value being checked again" title="magical value being checked again" >}}
 
 This is dynamically linked executable, so, the actual stack check code isn't here but usually it'll roughly look something like this :
 
@@ -134,15 +134,15 @@ You have `push` and `pop` instructions in assembly to save and get data from the
 
 Let's say the next instruction to be executed is NOP, then after execution the stack will look something like this :
 
-![stack image](selection_027.png "stack before push or pop")
+{{< img src="selection_027.png" alt="stack image" caption="stack before push or pop" title="stack before push or pop" >}}
 
 The next instruction is a push instruction which will save the operand on the stack. When I say on the stack, I refer to the idea that `stack pointer` is the top of stack and the value being pushed is stored there.
 
-![](selection_028.png "push something on the stack")
+{{< img src="selection_028.png" caption="push something on the stack" title="push something on the stack" >}}
 
-![](selection_029.png "another value being pushed on the stack")
+{{< img src="selection_029.png" caption="another value being pushed on the stack" title="another value being pushed on the stack" >}}
 
-![](selection_030.png "popping value from the stack in a register")
+{{< img src="selection_030.png" caption="popping value from the stack in a register" title="popping value from the stack in a register" >}}
 
 This last instruction will pop a value from the stack and store it in `$RAX`.
 
@@ -150,7 +150,7 @@ This last instruction will pop a value from the stack and store it in `$RAX`.
 
 Here I'll consider a program where canary is disabled. 
 
-![](function-stack-working.gif "stack when a function is called")
+{{< img src="function-stack-working.gif" caption="stack when a function is called" title="stack when a function is called" >}}
 
 The `SUB RSP, 0x10` is allocating 16 bytes buffer on the stack. When the instruction `CALL PWNME` is executed, the current `$RIP` is pushed onto the stack automatically and when the control flow reaches the function `PWNME`, `PUSH $RBP` is called to save the begin address address of stack of caller function. Later, when RET instruction is executed, the value of `$RIP` is popped from the stack and `$RSP` get's adjusted to the top of stack frame of caller function automatically.
 
@@ -158,7 +158,7 @@ The `SUB RSP, 0x10` is allocating 16 bytes buffer on the stack. When the instruc
 
 Before understanding stack overflow, you must first understand the write direction when a program is taking input. When program starts taking input and the buffer address is say **0x0000**, it takes first character input, then it will be written at address **0x0000**, for second character, the write address will be **0x0001**, for 10th character, the write address will be **0x0009**. Say we're writing the string "aaaa....aa" to the buffer then it'll be written like this :
 
-![](selection_031.png)
+{{< img src="selection_031.png" >}}
 
 ### Stack Overflow
 
@@ -166,13 +166,13 @@ The term stack overwrite is a better and more precise term for this according to
 
 Say, the program is doing a read to a buffer syscall. The buffer size to be read is 0x20 and the read size is 0x30, then we can basically just write 0x30 bytes onto the stack! it doesn't matter what the size of buffer is!
 
-![](amazing-gif.gif "taken from tenor[dot]com")
+{{< img src="amazing-gif.gif" caption="taken from tenor[dot]com" title="taken from tenor[dot]com" >}}
 
 #### What Is The Vulnerability Here?
 
 As we saw, the instruction pointer is saved on the stack and when return is called, the program jumps to that instruction address. We also saw that we can overwrite the stack if allowed to do so. This means we can overwrite the stack where the return address is stored! This means we can control the execution flow! This is a very big vulnerability in itself.
 
-![](mind-blown.gif "taken from tenor[dot]com")
+{{< img src="mind-blown.gif" caption="taken from tenor[dot]com" title="taken from tenor[dot]com" >}}
 
 #### How do we exploit it then?
 

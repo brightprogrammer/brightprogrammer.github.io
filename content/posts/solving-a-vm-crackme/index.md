@@ -38,7 +38,7 @@ When it comes to a virtual CPU (machine), it may or may not have a move instruct
 
 Since a virtual machine is trying to emulate some new instruction set, it'll need to have a CPU that will be able to decode those set of instructions and for that all virtual machines implement their own virtual CPU. How do we do that? Well, a CPU is just a bunch of registers and some helper units.
 
-![](abasiccomputer.gif)
+{{< img src="abasiccomputer.gif" >}}
 
 A virtual CPU is much similar to a physical CPU. It'll have it's own set of registers and cache and all. A simple implementation in code will look something like this
 
@@ -106,7 +106,7 @@ Instead of if-else statements, switch-case statements can be used too! Now, this
 
 We'll a new tool **Iaito**. Iaito is the GUI version of radare. We'll use this to quickly get to the dispatcher function and then we can switch to any other tool.
 
-![](entry.png)
+{{< img src="entry.png" >}}
 
 This is doing a simple call to `libc_start_main` which will eventually call `main`.
 
@@ -114,11 +114,11 @@ This is doing a simple call to `libc_start_main` which will eventually call `mai
 
 Instead of going to main and following the code sequentially, we'll now go through all those functions and check the graph structure from a high level perspective.
 
-![](main.png "high level view of main")
+{{< img src="main.png" caption="high level view of main" title="high level view of main" >}}
 
 Simple and short. The head block is big and is most probably reading input and doing some initializations. On going through functions one by one, you'll see a function like this
 
-![](overview.png)
+{{< img src="overview.png" >}}
 
 Looks like this one has lots of conditional jumps. Let's analyse this one. Spoiler : This is is indeed the dispatcher function.
 
@@ -126,33 +126,33 @@ Looks like this one has lots of conditional jumps. Let's analyse this one. Spoil
 
 Now we can go to main and look where this function is being called and then analyze what's being passed to this. We'll try to do as less reversing as possible in functions outside this one. I'll name this function to *dispatcher* to increase readability.
 
-![](2.png "call to dispatcher in main")
+{{< img src="2.png" caption="call to dispatcher in main" title="call to dispatcher in main" >}}
 
 Clearly this is taking three arguments, first one is some value in `rax`, second value looks like some address, and third one is some number. Let's check the value in rax.
 
-![](1.png)
+{{< img src="1.png" >}}
 
 That function looks like it's creating something  (some data structure), let's check it out XD.
 
-![](3.png)
+{{< img src="3.png" >}}
 
 Looks like it's memsetting a huge array (0x118 bytes) to 0. So, we don't get any idea of what it is. But since this is the only constructor and is called in the initialization stage, most probably it's either building a context data structure or something similar to CPU. A context data structure will contain everything important for current execution, eg : handle to bytecode file, bytecode buffer in memory, cpu that'll execute the bytecode. Don't mind that for now as we'll see how it's being used (i.e if it's being used). We'll name that variable as ctx and continue.
 
 Let's check the dispatcher function now.
 
-![](4.png "head block of dispatcher function")
+{{< img src="4.png" caption="head block of dispatcher function" title="head block of dispatcher function" >}}
 
 Name the first parameter as ctx, other two variables as arg2, arg3 and keep an eye on how the other two variables are being used from now on.
 
-![](5.png)
+{{< img src="5.png" >}}
 
 If you take a high level view, this is the basic working condition for the FeDeX loop. This means this can be either a normal iterator or a program counter or something similar. Let's keep an eye on that variable too. If this field is being increased again and again in before some conditional jumps then it must be the program counter. Let's confirm that suspicion first. Scroll through the graph and check when and how it's being altered.
 
-![](6.png)
+{{< img src="6.png" >}}
 
 Looks like a2 is indeed an address. We can see that value is being fetched from it at an offeset. This happens when the bytecode for the vm is stored in the program itself in a global variable. Here a fixed address is being passed so let's check what's at that address.
 
-![](7.png)
+{{< img src="7.png" >}}
 
 Size of this array is 16*5 + 5 = 85 bytes which is 0x55 in hex. Remember this is the third argument to dispatcher and also used in loop condition. This means this is our bytecode and a3 is the size of this bytecode. It's completely normal if you didn't get it in first glance (even I didn't get it but I feel experienced individuals will see it instantly!)
 
@@ -221,15 +221,15 @@ int main(){
 }
 ```
 
-![](8.png)
+{{< img src="8.png" >}}
 
 In the end it's comparing current instruction with value at some address. Let's what's at that address.
 
-![](9.png)
+{{< img src="9.png" >}}
 
 Why I selected only 16 bytes of data? Check how many similar conditional jumps are there. You'll notice only 16 such jumps are present! And logic implies this must be the total number of instructions and also we got all the opcodes! This is just a trickery to make it hard to reverse, but we are smart XD.
 
-![](10.png)
+{{< img src="10.png" >}}
 
 This type of graph occurs with a code flow like this
 
@@ -247,17 +247,17 @@ if(condition1){
 
 Similar you'll see 2 more node sets like this below this one. Let's reverse this set first.
 
-![](11.png)
+{{< img src="11.png" >}}
 
 This one looks like it's moving op2 into *(ctx+op1). This bevaiour looks similar to a mov instruction : `mov <reg> <const>`. Let's check other node.
 
-![](12.png)
+{{< img src="12.png" >}}
 
 Let's analyze these two functions.
 
-![](13.png "this gets high nibble from a byte")
+{{< img src="13.png" caption="this gets high nibble from a byte" title="this gets high nibble from a byte" >}}
 
-![](14.png "getting lower 4 bits of given byte")
+{{< img src="14.png" caption="getting lower 4 bits of given byte" title="getting lower 4 bits of given byte" >}}
 
 We'll also rename these functions accordingly. We noticed that values returned by these functions is used as an offset in ctx array. This means that each nibble here represents as a register and this is also a mov instruction. This node is moving value from one register to another. This also means that maximum number of registers are 16 and program counter is separate from those registers. This is a huge coincidence!
 
@@ -296,7 +296,7 @@ This wraps up mov instructions.
 
 Set of another if-elseif-else statements
 
-![](16.png)
+{{< img src="16.png" >}}
 
 This one decodes to
 
@@ -333,7 +333,7 @@ I trust you can reverse this part easily. You must spend some time to analyze th
 
 I feel like I need to explain this if you're new to reversing.
 
-![](17.png)
+{{< img src="17.png" >}}
 
 This will check if first register is 0 or not, if it's 0 then it'll set second register to 1, otherwise 0.
 
@@ -388,7 +388,7 @@ So, this set decodes to
 
 This one was for bitwise logical operations.
 
-![](20.png "This set looks completely different")
+{{< img src="20.png" caption="This set looks completely different" title="This set looks completely different" >}}
 
 Decompilation to that red circle looks like this
 
@@ -441,7 +441,7 @@ Decompilation to that red circle looks like this
  ...
 ```
 
-![](21.png "some new fields are used here")
+{{< img src="21.png" caption="some new fields are used here" title="some new fields are used here" >}}
 
 I'll add some new fields to the context struct in order to understand this. This doesn't mean we understand the meaining of those fields. This part is a bit tricky.
 

@@ -14,7 +14,7 @@ categories:
   - Infinity
 projects: []
 ---
-![](infinity-1400x1050.png "Infinity Engine")
+{{< img src="infinity-1400x1050.png" caption="Infinity Engine" title="Infinity Engine" >}}
 
 In this post we will setup our project directory for development. There is no *hard and fast rule* to setup project directory structure and this one will be based on my past experiences. We will be using the following things (for now) : 
 
@@ -324,7 +324,7 @@ One more thing, it's okay to give up now and pick up the topic later because lea
 
 It will be hard but ***IT WILL BE AMAZING.*** Once you take your Game Engine to a decent mature level, you'll be different, different like the ninja standing on the top of a tower in windy night with a big moon glowing behind him!, darkness covering this face, holding his Katana, ready to slay the enemies!
 
-![](11854.jpg)
+{{< img src="11854.jpg" >}}
 
 Here are the few resources that I refer to when I get stuck : 
 

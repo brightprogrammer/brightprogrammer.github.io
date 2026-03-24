@@ -49,7 +49,7 @@ I however wanted to know how exactly will this equilibrium change when I slightl
 
 And below is the data for that experiment :
 
-![experiment data](screenshot-from-2022-08-20-01-28-32.png "experiment data")
+{{< img src="screenshot-from-2022-08-20-01-28-32.png" alt="experiment data" caption="experiment data" title="experiment data" >}}
 
 Clearly one can see that equilibrium point shifted from zero to 10 in this case. How do I know that? Look at the scatter plot, most of the points are cluttered near the line **y=10**. Slight changing of rule and such major change in equilibrium! So, how do we explain this? One major thing to notice is that equilibrium point still exists! and hence the mathematics of Game Theory is working as expected and hence maths never fails to amaze meeeee...
 

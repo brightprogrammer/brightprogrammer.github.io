@@ -10,29 +10,29 @@ tags:
 categories:
   - reversing
 ---
-![](pexels-renda-eko-riyadi-1395463.jpg)
+{{< img src="pexels-renda-eko-riyadi-1395463.jpg" >}}
 
 Y﻿ou can download the challenge binary from [here](https://crackmes.one/crackme/63710e2433c5d43ab4eceac6). This is a keygen like crackme. Program asks you for a key that isn't directly stored inside the program. You have to reverse the key checking algorithm to genreate key. Basically this is what a keygen is! There are a few tricks in this program as the author tried to make it little bit fun.
 
 R﻿un the binary and you'll see this :
 
-![](screenshot-from-2022-12-02-12-26-58.png)
+{{< img src="screenshot-from-2022-12-02-12-26-58.png" >}}
 
 O﻿n checking your `pwd` you'll notice that there's a new file created. Opening that file reaveals nothing useful. So we jump to IDA to see it's decompilation.
 
-![](screenshot-from-2022-12-02-12-30-26.png)
+{{< img src="screenshot-from-2022-12-02-12-30-26.png" >}}
 
 I﻿n the very beginning it's checking if you're running the program as .`/robot1` or not. Then it gets the fourth charcter from program name ("./robot") and takes differences with 'a' and 'k'. 
 
-![](screenshot-from-2022-12-02-12-32-23.png)
+{{< img src="screenshot-from-2022-12-02-12-32-23.png" >}}
 
 A﻿ check is made then whether `argc == 4` or not. Note that difference of 'o' and 'k' is 4 in ASCII. If argc is not exactly 4 then the program will exit printing that message we saw in the beginning. Let's run the program with 4 arguments then.
 
-![](screenshot-from-2022-12-02-12-34-18.png)
+{{< img src="screenshot-from-2022-12-02-12-34-18.png" >}}
 
 I﻿t asks for a key then. If you take a look at the decompiled code before this image, you'll see that the program's taking input from user and calculating exact key size it's expecting and comparing it with the input size. After that you'll basically see it initialize two arrays with some values. In the end these values are used to check whether the input that user gave is correct or not. The values in these two arrays are xorred element by element to get the key. 
 
-![](screenshot-from-2022-12-02-12-37-32.png)
+{{< img src="screenshot-from-2022-12-02-12-37-32.png" >}}
 
 Y﻿ou can now write a script to generate the actual key. I wrote this one :
 
@@ -80,6 +80,6 @@ print(f"key = {key}")
 
 R﻿unning this, you'll get the key and then you plug that into the program to get a solve! yayy!
 
-![](screenshot-from-2022-12-02-12-40-21.png)
+{{< img src="screenshot-from-2022-12-02-12-40-21.png" >}}
 
 H﻿ope you liked the read!

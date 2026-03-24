@@ -13,7 +13,7 @@ categories:
   - reversing
   - crackme
 ---
-![](francesco-ungaro-nlqqldludbw-unsplash.jpg)
+{{< img src="francesco-ungaro-nlqqldludbw-unsplash.jpg" >}}
 
 This crackme is less about actual reverse engineering and more on the programming side. You must have some decent knowledge of computer science and algorithms to solve this. Figuring out what the crackme is actually asking was a lot easier than convincing myself to actually solve it after that! I spent almost three days to solve this one. I figured out what I have to do on the second day of starting but I'm kinda lazy so I spent the rest of day looking for easier solutions (this crackme has kinda different solution).
 
@@ -21,19 +21,19 @@ This crackme is less about actual reverse engineering and more on the programmin
 
 Y﻿ou can get the crackme from [here](https://crackmes.one/crackme/62d08a7a33c5d44a934e97bb). There's nothing much to do in reversing. First look, with so many switch cases, I thought this might be a VM, but no, it's not! 
 
-![](screenshot-from-2022-12-04-18-49-16.png)
+{{< img src="screenshot-from-2022-12-04-18-49-16.png" >}}
 
 The eye opening point was when I reversed that `rotate_matrix` function. Reversing that function gave me some idea that this program might be using matrices to encrypt/decrypt given key. I tried googling for some things related but got no good results. Since at this point I know that matrices are being used I did an xref to see where is the data it's manipulating. I saw a 24 byte contiguous ASCII string. From the `reverse_matrix` function I know that the matrices are of 2x2 size. So I know there had to be 6 matrices in total there. I renamed those bytes to `matx_yz`. Where x is the matrix index and yz are indices of element inside that matrix. This helped me understand the code more as you can see in the image above. That was all for first day!
 
 T﻿he next day I woke up and suddenly this idea popped into my head that it might be a cube that it's trying to solve. Each face of that cube must be a 2x2 matrix. A cube has 6 faces. Now this sounds very much like a Rubik's cube. My suspicions were confirmed when I scrolled down to the decompiled code to see that it's actually checking whether all the six faces have same color (characters). I now knew what I had to do. So I tried searching for github projects that solve 2x2 matrices. Tried a few but they were either too slow or too complex to understand (mostly they were too slow!). This happened mostly because I wasn't able to figure out how the layout of the cube was in 3D. I am provided with a flat 1D array of string and I have to wrap it around a cube. If I place faces in wrong order, the cube will never have a solution, or might give wrong solutions. Day two passed like this.
 
-![](screenshot-from-2022-12-04-19-09-20.png "A single rotation operation. D means rotating down face.")
+{{< img src="screenshot-from-2022-12-04-19-09-20.png" caption="A single rotation operation. D means rotating down face." title="A single rotation operation. D means rotating down face." >}}
 
-![](screenshot-from-2022-12-04-19-10-29.png "Program confirming whether face is of uniform color.")
+{{< img src="screenshot-from-2022-12-04-19-10-29.png" caption="Program confirming whether face is of uniform color." title="Program confirming whether face is of uniform color." >}}
 
 T﻿hird day (today) I decide to write a solver on my own. So I started searching how we can approach this problem of solving a Rubik's cube. It's quite interesting! Turns out you can apply the concept of graphs and use graph searching algorithms to solve an NxN rubik's cube. Each state of a cube can be thought of as a node in the whole graph and each operation that you do on the cube takes you from one node to another. The cube will be considered solved when you reach a node in which all the six faces of cube contain same character. Also, that face ordering problem in 2nd day was solved by this [site](https://neos-guide.org/case-studies/pag/rubiks-cube/).
 
-![](rubiks-valid-move.png "source : https://neos-guide.org/case-studies/pag/rubiks-cube/")
+{{< img src="rubiks-valid-move.png" caption="source : https://neos-guide.org/case-studies/pag/rubiks-cube/" title="source : https://neos-guide.org/case-studies/pag/rubiks-cube/" >}}
 
 I﻿ used this ordering to wrap the 1D string around my 3D cube.
 
@@ -650,7 +650,7 @@ P﻿heww! That's around 300 lines of code, just to solve a 2x2 rubik's cube. It 
 
 N﻿ext thing, you compile this code and get a valid flag. Note that a rubik's cube can have infinitely many solutions. Mathematics have proven that any rubik's cube state can be solved in about 20 steps, with the median being 18 steps! I tried iterating over : 4 steps, 8 and 12. 12 steps got me the answer so that's what I keep. If you increase the depth variable, the time will increase too but you will get different solutions.
 
-![](screenshot-from-2022-12-04-19-28-43.png "proof of solution")
+{{< img src="screenshot-from-2022-12-04-19-28-43.png" caption="proof of solution" title="proof of solution" >}}
 
 T﻿here you go! Another crackme solved!
 

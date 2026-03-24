@@ -19,7 +19,7 @@ P﻿lease keep taking reference from this while reading this blog post. But befo
 
 ## G﻿eneral Instruction Layout
 
-![Figure 1-2 (AMD Vol3 Page5)](screenshot-from-2023-03-02-00-42-24.png "Figure showing general layout of an AMD64 Instruction (AMD Vol3 Page5)")
+{{< img src="screenshot-from-2023-03-02-00-42-24.png" alt="Figure 1-2 (AMD Vol3 Page5)" caption="Figure showing general layout of an AMD64 Instruction (AMD Vol3 Page5)" title="Figure showing general layout of an AMD64 Instruction (AMD Vol3 Page5)" >}}
 
 ## P﻿refixes
 
@@ -30,7 +30,7 @@ T﻿here are three types of prefixes :
 1. **L﻿egacy Prefixes** : These prefixes were present in older architectures also (before `AMD64`). There can be maximum of four legacy prefix bytes in an instruction. There are five different types of legacy prefixes.
 2. **R﻿EX Prefix** : This is a single byte prefix and there can be maximum one REX prefix in an instruction. They allow access to R-Extended and new registers added to AMD64 architecture. Value of REX prefix ranges from 0x40 to 0x4f. So to detect whether this prefix is a REX prefix or not, we can check whether upper nibble is 0x4 or not.
 
-   ![Fig 1-3 (AMD Vol3 Page15)](screenshot-from-2023-03-01-23-21-21.png "Layout of REX prefix byte (AMD Vol3 Page15)")
+   {{< img src="screenshot-from-2023-03-01-23-21-21.png" alt="Fig 1-3 (AMD Vol3 Page15)" caption="Layout of REX prefix byte (AMD Vol3 Page15)" title="Layout of REX prefix byte (AMD Vol3 Page15)" >}}
 3. **V﻿EX/XOP Prefix** : I'll cover this in a later part maybe, ignore this for now. 
 
 I﻿ will explain legacy prefixes in more detail later, for now let's just skim through each name so that you have the names in mind and have an abstract idea of what they do.
@@ -51,7 +51,7 @@ T﻿he ModRM byte has three fields.
 * R﻿ field (next three bits, 0x38 mask)
 * R﻿M field (lower three bits, 0x07 mask)
 
-![(AMD Vol3 Page17)](screenshot-from-2023-03-01-19-02-58.png "Diagram of the ModRM byte (AMD Vol3 Page17)")
+{{< img src="screenshot-from-2023-03-01-19-02-58.png" alt="(AMD Vol3 Page17)" caption="Diagram of the ModRM byte (AMD Vol3 Page17)" title="Diagram of the ModRM byte (AMD Vol3 Page17)" >}}
 
 ### The `M﻿odRM.mod` Field
 
@@ -89,15 +89,15 @@ T﻿his specifies the register/memory operand based on the register addressing m
 
 A﻿s I mentioned, `REX` byte is used in combination with `ModRM` byte to give access to all 16 R-Extended registers. Before we continue, I'd like to give you values of the `ModRM.r` and `ModRM.r/m` field that index different registers.
 
-![Table 1-10 (AMD Vol3 Page18)](screenshot-from-2023-03-01-23-32-13.png "Table showing different values of ModRM fields to index different registers (AMD Vol3 Page18)")
+{{< img src="screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD Vol3 Page18)" caption="Table showing different values of ModRM fields to index different registers (AMD Vol3 Page18)" title="Table showing different values of ModRM fields to index different registers (AMD Vol3 Page18)" >}}
 
 P﻿lease ignore the fourth column for now and only refer to first, second and third one. For given 8 values using only `ModRM.r` or `ModRM.rm` field and no `REX` prefix byte, we can have access to only these registers, but if we flag the `REX.R` bit as 1 then we 8 more different values which are used to index registers `r8` to `r15`. There are instructions that access only a part of these registers, like only the lower byte, or word, or double word. In those cases the `REX.W` prefix will be ignored. `REX.W` prefix is taken into account only where it's possible to increaase the size of registers to their maximum.
 
-![Figure 2-3 (AMD Vol3 Page39)](screenshot-from-2023-03-01-23-39-34.png "Table displaying the GPRs and their format (AMD Vol3 Page39)")
+{{< img src="screenshot-from-2023-03-01-23-39-34.png" alt="Figure 2-3 (AMD Vol3 Page39)" caption="Table displaying the GPRs and their format (AMD Vol3 Page39)" title="Table displaying the GPRs and their format (AMD Vol3 Page39)" >}}
 
 S﻿o, let's say the `REX.R` bit is flagged and the `ModRM.r` field is set to 0, then the effective value (which is 8) will index to r8 register and it's smaller parts depending on the instruction. For example `00` and `03` are two instruction opcodes  that belong to the `ADD` instruction family.
 
-![(AMD Vol3 Page83)](screenshot-from-2023-03-01-23-48-48.png-mh.png "Table showing all possible ADD opcodes and their description (AMD Vol3 Page83)")
+{{< img src="screenshot-from-2023-03-01-23-48-48.png-mh.png" alt="(AMD Vol3 Page83)" caption="Table showing all possible ADD opcodes and their description (AMD Vol3 Page83)" title="Table showing all possible ADD opcodes and their description (AMD Vol3 Page83)" >}}
 
 D﻿on't pay attention to the specific opcodes and just pay attention to the first byte in opcode and the size of operands in the instruction. I'll now give a few examples here and let you figure out how this work
 
@@ -113,23 +113,23 @@ N﻿ow, if you are a keen observer, then you might have noticed something here! 
 
 T﻿his is a special form of register-indirect memory addressing for accessing an array like memory region.
 
-![Table 1-10 (AMD64 Vol3 Page18)](screenshot-from-2023-03-01-23-32-13.png "Table displaying different values of ModRM.r or ModRM.rm field (AMD64 Vol3 Page18)")
+{{< img src="screenshot-from-2023-03-01-23-32-13.png" alt="Table 1-10 (AMD64 Vol3 Page18)" caption="Table displaying different values of ModRM.r or ModRM.rm field (AMD64 Vol3 Page18)" title="Table displaying different values of ModRM.r or ModRM.rm field (AMD64 Vol3 Page18)" >}}
 
 A﻿n `SIB` byte is present only if the mode is register-indirect and `ModRM.rm` value is `100b`. 
 
-![Figure 1-5 (AMD Vol3 Page19)](screenshot-from-2023-03-02-00-49-09.png "Diagram displaying different fields of SIB byte (AMD Vol3 Page19)")
+{{< img src="screenshot-from-2023-03-02-00-49-09.png" alt="Figure 1-5 (AMD Vol3 Page19)" caption="Diagram displaying different fields of SIB byte (AMD Vol3 Page19)" title="Diagram displaying different fields of SIB byte (AMD Vol3 Page19)" >}}
 
-![Table 1-11 (AMD Vol3 Page19)](screenshot-from-2023-03-02-00-50-23.png "Table showing different SIB.sacle value encodings (AMD Vol3 Page19)")
+{{< img src="screenshot-from-2023-03-02-00-50-23.png" alt="Table 1-11 (AMD Vol3 Page19)" caption="Table showing different SIB.sacle value encodings (AMD Vol3 Page19)" title="Table showing different SIB.sacle value encodings (AMD Vol3 Page19)" >}}
 
 T﻿hen the `SIB.index` field is used to specify the index of register containing the index into array and the `SIB.base` field is used to specify the index of register containing base address of this register-indirect addressing mode.
 
 N﻿ote that here `ModRM.rm` is fixed to `100b` so all index is done by `SIB` byte. For second operand, `ModRM.r` can index to other registers. Due to this configuration, the `REX.X` and `REX.B` bits were given to extend this `SIB.base` and `SIB.index` fields.
 
-![Table 1-12 (AMD Vol3 Page20)](screenshot-from-2023-03-02-00-56-19.png "SIB.index and SIB.base Field Encodings (AMD Vol3 Page20)")
+{{< img src="screenshot-from-2023-03-02-00-56-19.png" alt="Table 1-12 (AMD Vol3 Page20)" caption="SIB.index and SIB.base Field Encodings (AMD Vol3 Page20)" title="SIB.index and SIB.base Field Encodings (AMD Vol3 Page20)" >}}
 
-![Table 1-13 (AMD Vol3 Page20)](screenshot-from-2023-03-02-00-57-59.png "SIB.base encodings for ModRM.r/m = 100b (AMD Vol3 Page20)")
+{{< img src="screenshot-from-2023-03-02-00-57-59.png" alt="Table 1-13 (AMD Vol3 Page20)" caption="SIB.base encodings for ModRM.r/m = 100b (AMD Vol3 Page20)" title="SIB.base encodings for ModRM.r/m = 100b (AMD Vol3 Page20)" >}}
 
-![Table 1-14 (AMD Vol3 Page21)](screenshot-from-2023-03-02-01-10-02.png "Operand Addressing Using ModRM and SIB Bytes (AMD Vol3 Page21)")
+{{< img src="screenshot-from-2023-03-02-01-10-02.png" alt="Table 1-14 (AMD Vol3 Page21)" caption="Operand Addressing Using ModRM and SIB Bytes (AMD Vol3 Page21)" title="Operand Addressing Using ModRM and SIB Bytes (AMD Vol3 Page21)" >}}
 
 A﻿s examples
 
@@ -148,13 +148,13 @@ A﻿s examples
 
 L﻿egacy prefixes are of five types and each type has specific byte assigned. Comparing the first few bytes of instruction with these special bytes, we can check whether this byte is a legacy prefix byte or not.
 
-![Table 1-1 (AMD Vol3 Page7)](screenshot-from-2023-03-01-18-42-05.png "Table showing all legacy prefix bytes with their meaning and names (AMD Vol3 Page7)")
+{{< img src="screenshot-from-2023-03-01-18-42-05.png" alt="Table 1-1 (AMD Vol3 Page7)" caption="Table showing all legacy prefix bytes with their meaning and names (AMD Vol3 Page7)" title="Table showing all legacy prefix bytes with their meaning and names (AMD Vol3 Page7)" >}}
 
 ### T﻿he Operand Size Override Prefix (`0x66`)
 
 T﻿his prefix is used to override and select the non default operand size. If REX prefix byte is present along with this  prefix byte then, REX is always given preference! Also, this byte has some other meanings too which is used to extend the instruction set. More on that in later parts of this post (series).
 
-![Table 1-2 (AMD Vol3 Page8)](screenshot-from-2023-03-02-00-15-40.png "Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)")
+{{< img src="screenshot-from-2023-03-02-00-15-40.png" alt="Table 1-2 (AMD Vol3 Page8)" caption="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)" title="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)" >}}
 
 T﻿ake a look at this table and closely understand the meaning and then try to decode/assemble the following opcodes/instructions.
 
@@ -172,13 +172,13 @@ T﻿ake a look at this table and closely understand the meaning and then try to 
 
 T﻿his prefix is used to change the address size when accessing an address. For example in instructions `mov byte ptr ds:[rax]` and `mov qword ptr ds:[rax]` has different address sizes. This is also changing the default address size just like address size override.
 
-![Table 1-3 (AMD Vol3 Page9)](screenshot-from-2023-03-02-00-23-13.png "Table showing effective address size in different cases (AMD Vol3 Page9)")
+{{< img src="screenshot-from-2023-03-02-00-23-13.png" alt="Table 1-3 (AMD Vol3 Page9)" caption="Table showing effective address size in different cases (AMD Vol3 Page9)" title="Table showing effective address size in different cases (AMD Vol3 Page9)" >}}
 
 ### T﻿he Segment Override
 
 T﻿his is used to override default segment being used when getting values from a memory address. For example, you can use address size override prefix to change from ds to cs segment, like `mov word ptr ds:[rdi*4 + base]` to `mov word ptr cs:[rdi*4+base]`.
 
-![Table 1-5 (AMD Vol3 Page11)](screenshot-from-2023-03-02-00-26-45.png "Table showing different segment override prefixes (AMD Vol3 Page11)")
+{{< img src="screenshot-from-2023-03-02-00-26-45.png" alt="Table 1-5 (AMD Vol3 Page11)" caption="Table showing different segment override prefixes (AMD Vol3 Page11)" title="Table showing different segment override prefixes (AMD Vol3 Page11)" >}}
 
 S﻿imilarly you can take reference for `LOCK` and `REP`, `REPE/REPZ` and `REPNE/REPNZ` prefixes from the manual.
 
@@ -190,6 +190,6 @@ T﻿hese two values depend on the instruction you're trying to decode. You can r
 
 T﻿his writeup is no replacement for the 3000+ pages architecture manual given by the CPU vendor themselves to you. Ending this post with an awesome diagram from the manual itself to help you understand step wise how to decode the `AMD64` instruction.
 
-![Figure 1-1 (AMD Vol3 Page2)](screenshot-from-2023-03-02-00-34-12.png "Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)")
+{{< img src="screenshot-from-2023-03-02-00-34-12.png" alt="Figure 1-1 (AMD Vol3 Page2)" caption="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)" title="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)" >}}
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">As promised, I did a writeup for introducing you to the AMD64 Instruction Encoding format<a href="https://t.co/KVOBKG5KLb">https://t.co/KVOBKG5KLb</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1631008375898099713?ref_src=twsrc%5Etfw">March 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

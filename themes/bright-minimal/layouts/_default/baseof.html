@@ -14,6 +14,14 @@
       </main>
       {{ partial "footer.html" . }}
     </div>
+    <div class="img-modal" id="img-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="img-modal__backdrop" data-img-close aria-hidden="true"></div>
+      <div class="img-modal__content" role="document">
+        <button class="img-modal__close" type="button" aria-label="Close image" data-img-close>×</button>
+        <img class="img-modal__image" alt="" />
+        <div class="img-modal__caption" aria-live="polite"></div>
+      </div>
+    </div>
     {{ partial "scripts.html" . }}
   </body>
 </html>

@@ -21,14 +21,14 @@ P﻿robably one of the main reasons I'm writing about this is because this binar
 
 Just run the binary (after maybe checking for malicious behaviour on VirusTotal) and then enter the key! What's the key you ask? Enter anything other than a non zero integer and you'll get a solve. It was a complete by chance solution so I went to check the assembly in radare and it actually is the real flag! So easy that you start doubting yourself!
 
-![image showing the proof of solution](screenshot-from-2022-12-02-10-22-01.png "proof of solve")
+{{< img src="screenshot-from-2022-12-02-10-22-01.png" alt="image showing the proof of solution" caption="proof of solve" title="proof of solve" >}}
 
 Y﻿ou can also take a look at the disassembly but there's no point actually.
 
-![](screenshot-from-2022-12-02-10-24-50.png "disassembly of main")
+{{< img src="screenshot-from-2022-12-02-10-24-50.png" caption="disassembly of main" title="disassembly of main" >}}
 
 P﻿rogram takes input in an integer and gives this integer to the checker function. Let's take a look at the checker function now.
 
-![](screenshot-from-2022-12-02-10-32-37.png "disassembly of checker")
+{{< img src="screenshot-from-2022-12-02-10-32-37.png" caption="disassembly of checker" title="disassembly of checker" >}}
 
 T﻿his will check whether the argument given to checker (the integer taken as input) is equal to 0 or not. If it's not zero then it'll spit out a flag else it'll throw some tantrums.

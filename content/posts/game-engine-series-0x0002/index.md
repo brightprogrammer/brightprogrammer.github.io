@@ -13,7 +13,7 @@ categories:
   - ComputerGraphics
   - Infinity
 ---
-![](infinity-1400x1050.png "Infinity Engine")
+{{< img src="infinity-1400x1050.png" caption="Infinity Engine" title="Infinity Engine" >}}
 
 This post will be on introduction to Vulkan API. We will try to get an idea of how Vulkan Loader works, look at some common definitions and some other interesting things! So, let's begin by asking what is Vulkan?
 
@@ -49,7 +49,8 @@ For the latter method, we just have to download [Vulkan Loader](https://github.c
 
 Volk (and similar implementations) gets it's perfomance boost because it skips the [trampoline](http://kylehalladay.com/blog/2020/11/13/Hooking-By-Example.html) (also known as hooking) part in Vulkan Loader. An example image retrieved from khronos site is :
 
-![Webinar Recap: Vulkan Loader Deep Dive](https://www.khronos.org/assets/uploads/blogs/2017-Webinar-Recap-Vulkan-Loader-Deep-Dive.jpg)Here is a paragraph from a [vulkan.lunarg.com post](https://vulkan.lunarg.com/doc/view/1.2.170.0/windows/loader_and_layer_interface.html) : 
+{{< img src="https://www.khronos.org/assets/uploads/blogs/2017-Webinar-Recap-Vulkan-Loader-Deep-Dive.jpg" alt="Webinar Recap: Vulkan Loader Deep Dive" >}}
+Here is a paragraph from a [vulkan.lunarg.com post](https://vulkan.lunarg.com/doc/view/1.2.170.0/windows/loader_and_layer_interface.html) : 
 
 > ##### [](https://vulkan.lunarg.com/doc/view/1.2.170.0/windows/loader_and_layer_interface.html#user-content-indirectly-linking-to-the-loader)Indirectly Linking to the Loader
 >
@@ -69,7 +70,8 @@ Say you are calling some function named `doSomething(xyz)`. Now, this function h
 
 This way the loader allows you to use multiple `ICD`s at a time! You just need to have the driver and the `ICD` present on your system. Below is an image to show how loader works
 
-![High Level View of Loader](https://github.com/KhronosGroup/Vulkan-Loader/raw/master/loader/images/high_level_loader.png)source : Khronos Group
+{{< img src="https://github.com/KhronosGroup/Vulkan-Loader/raw/master/loader/images/high_level_loader.png" alt="High Level View of Loader" >}}
+source : Khronos Group
 
 In Linux you will generally find the loader as a shared object file named `/usr/lib/libvulkan.so`. You will see a library file named the same in our projects `/lib` directory because remember we build this as a dependency.
 

@@ -13,7 +13,7 @@ categories:
   - reversing
   - crackme
 ---
-![](preview.png)
+{{< img src="preview.png" >}}
 
 - - -
 
@@ -441,7 +441,7 @@ WARNING: No calling convention defined for this file, analysis may be inaccurate
 
 Next to see the disassembly, type `v`! after which you will see a window similar to this :
 
-![](radare2-1.png)
+{{< img src="radare2-1.png" >}}
 
 The big window on left is the one that contains our disassembly code. One in the top right corner contains function names/symbols and in bottom right contains symbol names.\
 At the very beginning you see the `entry` function, this is the very first function that is called when our program executes! and this function calls `main()`(indirectly). This function passes those `argc` and `argv` values to `main()`! Let's take a look at this function and try to find our `main()` from here :

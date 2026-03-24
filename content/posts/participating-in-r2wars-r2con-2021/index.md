@@ -14,13 +14,13 @@ categories:
 ---
 So I participated in this year's online [r2con](https://rada.re/con/2021/)'s [r2wars](https://rada.re/con/2021/#r2wars) event. It was amazing. Me and my friend (**[X3eRo0](https://twitter.com/X3eRo0)**) participated in this years [r2con](https://rada.re/con/2021/). I never heard of this event before and it was introduced to me by **[X3eRo0](https://twitter.com/X3eRo0)** himself. Also this type of event was completely new to me.
 
-![r2wars image](https://github.com/radareorg/r2wars/blob/master/csharp/resources/r2wars_logo_transparent.png?raw=true "Source : https://github.com/radareorg/r2wars ")
+{{< img src="https://github.com/radareorg/r2wars/blob/master/csharp/resources/r2wars_logo_transparent.png?raw=true" alt="r2wars image" caption="Source : https://github.com/radareorg/r2wars " title="Source : https://github.com/radareorg/r2wars " >}}
 
 ### Beginning
 
 My exams were already over and I was sitting waiting for a nice thing to happen in my life  (working on my side projects). As I've mentioned in my earlier post ([Solving **X3eRo0**'s CrackME The Hard Way](/posts/solving-x3ero0s-crackme-the-hard-way/)) **[X3eRo0](https://twitter.com/X3eRo0)** challeged me to solve his CrackMe and he'll invite me to his **[ctf-team](https://medium.com/zh3r0)**. This acted as a motivation to me. At the time of writing this post, the CrackMe is still unsolved (I am still at reversing stage, the read time is 109mins and I guess it will probably increase to 400mins+ after I'm done with it). After a month approx he sent me an invitation to join his **[ctf-team](https://medium.com/zh3r0)** (probably by seeing how foolish I am and that I won't be able to complete his crackme in an eternity 😂 🤣). Everyone is polite and helpful in the team I feel comfortable with them 😄.
 
-![](chat_ss.png "😂😂😂😂")
+{{< img src="chat_ss.png" caption="😂😂😂😂" title="😂😂😂😂" >}}
 
 So, I was there checking my notifications, reading some ctf writeups, waiting for a nice team event to occur and on the 2nd day of joining the team, **[X3eRo0](https://twitter.com/X3eRo0)** invited me and some other team members to participate in this event. Some members were busy with their college life and other stuffs so in the end only me and **[X3eRo0](https://twitter.com/X3eRo0)** were participating.
 
@@ -34,7 +34,7 @@ The competing bots will be initialized in a common memory space of 1024 (0x400 o
 
 [r2wars](https://rada.re/con/2021/#r2wars) is held once every year. It is a part of [r2con](https://rada.re/con/2021) which usually happened (before [covid19](https://en.wikipedia.org/wiki/COVID-19)) like a normal conference but since the last two years [it was held online](https://www.youtube.com/results?search_query=r2con).
 
-![](r2wars_ui.png "a look at r2wars arena")
+{{< img src="r2wars_ui.png" caption="a look at r2wars arena" title="a look at r2wars arena" >}}
 
 So as you can see above, the coloured (yellow, red, blue, pink etc...) region in the middle is a pictorial representation of memory region allocated to the two bots. In the image you can see that almost every thing is open source here. You can see the god damn assembly instructions of each bot in there! Which means you can reverse the bot by just looking at the match! Here **[X3eRo0](https://twitter.com/X3eRo0)**'s bot is competing against a bot named **old-flacucho.** This bot was reversed by **[X3eRo0](https://twitter.com/X3eRo0)** after [day1's match](https://youtu.be/yv4vuXrbt0M?t=19274). Blue means the executable code for left bot and Red means the executable code for right bot. Also the |R|W| colors shown beside the name of each bot is the colour of read and written memory for each bot. So, for eg: orange coloured memory region is written by **[X3eRo0](https://twitter.com/X3eRo0)**'s bot and the region in pink is written by **old-flacucho.**
 
@@ -160,7 +160,7 @@ start:
 
 But this was a failure too. I sumbitted this on for [Day2 match](https://youtu.be/UgJhN3dt9yU?t=8715). It came 5th 😆. It was fun though seeing it fight. This time since I wrote a bot myself I felt that current of excitement running through my body, giving me goosebumps.
 
-![](spiderman-infinity-war.gif "source : tenor")
+{{< img src="spiderman-infinity-war.gif" caption="source : tenor" title="source : tenor" >}}
 
 We both were constantly modifying our code and testing against other bots from github. It was was a blast. I had my setup for r2wars already done so **[X3eRo0](https://twitter.com/X3eRo0)** sent me his bots to test and run. I screencasted  my pc and we enjoyed a lot.
 
