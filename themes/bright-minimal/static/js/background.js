@@ -95,23 +95,37 @@
 
     const nextGridW = Math.max(70, Math.floor(width / qualityDivisor));
     const nextGridH = Math.max(54, Math.floor(height / qualityDivisor));
+    const widthDelta = Math.abs(nextGridW - prevGridW);
+    const heightDelta = Math.abs(nextGridH - prevGridH);
+    const onlyHeightChange = widthDelta < 1 && heightDelta > 0;
+    const heightExpanded = nextGridH > prevGridH;
 
     const count = Math.max(10, Math.floor(Math.min(width, height) / pointDivisor));
     if (preserve && points.length) {
-      const scaleX = nextGridW / prevGridW;
-      const scaleY = nextGridH / prevGridH;
-      points = points.map((p) => ({
-        ...p,
-        x: Math.max(0, Math.min(nextGridW, p.x * scaleX)),
-        y: Math.max(0, Math.min(nextGridH, p.y * scaleY)),
-      }));
+      if (onlyHeightChange) {
+        points = points.map((p) => ({
+          ...p,
+          x: Math.max(0, Math.min(nextGridW, p.x)),
+          y: p.y > nextGridH ? Math.random() * nextGridH : p.y,
+        }));
+      } else {
+        const scaleX = nextGridW / prevGridW;
+        const scaleY = nextGridH / prevGridH;
+        points = points.map((p) => ({
+          ...p,
+          x: Math.max(0, Math.min(nextGridW, p.x * scaleX)),
+          y: Math.max(0, Math.min(nextGridH, p.y * scaleY)),
+        }));
+      }
 
       if (points.length < count) {
         const addCount = count - points.length;
         points = points.concat(
           Array.from({ length: addCount }, () => ({
             x: Math.random() * nextGridW,
-            y: Math.random() * nextGridH,
+            y: heightExpanded && onlyHeightChange
+              ? prevGridH + Math.random() * (nextGridH - prevGridH)
+              : Math.random() * nextGridH,
             vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
             vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
             color: colors[Math.floor(Math.random() * colors.length)],
@@ -252,8 +266,15 @@
       const widthDelta = Math.abs(viewport.width - width);
       const heightDelta = Math.abs(viewport.height - height);
       const heightDeltaLimit = Math.max(140, height * 0.15);
-      if (width && widthDelta < 1 && heightDelta < heightDeltaLimit) {
-        return;
+      if (width && widthDelta < 1) {
+        const heightIncrease = viewport.height - height;
+        const heightIncreaseLimit = Math.max(60, height * 0.08);
+        if (heightIncrease <= 0) {
+          return;
+        }
+        if (heightIncrease < heightIncreaseLimit && heightDelta < heightDeltaLimit) {
+          return;
+        }
       }
       resize({
         preserve: true,
