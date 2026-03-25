@@ -16,6 +16,16 @@
   let resizeTimer = null;
   let offscreen = null;
   let offCtx = null;
+  let qualityDivisor = 12;
+  let pointDivisor = 140;
+  let frameInterval = 0.035;
+  let speedFactor = 5;
+
+  const isLowEnd = () => {
+    const mem = navigator.deviceMemory || 0;
+    const cores = navigator.hardwareConcurrency || 0;
+    return (mem && mem <= 4) || (cores && cores <= 4);
+  };
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -83,10 +93,10 @@
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const nextGridW = Math.max(80, Math.floor(width / 10));
-    const nextGridH = Math.max(60, Math.floor(height / 10));
+    const nextGridW = Math.max(70, Math.floor(width / qualityDivisor));
+    const nextGridH = Math.max(54, Math.floor(height / qualityDivisor));
 
-    const count = Math.max(12, Math.floor(Math.min(width, height) / 120));
+    const count = Math.max(10, Math.floor(Math.min(width, height) / pointDivisor));
     if (preserve && points.length) {
       const scaleX = nextGridW / prevGridW;
       const scaleY = nextGridH / prevGridH;
@@ -184,9 +194,9 @@
       lastTime = time;
     }
     const delta = (time - lastTime) / 1000;
-    if (delta >= 0.03) {
+    if (delta >= frameInterval) {
       const step = Math.min(delta, 0.05);
-      update(step * 5);
+      update(step * speedFactor);
       render();
       lastTime = time;
     }
@@ -194,11 +204,26 @@
   };
 
   const start = () => {
+    if (isLowEnd()) {
+      qualityDivisor = 14;
+      pointDivisor = 160;
+      frameInterval = 0.06;
+      speedFactor = 3.8;
+    }
     refreshColors();
     resize();
     render();
-    if (!prefersReducedMotion) {
-      raf = requestAnimationFrame(frame);
+
+    const startAnim = () => {
+      if (!prefersReducedMotion && !raf) {
+        raf = requestAnimationFrame(frame);
+      }
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(startAnim, { timeout: 1200 });
+    } else {
+      window.setTimeout(startAnim, 800);
     }
   };
 
