@@ -92,15 +92,13 @@
 <script>
   (function () {
     const storageKey = "bp-theme";
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const systemTheme = () => (media.matches ? "dark" : "light");
     let stored = null;
     try {
       stored = localStorage.getItem(storageKey);
     } catch (err) {
       stored = null;
     }
-    const theme = stored || systemTheme();
+    const theme = stored || "light";
     document.documentElement.setAttribute("data-theme", theme);
     if (document.body) {
       document.body.setAttribute("data-theme", theme);

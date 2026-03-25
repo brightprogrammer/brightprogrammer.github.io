@@ -3,6 +3,7 @@
   const root = document.documentElement;
   const toggle = document.querySelector("[data-theme-toggle]");
   const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const defaultTheme = "light";
 
   const getStoredTheme = () => {
     try {
@@ -45,16 +46,14 @@
     notifyThemeChange(theme);
   };
 
-  const systemTheme = () => (media.matches ? "dark" : "light");
-
   const stored = getStoredTheme();
   if (!stored) {
-    applyTheme(systemTheme(), false);
+    applyTheme(defaultTheme, false);
   }
 
   if (toggle) {
     toggle.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme") || systemTheme();
+      const current = root.getAttribute("data-theme") || defaultTheme;
       const next = current === "dark" ? "light" : "dark";
       applyTheme(next, true);
     });
@@ -62,7 +61,7 @@
 
   media.addEventListener("change", () => {
     if (!getStoredTheme()) {
-      applyTheme(systemTheme(), false);
+      applyTheme(defaultTheme, false);
     }
   });
 })();
