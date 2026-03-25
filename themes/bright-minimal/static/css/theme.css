@@ -355,21 +355,31 @@ a:hover {
   text-underline-offset: 0.2em;
 }
 
-.content-body a,
-.list-item a,
-.list-item-line a {
+.content-body a {
   position: relative;
 }
 
-.content-body a::after,
-.list-item a::after,
-.list-item-line a::after {
+.content-body a::after {
   content: "↗";
   display: inline-block;
   font-size: 0.6em;
   margin-left: 0;
   vertical-align: super;
   opacity: 0.8;
+}
+
+.list-item h2 a,
+.list-item h3 a,
+.list-item-line h2 a,
+.list-item-line h3 a {
+  text-decoration: none;
+}
+
+.list-item h2 a::after,
+.list-item h3 a::after,
+.list-item-line h2 a::after,
+.list-item-line h3 a::after {
+  content: none;
 }
 
 .page {
