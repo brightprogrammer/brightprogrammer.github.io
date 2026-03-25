@@ -343,7 +343,9 @@ video {
 
 a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
   transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -351,6 +353,23 @@ a:hover {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.content-body a,
+.list-item a,
+.list-item-line a {
+  position: relative;
+}
+
+.content-body a::after,
+.list-item a::after,
+.list-item-line a::after {
+  content: "↗";
+  display: inline-block;
+  font-size: 0.6em;
+  margin-left: 0;
+  vertical-align: super;
+  opacity: 0.8;
 }
 
 .page {
