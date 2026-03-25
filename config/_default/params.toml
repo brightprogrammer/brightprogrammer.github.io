@@ -8,13 +8,13 @@ since = "2023"
 toc = true
 showWordCount = true
 showReadingTime = true
-rootFontSize = "100%"
+rootFontSize = "118%"
 math = true
 enableDuckDuckGoSearchBox = false
 numberedSubtitles = true
 enableInlineShortcodes = true
 mermaid = true
-palette = "indigo"
+palette = "ember"
 
 [sharingbuttons]
 facebook = true
