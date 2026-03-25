@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "2. Lambda Calculus - Equivalences & Reductions"
+title: "Lambda Calculus - Equivalences & Reductions"
 date: "2025-02-06"
 description: "Notes on Lambda Calculus"
 tags:

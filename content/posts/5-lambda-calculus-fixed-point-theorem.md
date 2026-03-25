@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "4. Lambda Calculus - Fixed Point Theorem"
+title: "Lambda Calculus - Fixed Point Theorem"
 date: "2025-02-06"
 description: "Notes on Lambda Calculus"
 tags:

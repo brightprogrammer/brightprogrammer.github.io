@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "3. Lambda Calculus - Logic"
+title: "Lambda Calculus - Logic"
 date: "2025-02-06"
 description: "Notes on Lambda Calculus"
 tags:

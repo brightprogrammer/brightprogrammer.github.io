@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "1. Lambda Calculus - Grammar & Terms"
+title: "Lambda Calculus - Grammar & Terms"
 date: "2025-02-04"
 description: "Notes On Lambda Calculus"
 tags: [
