@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "A C Of Polymorphism With CPP"
+title: "A C Of Polymorphism Without CPP"
 date: "2026-03-25"
 description: "Polymorphism in C using real codebases"
 tags: ["c", "polymorphism", "gobject", "glib", "gtk", "linux"]
