@@ -14,8 +14,6 @@ categories:
   - Infinity
 projects: []
 ---
-{{< img src="infinity-1400x1050.png" caption="Infinity Engine" title="Infinity Engine" >}}
-
 In this post we will setup our project directory for development. There is no *hard and fast rule* to setup project directory structure and this one will be based on my past experiences. We will be using the following things (for now) : 
 
 * [Vulkan Graphics API](https://www.vulkan.org/)

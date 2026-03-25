@@ -13,8 +13,6 @@ categories:
   - reversing
   - crackme
 ---
-{{< img src="francesco-ungaro-nlqqldludbw-unsplash.jpg" >}}
-
 This crackme is less about actual reverse engineering and more on the programming side. You must have some decent knowledge of computer science and algorithms to solve this. Figuring out what the crackme is actually asking was a lot easier than convincing myself to actually solve it after that! I spent almost three days to solve this one. I figured out what I have to do on the second day of starting but I'm kinda lazy so I spent the rest of day looking for easier solutions (this crackme has kinda different solution).
 
 ## R﻿eversing

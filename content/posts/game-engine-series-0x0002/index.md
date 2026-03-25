@@ -13,8 +13,6 @@ categories:
   - ComputerGraphics
   - Infinity
 ---
-{{< img src="infinity-1400x1050.png" caption="Infinity Engine" title="Infinity Engine" >}}
-
 This post will be on introduction to Vulkan API. We will try to get an idea of how Vulkan Loader works, look at some common definitions and some other interesting things! So, let's begin by asking what is Vulkan?
 
 ### What is Vulkan ?

@@ -13,9 +13,7 @@ tags:
 
 # Elvis Magic Box
 
-**THIS WRITEUP IS VERY VERY LONG AND MOST OF THE PART IS NOT ACTUALLY RELATED TO THE VM. YOU CAN SKIP TO THE “*THE MOMENT OF TRUTH*” TO ACTUALLY READ THE SOLUTION.**
-
-After completing the [previous](https://www.notion.so/Elvis-Protected-CrackMe-66a9b2959da24d129efa94919cacfa5b?pvs=21) CrackMe based on a very good Anti-Debug technique (which can be further improved as I pointed out in that post by reading a research paper), Elvis, the author of previous challenge gave me another challenge. He already gave me a major hint about the challenge which you usually don’t get in real world scenarios. This challenge is another VM challenge and is an `OISC` (**One Instruction Set Computer**)
+After completing the [previous](/posts/a-self-debugging-software-protection-challenge/) CrackMe based on a very good Anti-Debug technique (which can be further improved as I pointed out in that post by reading a research paper), Elvis, the author of previous challenge gave me another challenge. He already gave me a major hint about the challenge which you usually don’t get in real world scenarios. This challenge is another VM challenge and is an `OISC` (**One Instruction Set Computer**)
 
 {{< img src="images/Untitled.png" >}}
 

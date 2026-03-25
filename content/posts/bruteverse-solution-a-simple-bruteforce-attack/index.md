@@ -11,8 +11,6 @@ tags:
 categories:
   - reversing
 ---
-{{< img src="pexels-natã-romualdo-2904269.jpg" >}}
-
 T﻿his is also another easy crackme. I don't know why is it rated 4.0 in difficulty. It should be like 2 or less than that. All you have to do is read the assembly of the program or decompiled code (if available) and everything will be clear. When I opened this in IDA first I saw that this only had one simple function. I was confused that a 4.0 rated challenge and only this function? Maybe something advanced was going on. So I objdumped it and found nothing more than what was already shown in IDA.
 
 {{< img src="screenshot-from-2022-12-02-21-11-50.png" >}}

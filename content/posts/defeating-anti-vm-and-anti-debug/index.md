@@ -4,8 +4,6 @@ description: Solution for ReverseMe3 from crackmes[.]one
 date: 2022-12-09T13:18:43.322Z
 draft: false
 ---
-{{< img src="joel-filipe-rg1lnufgjhi-unsplash.jpg" >}}
-
 You can get the challenge binary from [here](https://crackmes.one/crackme/5fb1642933c5d424269a1850).
 
 T﻿his is another awesome challenge from crackmes.one. The binary is able to run properly in specific builds of Windows 10. When run under a debugger, it closes and when run under a VM it probably crashes. So, to solve this crackme, we have to make it run under VM and Debugger, in other words : Defeat the Anti-VM and Anti-Debug.

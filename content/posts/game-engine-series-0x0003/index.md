@@ -16,8 +16,6 @@ categories:
 projects:
   - Infinity
 ---
-{{< img src="preview.png" caption="Infinity Engine" title="Infinity Engine" >}}
-
 In this post, we will setup our first window, that will present our rendered images on the screen. We will use [SDL](https://libsdl.org/) for this. You can use other windowing libraries like [GLFW](https://glfw.org/), [Qt](https://qt.io/), etc... This dependes on what functionality and how much of it you want and the most important factor of them all is how much you are comfortable with the API of the library/utility you are using. I'm comfortable with [SDL](https://libsdl.org/), plus, [Unreal Engine](https://www.unrealengine.com/en-US/) uses it too. One more plus point with SDL is that it runs of many platforms : 
 
 > SDL officially supports **Windows, Mac OS X, Linux, iOS, and Android**.

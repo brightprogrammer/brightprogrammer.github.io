@@ -10,8 +10,6 @@ tags:
 categories:
   - reversing
 ---
-{{< img src="pexels-renda-eko-riyadi-1395463.jpg" >}}
-
 Y﻿ou can download the challenge binary from [here](https://crackmes.one/crackme/63710e2433c5d43ab4eceac6). This is a keygen like crackme. Program asks you for a key that isn't directly stored inside the program. You have to reverse the key checking algorithm to genreate key. Basically this is what a keygen is! There are a few tricks in this program as the author tried to make it little bit fun.
 
 R﻿un the binary and you'll see this :
