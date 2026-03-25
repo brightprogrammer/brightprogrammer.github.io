@@ -251,7 +251,8 @@
       const viewport = getViewportSize();
       const widthDelta = Math.abs(viewport.width - width);
       const heightDelta = Math.abs(viewport.height - height);
-      if (width && widthDelta < 1 && heightDelta < 80) {
+      const heightDeltaLimit = Math.max(140, height * 0.15);
+      if (width && widthDelta < 1 && heightDelta < heightDeltaLimit) {
         return;
       }
       resize({
