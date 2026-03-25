@@ -33,7 +33,7 @@ These fixed points are not unique. Consider the lambda expression $F \stackrel{\
 a fixed point of this.
 {{< /notice >}}
 
-{{< notice type="disclaimer" >}}
+{{< notice type="info" >}}
 Proofs for the fixed point theorem already exist. I do not understand the proofs right now, becuase I feel I
 need more familiarity with lambda calculus. I'll come back to this once I feel confident to prove this myself.
 I know for now that the key to proving this is recursion. I'm figuring out how can we do recursion in lambda

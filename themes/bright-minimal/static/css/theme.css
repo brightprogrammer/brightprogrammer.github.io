@@ -173,6 +173,10 @@ body {
   mix-blend-mode: screen;
 }
 
+[data-theme="dark"] .ambient-bg {
+  filter: blur(14px) saturate(150%);
+}
+
 .ambient-bg[data-theme="light"],
 [data-theme="light"] .ambient-bg {
   opacity: 0.9;

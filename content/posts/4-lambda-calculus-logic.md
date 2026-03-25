@@ -118,6 +118,6 @@ languages don't have a way to iterate over some statements like Turing Machines 
 way. So, we create loops using recursion. Let's try to build up the idea of how we can do recursion in
 lambda calculus.
 
-{{< notice type="disclaimber" >}}
+{{< notice type="note" >}}
 To be continued from here.
 {{< /notice >}}

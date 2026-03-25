@@ -53,7 +53,7 @@
     const strengths =
       theme === "light"
         ? [0.35, 0.55, 0.2, 0.7]
-        : [0.22, 0.38, 0.1, 0.55];
+        : [0.48, 0.68, 0.32, 0.78];
 
     colors = [
       mix(bg, accent, strengths[0]),
