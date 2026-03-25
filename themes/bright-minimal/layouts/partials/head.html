@@ -22,12 +22,21 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}" />
 <link rel="manifest" href="{{ "images/site.webmanifest" | relURL }}" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript>
+  <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}" />
+</noscript>
+<link rel="preload" as="font" type="font/woff2" href="{{ "fonts/xn7gYHE41ni1AdIRggexSg.woff2" | relURL }}" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="{{ "fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" | relURL }}" crossorigin />
 
-<link rel="stylesheet" href="{{ "css/theme.css" | relURL }}" />
-<link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}" />
+<link rel="preload" as="style" href="{{ "css/theme.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript>
+  <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}" />
+</noscript>
+<link rel="preload" as="style" href="{{ "css/chroma.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript>
+  <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}" />
+</noscript>
 
 {{- with .Site.Params.customCSS }}
   {{- range . }}
@@ -40,7 +49,10 @@
 {{- end }}
 
 {{- if .Site.Params.math }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" />
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" />
+  </noscript>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.js" integrity="sha384-H6s1ZrH2CKpFpqR680poRdStIRJGXty7fSkxAcIfxwl9iu6A4BOPtTk7vQ58Ovio" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
   <script>
