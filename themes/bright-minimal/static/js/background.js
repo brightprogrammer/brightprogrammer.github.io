@@ -184,11 +184,6 @@
       lastTime = time;
     }
     const delta = (time - lastTime) / 1000;
-    if (delta > 0.2) {
-      lastTime = time;
-      raf = requestAnimationFrame(frame);
-      return;
-    }
     if (delta >= 0.03) {
       const step = Math.min(delta, 0.05);
       update(step * 5);
@@ -212,6 +207,14 @@
       cancelAnimationFrame(raf);
       raf = null;
     }
+  };
+
+  const resume = () => {
+    if (prefersReducedMotion || raf) {
+      return;
+    }
+    lastTime = 0;
+    raf = requestAnimationFrame(frame);
   };
 
   window.addEventListener("resize", () => {
@@ -241,6 +244,23 @@
       p.color = colors[Math.floor(Math.random() * colors.length)];
     });
     render();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stop();
+      return;
+    }
+    lastTime = 0;
+    render();
+    resume();
+  });
+
+  window.addEventListener("pagehide", stop);
+  window.addEventListener("pageshow", () => {
+    resize({ preserve: true });
+    render();
+    resume();
   });
 
   if (document.readyState === "loading") {
