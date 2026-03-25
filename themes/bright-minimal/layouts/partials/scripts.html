@@ -1,10 +1,12 @@
-<script src="{{ "js/theme.js" | relURL }}" defer></script>
-<script src="{{ "js/background.js" | relURL }}" defer></script>
-<script src="{{ "js/image-modal.js" | relURL }}" defer></script>
+{{- $assetVersion := .Site.Params.assetVersion | default (now.Unix) -}}
+<script src="{{ "js/theme.js" | relURL }}?v={{ $assetVersion }}" defer></script>
+<script src="{{ "js/background.js" | relURL }}?v={{ $assetVersion }}" defer></script>
+<script src="{{ "js/code-copy.js" | relURL }}?v={{ $assetVersion }}" defer></script>
+<script src="{{ "js/image-modal.js" | relURL }}?v={{ $assetVersion }}" defer></script>
 
 {{- if .Site.Params.mermaid }}
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
-  <script src="{{ "js/mermaid.js" | relURL }}" defer></script>
+  <script src="{{ "js/mermaid.js" | relURL }}?v={{ $assetVersion }}" defer></script>
 {{- end }}
 
 {{- with .Site.Params.customJS }}

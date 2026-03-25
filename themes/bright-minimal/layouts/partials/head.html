@@ -22,20 +22,21 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}" />
 <link rel="manifest" href="{{ "images/site.webmanifest" | relURL }}" />
 
-<link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+{{- $assetVersion := .Site.Params.assetVersion | default (now.Unix) -}}
+<link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}?v={{ $assetVersion }}" />
 </noscript>
 <link rel="preload" as="font" type="font/woff2" href="{{ "fonts/xn7gYHE41ni1AdIRggexSg.woff2" | relURL }}" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="{{ "fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" | relURL }}" crossorigin />
 
-<link rel="preload" as="style" href="{{ "css/theme.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+<link rel="preload" as="style" href="{{ "css/theme.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}?v={{ $assetVersion }}" />
 </noscript>
-<link rel="preload" as="style" href="{{ "css/chroma.css" | relURL }}" onload="this.onload=null;this.rel='stylesheet'" />
+<link rel="preload" as="style" href="{{ "css/chroma.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}?v={{ $assetVersion }}" />
 </noscript>
 
 {{- with .Site.Params.customCSS }}

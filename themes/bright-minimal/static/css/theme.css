@@ -737,11 +737,54 @@ a:hover {
   border-radius: 12px;
   overflow-x: auto;
   border: 1px solid var(--code-border);
+  position: relative !important;
 }
 
 .content-body pre code {
   background: transparent;
   padding: 0;
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  border: 1px solid var(--code-border);
+  background: rgba(var(--bg-rgb), 0.7);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.code-copy:hover {
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.code-copy:active {
+  transform: translateY(0);
+}
+
+.code-copy.is-copied {
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.4);
+}
+
+.code-copy svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
 }
 
 .content-body table {

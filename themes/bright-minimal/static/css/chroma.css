@@ -5,6 +5,7 @@
   border: 1px solid var(--code-border);
   background: var(--code-bg);
   overflow-x: auto;
+  position: relative;
 }
 
 .highlight pre {
