@@ -1,12 +1,23 @@
-{{- $assetVersion := .Site.Params.assetVersion | default (now.Unix) -}}
-<script src="{{ "js/theme.js" | relURL }}?v={{ $assetVersion }}" defer></script>
-<script src="{{ "js/background.js" | relURL }}?v={{ $assetVersion }}" defer></script>
-<script src="{{ "js/code-copy.js" | relURL }}?v={{ $assetVersion }}" defer></script>
-<script src="{{ "js/image-modal.js" | relURL }}?v={{ $assetVersion }}" defer></script>
+{{- $assetVersion := .Site.Params.assetVersion | default "" -}}
+{{- $assetQuery := "" -}}
+{{- if $assetVersion -}}
+  {{- $assetQuery = printf "?v=%s" $assetVersion -}}
+{{- end -}}
+<script src="{{ "js/theme.js" | relURL }}{{ $assetQuery }}" defer></script>
+<script src="{{ "js/background.js" | relURL }}{{ $assetQuery }}" defer></script>
+<script src="{{ "js/code-copy.js" | relURL }}{{ $assetQuery }}" defer></script>
+<script src="{{ "js/image-modal.js" | relURL }}{{ $assetQuery }}" defer></script>
 
-{{- if .Site.Params.mermaid }}
+{{- $content := .Content | default "" -}}
+{{- $needsMermaid := false -}}
+{{- if .Params.mermaid -}}
+  {{- $needsMermaid = true -}}
+{{- else if gt (len (findRE "language-mermaid|class=\\\"mermaid\\\"" $content)) 0 -}}
+  {{- $needsMermaid = true -}}
+{{- end -}}
+{{- if $needsMermaid }}
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
-  <script src="{{ "js/mermaid.js" | relURL }}?v={{ $assetVersion }}" defer></script>
+  <script src="{{ "js/mermaid.js" | relURL }}{{ $assetQuery }}" defer></script>
 {{- end }}
 
 {{- with .Site.Params.customJS }}

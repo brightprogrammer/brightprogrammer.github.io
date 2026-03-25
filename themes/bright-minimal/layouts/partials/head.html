@@ -22,21 +22,25 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}" />
 <link rel="manifest" href="{{ "images/site.webmanifest" | relURL }}" />
 
-{{- $assetVersion := .Site.Params.assetVersion | default (now.Unix) -}}
-<link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
+{{- $assetVersion := .Site.Params.assetVersion | default "" -}}
+{{- $assetQuery := "" -}}
+{{- if $assetVersion -}}
+  {{- $assetQuery = printf "?v=%s" $assetVersion -}}
+{{- end -}}
+<link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}{{ $assetQuery }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}?v={{ $assetVersion }}" />
+  <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}{{ $assetQuery }}" />
 </noscript>
 <link rel="preload" as="font" type="font/woff2" href="{{ "fonts/xn7gYHE41ni1AdIRggexSg.woff2" | relURL }}" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="{{ "fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2" | relURL }}" crossorigin />
 
-<link rel="preload" as="style" href="{{ "css/theme.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
+<link rel="preload" as="style" href="{{ "css/theme.css" | relURL }}{{ $assetQuery }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}?v={{ $assetVersion }}" />
+  <link rel="stylesheet" href="{{ "css/theme.css" | relURL }}{{ $assetQuery }}" />
 </noscript>
-<link rel="preload" as="style" href="{{ "css/chroma.css" | relURL }}?v={{ $assetVersion }}" onload="this.onload=null;this.rel='stylesheet'" />
+<link rel="preload" as="style" href="{{ "css/chroma.css" | relURL }}{{ $assetQuery }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
-  <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}?v={{ $assetVersion }}" />
+  <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}{{ $assetQuery }}" />
 </noscript>
 
 {{- with .Site.Params.customCSS }}
@@ -49,7 +53,18 @@
   <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}" />
 {{- end }}
 
-{{- if .Site.Params.math }}
+{{- $content := .Content | default "" -}}
+{{- $needsMath := false -}}
+{{- if .Params.math -}}
+  {{- $needsMath = true -}}
+{{- else -}}
+  {{- if gt (len (findRE "\\$\\$|\\\\\\(|\\\\\\[" $content)) 0 -}}
+    {{- $needsMath = true -}}
+  {{- else if gt (len (findRE "\\$[^\\$]+\\$" $content)) 0 -}}
+    {{- $needsMath = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if $needsMath }}
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css" integrity="sha384-/L6i+LN3dyoaK2jYG5ZLh5u13cjdsPDcFOSNJeFBFa/KgVXR5kOfTdiN3ft1uMAq" crossorigin="anonymous" />
