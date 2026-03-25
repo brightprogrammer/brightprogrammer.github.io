@@ -738,6 +738,23 @@ a:hover {
   color: var(--text);
 }
 
+.content-body .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content-body .katex-display > .katex,
+.content-body .katex-display .katex-html {
+  white-space: normal;
+}
+
+.content-body .katex-display .katex-html {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .content-body code {
   font-family: "SFMono-Regular", "JetBrains Mono", "Fira Code", monospace;
   background: var(--inline-code-bg);
