@@ -27,9 +27,6 @@
               pkgs.git
             ];
             shellHook = ''
-              if [ ! -d "static/tabler-icons" ] || [ -z "$(ls -A static/tabler-icons 2>/dev/null)" ]; then
-                echo "Icon submodule is missing. Run: git submodule update --init --recursive"
-              fi
               if [ ! -d "node_modules" ]; then
                 echo "Installing npm dependencies..."
                 if [ -f "package-lock.json" ]; then

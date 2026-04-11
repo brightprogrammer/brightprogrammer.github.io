@@ -55,12 +55,26 @@
         ? [0.35, 0.55, 0.2, 0.7]
         : [0.48, 0.68, 0.32, 0.78];
 
-    colors = [
+    const nextColors = [
       mix(bg, accent, strengths[0]),
       mix(bg, accent, strengths[1]),
       mix(bg, text, strengths[2]),
       mix(bg, accent, strengths[3]),
     ];
+    if (colors.length === nextColors.length) {
+      nextColors.forEach((next, index) => {
+        const target = colors[index];
+        if (Array.isArray(target) && target.length >= 3) {
+          target[0] = next[0];
+          target[1] = next[1];
+          target[2] = next[2];
+        } else {
+          colors[index] = next;
+        }
+      });
+    } else {
+      colors = nextColors;
+    }
   };
 
   const getViewportSize = () => {
@@ -305,9 +319,15 @@
 
   window.addEventListener("pagehide", stop);
   window.addEventListener("pageshow", () => {
+    refreshColors();
     resize({ preserve: true });
     render();
     resume();
+  });
+
+  window.addEventListener("load", () => {
+    refreshColors();
+    render();
   });
 
   if (document.readyState === "loading") {
