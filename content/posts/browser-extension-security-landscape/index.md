@@ -43,16 +43,16 @@ For context, our first presentation was on onion-routing security. I started wit
   {{< slide src="/images/browser-extension-news/guardio-fakegpt-2.png" alt="Guardio Labs report on FakeGPT #2 open-source turned malicious" link="https://guard.io/labs/fakegpt-2-open-source-turned-malicious-in-another-variant-of-the-facebook-account-stealer" >}}
 {{< /slideshow >}}
 
-## Activity Snapshot (2000-2026)
+## Trends in Academia in Recent Times
 
 {{< paper-stats
   data="browser_extension_security"
   title="Top venues only (USENIX Security, NDSS, IEEE S&amp;P, ACM CCS)"
-  note="Source: OpenAlex. Query: &quot;browser extension&quot; + &quot;security&quot; (search), years 2000-2026, venues filtered to USENIX Security, NDSS, IEEE S&amp;P, and ACM CCS. Citation counts shift over time; the paper counts are the more stable signal. Lower recent citation totals are expected because newer papers have had less time to be cited."
+  note="Source: Crossref. Query: titles containing both &quot;browser&quot; and &quot;extension(s)&quot; (any order), years 2000-2026, venues filtered by container title to USENIX Security, NDSS, IEEE S&amp;P, and ACM CCS. Citation counts shift over time; the paper counts are the more stable signal. Lower recent citation totals are expected because newer papers have had less time to be cited."
 >}}
 
 {{< paper-stats
   data="browser_extension_security_all"
   title="All venues (same query, no venue filter)"
-  note="This gives a wider view of the field beyond the top security venues, which makes the gap between elite venues and the broader literature more visible."
+  note="Same query as above, without the venue filter, to show the broader literature."
 >}}
