@@ -48,11 +48,11 @@ For context, our first presentation was on onion-routing security. I started wit
 {{< paper-stats
   data="browser_extension_security"
   title="Top venues only (USENIX Security, NDSS, IEEE S&amp;P, ACM CCS)"
-  note="Source: Crossref. Query: titles containing both &quot;browser&quot; and &quot;extension(s)&quot; (any order), years 2000-2026, venues filtered by container title to USENIX Security, NDSS, IEEE S&amp;P, and ACM CCS. Citation counts shift over time; the paper counts are the more stable signal. Lower recent citation totals are expected because newer papers have had less time to be cited."
+  note="Sources: DBLP API + arXiv. Query: titles containing both &quot;browser(s)&quot; and &quot;extension(s)&quot; (any order), years 2000-2026, venues filtered to USENIX Security, NDSS, IEEE S&amp;P, and ACM CCS. Citation counts come from OpenCitations (DOI-only), so arXiv and DOI-less entries show 0; paper counts are the more stable signal. Lower recent citation totals are expected because newer papers have had less time to be cited."
 >}}
 
 {{< paper-stats
   data="browser_extension_security_all"
   title="All venues (same query, no venue filter)"
-  note="Same query as above, without the venue filter, to show the broader literature."
+  note="Same query as above, without the venue filter, to show the broader literature (including arXiv preprints)."
 >}}

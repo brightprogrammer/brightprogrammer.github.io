@@ -1,19 +1,26 @@
 {
   "source": {
-    "name": "Crossref REST API",
-    "url": "https://api.crossref.org/",
-    "query": "query.title=['browser extension', 'browser extensions']; filter=from-pub-date:2000-01-01,until-pub-date:2026-12-31",
-    "raw_unique_results": 112898,
-    "matched_unique_results": 316,
-    "match_rule": "title contains both 'browser' and 'extension(s)' (any order, case-insensitive)"
+    "name": "DBLP + arXiv (citations from OpenCitations COCI)",
+    "dblp_query": [
+      "browser extension",
+      "browser extensions"
+    ],
+    "arxiv_query": "ti:\"browser extension\" OR ti:\"browser extensions\"",
+    "match_rule": "title contains both 'browser(s)' and 'extension(s)' (any order, case-insensitive)",
+    "meta": {
+      "dblp_total_results": 338,
+      "dblp_matched_results": 202,
+      "arxiv_total_results": null,
+      "arxiv_matched_results": 1
+    }
   },
   "range": {
     "start_year": 2000,
     "end_year": 2026
   },
   "totals": {
-    "works": 17,
-    "citations": 297
+    "works": 30,
+    "citations": 303
   },
   "years": [
     {
@@ -48,9 +55,16 @@
     },
     {
       "year": 2005,
-      "works": 0,
+      "works": 1,
       "citations": 0,
-      "papers": []
+      "papers": [
+        {
+          "title": "Stronger Password Authentication Using Browser Extensions",
+          "url": "https://www.usenix.org/conference/14th-usenix-security-symposium/stronger-password-authentication-using-browser-extensions",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2006,
@@ -78,20 +92,33 @@
     },
     {
       "year": 2010,
-      "works": 0,
+      "works": 2,
       "citations": 0,
-      "papers": []
+      "papers": [
+        {
+          "title": "Protecting Browsers from Extension Vulnerabilities",
+          "url": "https://www.ndss-symposium.org/ndss2010/protecting-browsers-extension-vulnerabilities",
+          "venue": "NDSS",
+          "citations": 0
+        },
+        {
+          "title": "VEX: Vetting Browser Extensions for Security Vulnerabilities",
+          "url": "http://www.usenix.org/events/sec10/tech/full_papers/Bandhakavi.pdf",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2011,
       "works": 1,
-      "citations": 68,
+      "citations": 67,
       "papers": [
         {
           "title": "Verified Security for Browser Extensions",
-          "url": "https://doi.org/10.1109/sp.2011.36",
-          "venue": "2011 IEEE Symposium on Security and Privacy",
-          "citations": 68
+          "url": "https://doi.org/10.1109/SP.2011.36",
+          "venue": "IEEE Symposium on Security and Privacy",
+          "citations": 67
         }
       ]
     },
@@ -109,9 +136,16 @@
     },
     {
       "year": 2014,
-      "works": 0,
+      "works": 1,
       "citations": 0,
-      "papers": []
+      "papers": [
+        {
+          "title": "Hulk: Eliciting Malicious Behavior in Browser Extensions",
+          "url": "https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/kapravelos",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2015,
@@ -127,95 +161,150 @@
     },
     {
       "year": 2017,
-      "works": 1,
-      "citations": 72,
+      "works": 4,
+      "citations": 71,
       "papers": [
         {
           "title": "XHOUND: Quantifying the Fingerprintability of Browser Extensions",
-          "url": "https://doi.org/10.1109/sp.2017.18",
-          "venue": "2017 IEEE Symposium on Security and Privacy (SP)",
-          "citations": 72
+          "url": "https://doi.org/10.1109/SP.2017.18",
+          "venue": "IEEE Symposium on Security and Privacy",
+          "citations": 66
+        },
+        {
+          "title": "Detecting Spying and Fraud Browser Extensions: Short Paper",
+          "url": "https://doi.org/10.1145/3137616.3137619",
+          "venue": "MPS@CCS",
+          "citations": 5
+        },
+        {
+          "title": "Extension Breakdown: Security Analysis of Browsers Extension Resources Control Policies",
+          "url": "https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/sanchez-rola",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        },
+        {
+          "title": "Malicious Browser Extensions at Scale: Bridging the Observability Gap between Web Site and Browser",
+          "url": "https://www.usenix.org/conference/cset17/workshop-program/presentation/dekoven",
+          "venue": "CSET @ USENIX Security Symposium",
+          "citations": 0
         }
       ]
     },
     {
       "year": 2018,
-      "works": 0,
-      "citations": 0,
-      "papers": []
+      "works": 3,
+      "citations": 65,
+      "papers": [
+        {
+          "title": "Mystique: Uncovering Information Leakage from Browser Extensions",
+          "url": "https://doi.org/10.1145/3243734.3243823",
+          "venue": "CCS",
+          "citations": 42
+        },
+        {
+          "title": "To Extend or not to Extend: On the Uniqueness of Browser Extensions and Web Logins",
+          "url": "https://doi.org/10.1145/3267323.3268959",
+          "venue": "WPES@CCS",
+          "citations": 23
+        },
+        {
+          "title": "Characterizing the Use of Browser-Based Blocking Extensions To Prevent Online Tracking",
+          "url": "https://www.usenix.org/conference/soups2018/presentation/mathur",
+          "venue": "SOUPS @ USENIX Security Symposium",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2019,
       "works": 2,
-      "citations": 50,
+      "citations": 30,
       "papers": [
         {
           "title": "EmPoWeb: Empowering Web Applications with Browser Extensions",
-          "url": "https://doi.org/10.1109/sp.2019.00058",
-          "venue": "2019 IEEE Symposium on Security and Privacy (SP)",
-          "citations": 33
+          "url": "https://doi.org/10.1109/SP.2019.00058",
+          "venue": "IEEE Symposium on Security and Privacy",
+          "citations": 30
         },
         {
           "title": "Latex Gloves: Protecting Browser Extensions from Probing and Revelation Attacks",
-          "url": "https://doi.org/10.14722/ndss.2019.23309",
-          "venue": "Proceedings 2019 Network and Distributed System Security Symposium",
-          "citations": 17
+          "url": "https://www.ndss-symposium.org/ndss-paper/latex-gloves-protecting-browser-extensions-from-probing-and-revelation-attacks/",
+          "venue": "NDSS",
+          "citations": 0
         }
       ]
     },
     {
       "year": 2020,
       "works": 2,
-      "citations": 51,
+      "citations": 21,
       "papers": [
         {
-          "title": "Carnus: Exploring the Privacy Threats of Browser Extension Fingerprinting",
-          "url": "https://doi.org/10.14722/ndss.2020.24383",
-          "venue": "Proceedings 2020 Network and Distributed System Security Symposium",
-          "citations": 27
+          "title": "You&apos;ve Changed: Detecting Malicious Browser Extensions through their Update Deltas",
+          "url": "https://doi.org/10.1145/3372297.3423343",
+          "venue": "CCS",
+          "citations": 21
         },
         {
-          "title": "You've Changed: Detecting Malicious Browser Extensions through their Update Deltas",
-          "url": "https://doi.org/10.1145/3372297.3423343",
-          "venue": "Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security",
-          "citations": 24
+          "title": "Carnus: Exploring the Privacy Threats of Browser Extension Fingerprinting",
+          "url": "https://www.ndss-symposium.org/ndss-paper/carnus-exploring-the-privacy-threats-of-browser-extension-fingerprinting/",
+          "venue": "NDSS",
+          "citations": 0
         }
       ]
     },
     {
       "year": 2021,
-      "works": 2,
-      "citations": 34,
+      "works": 3,
+      "citations": 29,
       "papers": [
         {
           "title": "DoubleX: Statically Detecting Vulnerable Data Flows in Browser Extensions at Scale",
           "url": "https://doi.org/10.1145/3460120.3484745",
-          "venue": "Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security",
-          "citations": 34
+          "venue": "CCS",
+          "citations": 29
         },
         {
           "title": "Fingerprinting in Style: Detecting Browser Extensions via Injected Style Sheets",
           "url": "https://www.usenix.org/conference/usenixsecurity21/presentation/laperdrix",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        },
+        {
+          "title": "Understanding Users&apos; Knowledge about the Privacy and Security of Browser Extensions",
+          "url": "https://www.usenix.org/conference/soups2021/presentation/kariryaa",
+          "venue": "SOUPS @ USENIX Security Symposium",
           "citations": 0
         }
       ]
     },
     {
       "year": 2022,
-      "works": 2,
-      "citations": 0,
+      "works": 4,
+      "citations": 16,
       "papers": [
+        {
+          "title": "Escaping the Confines of Time: Continuous Browser Extension Fingerprinting Through Ephemeral Modifications",
+          "url": "https://doi.org/10.1145/3548606.3560576",
+          "venue": "CCS",
+          "citations": 9
+        },
+        {
+          "title": "Helping or Hindering?: How Browser Extensions Undermine Security",
+          "url": "https://doi.org/10.1145/3548606.3560685",
+          "venue": "CCS",
+          "citations": 7
+        },
         {
           "title": "The Dangers of Human Touch: Fingerprinting Browser Extensions through User Actions",
           "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/solomos",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
           "citations": 0
         },
         {
           "title": "Unleash the Simulacrum: Shifting Browser Realities for Robust Extension-Fingerprinting Prevention",
           "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/karami",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
           "citations": 0
         }
       ]
@@ -223,24 +312,24 @@
     {
       "year": 2023,
       "works": 3,
-      "citations": 18,
+      "citations": 4,
       "papers": [
-        {
-          "title": "Detection of Inconsistencies in Privacy Practices of Browser Extensions",
-          "url": "https://doi.org/10.1109/sp46215.2023.10179338",
-          "venue": "2023 IEEE Symposium on Security and Privacy (SP)",
-          "citations": 12
-        },
         {
           "title": "CoCo: Efficient Browser Extension Vulnerability Detection via Coverage-guided, Concurrent Abstract Interpretation",
           "url": "https://doi.org/10.1145/3576915.3616584",
-          "venue": "Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security",
-          "citations": 6
+          "venue": "CCS",
+          "citations": 4
+        },
+        {
+          "title": "Extending Browser Extension Fingerprinting to Mobile Devices",
+          "url": "https://doi.org/10.1145/3603216.3624955",
+          "venue": "WPES@CCS",
+          "citations": 0
         },
         {
           "title": "Extending a Hand to Attackers: Browser Privilege Escalation Attacks via Extensions",
           "url": "https://www.usenix.org/conference/usenixsecurity23/presentation/kim-young-min",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
           "citations": 0
         }
       ]
@@ -248,18 +337,18 @@
     {
       "year": 2024,
       "works": 2,
-      "citations": 4,
+      "citations": 0,
       "papers": [
-        {
-          "title": "Peeking through the window: Fingerprinting Browser Extensions through Page-Visible Execution Traces and Interactions",
-          "url": "https://doi.org/10.1145/3658644.3670339",
-          "venue": "Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security",
-          "citations": 4
-        },
         {
           "title": "Arcanum: Detecting and Evaluating the Privacy Risks of Browser Extensions on Web Pages and Web Content",
           "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xie-qinge",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
+          "citations": 0
+        },
+        {
+          "title": "Peeking through the window: Fingerprinting Browser Extensions through Page-Visible Execution Traces and Interactions",
+          "url": "https://doi.org/10.1145/3658644.3670339",
+          "venue": "CCS",
           "citations": 0
         }
       ]
@@ -270,15 +359,15 @@
       "citations": 0,
       "papers": [
         {
-          "title": "\"I have no idea how to make it safer\": Studying Security and Privacy Mindsets of Browser Extension Developers",
+          "title": "&quot;I have no idea how to make it safer&quot;: Studying Security and Privacy Mindsets of Browser Extension Developers",
           "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/agarwal-shubham",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
           "citations": 0
         },
         {
           "title": "Phishing Attacks against Password Manager Browser Extensions",
           "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/anliker",
-          "venue": "USENIX Security",
+          "venue": "USENIX Security Symposium",
           "citations": 0
         }
       ]
@@ -289,28 +378,5 @@
       "citations": 0,
       "papers": []
     }
-  ],
-  "supplemental_sources": {
-    "usenix_security": {
-      "years_with_pages": [
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "matched_papers": 7,
-      "url_template": "https://www.usenix.org/conference/usenixsecurity{suffix}/technical-sessions",
-      "added_items": 7
-    }
-  }
+  ]
 }
