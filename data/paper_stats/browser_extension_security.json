@@ -1,0 +1,152 @@
+{
+  "source": {
+    "name": "OpenAlex Works API",
+    "url": "https://openalex.org/",
+    "query": "search=\"browser extension\" security; filter=publication_year:>1999,publication_year:<2027,locations.source.id:S4306421123|S4306420590|S4306418833|S4210233669|S4306417956|S4393917527; select=publication_year,cited_by_count"
+  },
+  "range": {
+    "start_year": 2000,
+    "end_year": 2026
+  },
+  "totals": {
+    "works": 13,
+    "citations": 1137
+  },
+  "years": [
+    {
+      "year": 2000,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2001,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2002,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2003,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2004,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2005,
+      "works": 1,
+      "citations": 361
+    },
+    {
+      "year": 2006,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2007,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2008,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2009,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2010,
+      "works": 3,
+      "citations": 429
+    },
+    {
+      "year": 2011,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2012,
+      "works": 2,
+      "citations": 154
+    },
+    {
+      "year": 2013,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2014,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2015,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2016,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2017,
+      "works": 2,
+      "citations": 104
+    },
+    {
+      "year": 2018,
+      "works": 3,
+      "citations": 59
+    },
+    {
+      "year": 2019,
+      "works": 2,
+      "citations": 30
+    },
+    {
+      "year": 2020,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2021,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2022,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2023,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2024,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2025,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2026,
+      "works": 0,
+      "citations": 0
+    }
+  ]
+}

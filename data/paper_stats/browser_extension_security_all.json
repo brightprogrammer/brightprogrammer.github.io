@@ -1,0 +1,152 @@
+{
+  "source": {
+    "name": "OpenAlex Works API",
+    "url": "https://openalex.org/",
+    "query": "search=\"browser extension\" security; filter=publication_year:>1999,publication_year:<2027; select=publication_year,cited_by_count"
+  },
+  "range": {
+    "start_year": 2000,
+    "end_year": 2026
+  },
+  "totals": {
+    "works": 3709,
+    "citations": 39380
+  },
+  "years": [
+    {
+      "year": 2000,
+      "works": 1,
+      "citations": 58
+    },
+    {
+      "year": 2001,
+      "works": 5,
+      "citations": 30
+    },
+    {
+      "year": 2002,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2003,
+      "works": 0,
+      "citations": 0
+    },
+    {
+      "year": 2004,
+      "works": 1,
+      "citations": 16
+    },
+    {
+      "year": 2005,
+      "works": 7,
+      "citations": 837
+    },
+    {
+      "year": 2006,
+      "works": 6,
+      "citations": 37
+    },
+    {
+      "year": 2007,
+      "works": 11,
+      "citations": 273
+    },
+    {
+      "year": 2008,
+      "works": 16,
+      "citations": 345
+    },
+    {
+      "year": 2009,
+      "works": 33,
+      "citations": 876
+    },
+    {
+      "year": 2010,
+      "works": 22,
+      "citations": 491
+    },
+    {
+      "year": 2011,
+      "works": 25,
+      "citations": 281
+    },
+    {
+      "year": 2012,
+      "works": 54,
+      "citations": 768
+    },
+    {
+      "year": 2013,
+      "works": 83,
+      "citations": 1359
+    },
+    {
+      "year": 2014,
+      "works": 85,
+      "citations": 1641
+    },
+    {
+      "year": 2015,
+      "works": 133,
+      "citations": 1932
+    },
+    {
+      "year": 2016,
+      "works": 131,
+      "citations": 2298
+    },
+    {
+      "year": 2017,
+      "works": 148,
+      "citations": 2263
+    },
+    {
+      "year": 2018,
+      "works": 181,
+      "citations": 3319
+    },
+    {
+      "year": 2019,
+      "works": 208,
+      "citations": 4183
+    },
+    {
+      "year": 2020,
+      "works": 220,
+      "citations": 3442
+    },
+    {
+      "year": 2021,
+      "works": 239,
+      "citations": 4876
+    },
+    {
+      "year": 2022,
+      "works": 272,
+      "citations": 3862
+    },
+    {
+      "year": 2023,
+      "works": 541,
+      "citations": 4537
+    },
+    {
+      "year": 2024,
+      "works": 501,
+      "citations": 1193
+    },
+    {
+      "year": 2025,
+      "works": 622,
+      "citations": 462
+    },
+    {
+      "year": 2026,
+      "works": 164,
+      "citations": 1
+    }
+  ]
+}
