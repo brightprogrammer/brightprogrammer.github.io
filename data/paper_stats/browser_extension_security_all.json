@@ -1,152 +1,2166 @@
 {
   "source": {
-    "name": "OpenAlex Works API",
-    "url": "https://openalex.org/",
-    "query": "search=\"browser extension\" security; filter=publication_year:>1999,publication_year:<2027; select=publication_year,cited_by_count"
+    "name": "Crossref REST API",
+    "url": "https://api.crossref.org/",
+    "query": "query.title=['browser extension', 'browser extensions']; filter=from-pub-date:2000-01-01,until-pub-date:2026-12-31",
+    "raw_unique_results": 112898,
+    "matched_unique_results": 316,
+    "match_rule": "title contains both 'browser' and 'extension(s)' (any order, case-insensitive)"
   },
   "range": {
     "start_year": 2000,
     "end_year": 2026
   },
   "totals": {
-    "works": 3709,
-    "citations": 39380
+    "works": 323,
+    "citations": 2538
   },
   "years": [
     {
       "year": 2000,
-      "works": 1,
-      "citations": 58
+      "works": 0,
+      "citations": 0,
+      "papers": []
     },
     {
       "year": 2001,
-      "works": 5,
-      "citations": 30
+      "works": 1,
+      "citations": 18,
+      "papers": [
+        {
+          "title": "The privacy practices of Web browser extensions",
+          "url": "https://doi.org/10.1145/359205.359226",
+          "venue": "Communications of the ACM",
+          "citations": 18
+        }
+      ]
     },
     {
       "year": 2002,
       "works": 0,
-      "citations": 0
+      "citations": 0,
+      "papers": []
     },
     {
       "year": 2003,
-      "works": 0,
-      "citations": 0
+      "works": 1,
+      "citations": 0,
+      "papers": [
+        {
+          "title": "Client Browser Extensions",
+          "url": "https://doi.org/10.1007/978-1-4302-5362-4_5",
+          "venue": "The Web Professional\u2019s Handbook",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2004,
-      "works": 1,
-      "citations": 16
+      "works": 0,
+      "citations": 0,
+      "papers": []
     },
     {
       "year": 2005,
-      "works": 7,
-      "citations": 837
+      "works": 1,
+      "citations": 2,
+      "papers": [
+        {
+          "title": "Internet Applications for Computational Biology, the CMISS Web Browser Extension and and Use in Education",
+          "url": "https://doi.org/10.1109/iembs.2005.1616548",
+          "venue": "2005 IEEE Engineering in Medicine and Biology 27th Annual Conference",
+          "citations": 2
+        }
+      ]
     },
     {
       "year": 2006,
-      "works": 6,
-      "citations": 37
+      "works": 0,
+      "citations": 0,
+      "papers": []
     },
     {
       "year": 2007,
-      "works": 11,
-      "citations": 273
+      "works": 2,
+      "citations": 4,
+      "papers": [
+        {
+          "title": "A BROWSER EXTENSION FOR PROVIDING VISUALLY IMPAIRED USERS ACCESS TO THE CONTENT OF BAR CHARTS ON THE WEB",
+          "url": "https://doi.org/10.5220/0001274600590066",
+          "venue": "Proceedings of the Third International Conference on Web Information Systems and Technologies",
+          "citations": 3
+        },
+        {
+          "title": "Innovations Affecting Us -- Browser Add-Ons, Extensions, and Plug-Ins: How they Can Help Leverage the Use of Library Resources",
+          "url": "https://doi.org/10.7771/2380-176x.5309",
+          "venue": "Against the Grain",
+          "citations": 1
+        }
+      ]
     },
     {
       "year": 2008,
-      "works": 16,
-      "citations": 345
+      "works": 1,
+      "citations": 53,
+      "papers": [
+        {
+          "title": "Enhancing web browser security against malware extensions",
+          "url": "https://doi.org/10.1007/s11416-007-0078-5",
+          "venue": "Journal in Computer Virology",
+          "citations": 53
+        }
+      ]
     },
     {
       "year": 2009,
-      "works": 33,
-      "citations": 876
+      "works": 4,
+      "citations": 109,
+      "papers": [
+        {
+          "title": "Analyzing Information Flow in JavaScript-Based Browser Extensions",
+          "url": "https://doi.org/10.1109/acsac.2009.43",
+          "venue": "2009 Annual Computer Security Applications Conference",
+          "citations": 86
+        },
+        {
+          "title": "PubMed-EX: a web browser extension to enhance PubMed search with text mining features",
+          "url": "https://doi.org/10.1093/bioinformatics/btp475",
+          "venue": "Bioinformatics",
+          "citations": 14
+        },
+        {
+          "title": "Graphical Passwords as Browser Extension: Implementation and Usability Study",
+          "url": "https://doi.org/10.1007/978-3-642-02056-8_2",
+          "venue": "IFIP Advances in Information and Communication Technology",
+          "citations": 7
+        },
+        {
+          "title": "Graphical passwords as browser extension",
+          "url": "https://doi.org/10.1145/1572532.1572579",
+          "venue": "Proceedings of the 5th Symposium on Usable Privacy and Security",
+          "citations": 2
+        }
+      ]
     },
     {
       "year": 2010,
-      "works": 22,
-      "citations": 491
+      "works": 4,
+      "citations": 3,
+      "papers": [
+        {
+          "title": "dinsEditor: A Browser Extension for QTI-Compliant Assessment Item Authoring",
+          "url": "https://doi.org/10.1109/icalt.2010.71",
+          "venue": "2010 10th IEEE International Conference on Advanced Learning Technologies",
+          "citations": 2
+        },
+        {
+          "title": "A smart card based single Sign-On and password management solution as a browser extension",
+          "url": "https://doi.org/10.1109/icemt.2010.5657596",
+          "venue": "2010 International Conference on Education and Management Technology",
+          "citations": 1
+        },
+        {
+          "title": "A framework to strengthen password authentication using mobile devices and browser extensions",
+          "url": "https://doi.org/10.1109/isspit.2010.5711728",
+          "venue": "The 10th IEEE International Symposium on Signal Processing and Information Technology",
+          "citations": 0
+        },
+        {
+          "title": "Building In-Process Extensions with Browser Helper Objects",
+          "url": "https://doi.org/10.1007/978-1-4302-2854-7_13",
+          "venue": "Pro Internet Explorer 8 &amp; 9 Development",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2011,
-      "works": 25,
-      "citations": 281
+      "works": 9,
+      "citations": 406,
+      "papers": [
+        {
+          "title": "The UCSC Genome Browser database: extensions and updates 2011",
+          "url": "https://doi.org/10.1093/nar/gkr1055",
+          "venue": "Nucleic Acids Research",
+          "citations": 265
+        },
+        {
+          "title": "Verified Security for Browser Extensions",
+          "url": "https://doi.org/10.1109/sp.2011.36",
+          "venue": "2011 IEEE Symposium on Security and Privacy",
+          "citations": 68
+        },
+        {
+          "title": "Vetting browser extensions for security vulnerabilities with VEX",
+          "url": "https://doi.org/10.1145/1995376.1995398",
+          "venue": "Communications of the ACM",
+          "citations": 58
+        },
+        {
+          "title": "Figure summarizer browser extensions for PubMed Central",
+          "url": "https://doi.org/10.1093/bioinformatics/btr194",
+          "venue": "Bioinformatics",
+          "citations": 7
+        },
+        {
+          "title": "Spying on the browser: dissecting the design of malicious extensions",
+          "url": "https://doi.org/10.1016/s1353-4858(11)70050-2",
+          "venue": "Network Security",
+          "citations": 5
+        },
+        {
+          "title": "Botnet with Browser Extensions",
+          "url": "https://doi.org/10.1109/passat/socialcom.2011.25",
+          "venue": "2011 IEEE Third Int'l Conference on Privacy, Security, Risk and Trust and 2011 IEEE Third Int'l Conference on Social Computing",
+          "citations": 3
+        },
+        {
+          "title": "Generic Access to Multimedia Metadata as a Browser Extension",
+          "url": "https://doi.org/10.1109/mmweb.2011.11",
+          "venue": "2011 Workshop on Multimedia on the Web",
+          "citations": 0
+        },
+        {
+          "title": "Making browser extensions secure",
+          "url": "https://doi.org/10.1145/1995376.1995397",
+          "venue": "Communications of the ACM",
+          "citations": 0
+        },
+        {
+          "title": "Privacy-enhanced identity via browser extensions and linking services",
+          "url": "https://doi.org/10.1109/icnss.2011.6059964",
+          "venue": "2011 5th International Conference on Network and System Security",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2012,
-      "works": 54,
-      "citations": 768
+      "works": 8,
+      "citations": 675,
+      "papers": [
+        {
+          "title": "The UCSC Genome Browser database: extensions and updates 2013",
+          "url": "https://doi.org/10.1093/nar/gks1048",
+          "venue": "Nucleic Acids Research",
+          "citations": 633
+        },
+        {
+          "title": "Browser extension-based man-in-the-browser attacks against Ajax applications with countermeasures",
+          "url": "https://doi.org/10.1145/2383276.2383314",
+          "venue": "Proceedings of the 13th International Conference on Computer Systems and Technologies",
+          "citations": 18
+        },
+        {
+          "title": "CDAPubMed: a browser extension to retrieve EHR-based biomedical literature",
+          "url": "https://doi.org/10.1186/1472-6947-12-29",
+          "venue": "BMC Medical Informatics and Decision Making",
+          "citations": 10
+        },
+        {
+          "title": "Towards Fine-Grained Access Control on Browser Extensions",
+          "url": "https://doi.org/10.1007/978-3-642-29101-2_11",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 9
+        },
+        {
+          "title": "Towards Improving Browser Extension Permission Management and User Awareness",
+          "url": "https://doi.org/10.4108/icst.collaboratecom.2012.250642",
+          "venue": "Proceedings of the 8th IEEE International Conference on Collaborative Computing: Networking, Applications and Worksharing",
+          "citations": 3
+        },
+        {
+          "title": "Pointer Analysis Based Vulnerability Detection for Browser Extension",
+          "url": "https://doi.org/10.4156/jdcta.vol6.issue1.59",
+          "venue": "International Journal of Digital Content Technology and its Applications",
+          "citations": 1
+        },
+        {
+          "title": "REM: A runtime browser extension manager with fine-grained access control",
+          "url": "https://doi.org/10.1109/pst.2012.6297947",
+          "venue": "2012 Tenth Annual International Conference on Privacy, Security and Trust",
+          "citations": 1
+        },
+        {
+          "title": "A Browser Extension Vulnerability Detecting Approach Based on Behavior Monitoring and Analysis",
+          "url": "https://doi.org/10.1007/978-3-642-34447-3_24",
+          "venue": "Communications in Computer and Information Science",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2013,
-      "works": 83,
-      "citations": 1359
+      "works": 11,
+      "citations": 51,
+      "papers": [
+        {
+          "title": "Verifying Web Browser Extensions\u2019 Compliance with Private-Browsing Mode",
+          "url": "https://doi.org/10.1007/978-3-642-40203-6_4",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 20
+        },
+        {
+          "title": "Protecting Web Browser Extensions from JavaScript Injection Attacks",
+          "url": "https://doi.org/10.1109/iceccs.2013.36",
+          "venue": "2013 18th International Conference on Engineering of Complex Computer Systems",
+          "citations": 9
+        },
+        {
+          "title": "A Model-Based Detection of Vulnerable and Malicious Browser Extensions",
+          "url": "https://doi.org/10.1109/sere.2013.32",
+          "venue": "2013 IEEE 7th International Conference on Software Security and Reliability",
+          "citations": 6
+        },
+        {
+          "title": "Defeat Information Leakage from Browser Extensions via Data Obfuscation",
+          "url": "https://doi.org/10.1007/978-3-319-02726-5_3",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 5
+        },
+        {
+          "title": "Fostering Content Relevant Information Security Awareness through Browser Extensions",
+          "url": "https://doi.org/10.1007/978-3-642-39377-8_7",
+          "venue": "IFIP Advances in Information and Communication Technology",
+          "citations": 4
+        },
+        {
+          "title": "Behavior Decomposition: Aspect-Level Browser Extension Clustering and Its Security Implications",
+          "url": "https://doi.org/10.1007/978-3-642-41284-4_13",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 2
+        },
+        {
+          "title": "Enhanced Link Redirection Interface for Secured Browsing using Web Browser Extensions",
+          "url": "https://doi.org/10.14569/ijacsa.2013.041009",
+          "venue": "International Journal of Advanced Computer Science and Applications",
+          "citations": 2
+        },
+        {
+          "title": "Samekana: A Browser Extension for Including Relevant Web Links in Issue Tracking System Discussion Forum",
+          "url": "https://doi.org/10.1109/apsec.2013.15",
+          "venue": "2013 20th Asia-Pacific Software Engineering Conference (APSEC)",
+          "citations": 2
+        },
+        {
+          "title": "Browser Extension to Improve Web Accessibility for Visually Impaired",
+          "url": "https://doi.org/10.14257/astl.2013.29.27",
+          "venue": "Interdisciplinary Research Theory and Technology",
+          "citations": 1
+        },
+        {
+          "title": "BUI: BROWSER USER INTERFACE AND EXTENSIONS WITH CLOUD STORAGE",
+          "url": "https://doi.org/10.18000/ijisac.50133",
+          "venue": "International Journal on Information Sciences and Computing",
+          "citations": 0
+        },
+        {
+          "title": "Design and Implementation of a Functional Extension Framework for Authn &amp;amp;amp; Authz Federation Infrastructure Using Web Browser Add-on",
+          "url": "https://doi.org/10.1109/aina.2013.115",
+          "venue": "2013 IEEE 27th International Conference on Advanced Information Networking and Applications (AINA)",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2014,
-      "works": 85,
-      "citations": 1641
+      "works": 7,
+      "citations": 32,
+      "papers": [
+        {
+          "title": "Effective detection of vulnerable and malicious browser extensions",
+          "url": "https://doi.org/10.1016/j.cose.2014.06.005",
+          "venue": "Computers &amp; Security",
+          "citations": 26
+        },
+        {
+          "title": "Making Web Pages and Applications Accessible Automatically Using Browser Extensions and Apps",
+          "url": "https://doi.org/10.1007/978-3-319-07509-9_6",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 3
+        },
+        {
+          "title": "On evaluating and securing firefox for Android browser extensions",
+          "url": "https://doi.org/10.1145/2593902.2593909",
+          "venue": "Proceedings of the 1st International Conference on Mobile Software Engineering and Systems",
+          "citations": 3
+        },
+        {
+          "title": "Improving Web Accessibility for Visually Impaired with Open Source Browser Extension",
+          "url": "https://doi.org/10.14257/ijseia.2014.8.1.39",
+          "venue": "International Journal of Software Engineering and Its Applications",
+          "citations": 0
+        },
+        {
+          "title": "Mining Specification of Insecure Browser Extension Behavior",
+          "url": "https://doi.org/10.1109/trustcom.2014.119",
+          "venue": "2014 IEEE 13th International Conference on Trust, Security and Privacy in Computing and Communications",
+          "citations": 0
+        },
+        {
+          "title": "Privilege Separation in Browser Extensions Based on Web Workers",
+          "url": "https://doi.org/10.4028/www.scientific.net/amr.989-994.4675",
+          "venue": "Advanced Materials Research",
+          "citations": 0
+        },
+        {
+          "title": "Retargetting Legacy Browser Extensions to Modern Extension Frameworks",
+          "url": "https://doi.org/10.1007/978-3-662-44202-9_19",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2015,
-      "works": 133,
-      "citations": 1932
+      "works": 14,
+      "citations": 218,
+      "papers": [
+        {
+          "title": "Understanding Malvertising Through Ad-Injecting Browser Extensions",
+          "url": "https://doi.org/10.1145/2736277.2741630",
+          "venue": "Proceedings of the 24th International Conference on World Wide Web",
+          "citations": 70
+        },
+        {
+          "title": "GEO2Enrichr: browser extension and server app to extract gene sets from GEO and analyze them for biological functions",
+          "url": "https://doi.org/10.1093/bioinformatics/btv297",
+          "venue": "Bioinformatics",
+          "citations": 55
+        },
+        {
+          "title": "WebHelpDyslexia: A Browser Extension to Adapt Web Content for People with Dyslexia",
+          "url": "https://doi.org/10.1016/j.procs.2015.09.259",
+          "venue": "Procedia Computer Science",
+          "citations": 24
+        },
+        {
+          "title": "May I? - Content Security Policy Endorsement for Browser Extensions",
+          "url": "https://doi.org/10.1007/978-3-319-20550-2_14",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 16
+        },
+        {
+          "title": "Automatic Detection of Information Leakage Vulnerabilities in Browser Extensions",
+          "url": "https://doi.org/10.1145/2736277.2741134",
+          "venue": "Proceedings of the 24th International Conference on World Wide Web",
+          "citations": 15
+        },
+        {
+          "title": "Fine-Grained Detection of Privilege Escalation Attacks on Browser Extensions",
+          "url": "https://doi.org/10.1007/978-3-662-46669-8_21",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 10
+        },
+        {
+          "title": "A Systematic Review of Security Measures for Web Browser Extension Vulnerabilities",
+          "url": "https://doi.org/10.1007/978-81-322-2674-1_10",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 9
+        },
+        {
+          "title": "Private Browsing Mode Not Really That Private: Dealing with Privacy Breach Caused by Browser Extensions",
+          "url": "https://doi.org/10.1109/dsn.2015.18",
+          "venue": "2015 45th Annual IEEE/IFIP International Conference on Dependable Systems and Networks",
+          "citations": 6
+        },
+        {
+          "title": "The prevalence of web browser extensions use in library services: an exploratory study",
+          "url": "https://doi.org/10.1108/el-04-2013-0063",
+          "venue": "The Electronic Library",
+          "citations": 5
+        },
+        {
+          "title": "A Literature Survey on Anti-Phishing Browser Extensions",
+          "url": "https://doi.org/10.5121/ijcses.2015.6402",
+          "venue": "International Journal of Computer Science &amp; Engineering Survey",
+          "citations": 4
+        },
+        {
+          "title": "Enterprise WebRTC Powered by Browser Extensions",
+          "url": "https://doi.org/10.1145/2843491.2843753",
+          "venue": "Proceedings of the Principles, Systems and Applications on IP Telecommunications",
+          "citations": 2
+        },
+        {
+          "title": "Building Browser Extension to Develop Website Personalization Based on Adaptive Hypermedia System",
+          "url": "https://doi.org/10.1007/978-3-319-19066-2_31",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 1
+        },
+        {
+          "title": "Protecting the Augmented Browser Extension from Mutation Cross-Site Scripting",
+          "url": "https://doi.org/10.1007/978-81-322-2517-1_22",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 1
+        },
+        {
+          "title": "RDFa Live Browser Extension: Faceted Presentation and Tooltip Navigation over Linked Data on the Web",
+          "url": "https://doi.org/10.1007/978-3-319-26762-3_25",
+          "venue": "Lecture Notes in Business Information Processing",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2016,
-      "works": 131,
-      "citations": 2298
+      "works": 7,
+      "citations": 81,
+      "papers": [
+        {
+          "title": "Watching Them Watching Me: Browser Extensions Impact on User Privacy Awareness and Concern",
+          "url": "https://doi.org/10.14722/usec.2016.23017",
+          "venue": "Proceedings 2016 Workshop on Usable Security",
+          "citations": 41
+        },
+        {
+          "title": "A New Cross-Site Scripting Detection Mechanism Integrated with HTML5 and CORS Properties by Using Browser Extensions",
+          "url": "https://doi.org/10.1109/ics.2016.0060",
+          "venue": "2016 International Computer Symposium (ICS)",
+          "citations": 13
+        },
+        {
+          "title": "Colluding browser extension attack on user privacy and its implication for web browsers",
+          "url": "https://doi.org/10.1016/j.cose.2016.09.003",
+          "venue": "Computers &amp; Security",
+          "citations": 10
+        },
+        {
+          "title": "ExtensionGuard: Towards runtime browser extension information leakage detection",
+          "url": "https://doi.org/10.1109/cns.2016.7860481",
+          "venue": "2016 IEEE Conference on Communications and Network Security (CNS)",
+          "citations": 7
+        },
+        {
+          "title": "Implementation of extension for browser to detect vulnerable elements on web pages and avoid Clickjacking",
+          "url": "https://doi.org/10.1109/confluence.2016.7508118",
+          "venue": "2016 6th International Conference - Cloud System and Big Data Engineering (Confluence)",
+          "citations": 7
+        },
+        {
+          "title": "CLOUBEX: A Cloud-Based Security Analysis Framework for Browser Extensions",
+          "url": "https://doi.org/10.1109/hase.2016.18",
+          "venue": "2016 IEEE 17th International Symposium on High Assurance Systems Engineering (HASE)",
+          "citations": 3
+        },
+        {
+          "title": "Autofill Browser Extension: A User-Friendly Solution to Optimize Metadata Workflow in Digital Repositories",
+          "url": "https://doi.org/10.1080/19386389.2016.1167496",
+          "venue": "Journal of Library Metadata",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2017,
-      "works": 148,
-      "citations": 2263
+      "works": 12,
+      "citations": 160,
+      "papers": [
+        {
+          "title": "XHOUND: Quantifying the Fingerprintability of Browser Extensions",
+          "url": "https://doi.org/10.1109/sp.2017.18",
+          "venue": "2017 IEEE Symposium on Security and Privacy (SP)",
+          "citations": 72
+        },
+        {
+          "title": "Discovering Browser Extensions via Web Accessible Resources",
+          "url": "https://doi.org/10.1145/3029806.3029820",
+          "venue": "Proceedings of the Seventh ACM on Conference on Data and Application Security and Privacy",
+          "citations": 44
+        },
+        {
+          "title": "Detecting DOM-Sourced Cross-Site Scripting in Browser Extensions",
+          "url": "https://doi.org/10.1109/icsme.2017.11",
+          "venue": "2017 IEEE International Conference on Software Maintenance and Evolution (ICSME)",
+          "citations": 19
+        },
+        {
+          "title": "STRIDE Based Analysis of the Chrome Browser Extensions API",
+          "url": "https://doi.org/10.1007/978-981-10-3156-4_17",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 6
+        },
+        {
+          "title": "Browshing a new way of phishing using a malicious browser extension",
+          "url": "https://doi.org/10.1109/ipact.2017.8245147",
+          "venue": "2017 Innovations in Power and Advanced Computing Technologies (i-PACT)",
+          "citations": 5
+        },
+        {
+          "title": "Detecting Spying and Fraud Browser Extensions",
+          "url": "https://doi.org/10.1145/3137616.3137619",
+          "venue": "Proceedings of the 2017 on Multimedia Privacy and Security",
+          "citations": 5
+        },
+        {
+          "title": "Usability evaluation of active anti-phishing browser extensions for persons with visual impairments",
+          "url": "https://doi.org/10.1109/icaccs.2017.8014654",
+          "venue": "2017 4th International Conference on Advanced Computing and Communication Systems (ICACCS)",
+          "citations": 4
+        },
+        {
+          "title": "CBEAT: Chrome Browser Extension Analysis Tool",
+          "url": "https://doi.org/10.1007/978-981-10-6898-0_30",
+          "venue": "Communications in Computer and Information Science",
+          "citations": 2
+        },
+        {
+          "title": "Review of Unpaywall [Chrome &amp; Firefox browser extension]",
+          "url": "https://doi.org/10.7710/2162-3309.2190",
+          "venue": "Journal of Librarianship and Scholarly Communication",
+          "citations": 2
+        },
+        {
+          "title": "Isolating malicious content scripts of browser extensions",
+          "url": "https://doi.org/10.1504/ijipsi.2017.086794",
+          "venue": "International Journal of Information Privacy, Security and Integrity",
+          "citations": 1
+        },
+        {
+          "title": "[Guest Post] Lean Library's browser extension - Seamless delivery for users",
+          "url": "https://doi.org/10.59350/6kzws-zra45",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "[Guest Post] Lean Library's browser extension - Seamless delivery for users",
+          "url": "https://doi.org/10.59350/cbzga-j3907",
+          "venue": null,
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2018,
-      "works": 181,
-      "citations": 3319
+      "works": 16,
+      "citations": 122,
+      "papers": [
+        {
+          "title": "I Spy with My Little Eye: Analysis and Detection of Spying Browser Extensions",
+          "url": "https://doi.org/10.1109/eurosp.2018.00012",
+          "venue": "2018 IEEE European Symposium on Security and Privacy (EuroS&amp;P)",
+          "citations": 21
+        },
+        {
+          "title": "CYCLOSA: Decentralizing Private Web Search through SGX-Based Browser Extensions",
+          "url": "https://doi.org/10.1109/icdcs.2018.00053",
+          "venue": "2018 IEEE 38th International Conference on Distributed Computing Systems (ICDCS)",
+          "citations": 19
+        },
+        {
+          "title": "Botnet in the Browser: Understanding Threats Caused by Malicious Browser Extensions",
+          "url": "https://doi.org/10.1109/msp.2018.3111249",
+          "venue": "IEEE Security &amp; Privacy",
+          "citations": 14
+        },
+        {
+          "title": "A Combined Static and Dynamic Analysis Approach to Detect Malicious Browser Extensions",
+          "url": "https://doi.org/10.1155/2018/7087239",
+          "venue": "Security and Communication Networks",
+          "citations": 12
+        },
+        {
+          "title": "CEDAR OnDemand: a browser extension to generate ontology-based scientific metadata",
+          "url": "https://doi.org/10.1186/s12859-018-2247-6",
+          "venue": "BMC Bioinformatics",
+          "citations": 10
+        },
+        {
+          "title": "PrivacyMeter: Designing and Developing a Privacy-Preserving Browser Extension",
+          "url": "https://doi.org/10.1007/978-3-319-94496-8_6",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 10
+        },
+        {
+          "title": "Secure authentication scheme to thwart RT MITM, CR MITM and malicious browser extension based phishing attacks",
+          "url": "https://doi.org/10.1016/j.jisa.2018.07.001",
+          "venue": "Journal of Information Security and Applications",
+          "citations": 10
+        },
+        {
+          "title": "Secureweb: Protecting sensitive information through the web browser extension with a security token",
+          "url": "https://doi.org/10.26599/tst.2018.9010015",
+          "venue": "Tsinghua Science and Technology",
+          "citations": 9
+        },
+        {
+          "title": "Malicious browser extensions: A growing threat: A case study on Google Chrome: Ongoing work in progress",
+          "url": "https://doi.org/10.1109/icoin.2018.8343108",
+          "venue": "2018 International Conference on Information Networking (ICOIN)",
+          "citations": 7
+        },
+        {
+          "title": "A Google Chromium Browser Extension for Detecting XSS Attack in HTML5 Based Websites",
+          "url": "https://doi.org/10.1109/eit.2018.8500284",
+          "venue": "2018 IEEE International Conference on Electro/Information Technology (EIT)",
+          "citations": 5
+        },
+        {
+          "title": "Analysis of Vulnerabilities of Web Browser Extensions",
+          "url": "https://doi.org/10.1109/csci46756.2018.00029",
+          "venue": "2018 International Conference on Computational Science and Computational Intelligence (CSCI)",
+          "citations": 3
+        },
+        {
+          "title": "Exploiting DOM Mutation for the Detection of Ad-injecting Browser Extension",
+          "url": "https://doi.org/10.1007/978-3-319-99007-1_61",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 1
+        },
+        {
+          "title": "Security Verification in Web Browser Extensions",
+          "url": "https://doi.org/10.2139/ssrn.3168418",
+          "venue": "SSRN Electronic Journal",
+          "citations": 1
+        },
+        {
+          "title": "Browser Extension for Top-k Instance Retrieval",
+          "url": "https://doi.org/10.14445/22312803/ijctt-v56p110",
+          "venue": "International Journal of Computer Trends and Technology",
+          "citations": 0
+        },
+        {
+          "title": "Cyberattacks via Google Chrome Browser Extensions",
+          "url": "https://doi.org/10.1142/9789813149106_0009",
+          "venue": "World Scientific Reference on Innovation",
+          "citations": 0
+        },
+        {
+          "title": "Integration of REST-Based Web Service and Browser Extension for Instagram Spam Detection",
+          "url": "https://doi.org/10.14569/ijacsa.2018.091253",
+          "venue": "International Journal of Advanced Computer Science and Applications",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2019,
-      "works": 208,
-      "citations": 4183
+      "works": 21,
+      "citations": 136,
+      "papers": [
+        {
+          "title": "EmPoWeb: Empowering Web Applications with Browser Extensions",
+          "url": "https://doi.org/10.1109/sp.2019.00058",
+          "venue": "2019 IEEE Symposium on Security and Privacy (SP)",
+          "citations": 33
+        },
+        {
+          "title": "Unnecessarily Identifiable: Quantifying the fingerprintability of browser extensions due to bloat",
+          "url": "https://doi.org/10.1145/3308558.3313458",
+          "venue": "The World Wide Web Conference",
+          "citations": 19
+        },
+        {
+          "title": "DOMtegrity: ensuring web page integrity against malicious browser extensions",
+          "url": "https://doi.org/10.1007/s10207-019-00442-1",
+          "venue": "International Journal of Information Security",
+          "citations": 18
+        },
+        {
+          "title": "Latex Gloves: Protecting Browser Extensions from Probing and Revelation Attacks",
+          "url": "https://doi.org/10.14722/ndss.2019.23309",
+          "venue": "Proceedings 2019 Network and Distributed System Security Symposium",
+          "citations": 17
+        },
+        {
+          "title": "After you, please: browser extensions order attacks and countermeasures",
+          "url": "https://doi.org/10.1007/s10207-019-00481-8",
+          "venue": "International Journal of Information Security",
+          "citations": 10
+        },
+        {
+          "title": "Browser Extension based Hybrid Anti-Phishing Framework using Feature Selection",
+          "url": "https://doi.org/10.14569/ijacsa.2019.0101178",
+          "venue": "International Journal of Advanced Computer Science and Applications",
+          "citations": 10
+        },
+        {
+          "title": "Leaning into Browser Extensions",
+          "url": "https://doi.org/10.1080/00987913.2019.1624909",
+          "venue": "Serials Review",
+          "citations": 6
+        },
+        {
+          "title": "Cookie Based Protocol to Defend Malicious Browser Extensions",
+          "url": "https://doi.org/10.1109/ccst.2019.8888425",
+          "venue": "2019 International Carnahan Conference on Security Technology (ICCST)",
+          "citations": 5
+        },
+        {
+          "title": "Manipulation of perceived politeness in a web-based email discourse through a malicious browser extension",
+          "url": "https://doi.org/10.1145/3368860.3368863",
+          "venue": "Proceedings of the New Security Paradigms Workshop",
+          "citations": 5
+        },
+        {
+          "title": "A Method to Prevent Tracking Browsing History with the Use of Browser Extension",
+          "url": "https://doi.org/10.1109/ubmk.2019.8907084",
+          "venue": "2019 4th International Conference on Computer Science and Engineering (UBMK)",
+          "citations": 4
+        },
+        {
+          "title": "Improving User Experience by Browser Extensions: A New Role of Public Service Media?",
+          "url": "https://doi.org/10.1007/978-3-030-34770-3_20",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 4
+        },
+        {
+          "title": "Desktop Browser Extension Security and Privacy Issues",
+          "url": "https://doi.org/10.1007/978-3-030-12385-7_59",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 3
+        },
+        {
+          "title": "Implementation of Web Browser Extension for Mitigating CSRF Attack",
+          "url": "https://doi.org/10.1007/978-3-030-16184-2_82",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 1
+        },
+        {
+          "title": "Implementation of Web Browser Extension for Mitigating Clickjacking Attack",
+          "url": "https://doi.org/10.1007/978-3-030-21009-0_39",
+          "venue": "Smart Innovation, Systems and Technologies",
+          "citations": 1
+        },
+        {
+          "title": "A comparison of 6 Access Broker browser extensions Lean Library, Kopernio, Anywhere Access, Libkey Nomad &amp;amp; more",
+          "url": "https://doi.org/10.59350/mb1mm-3mv42",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "A comparison of 6 Access Broker browser extensions Lean Library, Kopernio, Anywhere Access, Libkey Nomad &amp;amp; more",
+          "url": "https://doi.org/10.59350/d7a5e-tjz56",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension-based Crowdsourcing Model for Website Monitoring",
+          "url": "https://doi.org/10.1145/3368926.3369706",
+          "venue": "Proceedings of the Tenth International Symposium on Information and Communication Technology  - SoICT 2019",
+          "citations": 0
+        },
+        {
+          "title": "FAIR-biomed: a browser extension using Europe PMC API",
+          "url": "https://doi.org/10.59350/cjxha-p9h73",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "FAIR-biomed: a browser extension using Europe PMC API",
+          "url": "https://doi.org/10.59350/t1yhw-zgc14",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Kopernio, Lean Library, Anywhere Access &amp;amp; other \"Access Broker\" browser extensions - a roundup &amp;amp; update of current state of play",
+          "url": "https://doi.org/10.59350/qwn5z-px334",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Kopernio, Lean Library, Anywhere Access &amp;amp; other \"Access Broker\" browser extensions - a roundup &amp;amp; update of current state of play",
+          "url": "https://doi.org/10.59350/2npc2-tb892",
+          "venue": null,
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2020,
-      "works": 220,
-      "citations": 3442
+      "works": 13,
+      "citations": 201,
+      "papers": [
+        {
+          "title": "Twitter A11y: A Browser Extension to Make Twitter Images Accessible",
+          "url": "https://doi.org/10.1145/3313831.3376728",
+          "venue": "Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems",
+          "citations": 99
+        },
+        {
+          "title": "BRENDA: Browser Extension for Fake News Detection",
+          "url": "https://doi.org/10.1145/3397271.3401396",
+          "venue": "Proceedings of the 43rd International ACM SIGIR Conference on Research and Development in Information Retrieval",
+          "citations": 29
+        },
+        {
+          "title": "Carnus: Exploring the Privacy Threats of Browser Extension Fingerprinting",
+          "url": "https://doi.org/10.14722/ndss.2020.24383",
+          "venue": "Proceedings 2020 Network and Distributed System Security Symposium",
+          "citations": 27
+        },
+        {
+          "title": "You've Changed: Detecting Malicious Browser Extensions through their Update Deltas",
+          "url": "https://doi.org/10.1145/3372297.3423343",
+          "venue": "Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security",
+          "citations": 24
+        },
+        {
+          "title": "Understanding the Performance Costs and Benefits of Privacy-focused Browser Extensions",
+          "url": "https://doi.org/10.1145/3366423.3380292",
+          "venue": "Proceedings of The Web Conference 2020",
+          "citations": 10
+        },
+        {
+          "title": "Securing Instant Messages With Hardware-Based Cryptography and Authentication in Browser Extension",
+          "url": "https://doi.org/10.1109/access.2020.2993774",
+          "venue": "IEEE Access",
+          "citations": 5
+        },
+        {
+          "title": "Man-in-the-browser Attack: A Case Study on Malicious Browser Extensions",
+          "url": "https://doi.org/10.1007/978-981-15-4825-3_5",
+          "venue": "Communications in Computer and Information Science",
+          "citations": 4
+        },
+        {
+          "title": "Development of Browser Extension for HTML Web Page Content Extraction",
+          "url": "https://doi.org/10.1109/hora49412.2020.9152891",
+          "venue": "2020 International Congress on Human-Computer Interaction, Optimization and Robotic Applications (HORA)",
+          "citations": 3
+        },
+        {
+          "title": "ACTIVIST BROWSER EXTENSIONS AS INTERFACE D\u00c9TOURNEMENT: REMINDING,\t\t\tCOPING, AND INFRASTRUCTURAL ALIGNMENT",
+          "url": "https://doi.org/10.5210/spir.v2020i0.11189",
+          "venue": "AoIR Selected Papers of Internet Research",
+          "citations": 0
+        },
+        {
+          "title": "Phish Detect-Real Time Phish Detecting Browser Extension",
+          "url": "https://doi.org/10.1166/jctn.2020.8423",
+          "venue": "Journal of Computational and Theoretical Nanoscience",
+          "citations": 0
+        },
+        {
+          "title": "Tech-Inclusion Research: An Iconographic Browser Extension Solution",
+          "url": "https://doi.org/10.1007/978-3-030-60149-2_26",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 0
+        },
+        {
+          "title": "Unofficial API and Browser Extension Development for Augmenting Student Resources : CSCI-ISED Short Research Papers",
+          "url": "https://doi.org/10.1109/csci51800.2020.00188",
+          "venue": "2020 International Conference on Computational Science and Computational Intelligence (CSCI)",
+          "citations": 0
+        },
+        {
+          "title": "Web Browser Extension User-Script XSS Vulnerabilities",
+          "url": "https://doi.org/10.1109/dasc-picom-cbdcom-cyberscitech49142.2020.00062",
+          "venue": "2020 IEEE Intl Conf on Dependable, Autonomic and Secure Computing, Intl Conf on Pervasive Intelligence and Computing, Intl Conf on Cloud and Big Data Computing, Intl Conf on Cyber Science and Technology Congress (DASC/PiCom/CBDCom/CyberSciTech)",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2021,
-      "works": 239,
-      "citations": 4876
+      "works": 18,
+      "citations": 65,
+      "papers": [
+        {
+          "title": "DoubleX: Statically Detecting Vulnerable Data Flows in Browser Extensions at Scale",
+          "url": "https://doi.org/10.1145/3460120.3484745",
+          "venue": "Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security",
+          "citations": 34
+        },
+        {
+          "title": "MailTrout: A Machine Learning Browser Extension for Detecting Phishing Emails",
+          "url": "https://doi.org/10.14236/ewic/hci2021.10",
+          "venue": "Electronic Workshops in Computing",
+          "citations": 7
+        },
+        {
+          "title": "First, Do No Harm: Studying the manipulation of security headers in browser extensions",
+          "url": "https://doi.org/10.14722/madweb.2021.23016",
+          "venue": "Proceedings 2021 Workshop on Measurements, Attacks, and Defenses for the Web",
+          "citations": 5
+        },
+        {
+          "title": "Dynamic Identification of Learning Styles in MOOC Environment Using Ontology Based Browser Extension",
+          "url": "https://doi.org/10.3991/ijet.v16i12.21789",
+          "venue": "International Journal of Emerging Technologies in Learning (iJET)",
+          "citations": 4
+        },
+        {
+          "title": "News2PubMed: A Browser Extension for Linking Health News to Medical Literature",
+          "url": "https://doi.org/10.1145/3404835.3462788",
+          "venue": "Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+          "citations": 4
+        },
+        {
+          "title": "Privacy Model: Detect Privacy Leakage for Chinese Browser Extensions",
+          "url": "https://doi.org/10.1109/access.2021.3063814",
+          "venue": "IEEE Access",
+          "citations": 4
+        },
+        {
+          "title": "Free Services - A Threat to Privacy: Ensuring a Safe Online Presence using Chrome Browser Extension",
+          "url": "https://doi.org/10.1109/icac3n53548.2021.9725431",
+          "venue": "2021 3rd International Conference on Advances in Computing, Communication Control and Networking (ICAC3N)",
+          "citations": 2
+        },
+        {
+          "title": "Standalone Application and Chromium Browser Extension-based System for Online Examination Cheating Detection",
+          "url": "https://doi.org/10.1109/icac54203.2021.9671103",
+          "venue": "2021 3rd International Conference on Advancements in Computing (ICAC)",
+          "citations": 2
+        },
+        {
+          "title": "Credibility of Browser Extension Program Based on Behavioral Statement",
+          "url": "https://doi.org/10.1109/ipec51340.2021.9421124",
+          "venue": "2021 IEEE Asia-Pacific Conference on Image Processing, Electronics and Computers (IPEC)",
+          "citations": 1
+        },
+        {
+          "title": "MAWA: A Browser Extension for Mobile Web Augmentation",
+          "url": "https://doi.org/10.1007/978-3-030-85610-6_14",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 1
+        },
+        {
+          "title": "Smart Tab Predictor: A Chrome Extension to Assist Browser Task Management using Machine Learning and Data Analysis",
+          "url": "https://doi.org/10.5121/csit.2021.112318",
+          "venue": "Natural Language Processing",
+          "citations": 1
+        },
+        {
+          "title": "A Browser Extension to Facilitate Language Acquisition",
+          "url": "https://doi.org/10.1145/3463531.3463532",
+          "venue": "2021 7th International Conference on Education and Training Technologies",
+          "citations": 0
+        },
+        {
+          "title": "A look at the BDBFind browser extension",
+          "url": "https://doi.org/10.59350/285fe-8ve32",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "A look at the BDBFind browser extension",
+          "url": "https://doi.org/10.59350/bpt86-8bc14",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Development of a browser extension for web application vulnerability detection, avoidance, and secure browsing (VDAS)",
+          "url": "https://doi.org/10.19101/ijatee.2020.762187",
+          "venue": "International Journal of Advanced Technology and Engineering Exploration",
+          "citations": 0
+        },
+        {
+          "title": "Fingerprinting in Style: Detecting Browser Extensions via Injected Style Sheets",
+          "url": "https://www.usenix.org/conference/usenixsecurity21/presentation/laperdrix",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "Ontoclick: a web browser extension to facilitate biomedical knowledge curation",
+          "url": "https://doi.org/10.1093/bioinformatics/btab520",
+          "venue": "Bioinformatics",
+          "citations": 0
+        },
+        {
+          "title": "Ontoclick: a web browser extension to facilitate biomedical knowledge curation",
+          "url": "https://doi.org/10.1101/2021.03.04.433993",
+          "venue": null,
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2022,
-      "works": 272,
-      "citations": 3862
+      "works": 30,
+      "citations": 75,
+      "papers": [
+        {
+          "title": "Hardening the security analysis of browser extensions",
+          "url": "https://doi.org/10.1145/3477314.3507098",
+          "venue": "Proceedings of the 37th ACM/SIGAPP Symposium on Applied Computing",
+          "citations": 15
+        },
+        {
+          "title": "Are they Toeing the Line? Diagnosing Privacy Compliance Violations among Browser Extensions",
+          "url": "https://doi.org/10.1145/3551349.3560436",
+          "venue": "Proceedings of the 37th IEEE/ACM International Conference on Automated Software Engineering",
+          "citations": 14
+        },
+        {
+          "title": "Characterizing Cryptocurrency-themed Malicious Browser Extensions",
+          "url": "https://doi.org/10.1145/3570603",
+          "venue": "Proceedings of the ACM on Measurement and Analysis of Computing Systems",
+          "citations": 12
+        },
+        {
+          "title": "No Signal Left to Chance: Driving Browser Extension Analysis by Download Patterns",
+          "url": "https://doi.org/10.1145/3564625.3567988",
+          "venue": "Proceedings of the 38th Annual Computer Security Applications Conference",
+          "citations": 7
+        },
+        {
+          "title": "A real-time machine learning application for browser extension security monitoring",
+          "url": "https://doi.org/10.1080/19393555.2022.2128944",
+          "venue": "Information Security Journal: A Global Perspective",
+          "citations": 6
+        },
+        {
+          "title": "Our Browser Extension Lets Readers Change the Headlines on News Articles, and You Won't Believe What They Did!",
+          "url": "https://doi.org/10.1145/3555643",
+          "venue": "Proceedings of the ACM on Human-Computer Interaction",
+          "citations": 6
+        },
+        {
+          "title": "Browser Extension for Digital Signature",
+          "url": "https://doi.org/10.1007/978-981-19-1976-3_21",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 5
+        },
+        {
+          "title": "WebEnclave: Protect Web Secrets From Browser Extensions With Software Enclave",
+          "url": "https://doi.org/10.1109/tdsc.2021.3081867",
+          "venue": "IEEE Transactions on Dependable and Secure Computing",
+          "citations": 4
+        },
+        {
+          "title": "Web Browser Extension Development of Structured Query Language Injection Vulnerability Detection Using Long Short-Term Memory Algorithm",
+          "url": "https://doi.org/10.1109/icosnikom56551.2022.10034905",
+          "venue": "2022 IEEE International Conference of Computer Science and Information Technology (ICOSNIKOM)",
+          "citations": 2
+        },
+        {
+          "title": "A Context-Aware Browser Extension for Just-in-Time Learning of Data Literacy Skills",
+          "url": "https://doi.org/10.1145/3501709.3544281",
+          "venue": "Proceedings of the 2022 ACM Conference on International Computing Education Research - Volume 2",
+          "citations": 1
+        },
+        {
+          "title": "Browser Extension For A Safe Browsing Experience",
+          "url": "https://doi.org/10.1109/ic3sis54991.2022.9885551",
+          "venue": "2022 International Conference on Computing, Communication, Security and Intelligent Systems (IC3SIS)",
+          "citations": 1
+        },
+        {
+          "title": "Designing a Browser Extension for Reliable Online Health Information Retrieval Among Older Adults Using Design Thinking",
+          "url": "https://doi.org/10.5210/ojphi.v14i1.12593",
+          "venue": "Online Journal of Public Health Informatics",
+          "citations": 1
+        },
+        {
+          "title": "Extension and Browser APIs",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_11",
+          "venue": "Building Browser Extensions",
+          "citations": 1
+        },
+        {
+          "title": "A Privacy-Aware Browser Extension to\u00a0Track User Search Behavior for\u00a0Programming Course Supplement",
+          "url": "https://doi.org/10.1007/978-3-030-94822-1_51",
+          "venue": "Lecture Notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension Architecture",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_4",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension Crash Course",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_3",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension for Malicious URL Detection Based on Machine Learning Model",
+          "url": "https://doi.org/10.65136/jati.v6i1.180",
+          "venue": "Journal of Applied Technology and Innovation",
+          "citations": 0
+        },
+        {
+          "title": "CopypastaVulGuard \u2013 A browser extension to prevent copy and paste spreading of vulnerable source code in forum posts",
+          "url": "https://doi.org/10.1145/3538969.3538973",
+          "venue": "Proceedings of the 17th International Conference on Availability, Reliability and Security",
+          "citations": 0
+        },
+        {
+          "title": "Cross-Browser Extensions",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_15",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Designing a Browser Extension for Reliable Online Health Information Retrieval Among Older Adults Using Design Thinking",
+          "url": "https://doi.org/10.36227/techrxiv.16679776.v2",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Designing a Browser Extension for Reliable Online Health Information Retrieval Among Older Adults Using Design Thinking",
+          "url": "https://doi.org/10.36227/techrxiv.16679776",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Developing Privacy Extensions: Is it Advocacy through the Web Browser?",
+          "url": "https://doi.org/10.24908/ss.v20i1.13958",
+          "venue": "Surveillance &amp; Society",
+          "citations": 0
+        },
+        {
+          "title": "Figure 1 from: Hernandez Serrano P, Emonet V (2022) The FAIR extension: A web browser extension to evaluate Digital Object\u00a0FAIRness\u00a0. Research Ideas and Outcomes 8: e95006. https://doi.org/10.3897/rio.8.e95006",
+          "url": "https://doi.org/10.3897/rio.8.e95006.figure1",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Fundamental Elements of Browser Extensions",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_2",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "NEEX: An Automated and Efficient Tool for Detecting Browser Extension Fingerprint",
+          "url": "https://doi.org/10.1007/978-3-030-93956-4_2",
+          "venue": "Communications in Computer and Information Science",
+          "citations": 0
+        },
+        {
+          "title": "The Dangers of Human Touch: Fingerprinting Browser Extensions through User Actions",
+          "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/solomos",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "The FAIR extension: A web browser extension to evaluate Digital Object FAIRness",
+          "url": "https://doi.org/10.3897/rio.8.e95006",
+          "venue": "Research Ideas and Outcomes",
+          "citations": 0
+        },
+        {
+          "title": "Twine Screen Reader: A Browser Extension for Improving the Accessibility of Twine Stories for People with Visual Impairments",
+          "url": "https://doi.org/10.1007/978-3-031-22298-6_37",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 0
+        },
+        {
+          "title": "Unleash the Simulacrum: Shifting Browser Realities for Robust Extension-Fingerprinting Prevention",
+          "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/karami",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "What Are Browser Extensions?",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5_1",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2023,
-      "works": 541,
-      "citations": 4537
+      "works": 34,
+      "citations": 69,
+      "papers": [
+        {
+          "title": "Safeguard confidential web information from malicious browser extension using Encryption and Isolation techniques",
+          "url": "https://doi.org/10.3233/jifs-233122",
+          "venue": "Journal of Intelligent &amp; Fuzzy Systems",
+          "citations": 13
+        },
+        {
+          "title": "Detection of Inconsistencies in Privacy Practices of Browser Extensions",
+          "url": "https://doi.org/10.1109/sp46215.2023.10179338",
+          "venue": "2023 IEEE Symposium on Security and Privacy (SP)",
+          "citations": 12
+        },
+        {
+          "title": "Malicious Address Identifier (MAI): A Browser Extension to Identify Malicious URLs",
+          "url": "https://doi.org/10.1109/icetet-sip58143.2023.10151582",
+          "venue": "2023 11th International Conference on Emerging Trends in Engineering &amp; Technology - Signal and Information Processing (ICETET - SIP)",
+          "citations": 10
+        },
+        {
+          "title": "CoCo: Efficient Browser Extension Vulnerability Detection via Coverage-guided, Concurrent Abstract Interpretation",
+          "url": "https://doi.org/10.1145/3576915.3616584",
+          "venue": "Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security",
+          "citations": 6
+        },
+        {
+          "title": "Mitigating the Security Risks of Browser Extensions",
+          "url": "https://doi.org/10.1109/icscss57650.2023.10169483",
+          "venue": "2023 International Conference on Sustainable Computing and Smart Systems (ICSCSS)",
+          "citations": 4
+        },
+        {
+          "title": "Browser Extension for\u00a0Detection of\u00a0Fake News and\u00a0Disinformation",
+          "url": "https://doi.org/10.1007/978-3-031-30694-5_16",
+          "venue": "Lecture Notes in Business Information Processing",
+          "citations": 3
+        },
+        {
+          "title": "Factit: A Fact-Checking Browser Extension",
+          "url": "https://doi.org/10.1109/iceit57125.2023.10107833",
+          "venue": "2023 IEEE 12th International Conference on Educational and Information Technology (ICEIT)",
+          "citations": 3
+        },
+        {
+          "title": "BEAUD: A Browser Extension to Automatize End-User Deeds",
+          "url": "https://doi.org/10.1016/j.simpa.2023.100516",
+          "venue": "Software Impacts",
+          "citations": 2
+        },
+        {
+          "title": "Characterizing Cryptocurrency-themed Malicious Browser Extensions",
+          "url": "https://doi.org/10.1145/3578338.3593529",
+          "venue": "Abstract Proceedings of the 2023 ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems",
+          "citations": 2
+        },
+        {
+          "title": "Phishing Detection with Browser Extension Based on Machine Learning",
+          "url": "https://doi.org/10.1109/asiajcis60284.2023.00023",
+          "venue": "2023 18th Asia Joint Conference on Information Security (AsiaJCIS)",
+          "citations": 2
+        },
+        {
+          "title": "A Data Service Layer for Web Browser Extensions",
+          "url": "https://doi.org/10.5220/0012165500003584",
+          "venue": "Proceedings of the 19th International Conference on Web Information Systems and Technologies",
+          "citations": 1
+        },
+        {
+          "title": "Accessible e-News Summary Browser Extension for Visually Challenged Users",
+          "url": "https://doi.org/10.1109/cisct57197.2023.10351285",
+          "venue": "2023 3rd International Conference on Innovative Sustainable Computational Technologies (CISCT)",
+          "citations": 1
+        },
+        {
+          "title": "Assessing Trustworthiness of Internet Pharmacies with an Internet Browser Extension",
+          "url": "https://doi.org/10.1177/27550834231191895",
+          "venue": "The Journal of Medicine Access",
+          "citations": 1
+        },
+        {
+          "title": "Building Browser Extensions",
+          "url": "https://doi.org/10.1007/978-1-4842-8725-5",
+          "venue": null,
+          "citations": 1
+        },
+        {
+          "title": "Characterizing Cryptocurrency-themed Malicious Browser Extensions",
+          "url": "https://doi.org/10.1145/3606376.3593529",
+          "venue": "ACM SIGMETRICS Performance Evaluation Review",
+          "citations": 1
+        },
+        {
+          "title": "Comprehensive Browser Extension for Analysing YouTube User Engagement, Controversy, User Requirements, and Trending Keywords",
+          "url": "https://doi.org/10.1109/itnac59571.2023.10368503",
+          "venue": "2023 33rd International Telecommunication Networks and Applications Conference",
+          "citations": 1
+        },
+        {
+          "title": "Design of Free-Focused: Screen-Time Tracker and Task Management Browser Extension",
+          "url": "https://doi.org/10.1109/csnt57126.2023.10134601",
+          "venue": "2023 IEEE 12th International Conference on Communication Systems and Network Technologies (CSNT)",
+          "citations": 1
+        },
+        {
+          "title": "Detecting Malicious Browser Extensions by Combining Machine Learning and Feature Engineering",
+          "url": "https://doi.org/10.1007/978-3-031-28332-1_13",
+          "venue": "Advances in Intelligent Systems and Computing",
+          "citations": 1
+        },
+        {
+          "title": "Matt Frisbie on Browser Extensions",
+          "url": "https://doi.org/10.1109/ms.2023.3265374",
+          "venue": "IEEE Software",
+          "citations": 1
+        },
+        {
+          "title": "Rumour Detection in the Wild: A Browser Extension for Twitter",
+          "url": "https://doi.org/10.18653/v1/2023.nlposs-1.15",
+          "venue": "Proceedings of the 3rd Workshop for Natural Language Processing Open Source Software (NLP-OSS 2023)",
+          "citations": 1
+        },
+        {
+          "title": "The browser extension guidance for online information searching",
+          "url": "https://doi.org/10.1108/el-01-2023-0026",
+          "venue": "The Electronic Library",
+          "citations": 1
+        },
+        {
+          "title": "Web Extension For Phishing Website Identification: A Browser-Based Security Solution",
+          "url": "https://doi.org/10.1109/rmkmate59243.2023.10369766",
+          "venue": "2023 International Conference on Research Methodologies in Knowledge Management, Artificial Intelligence and Telecommunication Engineering (RMKMATE)",
+          "citations": 1
+        },
+        {
+          "title": "A Case Study of\u00a0a\u00a0Privacy-Invading Browser Extension",
+          "url": "https://doi.org/10.1007/978-3-031-33258-6_12",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 0
+        },
+        {
+          "title": "A Survey Paper on Browser Extensions to Detect Web Attacks",
+          "url": "https://doi.org/10.1109/icccnt56998.2023.10306729",
+          "venue": "2023 14th International Conference on Computing Communication and Networking Technologies (ICCCNT)",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extensions For The Stretched Health Librarian",
+          "url": "https://doi.org/10.55999/johila.v4i1.143",
+          "venue": "Journal of Health Information and Libraries Australasia",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extensions for Post-Secondary Students with Disabilities",
+          "url": "https://doi.org/10.11114/jets.v11i2.5867",
+          "venue": "Journal of Education and Training Studies",
+          "citations": 0
+        },
+        {
+          "title": "CONTROLLING WEBSITES THROUGH HAND GESTURES USING TENSORFLOW JS AND BROWSER EXTENSION",
+          "url": "https://doi.org/10.56726/irjmets34907",
+          "venue": "International Research Journal of Modernization in Engineering Technology and Science",
+          "citations": 0
+        },
+        {
+          "title": "Extending Browser Extension Fingerprinting to Mobile Devices",
+          "url": "https://doi.org/10.1145/3603216.3624955",
+          "venue": "Proceedings of the 22nd Workshop on Privacy in the Electronic Society",
+          "citations": 0
+        },
+        {
+          "title": "Extending a Hand to Attackers: Browser Privilege Escalation Attacks via Extensions",
+          "url": "https://www.usenix.org/conference/usenixsecurity23/presentation/kim-young-min",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "Extension to Block and Customize Websites in the Browser to Isolate the User from Piracy Websites, Fraudulent Risk, Online Gambling, and Social Media Addiction",
+          "url": "https://doi.org/10.55041/ijsrem18969",
+          "venue": "INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+          "citations": 0
+        },
+        {
+          "title": "IBE.js: A Framework for Instrumenting Browser Extensions",
+          "url": "https://doi.org/10.5220/0012120000003538",
+          "venue": "Proceedings of the 18th International Conference on Software Technologies",
+          "citations": 0
+        },
+        {
+          "title": "Prevention of URL Attacks by Analyzing Browser Extension",
+          "url": "https://doi.org/10.61137/ijsret.vol.9.issue6.123",
+          "venue": "International Journal of Scientific Research and Engineering Trends",
+          "citations": 0
+        },
+        {
+          "title": "Two new browser extensions that help with delivery or access - ebsco passport and GetFTR browser extension and other developments",
+          "url": "https://doi.org/10.59350/p679x-qfh48",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Two new browser extensions that help with delivery or access - ebsco passport and GetFTR browser extension and other developments",
+          "url": "https://doi.org/10.59350/ne3ak-ms352",
+          "venue": null,
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2024,
-      "works": 501,
-      "citations": 1193
+      "works": 33,
+      "citations": 54,
+      "papers": [
+        {
+          "title": "A Browser Extension for in-place Signaling and Assessment of Misinformation",
+          "url": "https://doi.org/10.1145/3613904.3642473",
+          "venue": "Proceedings of the CHI Conference on Human Factors in Computing Systems",
+          "citations": 16
+        },
+        {
+          "title": "FakeX: A Framework for Detecting Fake Reviews of Browser Extensions",
+          "url": "https://doi.org/10.1145/3634737.3656999",
+          "venue": "Proceedings of the 19th ACM Asia Conference on Computer and Communications Security",
+          "citations": 7
+        },
+        {
+          "title": "A Study on Web User's Attitude and Knowledge Towards Data Security and Privacy Issues of Web Browser Extensions",
+          "url": "https://doi.org/10.1109/iceccme62383.2024.10796625",
+          "venue": "2024 4th International Conference on Electrical, Computer, Communications and Mechatronics Engineering (ICECCME)",
+          "citations": 4
+        },
+        {
+          "title": "Experimental Security Analysis of Sensitive Data Access by Browser Extensions",
+          "url": "https://doi.org/10.1145/3589334.3645683",
+          "venue": "Proceedings of the ACM Web Conference 2024",
+          "citations": 4
+        },
+        {
+          "title": "Peeking through the window: Fingerprinting Browser Extensions through Page-Visible Execution Traces and Interactions",
+          "url": "https://doi.org/10.1145/3658644.3670339",
+          "venue": "Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security",
+          "citations": 4
+        },
+        {
+          "title": "Developing a Browser Extension for the Automated Detection of Deceptive Patterns in Cookie Banners",
+          "url": "https://doi.org/10.2991/978-94-6463-388-7_8",
+          "venue": "Atlantis Highlights in Computer Sciences",
+          "citations": 3
+        },
+        {
+          "title": "Analyzing Security Risks in Browser Extension Search Tools: A Literature Review",
+          "url": "https://doi.org/10.2139/ssrn.4842191",
+          "venue": "SSRN Electronic Journal",
+          "citations": 2
+        },
+        {
+          "title": "Block Cookies, Not Websites: Analysing Mental Models and Usability of the Privacy-Preserving Browser Extension CookieBlock",
+          "url": "https://doi.org/10.56553/popets-2024-0012",
+          "venue": "Proceedings on Privacy Enhancing Technologies",
+          "citations": 2
+        },
+        {
+          "title": "Detecting ugly and derogatory words in Serbian language using a web browser extension",
+          "url": "https://doi.org/10.1109/telfor63250.2024.10819059",
+          "venue": "2024 32nd Telecommunications Forum (TELFOR)",
+          "citations": 2
+        },
+        {
+          "title": "HyperCRX: A Browser Extension for Insights into GitHub Projects and Developers",
+          "url": "https://doi.org/10.1145/3643916.3644440",
+          "venue": "Proceedings of the 32nd IEEE/ACM International Conference on Program Comprehension",
+          "citations": 2
+        },
+        {
+          "title": "RXSS Protect: A Browser Extension for Detection of Reflected Cross-Site Scripting Attacks in Real-Time Using Machine Learning",
+          "url": "https://doi.org/10.1109/nextcomp63004.2024.10779651",
+          "venue": "2024 International Conference on Next Generation Computing Applications (NextComp)",
+          "citations": 2
+        },
+        {
+          "title": "ALGORITHMIC INTERVENTION FOR REDUCING DIGITAL ADDICTION: A COMPREHENSIVE EVALUATION OF A BROWSER EXTENSION DESIGNED TO MITIGATE PSYCHOLOGICAL TRIGGERS IN ONLINE VIDEO CONSUMPTION ON YOUTUBE",
+          "url": "https://doi.org/10.31234/osf.io/2vwu7",
+          "venue": null,
+          "citations": 1
+        },
+        {
+          "title": "Enhancing Internet Security: A Machine Learning-Based Browser Extension to Prevent Phishing Attacks",
+          "url": "https://doi.org/10.1109/ic3se62002.2024.10593201",
+          "venue": "2024 International Conference on Communication, Computer Sciences and Engineering (IC3SE)",
+          "citations": 1
+        },
+        {
+          "title": "Enhancing Web Browser Extensions: Preventing JavaScript Code Injection and Vulnerabilities",
+          "url": "https://doi.org/10.1007/978-981-97-3588-4_44",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 1
+        },
+        {
+          "title": "Essential or Excessive? MINDAEXT: Measuring Data Minimization Practices among Browser Extensions",
+          "url": "https://doi.org/10.1109/saner60148.2024.00104",
+          "venue": "2024 IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)",
+          "citations": 1
+        },
+        {
+          "title": "From User Insights to Actionable Metrics: A User-Focused Evaluation of Privacy-Preserving Browser Extensions",
+          "url": "https://doi.org/10.1145/3634737.3657028",
+          "venue": "Proceedings of the 19th ACM Asia Conference on Computer and Communications Security",
+          "citations": 1
+        },
+        {
+          "title": "Semantic SDG-Mapper: Browser Extension for Mapping Sustainable Development Goals to Open Webpages",
+          "url": "https://doi.org/10.1145/3703323.3704269",
+          "venue": "Proceedings of the 8th International Conference on Data Science and Management of Data (12th ACM IKDD CODS and 30th COMAD)",
+          "citations": 1
+        },
+        {
+          "title": "A Holistic Review on Detection of Malicious Browser Extensions and Links using Deep Learning",
+          "url": "https://doi.org/10.1109/icaic60265.2024.10433842",
+          "venue": "2024 IEEE 3rd International Conference on AI in Cybersecurity (ICAIC)",
+          "citations": 0
+        },
+        {
+          "title": "Access broker browser extensions: plugin tools for searching open scholarly literature",
+          "url": "https://doi.org/10.1108/lhtn-11-2023-0198",
+          "venue": "Library Hi Tech News",
+          "citations": 0
+        },
+        {
+          "title": "Analyzing Security Risks in Browser  Extension Search Tools: A Literature  Review",
+          "url": "https://doi.org/10.55041/ijsrem36007",
+          "venue": "INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+          "citations": 0
+        },
+        {
+          "title": "Arcanum: Detecting and Evaluating the Privacy Risks of Browser Extensions on Web Pages and Web Content",
+          "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xie-qinge",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension Offers Speedy Access to Full-Text Content",
+          "url": "https://doi.org/10.1146/katina-110524-3",
+          "venue": "Katina Magazine",
+          "citations": 0
+        },
+        {
+          "title": "CodeX: Contextual Flow Tracking for Browser Extensions",
+          "url": "https://doi.org/10.1145/3714393.3726495",
+          "venue": "Proceedings of the Fifteenth ACM Conference on Data and Application Security and Privacy",
+          "citations": 0
+        },
+        {
+          "title": "DEVELOPING A WEB BROWSER EXTENSION TO PREVENT THE SPREAD OF FAKE NEWS",
+          "url": "https://doi.org/10.18535/ijecs/v13i10.4921",
+          "venue": "International Journal of Engineering and Computer Science",
+          "citations": 0
+        },
+        {
+          "title": "DWallet: Two-Factor Authentication Crypto Wallet Browser Extension",
+          "url": "https://doi.org/10.1007/978-981-97-1724-8_45",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 0
+        },
+        {
+          "title": "Enhancing Web Browser Security with LLM Chatbot Assistant: Case of Firefox Extension with ChatGPT",
+          "url": "https://doi.org/10.1007/978-3-031-66850-0_23",
+          "venue": "Information Systems Engineering and Management",
+          "citations": 0
+        },
+        {
+          "title": "Ensemble Learning-Based Browser Extension for Mitigating Cyber Attacks Carried out using Malicious Short URLs",
+          "url": "https://doi.org/10.52783/jes.1264",
+          "venue": "Journal of Electrical Systems",
+          "citations": 0
+        },
+        {
+          "title": "Harnessing Multiplicity: Granular Browser Extension Fingerprinting through User Configurations",
+          "url": "https://doi.org/10.1109/acsac63791.2024.00029",
+          "venue": "2024 Annual Computer Security Applications Conference (ACSAC)",
+          "citations": 0
+        },
+        {
+          "title": "Implementation of a Stack Data Structure for Browsing History Management in the Form of a Chrome Web Browser Extension",
+          "url": "https://doi.org/10.57235/ijedr.v3i1.4576",
+          "venue": "Indonesian Journal of Education and Development Research",
+          "citations": 0
+        },
+        {
+          "title": "Simulating Phishing and Security Step (2FA) and Detecting Fake URLs Using Plugin and Browser Extension Detection",
+          "url": "https://doi.org/10.59232/cys-v2i4p103",
+          "venue": "DS Journal of Cyber Security",
+          "citations": 0
+        },
+        {
+          "title": "The Comparison of Random Forest and XGBoost in Malicious Browser Extensions Detection in Google Chrome Based on the Feature Importance",
+          "url": "https://doi.org/10.1007/978-3-031-73128-0_10",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 0
+        },
+        {
+          "title": "UltraCommander: Ultrasonic Side Channel Attack via\u00a0Browser Extensions",
+          "url": "https://doi.org/10.1007/978-981-97-8540-7_12",
+          "venue": "Lecture Notes in Computer Science",
+          "citations": 0
+        },
+        {
+          "title": "WRIT: Web Request Integrity and Attestation Against Malicious Browser Extensions",
+          "url": "https://doi.org/10.1109/tdsc.2023.3322516",
+          "venue": "IEEE Transactions on Dependable and Secure Computing",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2025,
-      "works": 622,
-      "citations": 462
+      "works": 58,
+      "citations": 4,
+      "papers": [
+        {
+          "title": "DETECTING MALICIOUS URLS:TRENDS, CHALLENGES AND THE ROLE OF BROWSER EXTENSIONS",
+          "url": "https://doi.org/10.5121/ijnsa.2025.17301",
+          "venue": "International Journal of Network Security &amp; Its Applications",
+          "citations": 1
+        },
+        {
+          "title": "Enhancing Web Accessibility Through a\u00a0Customizable Browser Extension for\u00a0Users with\u00a0Visual Impairments",
+          "url": "https://doi.org/10.1007/978-3-031-84093-7_19",
+          "venue": "Communications in Computer and Information Science",
+          "citations": 1
+        },
+        {
+          "title": "Stealth Extension Exfiltration (SEE) Attacks: Stealing User Data without Permissions via Browser Extensions",
+          "url": "https://doi.org/10.1145/3672608.3707856",
+          "venue": "Proceedings of the 40th ACM/SIGAPP Symposium on Applied Computing",
+          "citations": 1
+        },
+        {
+          "title": "The Proactive Gap: A Scoping Review of Publicly Available LLM-based Browser Extensions and Their Potential to Mitigate Information Disorder",
+          "url": "https://doi.org/10.1145/3771882.3771896",
+          "venue": "Proceedings of the 24th International Conference on Mobile and Ubiquitous Multimedia",
+          "citations": 1
+        },
+        {
+          "title": "\"I have no idea how to make it safer\": Studying Security and Privacy Mindsets of Browser Extension Developers",
+          "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/agarwal-shubham",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "A Comprehensive Approach for Phishing Detection and URL Blocking Using Browser Extensions and Mobile Applications",
+          "url": "https://doi.org/10.1109/csitss67709.2025.11295663",
+          "venue": "2025 9th International Conference on Computational System and Information Technology for Sustainable Solutions (CSITSS)",
+          "citations": 0
+        },
+        {
+          "title": "A Holistic Analysis of Security and Privacy Implications of Firefox Browser Extensions",
+          "url": "https://doi.org/10.1109/mipr67560.2025.00084",
+          "venue": "2025 IEEE 8th International Conference on Multimedia Information Processing and Retrieval (MIPR)",
+          "citations": 0
+        },
+        {
+          "title": "A Performance Optimised Multi-Function Browser Extension for Enhanced Web Privacy and Secure Link Shortening",
+          "url": "https://doi.org/10.1109/ciacon65473.2025.11189355",
+          "venue": "2025 International Conference on Computing, Intelligence, and Application (CIACON)",
+          "citations": 0
+        },
+        {
+          "title": "A!rrange: AI-based Smart Bookmark Management Browser Extension",
+          "url": "https://doi.org/10.30693/smj.2025.14.10.16",
+          "venue": "Korean Institute of Smart Media",
+          "citations": 0
+        },
+        {
+          "title": "AI-Based Browser Extension for Inclusive Education: Enhancing Accessibility for Students with Dyslexia",
+          "url": "https://doi.org/10.1007/978-3-031-97015-3_8",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 0
+        },
+        {
+          "title": "AI-Based Gaze Tracking with a Browser Extension: A Study",
+          "url": "https://doi.org/10.9728/dcs.2025.26.10.2849",
+          "venue": "Journal of Digital Contents Society",
+          "citations": 0
+        },
+        {
+          "title": "AI-Powered Web Scraping and Parsing: A Browser Extension Using LLMs for Adaptive Data Extraction",
+          "url": "https://doi.org/10.55041/ijsrem44113",
+          "venue": "INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+          "citations": 0
+        },
+        {
+          "title": "Advanced Browser Security Extension for Cyber Threat Protection",
+          "url": "https://doi.org/10.1109/iccds64403.2025.11209616",
+          "venue": "2025 2nd International Conference on Computing and Data Science (ICCDS)",
+          "citations": 0
+        },
+        {
+          "title": "An Intelligent browser extension for phishing website detection using machine learning models",
+          "url": "https://doi.org/10.31705/adscai.2025.06",
+          "venue": "Proceedings of Applied Data Science &amp; Artificial Intelligence Symposium 2025",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension Architecture",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_4",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension Crash Course",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_3",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension for Instant Language Conversion for Video Audio",
+          "url": "https://doi.org/10.1109/iccpct65132.2025.11176619",
+          "venue": "2025 8th International Conference on Circuit, Power &amp;amp; Computing Technologies (ICCPCT)",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension for Phishing Website Detection Using Machine Learning",
+          "url": "https://doi.org/10.21467/proceedings.7.5.5",
+          "venue": "AIJR Proceedings",
+          "citations": 0
+        },
+        {
+          "title": "Browser Extension for Secure Session Parameter Handling and Hyperlink Modification",
+          "url": "https://doi.org/10.1109/icaiqsa67794.2025.11440582",
+          "venue": "2025 International Conference on Artificial Intelligence and Quantum Computation-Based Sensor Application (ICAIQSA)",
+          "citations": 0
+        },
+        {
+          "title": "Building Browser Extensions",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Characterizing Cryptocurrency-Themed Malicious Browser Extensions",
+          "url": "https://doi.org/10.1145/3715673",
+          "venue": "Communications of the ACM",
+          "citations": 0
+        },
+        {
+          "title": "Cross-Browser Extensions",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_14",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Cryptocurrency Browser-Extension Security: A Wake-Up Call and a Way Forward",
+          "url": "https://doi.org/10.1145/3747586",
+          "venue": "Communications of the ACM",
+          "citations": 0
+        },
+        {
+          "title": "DeepShield: An EfficientNet-B7 based Browser Extension for Real-Time Deepfake Detection in Multimedia Forensics",
+          "url": "https://doi.org/10.1109/icicnis66685.2025.11315573",
+          "venue": "2025 6th International Conference on IoT Based Control Networks and Intelligent Systems (ICICNIS)",
+          "citations": 0
+        },
+        {
+          "title": "Demo: LLM-Based Browser Extension for Phishing Detection",
+          "url": "https://doi.org/10.1109/svcc65277.2025.11133657",
+          "venue": "2025 Silicon Valley Cybersecurity Conference (SVCC)",
+          "citations": 0
+        },
+        {
+          "title": "Dual-Architecture URL Phishing Detection System: A Comprehensive Approach Using Lightweight Browser Extensions and Deep Analysis Models",
+          "url": "https://doi.org/10.1109/icac69156.2025.11361454",
+          "venue": "2025 7th International Conference on Advancements in Computing (ICAC)",
+          "citations": 0
+        },
+        {
+          "title": "Enhancing Blockchain Security with the Safu Browser Extension",
+          "url": "https://doi.org/10.20944/preprints202509.0207.v1",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "Enhancing Search Efficiency: A Personalized, Profession-Based Approach Using AIML-Driven Browser Extensions",
+          "url": "https://doi.org/10.1007/978-981-96-7514-2_6",
+          "venue": "Lecture Notes in Networks and Systems",
+          "citations": 0
+        },
+        {
+          "title": "Evaluating Performance of AI-Powered Browser Extensions on Online Exams in a Doctor of Pharmacy Program",
+          "url": "https://doi.org/10.1016/j.ajpe.2025.101814",
+          "venue": "American Journal of Pharmaceutical Education",
+          "citations": 0
+        },
+        {
+          "title": "Evaluating the Performance of AI-Powered Browser Extensions in Online Pharmacy Exams",
+          "url": "https://doi.org/10.1016/j.ajpe.2025.101897",
+          "venue": "American Journal of Pharmaceutical Education",
+          "citations": 0
+        },
+        {
+          "title": "ExtFPDet: A CNN-Based Detection Framework for Browser Extensions Fingerprinting",
+          "url": "https://doi.org/10.1109/cscwd64889.2025.11033570",
+          "venue": "2025 28th International Conference on Computer Supported Cooperative Work in Design (CSCWD)",
+          "citations": 0
+        },
+        {
+          "title": "Extension and Browser APIs",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_9",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "FalconCyber Scan: AI-Enabled Browser Extension for Proactive Website Vulnerability Management",
+          "url": "https://doi.org/10.1109/icec2nt65402.2025.11380124",
+          "venue": "2025 International Conference on Electronics and Computing, Communication Networking Automation Technologies (ICEC2NT)",
+          "citations": 0
+        },
+        {
+          "title": "FallacyCheck - A Proactive LLM-based Browser Extension to Motivate Critical Assessment of News Articles by Questioning Logical Fallacies",
+          "url": "https://doi.org/10.1145/3771882.3774253",
+          "venue": "Proceedings of the 24th International Conference on Mobile and Ubiquitous Multimedia",
+          "citations": 0
+        },
+        {
+          "title": "Find my phish: phishing detection browser extension using deep learning methods by merging datasets",
+          "url": "https://doi.org/10.1109/imsa65733.2025.11167022",
+          "venue": "2025 Intelligent Methods, Systems, and Applications\u200b (IMSA)",
+          "citations": 0
+        },
+        {
+          "title": "FocusUp: A Browser Extension for Enhancing Online Attention and Productivity for ADHD Individuals",
+          "url": "https://doi.org/10.1145/3744257.3744278",
+          "venue": "Proceedings of the 22nd International Web for All Conference",
+          "citations": 0
+        },
+        {
+          "title": "From Browser to Kernel: Exploring a Lightweight Sandboxed Approach for Unikernel Extensions",
+          "url": "https://doi.org/10.1145/3764860.3768334",
+          "venue": "Proceedings of the 13th Workshop on Programming Languages and Operating Systems",
+          "citations": 0
+        },
+        {
+          "title": "From comments to threats: leveraging NLP to detect malicious browser extensions",
+          "url": "https://doi.org/10.1007/s11416-025-00578-w",
+          "venue": "Journal of Computer Virology and Hacking Techniques",
+          "citations": 0
+        },
+        {
+          "title": "Fundamental Elements of Browser Extensions",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_2",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Guardian Glance: An AI Powered Browser Extension for Proactive Mental Health Intervention and Suicide Prevention",
+          "url": "https://doi.org/10.1109/ictbig68706.2025.11323951",
+          "venue": "2025 IEEE 5th International Conference on ICT in Business Industry &amp;amp; Government (ICTBIG)",
+          "citations": 0
+        },
+        {
+          "title": "Hybrid Deep Learning-Powered Secure Browser Extension for Real-Time Malicious Website Detection",
+          "url": "https://doi.org/10.1109/ic2nc67409.2025.11376549",
+          "venue": "2025 International Conference on NexGen Networks and Cybernetics (IC2NC)",
+          "citations": 0
+        },
+        {
+          "title": "Impact of extensions on browser performance: An empirical study on google chrome",
+          "url": "https://doi.org/10.1007/s10664-025-10633-1",
+          "venue": "Empirical Software Engineering",
+          "citations": 0
+        },
+        {
+          "title": "Konsize.ai \u2014 Summarizing Textual Content through a Browser Extension using a Large Language Model",
+          "url": "https://doi.org/10.56726/irjmets86460",
+          "venue": "International Research Journal of Modernization in Engineering Technology &amp; Science",
+          "citations": 0
+        },
+        {
+          "title": "Machine Learning-Driven Phishing  Detection: A Robust Browser Extension Solution",
+          "url": "https://doi.org/10.38124/ijisrt/25mar670",
+          "venue": "International Journal of Innovative Science and Research Technology",
+          "citations": 0
+        },
+        {
+          "title": "Performance analysis of common browser extensions for cryptojacking detection",
+          "url": "https://doi.org/10.1109/redundancy68069.2025.11301498",
+          "venue": "2025 XI\u0425 International Symposium on Problems of Redundancy in Information and Control Systems (Redundancy)",
+          "citations": 0
+        },
+        {
+          "title": "Phishing Attacks against Password Manager Browser Extensions",
+          "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/anliker",
+          "venue": "USENIX Security",
+          "citations": 0
+        },
+        {
+          "title": "Phishing Prevention Focusing on Certificates and Input Forms: PoC as Browser Extensions",
+          "url": "https://doi.org/10.1109/icct-pacific63901.2025.11012853",
+          "venue": "2025 1st International Conference on Consumer Technology (ICCT-Pacific)",
+          "citations": 0
+        },
+        {
+          "title": "Plugin Extension for\u00a0Chrome Browser to\u00a0Display Web Browsing History in\u00a0Tree View",
+          "url": "https://doi.org/10.1007/978-3-032-06161-4_8",
+          "venue": "Lecture Notes on Data Engineering and Communications Technologies",
+          "citations": 0
+        },
+        {
+          "title": "Real-Time Phishing Website Detection with ML-Powered Browser Extension",
+          "url": "https://doi.org/10.1109/icecet63943.2025.11472071",
+          "venue": "2025 5th International Conference on Electrical, Computer and Energy Technologies (ICECET)",
+          "citations": 0
+        },
+        {
+          "title": "Real-Time-Phishing- URL Detection with a Deep Learning-Based Browser Extension",
+          "url": "https://doi.org/10.1109/iconstem65670.2025.11374688",
+          "venue": "2025 Tenth International Conference on Science Technology Engineering and Mathematics (ICONSTEM)",
+          "citations": 0
+        },
+        {
+          "title": "Rule-Based Approach for Detecting Phishing Websites through Browser Extension",
+          "url": "https://doi.org/10.55041/ijsrem53386",
+          "venue": "INTERNATIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+          "citations": 0
+        },
+        {
+          "title": "SafeURL_AI_Extension: An Intelligent Browser Extension for Real-Time Detection of Malicious and Phishing Content",
+          "url": "https://doi.org/10.48175/ijarsct-29686",
+          "venue": "International Journal of Advanced Research in Science, Communication and Technology",
+          "citations": 0
+        },
+        {
+          "title": "Shopping With a Price Comparison Browser Extension",
+          "url": "https://doi.org/10.1002/cb.2514",
+          "venue": "Journal of Consumer Behaviour",
+          "citations": 0
+        },
+        {
+          "title": "Somethingphishy: A Phishing Detection Browser Extension Using Logistic Regression",
+          "url": "https://doi.org/10.1109/iscaie64985.2025.11081133",
+          "venue": "2025 IEEE 15th Symposium on Computer Applications &amp;amp; Industrial Electronics (ISCAIE)",
+          "citations": 0
+        },
+        {
+          "title": "Webcam Eye-Tracking Browser Extension For General Navigation",
+          "url": "https://doi.org/10.1016/j.procs.2025.03.072",
+          "venue": "Procedia Computer Science",
+          "citations": 0
+        },
+        {
+          "title": "What Are Browser Extensions?",
+          "url": "https://doi.org/10.1007/979-8-8688-1594-2_1",
+          "venue": "Building Browser Extensions",
+          "citations": 0
+        },
+        {
+          "title": "Witty Gerbil Chrome Extension: A Browser-Based Framework for Comprehensive AI System Evaluation",
+          "url": "https://doi.org/10.1145/3701716.3717741",
+          "venue": "Companion Proceedings of the ACM on Web Conference 2025",
+          "citations": 0
+        },
+        {
+          "title": "liBERTa: Local Intelligence via Browser Extensions for Real-Time Applications",
+          "url": "https://doi.org/10.1109/icws67624.2025.00108",
+          "venue": "2025 IEEE International Conference on Web Services (ICWS)",
+          "citations": 0
+        }
+      ]
     },
     {
       "year": 2026,
-      "works": 164,
-      "citations": 1
+      "works": 18,
+      "citations": 0,
+      "papers": [
+        {
+          "title": "\"Securing the Browser: A Hybrid Static Analysis Framework for Detecting Malicious Chrome Extensions via Local Threat Intelligence\"",
+          "url": "https://doi.org/10.51583/ijltemas.2026.1501000102",
+          "venue": "International Journal of Latest Technology in Engineering Management &amp; Applied Science",
+          "citations": 0
+        },
+        {
+          "title": "A Browser Extension for Detecting Insecure Form Submissions Using Heuristics and DOM Inspection",
+          "url": "https://doi.org/10.1109/iitcee67948.2026.11394554",
+          "venue": "2026 International Conference on Intelligent and Innovative Technologies in Computing, Electrical and Electronics\u00a0(IITCEE)",
+          "citations": 0
+        },
+        {
+          "title": "A Study on Malicious Browser Extensions in2025",
+          "url": "https://doi.org/10.2139/ssrn.6519531",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "AXECC: Benchmarking the Privacy and Accessibility Impact of Browser Extensions",
+          "url": "https://doi.org/10.1145/3805701",
+          "venue": "ACM Transactions on Privacy and Security",
+          "citations": 0
+        },
+        {
+          "title": "An  Intelligent System for Detecting Online Gambling Promotion on Social Media Based on BERT and Adaptive Browser Extension",
+          "url": "https://doi.org/10.23887/janapati.v14i3.103511",
+          "venue": "Jurnal Nasional Pendidikan Teknik Informatika (JANAPATI)",
+          "citations": 0
+        },
+        {
+          "title": "Development and Testing of Generative AI-Based Browser Extension for Personalized Independent Learning",
+          "url": "https://doi.org/10.32664/icobits.v1.43",
+          "venue": "ICoBITS",
+          "citations": 0
+        },
+        {
+          "title": "Did I Vet You Before? Assessing the Chrome Web Store Vetting Process through Browser Extension Similarity",
+          "url": "https://doi.org/10.1109/tsc.2026.3675950",
+          "venue": "IEEE Transactions on Services Computing",
+          "citations": 0
+        },
+        {
+          "title": "Enhancing Online Privacy: Design and Evaluation of a Browser Extension Against Non-Consensual Tracking",
+          "url": "https://doi.org/10.1007/978-3-032-13485-1_30",
+          "venue": "Contributions to Finance and Accounting",
+          "citations": 0
+        },
+        {
+          "title": "Free Research for all?  How the Unpaywall browser extension is affecting scholarly communication",
+          "url": "https://doi.org/10.5206/cjils-rcsib.v49i1.20965",
+          "venue": "The Canadian Journal of Information and Library Science",
+          "citations": 0
+        },
+        {
+          "title": "Gef\u00e4hrliche Browser-Extensions \u2013 Der \u201cShadyPanda\u201d-Fall",
+          "url": "https://doi.org/10.1007/s11623-026-2220-x",
+          "venue": "Datenschutz und Datensicherheit - DuD",
+          "citations": 0
+        },
+        {
+          "title": "Perception of browser extension",
+          "url": "https://doi.org/10.1257/rct.17625-1.0",
+          "venue": "AEA Randomized Controlled Trials",
+          "citations": 0
+        },
+        {
+          "title": "Perception of browser extension",
+          "url": "https://doi.org/10.1257/rct.17625",
+          "venue": "AEA Randomized Controlled Trials",
+          "citations": 0
+        },
+        {
+          "title": "Phishing Detection Browser Extension",
+          "url": "https://doi.org/10.56726/irjmets93285",
+          "venue": "International Research Journal of Modernization in Engineering Technology &amp; Science",
+          "citations": 0
+        },
+        {
+          "title": "Phishing website detection browser extension using ML",
+          "url": "https://doi.org/10.59256/ijrtmr.20260601011",
+          "venue": "International Journal Of Recent Trends In Multidisciplinary Research",
+          "citations": 0
+        },
+        {
+          "title": "Prompt2Extension: A System for Generating Functional Browser Extensions from Natural Language Prompts",
+          "url": "https://doi.org/10.17148/ijarcce.2026.15145",
+          "venue": "IJARCCE",
+          "citations": 0
+        },
+        {
+          "title": "Real time identification of phishing attacks through machine learning enhanced browser extensions",
+          "url": "https://doi.org/10.1038/s41598-026-35655-7",
+          "venue": "Scientific Reports",
+          "citations": 0
+        },
+        {
+          "title": "SecureOutbox: A Local-First, Context-Aware Browser-Extension Framework for Preventing Sensitive Data Exfiltration via Quantized Small Language Models",
+          "url": "https://doi.org/10.36227/techrxiv.177015975.58711796/v1",
+          "venue": null,
+          "citations": 0
+        },
+        {
+          "title": "\u2018Honestly, i could lose a few hours on PubMed quite easily\u2019: breaking down the reading barriers of medical literature with an LLM-powered browser extension",
+          "url": "https://doi.org/10.1080/0144929x.2026.2619100",
+          "venue": "Behaviour &amp; Information Technology",
+          "citations": 0
+        }
+      ]
     }
-  ]
+  ],
+  "supplemental_sources": {
+    "usenix_security": {
+      "years_with_pages": [
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "matched_papers": 7,
+      "url_template": "https://www.usenix.org/conference/usenixsecurity{suffix}/technical-sessions",
+      "added_items": 7
+    }
+  }
 }
