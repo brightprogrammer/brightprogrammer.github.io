@@ -1,6 +1,13 @@
 (() => {
   const charts = new Set();
   let modalElements = null;
+  let resizeTimer = null;
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const getChartWidth = (chart) =>
+    chart?.canvas?.parentElement?.clientWidth ||
+    chart?.width ||
+    window.innerWidth ||
+    0;
 
   const ensureModal = () => {
     if (modalElements) {
@@ -163,6 +170,13 @@
     if (!chart) return;
     const { barColor, lineColor, pointColor, textColor, gridColor } =
       getThemeColors();
+    const chartWidth = getChartWidth(chart);
+    const compact = chartWidth < 460;
+    const scaleFactor = clamp(chartWidth / 560, 0.72, 1);
+    const tickFontSize = Math.round(12 * scaleFactor);
+    const legendFontSize = Math.round(12 * scaleFactor);
+    const axisTitleSize = Math.round(13 * scaleFactor);
+    const layoutPad = compact ? 8 : Math.round(12 * scaleFactor);
 
     const datasets = chart.data?.datasets || [];
     const bar = datasets.find((d) => d.type === "bar");
@@ -177,15 +191,38 @@
       line.backgroundColor = lineColor;
       line.pointBorderColor = pointColor;
       line.pointBackgroundColor = pointColor;
+      line.pointRadius = compact ? 1.5 : 2;
+      line.pointHoverRadius = compact ? 3 : 4;
     }
 
     const options = chart.options || {};
+    options.layout = {
+      padding: {
+        top: layoutPad,
+        right: layoutPad,
+        bottom: layoutPad,
+        left: layoutPad,
+      },
+    };
+
+    if (options.plugins?.legend) {
+      options.plugins.legend.position = compact ? "bottom" : "top";
+    }
     if (options.plugins?.legend?.labels) {
       options.plugins.legend.labels.color = textColor;
+      options.plugins.legend.labels.boxWidth = compact ? 12 : 16;
+      options.plugins.legend.labels.padding = compact ? 12 : 16;
+      options.plugins.legend.labels.font = {
+        size: legendFontSize,
+      };
     }
 
     if (options.scales?.x?.ticks) {
       options.scales.x.ticks.color = textColor;
+      options.scales.x.ticks.font = {
+        size: tickFontSize,
+      };
+      options.scales.x.ticks.maxTicksLimit = compact ? 6 : 10;
     }
     if (options.scales?.x?.grid) {
       options.scales.x.grid.color = gridColor;
@@ -193,19 +230,66 @@
 
     if (options.scales?.y?.ticks) {
       options.scales.y.ticks.color = textColor;
+      options.scales.y.ticks.font = {
+        size: tickFontSize,
+      };
+      options.scales.y.ticks.maxTicksLimit = compact ? 5 : 7;
     }
     if (options.scales?.y?.grid) {
       options.scales.y.grid.color = gridColor;
     }
     if (options.scales?.y?.title) {
       options.scales.y.title.color = textColor;
+      options.scales.y.title.display = !compact;
+      options.scales.y.title.font = {
+        size: axisTitleSize,
+      };
     }
 
     if (options.scales?.y1?.ticks) {
       options.scales.y1.ticks.color = textColor;
+      options.scales.y1.ticks.font = {
+        size: tickFontSize,
+      };
+      options.scales.y1.ticks.maxTicksLimit = compact ? 5 : 7;
     }
     if (options.scales?.y1?.title) {
       options.scales.y1.title.color = textColor;
+      options.scales.y1.title.display = !compact;
+      options.scales.y1.title.font = {
+        size: axisTitleSize,
+      };
+    }
+  };
+
+  const syncChart = (chart, mode = "none") => {
+    if (!chart) {
+      return;
+    }
+    chart.resize();
+    applyTheme(chart);
+    chart.update(mode);
+  };
+
+  const scheduleRefreshCharts = () => {
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+    resizeTimer = window.setTimeout(() => {
+      resizeTimer = null;
+      charts.forEach((chart) => {
+        syncChart(chart);
+      });
+    }, 120);
+  };
+
+  const bindResizeHandlers = () => {
+    window.addEventListener("resize", scheduleRefreshCharts);
+    window.addEventListener("orientationchange", scheduleRefreshCharts);
+    window.addEventListener("load", scheduleRefreshCharts);
+    window.addEventListener("pageshow", scheduleRefreshCharts);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", scheduleRefreshCharts);
     }
   };
 
@@ -275,6 +359,14 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 10,
+              right: 12,
+              bottom: 10,
+              left: 12,
+            },
+          },
           interaction: {
             mode: "index",
             intersect: false,
@@ -341,9 +433,11 @@
         },
       });
 
-      applyTheme(chart);
-      chart.update("none");
       charts.add(chart);
+      syncChart(chart);
+      window.requestAnimationFrame(() => {
+        syncChart(chart);
+      });
 
       const titleText = wrapper.querySelector(".paper-stats__title")?.textContent?.trim();
       canvas.addEventListener("click", (event) => {
@@ -370,8 +464,7 @@
   const observeThemeChanges = () => {
     const observer = new MutationObserver(() => {
       charts.forEach((chart) => {
-        applyTheme(chart);
-        chart.update("none");
+        syncChart(chart);
       });
     });
 
@@ -385,9 +478,11 @@
     document.addEventListener("DOMContentLoaded", () => {
       initCharts();
       observeThemeChanges();
+      bindResizeHandlers();
     });
   } else {
     initCharts();
     observeThemeChanges();
+    bindResizeHandlers();
   }
 })();

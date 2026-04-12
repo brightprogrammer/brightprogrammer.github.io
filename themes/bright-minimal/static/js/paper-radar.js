@@ -1,6 +1,41 @@
 (() => {
   const charts = new Set();
   let modalElements = null;
+  let resizeTimer = null;
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const getChartWidth = (chart) =>
+    chart?.canvas?.parentElement?.clientWidth ||
+    chart?.width ||
+    window.innerWidth ||
+    0;
+
+  const wrapLabel = (label, maxChars) => {
+    if (typeof label !== "string" || label.length <= maxChars) {
+      return label;
+    }
+
+    const words = label.split(/\s+/);
+    const lines = [];
+    let current = "";
+
+    words.forEach((word) => {
+      const next = current ? `${current} ${word}` : word;
+      if (next.length <= maxChars) {
+        current = next;
+        return;
+      }
+      if (current) {
+        lines.push(current);
+      }
+      current = word;
+    });
+
+    if (current) {
+      lines.push(current);
+    }
+
+    return lines.length > 1 ? lines : label;
+  };
 
   const ensureModal = () => {
     const existing = document.querySelector(".paper-modal");
@@ -171,6 +206,13 @@
     if (!chart) return;
     const { fillColor, lineColor, pointColor, textColor, gridColor } =
       getThemeColors();
+    const chartWidth = getChartWidth(chart);
+    const compact = chartWidth < 480;
+    const scaleFactor = clamp(chartWidth / 560, 0.68, 1);
+    const pointLabelSize = Math.round(12 * scaleFactor);
+    const tickSize = Math.round(11 * scaleFactor);
+    const layoutPad = compact ? 8 : Math.round(18 * scaleFactor);
+    const labelWrap = compact ? 14 : 18;
 
     const dataset = chart.data?.datasets?.[0];
     if (dataset) {
@@ -178,18 +220,73 @@
       dataset.borderColor = lineColor;
       dataset.pointBackgroundColor = pointColor;
       dataset.pointBorderColor = pointColor;
+      dataset.borderWidth = compact ? 1.5 : 2;
+      dataset.pointRadius = compact ? 2 : 3;
+      dataset.pointHoverRadius = compact ? 3 : 4;
     }
+
+    if (Array.isArray(chart.$rawLabels)) {
+      chart.data.labels = chart.$rawLabels.map((label) => wrapLabel(label, labelWrap));
+    }
+
+    chart.options.layout = {
+      padding: {
+        top: layoutPad,
+        right: layoutPad,
+        bottom: layoutPad,
+        left: layoutPad,
+      },
+    };
 
     const scale = chart.options?.scales?.r;
     if (scale) {
       scale.angleLines.color = gridColor;
       scale.grid.color = gridColor;
       scale.pointLabels.color = textColor;
+      scale.pointLabels.font = {
+        size: pointLabelSize,
+        weight: "600",
+      };
       scale.ticks.color = textColor;
+      scale.ticks.display = !compact;
+      scale.ticks.font = {
+        size: tickSize,
+      };
     }
 
     if (chart.options?.plugins?.legend?.labels) {
       chart.options.plugins.legend.labels.color = textColor;
+    }
+  };
+
+  const syncChart = (chart, mode = "none") => {
+    if (!chart) {
+      return;
+    }
+    chart.resize();
+    applyTheme(chart);
+    chart.update(mode);
+  };
+
+  const scheduleRefreshCharts = () => {
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+    resizeTimer = window.setTimeout(() => {
+      resizeTimer = null;
+      charts.forEach((chart) => {
+        syncChart(chart);
+      });
+    }, 120);
+  };
+
+  const bindResizeHandlers = () => {
+    window.addEventListener("resize", scheduleRefreshCharts);
+    window.addEventListener("orientationchange", scheduleRefreshCharts);
+    window.addEventListener("load", scheduleRefreshCharts);
+    window.addEventListener("pageshow", scheduleRefreshCharts);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", scheduleRefreshCharts);
     }
   };
 
@@ -276,12 +373,20 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 18,
+              right: 20,
+              bottom: 18,
+              left: 20,
+            },
+          },
           onClick: (event, elements, chartInstance) => {
             if (!elements.length) {
               return;
             }
             const index = elements[0].index;
-            const label = chartInstance.data.labels?.[index] || "Category";
+            const label = labels[index] || "Category";
             openModal({
               heading: `Paper themes - ${label}`,
               papers: buckets[index] || [],
@@ -300,7 +405,7 @@
             tooltip: {
               callbacks: {
                 label: (context) => {
-                  const label = context.chart.data.labels?.[context.dataIndex] || "";
+                  const label = labels[context.dataIndex] || "";
                   return `${label}: ${context.raw}`;
                 },
               },
@@ -326,16 +431,18 @@
         },
       });
 
-      applyTheme(chart);
-      chart.update();
+      chart.$rawLabels = labels;
       charts.add(chart);
+      syncChart(chart);
+      window.requestAnimationFrame(() => {
+        syncChart(chart);
+      });
     });
   };
 
   const updateTheme = () => {
     charts.forEach((chart) => {
-      applyTheme(chart);
-      chart.update();
+      syncChart(chart);
     });
   };
 
@@ -350,4 +457,5 @@
     attributeFilter: ["data-theme", "data-palette"],
   });
   initCharts();
+  bindResizeHandlers();
 })();

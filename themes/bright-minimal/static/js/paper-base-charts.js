@@ -1,5 +1,39 @@
 (() => {
   const charts = new Set();
+  let resizeTimer = null;
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const getChartWidth = (chart) =>
+    chart?.canvas?.parentElement?.clientWidth ||
+    chart?.width ||
+    window.innerWidth ||
+    0;
+  const wrapLabel = (label, maxChars) => {
+    if (typeof label !== "string" || label.length <= maxChars) {
+      return label;
+    }
+
+    const words = label.split(/\s+/);
+    const lines = [];
+    let current = "";
+
+    words.forEach((word) => {
+      const next = current ? `${current} ${word}` : word;
+      if (next.length <= maxChars) {
+        current = next;
+        return;
+      }
+      if (current) {
+        lines.push(current);
+      }
+      current = word;
+    });
+
+    if (current) {
+      lines.push(current);
+    }
+
+    return lines.length > 1 ? lines : label;
+  };
 
   const parseRgb = (value, fallback) => {
     if (!value) return fallback;
@@ -52,6 +86,12 @@
   const applyTheme = (chart) => {
     if (!chart) return;
     const colors = getThemeColors();
+    const chartWidth = getChartWidth(chart);
+    const compact = chartWidth < 460;
+    const scaleFactor = clamp(chartWidth / 560, 0.7, 1);
+    const tickFontSize = Math.round(12 * scaleFactor);
+    const legendFontSize = Math.round(12 * scaleFactor);
+    const layoutPad = compact ? 8 : Math.round(12 * scaleFactor);
 
     if (chart.$bpType === "doughnut") {
       const dataset = chart.data?.datasets?.[0];
@@ -65,7 +105,21 @@
 
       if (chart.options?.plugins?.legend?.labels) {
         chart.options.plugins.legend.labels.color = colors.textColor;
+        chart.options.plugins.legend.labels.boxWidth = compact ? 12 : 16;
+        chart.options.plugins.legend.labels.padding = compact ? 10 : 14;
+        chart.options.plugins.legend.labels.font = {
+          size: legendFontSize,
+        };
       }
+
+      chart.options.layout = {
+        padding: {
+          top: layoutPad,
+          right: layoutPad,
+          bottom: layoutPad,
+          left: layoutPad,
+        },
+      };
     }
 
     if (chart.$bpType === "bar") {
@@ -75,18 +129,40 @@
           flag ? colors.strongFill : colors.mutedFill
         );
         dataset.borderColor = colors.borderColor;
+        dataset.maxBarThickness = compact ? 16 : 20;
       }
 
       if (chart.options?.plugins?.legend?.labels) {
         chart.options.plugins.legend.labels.color = colors.textColor;
       }
 
+      chart.options.layout = {
+        padding: {
+          top: layoutPad,
+          right: layoutPad,
+          bottom: layoutPad,
+          left: layoutPad,
+        },
+      };
+
       const scales = chart.options?.scales;
       if (scales?.x?.ticks) {
         scales.x.ticks.color = colors.textColor;
+        scales.x.ticks.font = {
+          size: tickFontSize,
+        };
+        scales.x.ticks.maxTicksLimit = compact ? 5 : 7;
       }
       if (scales?.y?.ticks) {
         scales.y.ticks.color = colors.textColor;
+        scales.y.ticks.font = {
+          size: tickFontSize,
+        };
+        scales.y.ticks.callback = (value) => {
+          const label = chart.$gapLabels?.[value] || "";
+          const maxChars = chartWidth < 380 ? 14 : chartWidth < 460 ? 18 : 24;
+          return wrapLabel(label, maxChars);
+        };
       }
       if (scales?.x?.grid) {
         scales.x.grid.color = colors.gridColor;
@@ -94,6 +170,37 @@
       if (scales?.y?.grid) {
         scales.y.grid.color = colors.gridColor;
       }
+    }
+  };
+
+  const syncChart = (chart, mode = "none") => {
+    if (!chart) {
+      return;
+    }
+    chart.resize();
+    applyTheme(chart);
+    chart.update(mode);
+  };
+
+  const scheduleRefreshCharts = () => {
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+    resizeTimer = window.setTimeout(() => {
+      resizeTimer = null;
+      charts.forEach((chart) => {
+        syncChart(chart);
+      });
+    }, 120);
+  };
+
+  const bindResizeHandlers = () => {
+    window.addEventListener("resize", scheduleRefreshCharts);
+    window.addEventListener("orientationchange", scheduleRefreshCharts);
+    window.addEventListener("load", scheduleRefreshCharts);
+    window.addEventListener("pageshow", scheduleRefreshCharts);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", scheduleRefreshCharts);
     }
   };
 
@@ -148,6 +255,14 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10,
+            },
+          },
           plugins: {
             legend: {
               position: "bottom",
@@ -168,6 +283,7 @@
       });
       behaviorChart.$bpType = "doughnut";
       charts.add(behaviorChart);
+      syncChart(behaviorChart);
 
       const interfaceChart = new window.Chart(canvases[1].getContext("2d"), {
         type: "doughnut",
@@ -185,6 +301,14 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10,
+            },
+          },
           plugins: {
             legend: {
               position: "bottom",
@@ -205,6 +329,7 @@
       });
       interfaceChart.$bpType = "doughnut";
       charts.add(interfaceChart);
+      syncChart(interfaceChart);
 
       const gapLabels = fig3.labels || [];
       const gapCounts = fig3.counts || [];
@@ -233,6 +358,14 @@
           indexAxis: "y",
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 12,
+              right: 14,
+              bottom: 12,
+              left: 14,
+            },
+          },
           interaction: {
             mode: "nearest",
             intersect: true,
@@ -299,15 +432,22 @@
       });
       gapChart.$bpType = "bar";
       gapChart.$bpDisparity = gapDisparity;
+      gapChart.$gapLabels = gapLabels;
       charts.add(gapChart);
+      syncChart(gapChart);
+
+      window.requestAnimationFrame(() => {
+        syncChart(behaviorChart);
+        syncChart(interfaceChart);
+        syncChart(gapChart);
+      });
     });
   };
 
   const observeThemeChanges = () => {
     const observer = new MutationObserver(() => {
       charts.forEach((chart) => {
-        applyTheme(chart);
-        chart.update("none");
+        syncChart(chart);
       });
     });
 
@@ -321,9 +461,11 @@
     document.addEventListener("DOMContentLoaded", () => {
       initCharts();
       observeThemeChanges();
+      bindResizeHandlers();
     });
   } else {
     initCharts();
     observeThemeChanges();
+    bindResizeHandlers();
   }
 })();

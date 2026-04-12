@@ -77,12 +77,23 @@
     }
   };
 
-  const getViewportSize = () => {
+  const getViewportMetrics = () => {
     const viewport = window.visualViewport;
     return {
       width: viewport ? viewport.width : window.innerWidth,
       height: viewport ? viewport.height : window.innerHeight,
+      offsetLeft: viewport ? viewport.offsetLeft : 0,
+      offsetTop: viewport ? viewport.offsetTop : 0,
     };
+  };
+
+  const syncViewportVars = (viewport = getViewportMetrics()) => {
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--viewport-width", `${Math.ceil(viewport.width)}px`);
+    rootStyle.setProperty("--viewport-height", `${Math.ceil(viewport.height)}px`);
+    rootStyle.setProperty("--viewport-offset-x", `${viewport.offsetLeft}px`);
+    rootStyle.setProperty("--viewport-offset-y", `${viewport.offsetTop}px`);
+    return viewport;
   };
 
   const ensureOffscreen = () => {
@@ -98,13 +109,11 @@
     const dpr = window.devicePixelRatio || 1;
     const prevGridW = gridW || 1;
     const prevGridH = gridH || 1;
-    const viewport = getViewportSize();
+    const viewport = syncViewportVars();
     width = targetWidth ?? viewport.width;
     height = targetHeight ?? viewport.height;
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
+    canvas.width = Math.ceil(width * dpr);
+    canvas.height = Math.ceil(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const nextGridW = Math.max(70, Math.floor(width / qualityDivisor));
@@ -239,6 +248,7 @@
       speedFactor = 3.8;
     }
     refreshColors();
+    syncViewportVars();
     resize();
     render();
 
@@ -270,25 +280,17 @@
     raf = requestAnimationFrame(frame);
   };
 
-  window.addEventListener("resize", () => {
+  const scheduleResize = () => {
+    const viewport = syncViewportVars();
     if (resizeTimer) {
       window.clearTimeout(resizeTimer);
     }
     resizeTimer = window.setTimeout(() => {
       resizeTimer = null;
-      const viewport = getViewportSize();
       const widthDelta = Math.abs(viewport.width - width);
       const heightDelta = Math.abs(viewport.height - height);
-      const heightDeltaLimit = Math.max(140, height * 0.15);
-      if (width && widthDelta < 1) {
-        const heightIncrease = viewport.height - height;
-        const heightIncreaseLimit = Math.max(60, height * 0.08);
-        if (heightIncrease <= 0) {
-          return;
-        }
-        if (heightIncrease < heightIncreaseLimit && heightDelta < heightDeltaLimit) {
-          return;
-        }
+      if (widthDelta < 0.5 && heightDelta < 0.5) {
+        return;
       }
       resize({
         preserve: true,
@@ -297,7 +299,15 @@
       });
       render();
     }, 120);
-  });
+  };
+
+  window.addEventListener("resize", scheduleResize);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleResize);
+    window.visualViewport.addEventListener("scroll", () => {
+      syncViewportVars();
+    });
+  }
 
   window.addEventListener("theme-change", () => {
     refreshColors();
@@ -320,6 +330,7 @@
   window.addEventListener("pagehide", stop);
   window.addEventListener("pageshow", () => {
     refreshColors();
+    syncViewportVars();
     resize({ preserve: true });
     render();
     resume();
@@ -327,6 +338,7 @@
 
   window.addEventListener("load", () => {
     refreshColors();
+    syncViewportVars();
     render();
   });
 
