@@ -165,17 +165,27 @@
     }
 
     if (chart.$bpType === "bar") {
-      const dataset = chart.data?.datasets?.[0];
-      if (dataset && Array.isArray(chart.$bpDisparity)) {
-        dataset.backgroundColor = chart.$bpDisparity.map((flag) =>
-          flag ? colors.strongFill : colors.mutedFill
-        );
+      const datasets = chart.data?.datasets || [];
+      datasets.forEach((dataset) => {
+        if (dataset.$bpRole === "gap") {
+          dataset.backgroundColor = colors.strongFill;
+        } else if (dataset.$bpRole === "no-gap") {
+          dataset.backgroundColor = colors.mutedFill;
+        }
         dataset.borderColor = colors.borderColor;
         dataset.maxBarThickness = compact ? 16 : 20;
-      }
+      });
 
       if (chart.options?.plugins?.legend?.labels) {
         chart.options.plugins.legend.labels.color = colors.textColor;
+        chart.options.plugins.legend.labels.boxWidth = compact ? 12 : 16;
+        chart.options.plugins.legend.labels.padding = compact ? 10 : 14;
+        chart.options.plugins.legend.labels.font = {
+          size: legendFontSize,
+        };
+      }
+      if (chart.options?.plugins?.legend) {
+        chart.options.plugins.legend.position = compact ? "bottom" : "top";
       }
 
       chart.options.layout = {
@@ -377,6 +387,12 @@
       const gapCounts = fig3.counts || [];
       const gapDisparity = fig3.disparity || [];
       const gapInterfaces = fig3.interfaces || [];
+      const gapCountsWithDisparity = gapCounts.map((count, idx) =>
+        gapDisparity[idx] ? count : null
+      );
+      const gapCountsWithoutDisparity = gapCounts.map((count, idx) =>
+        gapDisparity[idx] ? null : count
+      );
 
       const gapChart = new window.Chart(canvases[2].getContext("2d"), {
         type: "bar",
@@ -384,15 +400,26 @@
           labels: gapLabels,
           datasets: [
             {
-              label: "Extensions (count)",
-              data: gapCounts,
-              backgroundColor: gapDisparity.map((flag) =>
-                flag ? colors.strongFill : colors.mutedFill
-              ),
+              label: "Privilege gap",
+              data: gapCountsWithDisparity,
+              backgroundColor: colors.strongFill,
               borderColor: colors.borderColor,
               borderWidth: 1,
               borderRadius: 6,
               maxBarThickness: 20,
+              stack: "gap",
+              $bpRole: "gap",
+            },
+            {
+              label: "No privilege gap",
+              data: gapCountsWithoutDisparity,
+              backgroundColor: colors.mutedFill,
+              borderColor: colors.borderColor,
+              borderWidth: 1,
+              borderRadius: 6,
+              maxBarThickness: 20,
+              stack: "gap",
+              $bpRole: "no-gap",
             },
           ],
         },
@@ -414,7 +441,8 @@
           },
           plugins: {
             legend: {
-              display: false,
+              display: true,
+              position: "top",
               labels: {
                 color: colors.textColor,
               },
@@ -446,6 +474,7 @@
           scales: {
             x: {
               beginAtZero: true,
+              stacked: true,
               ticks: {
                 color: colors.textColor,
                 precision: 0,
@@ -455,6 +484,7 @@
               },
             },
             y: {
+              stacked: true,
               ticks: {
                 color: colors.textColor,
                 callback: (value) => {

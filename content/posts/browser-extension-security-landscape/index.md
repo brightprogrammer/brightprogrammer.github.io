@@ -180,3 +180,18 @@ The clearest signal is [Manifest V3’s ban on remotely hosted code](https://dev
 The same is true in the store pipeline. The [Chrome Web Store Program Policies](https://developer.chrome.com/docs/webstore/program-policies/policies) require the narrowest permissions necessary, ban code obfuscation and concealed functionality, and allow removal when an extension exposes exploitable security bugs. The [review process](https://developer.chrome.com/docs/webstore/review-process/) explicitly targets scams, data harvesting, malware, and malicious actors, and published items can be warned, taken down, or auto-disabled. On the account side, [2-Step Verification is required](https://developer.chrome.com/docs/webstore/program-policies/two-step-verification/), and as of May 2025 Chrome Web Store also added [verified uploads](https://developer.chrome.com/blog/verified-uploads-cws), so developers can require future uploads to be signed by their own trusted key. That feature exists specifically to help even if the dashboard account or publishing workflow is compromised.
 
 **But this is not the same as saying supply chain is solved.** Chromium still treats the reviewed package, the publisher account, and the store update path as trust anchors. In other words, Chromium now clearly recognizes supply-chain abuse as part of extension security, but it handles that risk with code-reviewability rules, account hardening, signing, and store enforcement. The 2010 paper was mostly about over-privileged extension code. The 2026 landscape is about that *plus* malicious updates, compromised publisher accounts, opaque remote behavior, and post-publication enforcement. Architecture still matters, but the ecosystem has moved a lot of the fight into the supply chain.
+
+## Browser Extension Incidents Through Time
+
+The papers explain the model. The docs explain the platform. But neither really shows how browser extension abuse looked over time in the wild.
+
+So I put together a raw incident dataset from security news, advisories, and vendor writeups, then plotted the reports by year. The chart below keeps the raw yearly counts and stacks them by incident bucket, so it shows both how much reporting there was and what kind of cases were showing up.
+
+This is not a perfect count of every bad extension ever shipped. It is a reporting-based dataset, so the older years are thinner and the newer years are much easier to see. Also, some reports fit more than one label, so for the chart I assign each report to one primary display bucket to keep the stacked totals readable. Still, it is enough to show how the *shape* of the problem changed. If you want to inspect the raw file yourself, here is the exact dataset behind this chart: [browser_extension_incidents_raw.json](/data/incidents/browser_extension_incidents_raw.json).
+
+{{< incident-stats
+  data="browser_extension_incidents_raw"
+  title="Reported extension incidents in the accessible security-news corpus"
+  y_label="Incident reports"
+  note="Each bar shows raw yearly report counts, stacked by one primary display bucket: supply-chain, AI-related, vulnerability, malicious extension, or other. The dataset is collected by a script, so it can still be imperfect or inaccurate in places, but I manually checked the rough shape and the key classifications enough to trust it as a trend view. Click a year to inspect the incident list behind it."
+>}}

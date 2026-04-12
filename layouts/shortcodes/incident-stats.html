@@ -1,0 +1,86 @@
+{{ $dataKey := .Get "data" | default "browser_extension_incidents_raw" }}
+{{ $data := index .Site.Data.incidents $dataKey }}
+{{ $id := printf "incident-stats-%d" .Ordinal }}
+{{ $title := .Get "title" }}
+{{ $note := .Get "note" }}
+{{ $supplyLabel := .Get "supply_label" | default "Supply-chain" }}
+{{ $aiLabel := .Get "ai_label" | default "AI-related" }}
+{{ $vulnerabilityLabel := .Get "vulnerability_label" | default "Vulnerabilities" }}
+{{ $maliciousLabel := .Get "malicious_label" | default "Malicious extensions" }}
+{{ $otherLabel := .Get "other_label" | default "Other incidents" }}
+{{ $yLabel := .Get "y_label" | default "Incident reports" }}
+{{ $years := slice }}
+{{ $started := false }}
+
+{{ if not (.Page.Scratch.Get "chartjs") }}
+  {{ .Page.Scratch.Set "chartjs" true }}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+{{ end }}
+{{ if not (.Page.Scratch.Get "incidentStatsChart") }}
+  {{ .Page.Scratch.Set "incidentStatsChart" true }}
+  <script src="/js/incident-stats.js" defer></script>
+{{ end }}
+
+{{ range $entry := $data.by_year }}
+  {{ $bucketScratch := newScratch }}
+  {{ $bucketScratch.Set "supply" 0 }}
+  {{ $bucketScratch.Set "ai" 0 }}
+  {{ $bucketScratch.Set "vulnerability" 0 }}
+  {{ $bucketScratch.Set "malicious" 0 }}
+  {{ $bucketScratch.Set "other" 0 }}
+  {{ range $incident := $entry.entries }}
+    {{ if in $incident.incident_types "supply-chain" }}
+      {{ $bucketScratch.Add "supply" 1 }}
+    {{ else if in $incident.incident_types "ai-related" }}
+      {{ $bucketScratch.Add "ai" 1 }}
+    {{ else if in $incident.incident_types "vulnerability" }}
+      {{ $bucketScratch.Add "vulnerability" 1 }}
+    {{ else if in $incident.incident_types "malicious-extension" }}
+      {{ $bucketScratch.Add "malicious" 1 }}
+    {{ else }}
+      {{ $bucketScratch.Add "other" 1 }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $started) (gt $entry.count 0) }}
+    {{ $started = true }}
+  {{ end }}
+  {{ if $started }}
+    {{ $years = $years | append (dict
+      "year" $entry.year
+      "count" $entry.count
+      "supply" ($bucketScratch.Get "supply")
+      "ai" ($bucketScratch.Get "ai")
+      "vulnerability" ($bucketScratch.Get "vulnerability")
+      "malicious" ($bucketScratch.Get "malicious")
+      "other" ($bucketScratch.Get "other")
+      "entries" $entry.entries
+    ) }}
+  {{ end }}
+{{ end }}
+
+{{ $payload := dict
+  "labels" (dict
+    "supply" $supplyLabel
+    "ai" $aiLabel
+    "vulnerability" $vulnerabilityLabel
+    "malicious" $maliciousLabel
+    "other" $otherLabel
+    "y" $yLabel
+  )
+  "years" $years
+}}
+
+<figure class="paper-stats" data-incident-stats>
+  {{ with $title }}
+    <div class="paper-stats__title">{{ . }}</div>
+  {{ end }}
+  <div class="paper-stats__chart">
+    <canvas id="{{ $id }}" aria-label="{{ $title | default "Browser extension incident reports by year" }}"></canvas>
+  </div>
+  <script type="application/json" data-incident-stats-json>
+    {{ $payload | jsonify }}
+  </script>
+  {{ with $note }}
+    <figcaption class="paper-stats__note">{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>
