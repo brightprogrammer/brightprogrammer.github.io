@@ -1,5 +1,132 @@
 (() => {
   const charts = new Set();
+  let modalElements = null;
+
+  const ensureModal = () => {
+    if (modalElements) {
+      return modalElements;
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "paper-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+      <div class="paper-modal__backdrop" data-paper-modal-close></div>
+      <div class="paper-modal__content" role="document">
+        <div class="paper-modal__header">
+          <div>
+            <div class="paper-modal__title"></div>
+            <div class="paper-modal__meta"></div>
+          </div>
+          <button class="paper-modal__close" type="button" aria-label="Close" data-paper-modal-close>x</button>
+        </div>
+        <div class="paper-modal__body"></div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeModal = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    };
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest("[data-paper-modal-close]")) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+
+    modalElements = {
+      modal,
+      title: modal.querySelector(".paper-modal__title"),
+      meta: modal.querySelector(".paper-modal__meta"),
+      body: modal.querySelector(".paper-modal__body"),
+      closeModal,
+    };
+
+    return modalElements;
+  };
+
+  const openModal = ({ title, yearData, yearLabel }) => {
+    const elements = ensureModal();
+    const { modal, body, meta } = elements;
+
+    const heading = title ? `${title} - ${yearLabel}` : `Papers - ${yearLabel}`;
+    elements.title.textContent = heading;
+
+    const papers = yearData?.papers || [];
+    const citations = yearData?.citations || 0;
+    const papersCount = yearData?.works || papers.length;
+    meta.textContent = `${papersCount} papers - ${citations} citations`;
+
+    body.textContent = "";
+
+    if (!papers.length) {
+      const empty = document.createElement("div");
+      empty.className = "paper-modal__empty";
+      empty.textContent = "No papers found for this year in the dataset.";
+      body.appendChild(empty);
+    } else {
+      const list = document.createElement("ol");
+      list.className = "paper-modal__list";
+
+      papers.forEach((paper) => {
+        const li = document.createElement("li");
+        li.className = "paper-modal__item";
+
+        const titleText = paper.title || "Untitled";
+        if (paper.url) {
+          const link = document.createElement("a");
+          link.href = paper.url;
+          link.textContent = titleText;
+          link.setAttribute("data-external", "true");
+          link.setAttribute("rel", "noopener noreferrer");
+          li.appendChild(link);
+        } else {
+          const span = document.createElement("span");
+          span.textContent = titleText;
+          li.appendChild(span);
+        }
+
+        const metaBits = [];
+        if (paper.venue) {
+          metaBits.push(paper.venue);
+        }
+        if (paper.citations) {
+          metaBits.push(`${paper.citations} citations`);
+        }
+        if (metaBits.length) {
+          const metaLine = document.createElement("div");
+          metaLine.className = "paper-modal__item-meta";
+          metaLine.textContent = metaBits.join(" - ");
+          li.appendChild(metaLine);
+        }
+
+        list.appendChild(li);
+      });
+
+      body.appendChild(list);
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+
+    const focusTarget = modal.querySelector(".paper-modal__close");
+    if (focusTarget) {
+      focusTarget.focus();
+    }
+  };
 
   const getThemeColors = () => {
     const rootStyle = getComputedStyle(document.documentElement);
@@ -152,6 +279,12 @@
             mode: "index",
             intersect: false,
           },
+          onHover: (event, elements) => {
+            const target = event?.native?.target;
+            if (target) {
+              target.style.cursor = elements.length ? "pointer" : "default";
+            }
+          },
           plugins: {
             legend: {
               labels: {
@@ -211,6 +344,26 @@
       applyTheme(chart);
       chart.update("none");
       charts.add(chart);
+
+      const titleText = wrapper.querySelector(".paper-stats__title")?.textContent?.trim();
+      canvas.addEventListener("click", (event) => {
+        const points = chart.getElementsAtEventForMode(
+          event,
+          "nearest",
+          { intersect: true },
+          true
+        );
+        if (!points.length) {
+          return;
+        }
+        const index = points[0].index;
+        const yearData = years[index];
+        if (!yearData) {
+          return;
+        }
+        const yearLabel = labels[index];
+        openModal({ title: titleText, yearData, yearLabel });
+      });
     });
   };
 
