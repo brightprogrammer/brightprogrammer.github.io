@@ -251,11 +251,11 @@
     const roleMixSteps =
       theme === "dark"
         ? {
-            supply: { target: [255, 255, 255], ratio: 0.18 },
-            ai: { target: [255, 255, 255], ratio: 0.08 },
-            vulnerability: { target: contentAccentRgb, ratio: 0 },
-            malicious: { target: bgRgb, ratio: 0.16 },
-            other: { target: bgRgb, ratio: 0.32 },
+            supply: { target: [255, 255, 255], ratio: 0.28 },
+            ai: { target: [255, 255, 255], ratio: 0.14 },
+            vulnerability: { target: [255, 255, 255], ratio: 0.04 },
+            malicious: { target: bgRgb, ratio: 0.18 },
+            other: { target: bgRgb, ratio: 0.42 },
           }
         : {
             supply: { target: textRgb, ratio: 0.26 },
@@ -278,6 +278,25 @@
         ];
       })
     );
+    const roleBorderRgb = Object.fromEntries(
+      Object.entries(roleFillRgb).map(([key, rgb]) => {
+        const adjusted =
+          theme === "dark"
+            ? ensureContrastRgb(
+                mixRgb(rgb, [255, 255, 255], 0.22),
+                bgRgb,
+                [255, 255, 255],
+                3.9
+              )
+            : ensureContrastRgb(
+                mixRgb(rgb, textRgb, 0.2),
+                bgRgb,
+                textRgb,
+                3.1
+              );
+        return [key, adjusted];
+      })
+    );
 
     return {
       roleColors: {
@@ -287,6 +306,13 @@
         malicious: toCss(roleFillRgb.malicious, theme === "dark" ? 0.9 : 0.9),
         other: toCss(roleFillRgb.other, theme === "dark" ? 0.9 : 0.9),
       },
+      roleBorderColors: {
+        supply: toCss(roleBorderRgb.supply, theme === "dark" ? 0.92 : 0.82),
+        ai: toCss(roleBorderRgb.ai, theme === "dark" ? 0.92 : 0.82),
+        vulnerability: toCss(roleBorderRgb.vulnerability, theme === "dark" ? 0.92 : 0.82),
+        malicious: toCss(roleBorderRgb.malicious, theme === "dark" ? 0.92 : 0.82),
+        other: toCss(roleBorderRgb.other, theme === "dark" ? 0.92 : 0.82),
+      },
       borderColor: toCss(strongRgb, theme === "dark" ? 0.7 : 0.6),
       textColor,
       gridColor: toCss(gridRgb, theme === "dark" ? 0.3 : 0.2),
@@ -295,7 +321,7 @@
 
   const applyTheme = (chart) => {
     if (!chart) return;
-    const { roleColors, borderColor, textColor, gridColor } = getThemeColors();
+    const { roleColors, roleBorderColors, borderColor, textColor, gridColor } = getThemeColors();
     const chartWidth = getChartWidth(chart);
     const compact = chartWidth < 460;
     const scaleFactor = clamp(chartWidth / 560, 0.72, 1);
@@ -307,7 +333,12 @@
     const datasets = chart.data?.datasets || [];
     datasets.forEach((dataset) => {
       dataset.backgroundColor = roleColors[dataset.$incidentRole] || roleColors.other;
-      dataset.borderColor = borderColor;
+      dataset.hoverBackgroundColor = roleColors[dataset.$incidentRole] || roleColors.other;
+      dataset.borderColor =
+        roleBorderColors[dataset.$incidentRole] || borderColor;
+      dataset.hoverBorderColor =
+        roleBorderColors[dataset.$incidentRole] || borderColor;
+      dataset.borderWidth = compact ? 1.2 : 1.5;
       dataset.maxBarThickness = compact ? 18 : 22;
     });
 
@@ -427,9 +458,9 @@
         data: years.map((entry) => entry[key] || 0),
         backgroundColor: colors.roleColors[key] || colors.roleColors.other,
         hoverBackgroundColor: colors.roleColors[key] || colors.roleColors.other,
-        borderColor: colors.borderColor,
-        hoverBorderColor: colors.borderColor,
-        borderWidth: 1,
+        borderColor: colors.roleBorderColors[key] || colors.borderColor,
+        hoverBorderColor: colors.roleBorderColors[key] || colors.borderColor,
+        borderWidth: 1.5,
         borderRadius: 6,
         stack: "incidents",
         $incidentRole: key,
