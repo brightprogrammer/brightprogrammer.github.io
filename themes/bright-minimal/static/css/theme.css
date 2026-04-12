@@ -455,6 +455,38 @@ video {
   color: var(--muted);
 }
 
+.paper-base__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.paper-base__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+}
+
+.paper-base__chart {
+  height: clamp(220px, 38vw, 300px);
+}
+
+.paper-base__wide {
+  height: clamp(360px, 70vw, 560px);
+}
+
+@media (max-width: 720px) {
+  .paper-base__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .paper-base__wide {
+    height: clamp(380px, 90vw, 520px);
+  }
+}
+
 .paper-modal {
   position: fixed;
   inset: 0;

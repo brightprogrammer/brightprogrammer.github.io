@@ -62,3 +62,67 @@ For context, our first presentation was on onion-routing security. I started wit
   title="Paper themes"
   note="Manually curated buckets; overlap is minimized by assigning each paper to a single category."
 >}}
+
+## [Protecting Browsers from Extension Vulnerabilities](https://www.ndss-symposium.org/ndss2010/protecting-browsers-extension-vulnerabilities/)
+
+Back in 2010, browser extension security wasn't treated as its own serious research topic. Firefox extensions ran with the browser's full privileges, and security failures mostly looked like "bad extensions" rather than an architectural problem. This paper flips that framing: the Berkeley + Google authors study real Firefox extensions, show that most of them are over-privileged, and use that evidence to motivate a new extension architecture that later shaped Chrome.
+
+The proposal is simple in spirit but strong in effect: least privilege by default, privilege separation by construction, and hard isolation between components. Extensions are split into content scripts (exposed to web pages), a core (where most privileges live), and an optional native binary (powerful but kept far from web input). The idea is to make an exploit chain harder, not just make any one bug less likely.
+
+### What they measured (and what fell out)
+
+Their first move was empirical. They manually inspected 25 popular Firefox extensions to understand the behaviors those extensions actually needed, then compared those needs to the power of the interfaces they used. The gap is the story:
+
+- Only 3 out of 25 required "critical" privileges, yet all 25 effectively had them.
+- 19 used critical-rated interfaces despite not needing critical privileges.
+- 76% of the extensions used interfaces that were more powerful than their behavior required.
+
+The plots below recreate the paper's Figure 2 and Figure 3 with Chart.js. The left donut chart is the most powerful behavior each extension truly needs; the right donut is the most powerful interface they used to implement that behavior. The horizontal bars show how often specific behaviors appeared and whether each one had a privilege gap (highlighted).
+
+{{< paper-base-charts >}}
+
+### Threat model (who the attacker is)
+
+The paper assumes "benign-but-buggy" extensions: developers are well-meaning, but not necessarily security experts. The attacker doesn't trick users into installing native executables. Instead, they exploit vulnerabilities in extension code and inherit the extension's privileges. The model includes two attacker types:
+
+- A web attacker controlling a site the user visits.
+- An active network attacker who can tamper with HTTP traffic.
+
+The browser itself is treated as non-vulnerable so the focus stays on extension risk.
+
+### Vulnerability classes they highlight
+
+They focus on how web content can reach powerful extension privileges:
+
+- Extension XSS (e.g., unsafe `eval` or `document.write`) and how optional sandboxing isn't a full fix.
+- Mixed-content injection (loading scripts over HTTP or injecting HTTP into HTTPS pages).
+- Replacing native DOM APIs with attacker-controlled lookalikes (the XPCNativeWrapper story).
+- JavaScript capability leaks (exposing privileged objects to web pages).
+
+Each class is less about a specific bug and more about how tightly Firefox bound untrusted content to powerful extension APIs.
+
+### How they manually analyzed Firefox extensions and APIs
+
+The survey was hands-on. They picked two extensions from each of 13 "recommended" Firefox categories (25 total), ran them, and used the UI to understand what each extension actually needed to do. They then searched for API interfaces in the source code and manually matched behavior to interfaces. That let them assign a security severity level to behaviors and interfaces using Mozilla's five-level scale: critical, high, medium, low, none.
+
+This manual mapping is why the "gap" is convincing: it's not just static analysis of code; it's behavioral intent vs. the actual capabilities the code grabbed.
+
+### The deductive system for escalation points
+
+Beyond the survey, the paper tries to answer a deeper question: if an extension requests a low-privilege interface, can it still reach a high-privilege one through the API surface? To answer that, they model the Firefox extension API (XPCOM) as a security lattice and compute reachability through interfaces.
+
+Key parts of their setup:
+
+- Interfaces are defined in an IDL (think CORBA-style types). The browser enforces the declared parameter and return types.
+- They manually labeled 613 interfaces (out of 1582 total) with security severity.
+- They built a Datalog-backed analyzer that deduces what interfaces become reachable when you have access to a given interface.
+
+The inference rules are the interesting bit. In plain language, they track how access can flow:
+
+- If an interface is a subtype of another, you inherit reachability (subtyping).
+- If an interface exposes a method that returns another interface, you can reach the return type (method/return).
+- If you can pass an object into a method, you can sometimes obtain references back (parameter flow).
+- Getters and setters are treated as methods with return or input types.
+- Type forgery: any principal can manufacture an object that claims to implement an interface, which means you can sometimes unlock methods you weren't supposed to call.
+
+Because they don't analyze concrete implementations, this is an over-approximation. That's a feature here: the goal is to surface potential escalation paths and identify "escalation points" where a narrow interface still leaks broader power. Those points are exactly what their new Chrome-like extension design tries to eliminate.
