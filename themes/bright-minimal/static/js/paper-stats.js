@@ -8,6 +8,23 @@
     chart?.width ||
     window.innerWidth ||
     0;
+  const parseRgb = (value, fallback) => {
+    if (!value) {
+      return fallback;
+    }
+    const parts = value.trim().split(/\s+/).map((entry) => Number(entry));
+    if (parts.length !== 3 || parts.some((entry) => Number.isNaN(entry))) {
+      return fallback;
+    }
+    return parts;
+  };
+  const mixChannel = (a, b, ratio) => Math.round(a + (b - a) * ratio);
+  const mixRgb = (rgb, target, ratio) =>
+    rgb.map((channel, index) => mixChannel(channel, target[index], ratio));
+  const toCss = (rgb, alpha) =>
+    alpha === undefined
+      ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
+      : `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
 
   const ensureModal = () => {
     if (modalElements) {
@@ -138,31 +155,41 @@
   const getThemeColors = () => {
     const rootStyle = getComputedStyle(document.documentElement);
     const theme = document.documentElement.getAttribute("data-theme") || "light";
-    const palette =
-      theme === "dark"
-        ? {
-            bar: "rgba(255, 185, 0, 0.36)",
-            line: "#fe9a00",
-            point: "#ffd230",
-            grid: "rgba(255, 185, 0, 0.18)",
-          }
-        : {
-            bar: "rgba(225, 113, 0, 0.48)",
-            line: "#bb4d00",
-            point: "#973c00",
-            grid: "rgba(187, 77, 0, 0.2)",
-          };
+    const accentRgb = parseRgb(
+      rootStyle.getPropertyValue("--accent-rgb"),
+      theme === "dark" ? [148, 163, 184] : [63, 75, 90]
+    );
+    const bgRgb = parseRgb(
+      rootStyle.getPropertyValue("--bg-rgb"),
+      theme === "dark" ? [18, 20, 23] : [244, 245, 247]
+    );
+    const textRgb = parseRgb(
+      rootStyle.getPropertyValue("--text-rgb"),
+      theme === "dark" ? [230, 231, 232] : [31, 36, 41]
+    );
     const textColor =
       rootStyle.getPropertyValue("--text").trim() ||
       getComputedStyle(document.body).color ||
       "#0f172a";
+    const lineRgb =
+      theme === "dark"
+        ? mixRgb(accentRgb, [255, 255, 255], 0.12)
+        : mixRgb(accentRgb, textRgb, 0.08);
+    const pointRgb =
+      theme === "dark"
+        ? mixRgb(accentRgb, [255, 255, 255], 0.24)
+        : mixRgb(accentRgb, textRgb, 0.18);
+    const barRgb =
+      theme === "dark"
+        ? mixRgb(accentRgb, bgRgb, 0.12)
+        : mixRgb(accentRgb, bgRgb, 0.08);
 
     return {
-      barColor: palette.bar,
-      lineColor: palette.line,
-      pointColor: palette.point,
+      barColor: toCss(barRgb, theme === "dark" ? 0.34 : 0.42),
+      lineColor: toCss(lineRgb),
+      pointColor: toCss(pointRgb),
       textColor,
-      gridColor: palette.grid,
+      gridColor: toCss(accentRgb, theme === "dark" ? 0.2 : 0.18),
     };
   };
 
@@ -327,6 +354,7 @@
       }
 
       canvas.dataset.chartInitialized = "true";
+      const colors = getThemeColors();
 
       const chart = new window.Chart(ctx, {
         data: {
@@ -337,8 +365,8 @@
               label: "Papers",
               data: works,
               yAxisID: "y",
-              backgroundColor: "rgba(225, 113, 0, 0.48)",
-              borderColor: "#bb4d00",
+              backgroundColor: colors.barColor,
+              borderColor: colors.lineColor,
               borderWidth: 1,
             },
             {
@@ -346,10 +374,10 @@
               label: "Citations",
               data: citations,
               yAxisID: "y1",
-              borderColor: "#bb4d00",
-              backgroundColor: "#bb4d00",
-              pointBorderColor: "#973c00",
-              pointBackgroundColor: "#973c00",
+              borderColor: colors.lineColor,
+              backgroundColor: colors.lineColor,
+              pointBorderColor: colors.pointColor,
+              pointBackgroundColor: colors.pointColor,
               pointRadius: 2,
               pointHoverRadius: 4,
               tension: 0.25,
@@ -380,7 +408,7 @@
           plugins: {
             legend: {
               labels: {
-                color: "#0f172a",
+                color: colors.textColor,
               },
             },
             tooltip: {
@@ -391,34 +419,34 @@
           scales: {
             x: {
               ticks: {
-                color: "#0f172a",
+                color: colors.textColor,
                 maxRotation: 0,
                 autoSkip: true,
                 maxTicksLimit: 10,
               },
               grid: {
-                color: "rgba(187, 77, 0, 0.2)",
+                color: colors.gridColor,
               },
             },
             y: {
               beginAtZero: true,
               ticks: {
-                color: "#0f172a",
+                color: colors.textColor,
               },
               grid: {
-                color: "rgba(187, 77, 0, 0.2)",
+                color: colors.gridColor,
               },
               title: {
                 display: true,
                 text: "Papers",
-                color: "#0f172a",
+                color: colors.textColor,
               },
             },
             y1: {
               beginAtZero: true,
               position: "right",
               ticks: {
-                color: "#0f172a",
+                color: colors.textColor,
               },
               grid: {
                 drawOnChartArea: false,
@@ -426,7 +454,7 @@
               title: {
                 display: true,
                 text: "Citations",
-                color: "#0f172a",
+                color: colors.textColor,
               },
             },
           },

@@ -447,7 +447,13 @@
   };
 
   const observer = new MutationObserver((mutations) => {
-    if (mutations.some((mutation) => mutation.attributeName === "data-theme")) {
+    if (
+      mutations.some(
+        (mutation) =>
+          mutation.attributeName === "data-theme" ||
+          mutation.attributeName === "data-palette"
+      )
+    ) {
       updateTheme();
     }
   });
