@@ -65,7 +65,7 @@ For context, our first presentation was on onion-routing security. I started wit
 
 ## [Protecting Browsers from Extension Vulnerabilities](https://www.ndss-symposium.org/ndss2010/protecting-browsers-extension-vulnerabilities/)
 
-Back in 2010, browser extension security wasn't treated as its own serious research topic. Firefox extensions ran with the browser's full privileges, and security failures mostly looked like "bad extensions" rather than an architectural problem. This paper flips that framing: the Berkeley + Google authors study real Firefox extensions, show that most of them are over-privileged, and use that evidence to motivate a new extension architecture that later shaped Chrome.
+Back in 2010, browser extension security wasn't treated as its own serious research topic. Firefox extensions ran with the browser's full privileges, and security failures mostly looked like "bad extensions" rather than an architectural problem. A year earlier, DEFCON 17 had a talk titled ["Abusing Firefox Extensions"](https://www.defcon.org/images/defcon-17/dc-17-presentations/defcon-17-roberto_liverani-nick_freeman-abusing_firefox.pdf) by Liverani and Freeman that demonstrated practical attacks against popular extensions, which helped underline how serious the problem was. This paper flips the framing: the Berkeley + Google authors study real Firefox extensions, show that most of them are over-privileged, and use that evidence to motivate a new extension architecture that later shaped Chrome.
 
 The proposal is simple in spirit but strong in effect: least privilege by default, privilege separation by construction, and hard isolation between components. Extensions are split into content scripts (exposed to web pages), a core (where most privileges live), and an optional native binary (powerful but kept far from web input). The idea is to make an exploit chain harder, not just make any one bug less likely.
 
@@ -77,9 +77,10 @@ Their first move was empirical. They manually inspected 25 popular Firefox exten
 - 19 used critical-rated interfaces despite not needing critical privileges.
 - 76% of the extensions used interfaces that were more powerful than their behavior required.
 
-The plots below recreate the paper's Figure 2 and Figure 3 with Chart.js. The left donut chart is the most powerful behavior each extension truly needs; the right donut is the most powerful interface they used to implement that behavior. The horizontal bars show how often specific behaviors appeared and whether each one had a privilege gap (highlighted).
-
-{{< paper-base-charts >}}
+{{< paper-base-charts
+  donut_note="The donut charts show the highest privilege level per extension. On the behavior side, that means the most powerful action an extension actually needed. On the interface side, it means the most powerful interface the implementation touched."
+  bar_note="The horizontal bars show how common each behavior was and whether it came with a privilege gap--cases where the interface power exceeded the behavior's true need. The mismatch is the headline: a small slice of extensions need critical power, but a much larger slice end up touching critical APIs."
+>}}
 
 ### Threat model (who the attacker is)
 
@@ -89,6 +90,8 @@ The paper assumes "benign-but-buggy" extensions: developers are well-meaning, bu
 - An active network attacker who can tamper with HTTP traffic.
 
 The browser itself is treated as non-vulnerable so the focus stays on extension risk.
+
+One subtlety the paper calls out: extensions are not the same as plug-ins. Plug-ins are typically loaded by sites via specific MIME types, while extensions act on pages without explicit site requests. The paper stays scoped to extensions only, not plug-ins. In practice, classic browser plug-ins are basically gone today (NPAPI/Flash/Java/Silverlight are all retired), so the paper’s focus on extensions also lines up with how browsers actually work now.
 
 ### Vulnerability classes they highlight
 

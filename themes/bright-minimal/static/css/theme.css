@@ -477,6 +477,10 @@ video {
   height: clamp(360px, 70vw, 560px);
 }
 
+.paper-base__note {
+  margin: 0.65rem 0 1rem;
+}
+
 @media (max-width: 720px) {
   .paper-base__grid {
     grid-template-columns: 1fr;

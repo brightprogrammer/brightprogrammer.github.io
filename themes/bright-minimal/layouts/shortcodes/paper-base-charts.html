@@ -1,6 +1,8 @@
 {{ $id := printf "paper-base-%d" .Ordinal }}
 {{ $title := .Get "title" | default "Firefox extension privilege gap (NDSS 2010)" }}
 {{ $note := .Get "note" | default "Replotted from Figure 2 and Figure 3 in \"Protecting Browsers from Extension Vulnerabilities\" (NDSS 2010)." }}
+{{ $donutNote := .Get "donut_note" }}
+{{ $barNote := .Get "bar_note" }}
 
 {{ if not (.Page.Scratch.Get "chartjs") }}
   {{ .Page.Scratch.Set "chartjs" true }}
@@ -29,12 +31,18 @@
       </div>
     </div>
   </div>
+  {{ with $donutNote }}
+    <div class="paper-stats__note paper-base__note">{{ . | markdownify }}</div>
+  {{ end }}
   <div>
     <div class="paper-base__label">Behavior vs interface gap (frequency across 25 extensions)</div>
     <div class="paper-stats__chart paper-base__wide">
       <canvas id="{{ $id }}-gap" aria-label="Privilege gap by behavior"></canvas>
     </div>
   </div>
+  {{ with $barNote }}
+    <div class="paper-stats__note paper-base__note">{{ . | markdownify }}</div>
+  {{ end }}
   <script type="application/json" data-paper-base-json>
     {{ dict "fig2" (dict
       "behavior" (dict "labels" (slice "Critical" "High" "Medium" "Low" "None") "counts" (slice 3 12 3 3 4))
