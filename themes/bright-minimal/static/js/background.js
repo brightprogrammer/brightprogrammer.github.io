@@ -16,7 +16,7 @@
   let resizeTimer = null;
   let offscreen = null;
   let offCtx = null;
-  let qualityDivisor = 12;
+  let targetGridPixels = 18000;
   let pointDivisor = 140;
   let frameInterval = 0.035;
   let speedFactor = 5;
@@ -43,6 +43,7 @@
   };
 
   const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
   const refreshColors = () => {
     const styles = getComputedStyle(document.documentElement);
@@ -105,6 +106,67 @@
     }
   };
 
+  const createVelocity = () =>
+    (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
+
+  const createBalancedColors = (count) =>
+    Array.from({ length: count }, (_, index) => colors[index % colors.length]);
+
+  const rebalancePointColors = () => {
+    if (!points.length || !colors.length) {
+      return;
+    }
+    const balancedColors = createBalancedColors(points.length);
+    const orderedPoints = [...points].sort((a, b) =>
+      a.y === b.y ? a.x - b.x : a.y - b.y
+    );
+    orderedPoints.forEach((point, index) => {
+      point.color = balancedColors[index];
+    });
+  };
+
+  const createSeedPoints = (
+    count,
+    maxWidth,
+    maxHeight,
+    { minX = 0, minY = 0, maxX = maxWidth, maxY = maxHeight } = {}
+  ) => {
+    const spanW = Math.max(1, maxX - minX);
+    const spanH = Math.max(1, maxY - minY);
+    const cols = Math.max(1, Math.ceil(Math.sqrt((count * spanW) / spanH)));
+    const rows = Math.max(1, Math.ceil(count / cols));
+    const cellW = spanW / cols;
+    const cellH = spanH / rows;
+    const cells = Array.from({ length: cols * rows }, (_, index) => index);
+
+    for (let i = cells.length - 1; i > 0; i -= 1) {
+      const swapIndex = Math.floor(Math.random() * (i + 1));
+      [cells[i], cells[swapIndex]] = [cells[swapIndex], cells[i]];
+    }
+
+    return Array.from({ length: count }, (_, index) => {
+      const cell = cells[index];
+      const col = cell % cols;
+      const row = Math.floor(cell / cols);
+      return {
+        x: minX + col * cellW + (0.2 + Math.random() * 0.6) * cellW,
+        y: minY + row * cellH + (0.2 + Math.random() * 0.6) * cellH,
+        vx: createVelocity(),
+        vy: createVelocity(),
+        color: colors[index % colors.length],
+      };
+    });
+  };
+
+  const getGridSize = (targetWidth, targetHeight) => {
+    const area = Math.max(1, targetWidth * targetHeight);
+    const divisor = Math.max(1, Math.sqrt(area / targetGridPixels));
+    return {
+      width: Math.max(70, Math.min(Math.ceil(targetWidth), Math.round(targetWidth / divisor))),
+      height: Math.max(54, Math.min(Math.ceil(targetHeight), Math.round(targetHeight / divisor))),
+    };
+  };
+
   const resize = ({ preserve = false, targetWidth, targetHeight } = {}) => {
     const dpr = window.devicePixelRatio || 1;
     const prevGridW = gridW || 1;
@@ -116,8 +178,9 @@
     canvas.height = Math.ceil(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const nextGridW = Math.max(70, Math.floor(width / qualityDivisor));
-    const nextGridH = Math.max(54, Math.floor(height / qualityDivisor));
+    const nextGrid = getGridSize(width, height);
+    const nextGridW = nextGrid.width;
+    const nextGridH = nextGrid.height;
     const widthDelta = Math.abs(nextGridW - prevGridW);
     const heightDelta = Math.abs(nextGridH - prevGridH);
     const onlyHeightChange = widthDelta < 1 && heightDelta > 0;
@@ -144,27 +207,18 @@
       if (points.length < count) {
         const addCount = count - points.length;
         points = points.concat(
-          Array.from({ length: addCount }, () => ({
-            x: Math.random() * nextGridW,
-            y: heightExpanded && onlyHeightChange
-              ? prevGridH + Math.random() * (nextGridH - prevGridH)
-              : Math.random() * nextGridH,
-            vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-            vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-            color: colors[Math.floor(Math.random() * colors.length)],
-          }))
+          createSeedPoints(addCount, nextGridW, nextGridH, {
+            minY: heightExpanded && onlyHeightChange ? prevGridH : 0,
+            maxY: nextGridH,
+          })
         );
       } else if (points.length > count) {
         points = points.slice(0, count);
       }
+      rebalancePointColors();
     } else {
-      points = Array.from({ length: count }, () => ({
-        x: Math.random() * nextGridW,
-        y: Math.random() * nextGridH,
-        vx: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-        vy: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
-        color: colors[Math.floor(Math.random() * colors.length)],
-      }));
+      points = createSeedPoints(count, nextGridW, nextGridH);
+      rebalancePointColors();
     }
 
     gridW = nextGridW;
@@ -191,26 +245,43 @@
     const image = ctx.createImageData(gridW, gridH);
     const data = image.data;
     let idx = 0;
+    const edgeSoftness = Math.max(
+      1.6,
+      Math.sqrt((gridW * gridH) / Math.max(1, points.length)) * 0.08
+    );
 
     for (let y = 0; y < gridH; y += 1) {
       for (let x = 0; x < gridW; x += 1) {
         let closest = points[0];
+        let secondClosest = points[1] || points[0];
         let best = Infinity;
+        let secondBest = Infinity;
         for (let i = 0; i < points.length; i += 1) {
           const p = points[i];
           const dx = x - p.x;
           const dy = y - p.y;
           const dist = dx * dx + dy * dy;
           if (dist < best) {
+            secondBest = best;
+            secondClosest = closest;
             best = dist;
             closest = p;
+          } else if (dist < secondBest) {
+            secondBest = dist;
+            secondClosest = p;
           }
         }
+        const gap = Math.sqrt(secondBest) - Math.sqrt(best);
+        const edgeMix = clamp(1 - gap / edgeSoftness, 0, 1) * 0.32;
         const falloff = Math.min(1, best / (gridW * gridH * 0.015));
         const color = closest.color;
-        data[idx++] = Math.round(color[0] + (255 - color[0]) * (falloff * 0.08));
-        data[idx++] = Math.round(color[1] + (255 - color[1]) * (falloff * 0.08));
-        data[idx++] = Math.round(color[2] + (255 - color[2]) * (falloff * 0.08));
+        const edgeColor = secondClosest.color || color;
+        const red = Math.round(color[0] + (edgeColor[0] - color[0]) * edgeMix);
+        const green = Math.round(color[1] + (edgeColor[1] - color[1]) * edgeMix);
+        const blue = Math.round(color[2] + (edgeColor[2] - color[2]) * edgeMix);
+        data[idx++] = Math.round(red + (255 - red) * (falloff * 0.08));
+        data[idx++] = Math.round(green + (255 - green) * (falloff * 0.08));
+        data[idx++] = Math.round(blue + (255 - blue) * (falloff * 0.08));
         data[idx++] = 255;
       }
     }
@@ -242,7 +313,7 @@
 
   const start = () => {
     if (isLowEnd()) {
-      qualityDivisor = 14;
+      targetGridPixels = 12000;
       pointDivisor = 160;
       frameInterval = 0.06;
       speedFactor = 3.8;
@@ -311,9 +382,7 @@
 
   window.addEventListener("theme-change", () => {
     refreshColors();
-    points.forEach((p) => {
-      p.color = colors[Math.floor(Math.random() * colors.length)];
-    });
+    rebalancePointColors();
     render();
   });
 

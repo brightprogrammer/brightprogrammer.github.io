@@ -27,6 +27,65 @@
 {{- if $assetVersion -}}
   {{- $assetQuery = printf "?v=%s" $assetVersion -}}
 {{- end -}}
+{{- $paletteName := .Site.Params.palette | default "graphite" -}}
+{{- $paletteMap := dict
+  "ember" (dict
+    "lightBg" "#fff6ee" "lightText" "#2b1b14" "lightAccent" "#c2410c"
+    "lightBgRgb" "255 246 238" "lightTextRgb" "43 27 20" "lightAccentRgb" "194 65 12"
+    "darkBg" "#1b120e" "darkText" "#f4e9e2" "darkAccent" "#f97316"
+    "darkBgRgb" "27 18 14" "darkTextRgb" "244 233 226" "darkAccentRgb" "249 115 22"
+  )
+  "maroon" (dict
+    "lightBg" "#fff4f2" "lightText" "#2a1a1a" "lightAccent" "#9f1239"
+    "lightBgRgb" "255 244 242" "lightTextRgb" "42 26 26" "lightAccentRgb" "159 18 57"
+    "darkBg" "#1b1012" "darkText" "#f4e6ea" "darkAccent" "#fb7185"
+    "darkBgRgb" "27 16 18" "darkTextRgb" "244 230 234" "darkAccentRgb" "251 113 133"
+  )
+  "violet" (dict
+    "lightBg" "#f6f3ff" "lightText" "#221c2d" "lightAccent" "#7c3aed"
+    "lightBgRgb" "246 243 255" "lightTextRgb" "34 28 45" "lightAccentRgb" "124 58 237"
+    "darkBg" "#13101c" "darkText" "#eee9ff" "darkAccent" "#a78bfa"
+    "darkBgRgb" "19 16 28" "darkTextRgb" "238 233 255" "darkAccentRgb" "167 139 250"
+  )
+  "indigo" (dict
+    "lightBg" "#f4f5ff" "lightText" "#1d1f2f" "lightAccent" "#4f46e5"
+    "lightBgRgb" "244 245 255" "lightTextRgb" "29 31 47" "lightAccentRgb" "79 70 229"
+    "darkBg" "#0f1222" "darkText" "#e3e7ff" "darkAccent" "#818cf8"
+    "darkBgRgb" "15 18 34" "darkTextRgb" "227 231 255" "darkAccentRgb" "129 140 248"
+  )
+  "rose" (dict
+    "lightBg" "#fff1f6" "lightText" "#2a1b22" "lightAccent" "#db2777"
+    "lightBgRgb" "255 241 246" "lightTextRgb" "42 27 34" "lightAccentRgb" "219 39 119"
+    "darkBg" "#1b0f16" "darkText" "#f7e7f0" "darkAccent" "#f472b6"
+    "darkBgRgb" "27 15 22" "darkTextRgb" "247 231 240" "darkAccentRgb" "244 114 182"
+  )
+  "forest" (dict
+    "lightBg" "#f2f7f3" "lightText" "#1a2b20" "lightAccent" "#2f6b44"
+    "lightBgRgb" "242 247 243" "lightTextRgb" "26 43 32" "lightAccentRgb" "47 107 68"
+    "darkBg" "#0f1713" "darkText" "#e6f0e9" "darkAccent" "#7ccf98"
+    "darkBgRgb" "15 23 19" "darkTextRgb" "230 240 233" "darkAccentRgb" "124 207 152"
+  )
+  "teal" (dict
+    "lightBg" "#eef8f7" "lightText" "#17302d" "lightAccent" "#0f766e"
+    "lightBgRgb" "238 248 247" "lightTextRgb" "23 48 45" "lightAccentRgb" "15 118 110"
+    "darkBg" "#0d1717" "darkText" "#def2f0" "darkAccent" "#5eead4"
+    "darkBgRgb" "13 23 23" "darkTextRgb" "222 242 240" "darkAccentRgb" "94 234 212"
+  )
+  "copper" (dict
+    "lightBg" "#efe2d5" "lightText" "#2e1d16" "lightAccent" "#6a3417"
+    "lightBgRgb" "239 226 213" "lightTextRgb" "46 29 22" "lightAccentRgb" "106 52 23"
+    "darkBg" "#140f0d" "darkText" "#ebddd1" "darkAccent" "#9e5f36"
+    "darkBgRgb" "20 15 13" "darkTextRgb" "235 221 209" "darkAccentRgb" "158 95 54"
+    "darkContentAccent" "#c2875f" "darkContentAccentRgb" "194 135 95"
+  )
+  "graphite" (dict
+    "lightBg" "#f6f6f5" "lightText" "#1f2328" "lightAccent" "#3f4b5a"
+    "lightBgRgb" "246 246 245" "lightTextRgb" "31 35 40" "lightAccentRgb" "63 75 90"
+    "darkBg" "#121417" "darkText" "#e6e7e8" "darkAccent" "#94a3b8"
+    "darkBgRgb" "18 20 23" "darkTextRgb" "230 231 232" "darkAccentRgb" "148 163 184"
+  )
+-}}
+{{- $selectedPalette := index $paletteMap $paletteName | default (index $paletteMap "graphite") -}}
 <link rel="preload" as="style" href="{{ "css/fonts.css" | relURL }}{{ $assetQuery }}" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript>
   <link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}{{ $assetQuery }}" />
@@ -42,6 +101,29 @@
 <noscript>
   <link rel="stylesheet" href="{{ "css/chroma.css" | relURL }}{{ $assetQuery }}" />
 </noscript>
+<style>
+  :root {
+    --bg: {{ index $selectedPalette "lightBg" }};
+    --text: {{ index $selectedPalette "lightText" }};
+    --accent: {{ index $selectedPalette "lightAccent" }};
+    --bg-rgb: {{ index $selectedPalette "lightBgRgb" }};
+    --text-rgb: {{ index $selectedPalette "lightTextRgb" }};
+    --accent-rgb: {{ index $selectedPalette "lightAccentRgb" }};
+    --accent-content: {{ index $selectedPalette "lightContentAccent" | default (index $selectedPalette "lightAccent") }};
+    --accent-content-rgb: {{ index $selectedPalette "lightContentAccentRgb" | default (index $selectedPalette "lightAccentRgb") }};
+  }
+
+  :root[data-theme="dark"] {
+    --bg: {{ index $selectedPalette "darkBg" }};
+    --text: {{ index $selectedPalette "darkText" }};
+    --accent: {{ index $selectedPalette "darkAccent" }};
+    --bg-rgb: {{ index $selectedPalette "darkBgRgb" }};
+    --text-rgb: {{ index $selectedPalette "darkTextRgb" }};
+    --accent-rgb: {{ index $selectedPalette "darkAccentRgb" }};
+    --accent-content: {{ index $selectedPalette "darkContentAccent" | default (index $selectedPalette "darkAccent") }};
+    --accent-content-rgb: {{ index $selectedPalette "darkContentAccentRgb" | default (index $selectedPalette "darkAccentRgb") }};
+  }
+</style>
 
 {{- with .Site.Params.customCSS }}
   {{- range . }}
@@ -92,6 +174,7 @@
 <script>
   (function () {
     const storageKey = "bp-theme";
+    const defaultPalette = {{ $paletteName | jsonify }};
     let stored = null;
     try {
       stored = localStorage.getItem(storageKey);
@@ -99,7 +182,10 @@
       stored = null;
     }
     const theme = stored || "light";
+    const palette =
+      document.documentElement.getAttribute("data-palette") || defaultPalette;
     document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-palette", palette);
     if (document.body) {
       document.body.setAttribute("data-theme", theme);
     } else {

@@ -21,6 +21,38 @@
   const mixChannel = (a, b, ratio) => Math.round(a + (b - a) * ratio);
   const mixRgb = (rgb, target, ratio) =>
     rgb.map((channel, index) => mixChannel(channel, target[index], ratio));
+  const linearizeChannel = (channel) => {
+    const normalized = channel / 255;
+    return normalized <= 0.04045
+      ? normalized / 12.92
+      : Math.pow((normalized + 0.055) / 1.055, 2.4);
+  };
+  const luminance = (rgb) =>
+    0.2126 * linearizeChannel(rgb[0]) +
+    0.7152 * linearizeChannel(rgb[1]) +
+    0.0722 * linearizeChannel(rgb[2]);
+  const contrastRatio = (rgbA, rgbB) => {
+    const a = luminance(rgbA);
+    const b = luminance(rgbB);
+    const lighter = Math.max(a, b);
+    const darker = Math.min(a, b);
+    return (lighter + 0.05) / (darker + 0.05);
+  };
+  const ensureContrastRgb = (rgb, againstRgb, targetRgb, minRatio) => {
+    if (contrastRatio(rgb, againstRgb) >= minRatio) {
+      return rgb;
+    }
+
+    let adjusted = rgb;
+    for (let step = 0.08; step <= 0.72; step += 0.08) {
+      adjusted = mixRgb(rgb, targetRgb, step);
+      if (contrastRatio(adjusted, againstRgb) >= minRatio) {
+        return adjusted;
+      }
+    }
+
+    return adjusted;
+  };
   const toCss = (rgb, alpha) =>
     alpha === undefined
       ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
@@ -156,8 +188,11 @@
     const rootStyle = getComputedStyle(document.documentElement);
     const theme = document.documentElement.getAttribute("data-theme") || "light";
     const accentRgb = parseRgb(
-      rootStyle.getPropertyValue("--accent-rgb"),
-      theme === "dark" ? [148, 163, 184] : [63, 75, 90]
+      rootStyle.getPropertyValue("--accent-content-rgb"),
+      parseRgb(
+        rootStyle.getPropertyValue("--accent-rgb"),
+        theme === "dark" ? [148, 163, 184] : [63, 75, 90]
+      )
     );
     const bgRgb = parseRgb(
       rootStyle.getPropertyValue("--bg-rgb"),
@@ -167,29 +202,39 @@
       rootStyle.getPropertyValue("--text-rgb"),
       theme === "dark" ? [230, 231, 232] : [31, 36, 41]
     );
+    const contentAccentRgb = ensureContrastRgb(
+      accentRgb,
+      bgRgb,
+      textRgb,
+      theme === "dark" ? 4.8 : 4.5
+    );
     const textColor =
       rootStyle.getPropertyValue("--text").trim() ||
       getComputedStyle(document.body).color ||
       "#0f172a";
     const lineRgb =
       theme === "dark"
-        ? mixRgb(accentRgb, [255, 255, 255], 0.12)
-        : mixRgb(accentRgb, textRgb, 0.08);
+        ? mixRgb(contentAccentRgb, [255, 255, 255], 0.08)
+        : mixRgb(contentAccentRgb, textRgb, 0.06);
     const pointRgb =
       theme === "dark"
-        ? mixRgb(accentRgb, [255, 255, 255], 0.24)
-        : mixRgb(accentRgb, textRgb, 0.18);
+        ? mixRgb(contentAccentRgb, textRgb, 0.14)
+        : mixRgb(contentAccentRgb, textRgb, 0.12);
     const barRgb =
       theme === "dark"
-        ? mixRgb(accentRgb, bgRgb, 0.12)
-        : mixRgb(accentRgb, bgRgb, 0.08);
+        ? mixRgb(contentAccentRgb, bgRgb, 0.18)
+        : mixRgb(contentAccentRgb, bgRgb, 0.12);
+    const gridRgb =
+      theme === "dark"
+        ? mixRgb(contentAccentRgb, textRgb, 0.18)
+        : mixRgb(contentAccentRgb, textRgb, 0.08);
 
     return {
-      barColor: toCss(barRgb, theme === "dark" ? 0.34 : 0.42),
+      barColor: toCss(barRgb, theme === "dark" ? 0.44 : 0.42),
       lineColor: toCss(lineRgb),
       pointColor: toCss(pointRgb),
       textColor,
-      gridColor: toCss(accentRgb, theme === "dark" ? 0.2 : 0.18),
+      gridColor: toCss(gridRgb, theme === "dark" ? 0.3 : 0.2),
     };
   };
 
