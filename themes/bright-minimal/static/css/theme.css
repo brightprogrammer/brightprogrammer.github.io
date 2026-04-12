@@ -534,14 +534,22 @@ video {
 
 .paper-modal__list {
   margin: 0;
-  padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  padding-left: 2.2rem;
+  list-style: decimal;
+  font-variant-numeric: tabular-nums;
 }
 
 .paper-modal__item a {
   text-decoration: none;
+}
+
+.paper-modal__item {
+  margin: 0.4rem 0;
+}
+
+.paper-modal__list ::marker {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .paper-modal__item a:hover {
