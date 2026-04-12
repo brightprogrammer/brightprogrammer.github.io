@@ -117,12 +117,18 @@ Key parts of their setup:
 - They manually labeled 613 interfaces (out of 1582 total) with security severity.
 - They built a Datalog-backed analyzer that deduces what interfaces become reachable when you have access to a given interface.
 
-The inference rules are the interesting bit. In plain language, they track how access can flow:
+The inference rules are the interesting bit. The notation is: $\rho \leadsto_{\eta} \alpha$ means principal $\rho$ has a reference to interface $\alpha$ implemented by principal $\eta$. Here’s the rule set side by side with the intuition:
 
-- If an interface is a subtype of another, you inherit reachability (subtyping).
-- If an interface exposes a method that returns another interface, you can reach the return type (method/return).
-- If you can pass an object into a method, you can sometimes obtain references back (parameter flow).
-- Getters and setters are treated as methods with return or input types.
-- Type forgery: any principal can manufacture an object that claims to implement an interface, which means you can sometimes unlock methods you weren't supposed to call.
+| Rule | Intuition | KaTeX rule |
+| --- | --- | --- |
+| Subtyping | If an interface is a subtype of another, reachability carries over. | $\frac{\rho \leadsto_{\eta} \alpha \quad \alpha \le \beta}{\rho \leadsto_{\eta} \beta}$ |
+| Method | If you can call a method that returns $\beta$, you can reach $\beta$. | $\frac{\rho \leadsto_{\eta} \alpha \quad \alpha.\text{method}(\beta)}{\rho \leadsto_{\eta} \beta}$ |
+| Getter | Getters are methods that return a value. | $\frac{\rho \leadsto_{\eta} \alpha \quad \alpha.\text{method}(1 \to \beta)}{\rho \leadsto_{\eta} \beta}$ |
+| Setter | Setters are methods that take a value. | $\frac{\rho \leadsto_{\eta} \alpha \quad \alpha.\text{method}(\beta \to 1)}{\rho \leadsto_{\eta} \beta}$ |
+| Type forgery | Any principal can synthesize an object that *claims* to implement an interface. | $\frac{}{ \rho \leadsto_{\rho} \alpha }$ |
+| Return | If $\rho$ can call a method $\alpha \to \beta$ implemented by $\eta$, and can supply an $\alpha$, then the return gives $\rho$ a $\beta$ (implemented by $\delta$). | $\frac{\rho \leadsto_{\eta} \alpha \to \beta \quad \rho \leadsto_{\gamma} \alpha \quad \eta \leadsto_{\delta} \beta}{\rho \leadsto_{\delta} \beta}$ |
+| Parameter | The callee can also gain access to the argument it is handed. | $\frac{\rho \leadsto_{\eta} \alpha \to \beta \quad \rho \leadsto_{\gamma} \alpha \quad \eta \leadsto_{\delta} \beta}{\eta \leadsto_{\gamma} \alpha}$ |
 
 Because they don't analyze concrete implementations, this is an over-approximation. That's a feature here: the goal is to surface potential escalation paths and identify "escalation points" where a narrow interface still leaks broader power. Those points are exactly what their new Chrome-like extension design tries to eliminate.
+
+Two extra details from the text matter for how these rules behave in practice. First, the interfaces live in XPCOM and are specified in an IDL, so the browser enforces the declared parameter and return types regardless of who implements the interface. The authors attach a Datalog backend to the IDL compiler, manually label 613 of 1582 interfaces by severity, and then compute reachability using the rules above. Second, the analysis is deliberately an over-approximation because it ignores concrete implementations, so the parameter-flow rule might fire even if a real implementation never calls a particular method on its input. The payoff is that it surfaces potential escalation paths that would otherwise be missed in a strictly implementation-based analysis, and it explains why the type-forgery rule matters: extensions can manufacture objects that claim to implement XPCOM interfaces via `queryInterface`, which makes it possible to reach methods you couldn't otherwise call.
