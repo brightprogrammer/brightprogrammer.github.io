@@ -20,6 +20,7 @@
   let pointDivisor = 140;
   let frameInterval = 0.035;
   let speedFactor = 5;
+  let highlightStrength = 0.08;
 
   const isLowEnd = () => {
     const mem = navigator.deviceMemory || 0;
@@ -51,17 +52,32 @@
     const text = parseRGB(styles.getPropertyValue("--text-rgb"), [25, 25, 25]);
     const accent = parseRGB(styles.getPropertyValue("--accent-rgb"), [120, 80, 200]);
     const theme = document.documentElement.getAttribute("data-theme") || "light";
-    const strengths =
-      theme === "light"
-        ? [0.35, 0.55, 0.2, 0.7]
-        : [0.48, 0.68, 0.32, 0.78];
+    const palette = document.documentElement.getAttribute("data-palette") || "graphite";
+    let nextColors;
 
-    const nextColors = [
-      mix(bg, accent, strengths[0]),
-      mix(bg, accent, strengths[1]),
-      mix(bg, text, strengths[2]),
-      mix(bg, accent, strengths[3]),
-    ];
+    if (theme === "dark" && palette === "copper") {
+      const soot = [8, 5, 4];
+      highlightStrength = 0.05;
+      nextColors = [
+        mix(bg, accent, 0.3),
+        mix(bg, accent, 0.44),
+        mix(bg, text, 0.24),
+        mix(mix(bg, accent, 0.58), soot, 0.12),
+      ];
+    } else {
+      const strengths =
+        theme === "light"
+          ? [0.35, 0.55, 0.2, 0.7]
+          : [0.48, 0.68, 0.32, 0.78];
+      highlightStrength = 0.08;
+      nextColors = [
+        mix(bg, accent, strengths[0]),
+        mix(bg, accent, strengths[1]),
+        mix(bg, text, strengths[2]),
+        mix(bg, accent, strengths[3]),
+      ];
+    }
+
     if (colors.length === nextColors.length) {
       nextColors.forEach((next, index) => {
         const target = colors[index];
@@ -279,9 +295,9 @@
         const red = Math.round(color[0] + (edgeColor[0] - color[0]) * edgeMix);
         const green = Math.round(color[1] + (edgeColor[1] - color[1]) * edgeMix);
         const blue = Math.round(color[2] + (edgeColor[2] - color[2]) * edgeMix);
-        data[idx++] = Math.round(red + (255 - red) * (falloff * 0.08));
-        data[idx++] = Math.round(green + (255 - green) * (falloff * 0.08));
-        data[idx++] = Math.round(blue + (255 - blue) * (falloff * 0.08));
+        data[idx++] = Math.round(red + (255 - red) * (falloff * highlightStrength));
+        data[idx++] = Math.round(green + (255 - green) * (falloff * highlightStrength));
+        data[idx++] = Math.round(blue + (255 - blue) * (falloff * highlightStrength));
         data[idx++] = 255;
       }
     }

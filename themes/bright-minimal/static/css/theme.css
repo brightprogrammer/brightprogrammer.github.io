@@ -254,6 +254,11 @@ body {
   filter: blur(14px) saturate(150%);
 }
 
+[data-theme="dark"][data-palette="copper"] .ambient-bg {
+  opacity: 0.7;
+  filter: blur(14px) saturate(136%) brightness(0.9);
+}
+
 .ambient-bg[data-theme="light"],
 [data-theme="light"] .ambient-bg {
   opacity: 0.9;
