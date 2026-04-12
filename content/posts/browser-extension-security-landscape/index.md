@@ -163,14 +163,3 @@ The key property is that the most exposed component (content scripts) never dire
 - **Isolated worlds** for content scripts: the page and the content script see the same DOM, but they do not share JS objects or pointers, which is meant to reduce capability leaks and DOM‑level “rootkits.”
 
 **Evaluation and overhead.** When they survey 25 popular Chrome extensions, privilege requests are already narrower than Firefox. Only one extension (Cooliris) asks for more than it needs, and overall the privilege gap shrinks. The cost is real but manageable: message round‑trips across components average ~0.8ms, and isolated worlds add about a third to raw DOM micro‑benchmarks, but the paper argues those costs are small in real user flows.
-
-### Related work
-
-The paper positions itself against a few nearby lines of work:
-
-- **Jetpack (Firefox Labs)** is closer to their interface design, but at the time still ran with full privileges.
-- **IE BHOs** are the cautionary tale: native code extensions with wide system access.
-- **Sandboxing Firefox extensions** existed as a mechanism, but didn’t address *which* policies should be enforced.
-- **Plug‑in confinement** (SFI, interposition, etc.) is adjacent but focuses on native code isolation rather than JS APIs.
-- **Mashup security** and **capability‑leak research** motivate the “isolated worlds” design.
-- **Kernel‑module analogies** (Nooks, SafeDrive) show the same idea in OS land, but with different techniques.
