@@ -2,7 +2,6 @@
 title: "A Look Into Browser Extension Security"
 date: "2026-04-11"
 description: "Notes from a presentation in a reading group"
-draft: true
 tags:
   - security
   - browser
@@ -163,3 +162,5 @@ The key property is that the most exposed component (content scripts) never dire
 - **Isolated worlds** for content scripts: the page and the content script see the same DOM, but they do not share JS objects or pointers, which is meant to reduce capability leaks and DOM‑level “rootkits.”
 
 **Evaluation and overhead.** When they survey 25 popular Chrome extensions, privilege requests are already narrower than Firefox. Only one extension (Cooliris) asks for more than it needs, and overall the privilege gap shrinks. The cost is real but manageable: message round‑trips across components average ~0.8ms, and isolated worlds add about a third to raw DOM micro‑benchmarks, but the paper argues those costs are small in real user flows.
+
+At the adoption level, the contrast is sharp: the 2010 model directly influenced Chrome’s extension architecture, while the 2023 FISTBUMP design still looks like a research prototype with no clear mainstream deployment.
