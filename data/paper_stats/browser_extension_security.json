@@ -240,7 +240,7 @@
       "citations": 21,
       "papers": [
         {
-          "title": "You&apos;ve Changed: Detecting Malicious Browser Extensions through their Update Deltas",
+          "title": "You've Changed: Detecting Malicious Browser Extensions through their Update Deltas",
           "url": "https://doi.org/10.1145/3372297.3423343",
           "venue": "CCS",
           "citations": 21
@@ -271,7 +271,7 @@
           "citations": 0
         },
         {
-          "title": "Understanding Users&apos; Knowledge about the Privacy and Security of Browser Extensions",
+          "title": "Understanding Users' Knowledge about the Privacy and Security of Browser Extensions",
           "url": "https://www.usenix.org/conference/soups2021/presentation/kariryaa",
           "venue": "SOUPS @ USENIX Security Symposium",
           "citations": 0
@@ -359,7 +359,7 @@
       "citations": 0,
       "papers": [
         {
-          "title": "&quot;I have no idea how to make it safer&quot;: Studying Security and Privacy Mindsets of Browser Extension Developers",
+          "title": "\"I have no idea how to make it safer\": Studying Security and Privacy Mindsets of Browser Extension Developers",
           "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/agarwal-shubham",
           "venue": "USENIX Security Symposium",
           "citations": 0

@@ -1,0 +1,203 @@
+The privacy practices of web browser extensions	Privacy & tracking
+Nonius: Implementing a DRM Extension to an XML Browser	Specialized domains
+Stronger Password Authentication Using Browser Extensions	Defensive tooling
+A Browser Extension for Providing Visually Impaired Users Access to the Content of Bar Charts on the Web	Specialized domains
+A Web Browser Extension for Growing-up Ontological Knowledge from Traditional Web Content	Specialized domains
+Enhancing web browser security against malware extensions	Defensive tooling
+Analyzing Information Flow in JavaScript-Based Browser Extensions	Detection & analysis
+Graphical Passwords as Browser Extension: Implementation and Usability Study	Defensive tooling
+PubMed-EX: a web browser extension to enhance PubMed search with text mining features	Specialized domains
+A framework to strengthen password authentication using mobile devices and browser extensions	Defensive tooling
+Protecting Browsers from Extension Vulnerabilities	Architecture & privilege model
+VEX: Vetting Browser Extensions for Security Vulnerabilities	Detection & analysis
+dinsEditor: A Browser Extension for QTI-Compliant Assessment Item Authoring	Specialized domains
+Botnet with Browser Extensions	Attack papers
+Figure summarizer browser extensions for PubMed Central	Specialized domains
+Generic Access to Multimedia Metadata as a Browser Extension	Specialized domains
+Making browser extensions secure: technical perspective	Detection & analysis
+Privacy-enhanced identity via browser extensions and linking services	Privacy & tracking
+Spying on the browser: dissecting the design of malicious extensions	Attack papers
+Verified Security for Browser Extensions	Architecture & privilege model
+Vetting browser extensions for security vulnerabilities with VEX	Detection & analysis
+Browser extension-based man-in-the-browser attacks against Ajax applications with countermeasures	Attack papers
+CDAPubMed: a browser extension to retrieve EHR-based biomedical literature	Specialized domains
+Memoirs of a browser: a cross-browser detection model for privacy-breaching extensions	Privacy & tracking
+REM: A runtime browser extension manager with fine-grained access control	Architecture & privilege model
+The UCSC Genome Browser database: extensions and updates 2011	Specialized domains
+Towards Fine-Grained Access Control on Browser Extensions	Architecture & privilege model
+Towards improving browser extension permission management and user awareness	Users & developers
+A Model-Based Detection of Vulnerable and Malicious Browser Extensions	Detection & analysis
+Behavior Decomposition: Aspect-Level Browser Extension Clustering and Its Security Implications	Detection & analysis
+Defeat Information Leakage from Browser Extensions via Data Obfuscation	Defensive tooling
+Design and Implementation of a Functional Extension Framework for Authn & Authz Federation Infrastructure Using Web Browser Add-on	Specialized domains
+Fostering Content Relevant Information Security Awareness through Browser Extensions	Users & developers
+Protecting Web Browser Extensions from JavaScript Injection Attacks	Defensive tooling
+Samekana: A Browser Extension for Including Relevant Web Links in Issue Tracking System Discussion Forum	Specialized domains
+SearchPanel: A Browser Extension for Managing Search Activity	Specialized domains
+The UCSC Genome Browser database: extensions and updates 2013	Specialized domains
+Verifying Web Browser Extensions' Compliance with Private-Browsing Mode	Privacy & tracking
+A Security Analysis of Browser Extensions	Detection & analysis
+Effective detection of vulnerable and malicious browser extensions	Detection & analysis
+Hulk: Eliciting Malicious Behavior in Browser Extensions	Detection & analysis
+Making Web Pages and Applications Accessible Automatically Using Browser Extensions and Apps	Specialized domains
+Mining Specification of Insecure Browser Extension Behavior	Detection & analysis
+On evaluating and securing firefox for Android browser extensions	Defensive tooling
+Privacy Leakage Attacks in Browsers by Colluding Extensions	Attack papers
+Retargetting Legacy Browser Extensions to Modern Extension Frameworks	Frameworks & testing
+Automatic Detection of Information Leakage Vulnerabilities in Browser Extensions	Detection & analysis
+Building Browser Extension to Develop Website Personalization Based on Adaptive Hypermedia System	Specialized domains
+Enterprise WebRTC Powered by Browser Extensions	Specialized domains
+Fine-Grained Detection of Privilege Escalation Attacks on Browser Extensions	Detection & analysis
+GEO2Enrichr: browser extension and server app to extract gene sets from GEO and analyze them for biological functions	Specialized domains
+May I? - Content Security Policy Endorsement for Browser Extensions	Architecture & privilege model
+Private Browsing Mode Not Really That Private: Dealing with Privacy Breach Caused by Browser Extensions	Privacy & tracking
+RDFa Live Browser Extension: Faceted Presentation and Tooltip Navigation over Linked Data on the Web	Specialized domains
+See How ISPs Care: An RPKI Validation Extension for Web Browsers	Defensive tooling
+The prevalence of web browser extensions use in library services: an exploratory study	Measurement & ecosystem
+Understanding Malvertising Through Ad-Injecting Browser Extensions	Attack papers
+WebHelpDyslexia: A Browser Extension to Adapt Web Content for People with Dyslexia	Specialized domains
+CLOUBEX: A Cloud-Based Security Analysis Framework for Browser Extensions	Frameworks & testing
+Colluding browser extension attack on user privacy and its implication for web browsers	Attack papers
+ExtensionGuard: Towards runtime browser extension information leakage detection	Detection & analysis
+MicroForwarder.js: an NDN Forwarder Extension for Web Browsers	Specialized domains
+STRIDE Based Analysis of the Chrome Browser Extensions API	Detection & analysis
+Spying Browser Extensions: Analysis and Detection	Detection & analysis
+Addressing web locator fragility: a case for browser extensions	Specialized domains
+CBEAT: Chrome Browser Extension Analysis Tool	Frameworks & testing
+Detecting DOM-Sourced Cross-Site Scripting in Browser Extensions	Detection & analysis
+Detecting Spying and Fraud Browser Extensions: Short Paper	Detection & analysis
+Discovering Browser Extensions via Web Accessible Resources	Measurement & ecosystem
+Ex-Ray: Detection of History-Leaking Browser Extensions	Privacy & tracking
+Extended Tracking Powers: Measuring the Privacy Diffusion Enabled by Browser Extensions	Privacy & tracking
+Extension Breakdown: Security Analysis of Browsers Extension Resources Control Policies	Architecture & privilege model
+Hadith Web Browser Verification Extension	Specialized domains
+Isolating malicious content scripts of browser extensions	Architecture & privilege model
+Malicious Browser Extensions at Scale: Bridging the Observability Gap between Web Site and Browser	Measurement & ecosystem
+Wikipedia Verification Check: A Chrome Browser Extension	Specialized domains
+XHOUND: Quantifying the Fingerprintability of Browser Extensions	Privacy & tracking
+A Combined Static and Dynamic Analysis Approach to Detect Malicious Browser Extensions	Detection & analysis
+A Google Chromium Browser Extension for Detecting XSS Attack in HTML5 Based Websites	Defensive tooling
+Botnet in the Browser: Understanding Threats Caused by Malicious Browser Extensions	Attack papers
+CEDAR OnDemand: a browser extension to generate ontology-based scientific metadata	Specialized domains
+CYCLOSA: Decentralizing Private Web Search through SGX-Based Browser Extensions	Architecture & privilege model
+Characterizing the Use of Browser-Based Blocking Extensions To Prevent Online Tracking	Measurement & ecosystem
+I Spy with My Little Eye: Analysis and Detection of Spying Browser Extensions	Detection & analysis
+Malicious browser extensions: A growing threat: A case study on Google Chrome: Ongoing work in progress	Attack papers
+Mystique: Uncovering Information Leakage from Browser Extensions	Privacy & tracking
+PrivacyMeter: Designing and Developing a Privacy-Preserving Browser Extension	Defensive tooling
+Secure authentication scheme to thwart RT MITM, CR MITM and malicious browser extension based phishing attacks	Defensive tooling
+To Extend or not to Extend: On the Uniqueness of Browser Extensions and Web Logins	Privacy & tracking
+Tweety Holmes: A Browser Extension for Abusive Twitter Profile Detection	Specialized domains
+EmPoWeb: Empowering Web Applications with Browser Extensions	Architecture & privilege model
+Twitter A11y: A Browser Extension to Describe Images	Specialized domains
+Unnecessarily Identifiable: Quantifying the fingerprintability of browser extensions due to bloat	Privacy & tracking
+DOMtegrity: ensuring web page integrity against malicious browser extensions	Architecture & privilege model
+Exposing Cookie Policy Flaws Through an Extensive Evaluation of Browsers and Their Extensions	Measurement & ecosystem
+Large-scale Detection of Privacy Leaks for BAT Browsers Extensions in China	Privacy & tracking
+Manipulation of perceived politeness in a web-based email discourse through a malicious browser extension	Attack papers
+Cookie Based Protocol to Defend Malicious Browser Extensions	Architecture & privilege model
+Man-in-the-browser Attack: A Case Study on Malicious Browser Extensions	Attack papers
+Improving User Experience by Browser Extensions: A New Role of Public Service Media?	Users & developers
+Implementation of Web Browser Extension for Mitigating CSRF Attack	Defensive tooling
+Browser Extension-based Crowdsourcing Model for Website Monitoring	Specialized domains
+Latex Gloves: Protecting Browser Extensions from Probing and Revelation Attacks	Architecture & privilege model
+Twitter A11y: A Browser Extension to Make Twitter Images Accessible	Specialized domains
+BRENDA: Browser Extension for Fake News Detection	Defensive tooling
+You've Changed: Detecting Malicious Browser Extensions through their Update Deltas	Supply-chain & marketplace
+After you, please: browser extensions order attacks and countermeasures	Attack papers
+Understanding the Performance Costs and Benefits of Privacy-focused Browser Extensions	Measurement & ecosystem
+Securing Instant Messages With Hardware-Based Cryptography and Authentication in Browser Extension	Defensive tooling
+Web Browser Extension User-Script XSS Vulnerabilities	Attack papers
+Carnus: Exploring the Privacy Threats of Browser Extension Fingerprinting	Privacy & tracking
+Tech-Inclusion Research: An Iconographic Browser Extension Solution	Specialized domains
+DoubleX: Statically Detecting Vulnerable Data Flows in Browser Extensions at Scale	Detection & analysis
+Privacy Model: Detect Privacy Leakage for Chinese Browser Extensions	Privacy & tracking
+Dynamic Identification of Learning Styles in MOOC Environment Using Ontology Based Browser Extension	Specialized domains
+News2PubMed: A Browser Extension for Linking Health News to Medical Literature	Specialized domains
+A Privacy-Aware Browser Extension to Track User Search Behavior for Programming Course Supplement	Specialized domains
+MAWA: A Browser Extension for Mobile Web Augmentation	Specialized domains
+A Browser Extension to Facilitate Language Acquisition	Specialized domains
+Fingerprinting in Style: Detecting Browser Extensions via Injected Style Sheets	Privacy & tracking
+NEEX: An Automated and Efficient Tool for Detecting Browser Extension Fingerprint	Privacy & tracking
+Ontoclick: a web browser extension to facilitate biomedical knowledge curation	Specialized domains
+Understanding Users' Knowledge about the Privacy and Security of Browser Extensions	Users & developers
+Hardening the security analysis of browser extensions	Frameworks & testing
+Are they Toeing the Line? Diagnosing Privacy Compliance Violations among Browser Extensions	Privacy & tracking
+Escaping the Confines of Time: Continuous Browser Extension Fingerprinting Through Ephemeral Modifications	Privacy & tracking
+Helping or Hindering?: How Browser Extensions Undermine Security	Measurement & ecosystem
+No Signal Left to Chance: Driving Browser Extension Analysis by Download Patterns	Detection & analysis
+Our Browser Extension Lets Readers Change the Headlines on News Articles, and You Won't Believe What They Did!	Users & developers
+WebEnclave: Protect Web Secrets From Browser Extensions With Software Enclave	Architecture & privilege model
+Browser Extension for Detection of Fake News and Disinformation	Defensive tooling
+A Context-Aware Browser Extension for Just-in-Time Learning of Data Literacy Skills	Specialized domains
+A Study on the Design of Pandora's Box Web Application Using Design Thinking approach: A study on a centralized web browser security extension design and planned realization	Defensive tooling
+CopypastaVulGuard - A browser extension to prevent copy and paste spreading of vulnerable source code in forum posts	Defensive tooling
+The Dangers of Human Touch: Fingerprinting Browser Extensions through User Actions	Privacy & tracking
+Twine Screen Reader: A Browser Extension for Improving the Accessibility of Twine Stories for People with Visual Impairments	Specialized domains
+Unleash the Simulacrum: Shifting Browser Realities for Robust Extension-Fingerprinting Prevention	Defensive tooling
+Safeguard confidential web information from malicious browser extension using Encryption and Isolation techniques	Architecture & privilege model
+Detection of Inconsistencies in Privacy Practices of Browser Extensions	Privacy & tracking
+CoCo: Efficient Browser Extension Vulnerability Detection via Coverage-guided, Concurrent Abstract Interpretation	Detection & analysis
+BEAUD: A Browser Extension to Automatize End-User Deeds	Specialized domains
+Factit: A Fact-Checking Browser Extension	Defensive tooling
+Comprehensive Browser Extension for Analysing YouTube User Engagement, Controversy, User Requirements, and Trending Keywords	Specialized domains
+The browser extension guidance for online information searching	Users & developers
+A Data Service Layer for Web Browser Extensions	Architecture & privilege model
+A Survey Paper on Browser Extensions to Detect Web Attacks	Measurement & ecosystem
+Deep Breath: A Machine Learning Browser Extension to Tackle Online Misinformation	Defensive tooling
+Extending Browser Extension Fingerprinting to Mobile Devices	Privacy & tracking
+Extending a Hand to Attackers: Browser Privilege Escalation Attacks via Extensions	Architecture & privilege model
+IBE.js: A Framework for Instrumenting Browser Extensions	Frameworks & testing
+Matt Frisbie on Browser Extensions	Users & developers
+Phishing Detection with Browser Extension Based on Machine Learning	Defensive tooling
+A real-time machine learning application for browser extension security monitoring	Detection & analysis
+A Browser Extension for in-place Signaling and Assessment of Misinformation	Defensive tooling
+A Holistic Review on Detection of Malicious Browser Extensions and Links using Deep Learning	Measurement & ecosystem
+A Machine Learning Driven Website Platform and Browser Extension for Real-time Scoring and Fraud Detection for Website Legitimacy Verification and Consumer Protection	Defensive tooling
+Arcanum: Detecting and Evaluating the Privacy Risks of Browser Extensions on Web Pages and Web Content	Privacy & tracking
+Block Cookies, Not Websites: Analysing Mental Models and Usability of the Privacy-Preserving Browser Extension CookieBlock	Users & developers
+Browser Extension for Fake URL Detection	Defensive tooling
+CiteClick: A Browser Extension for Real-Time Scholar Citation Tracking	Specialized domains
+Did I Vet You Before? Assessing the Chrome Web Store Vetting Process through Browser Extension Similarity	Supply-chain & marketplace
+Enhancing Web Accessibility Through a Customizable Browser Extension for Users with Visual Impairments	Specialized domains
+Essential or Excessive? MINDAEXT: Measuring Data Minimization Practices among Browser Extensions	Privacy & tracking
+Experimental Security Analysis of Sensitive Data Access by Browser Extensions	Detection & analysis
+FakeX: A Framework for Detecting Fake Reviews of Browser Extensions	Supply-chain & marketplace
+From User Insights to Actionable Metrics: A User-Focused Evaluation of Privacy-Preserving Browser Extensions	Users & developers
+Harnessing Multiplicity: Granular Browser Extension Fingerprinting through User Configurations	Privacy & tracking
+HyperCRX: A Browser Extension for Insights into GitHub Projects and Developers	Specialized domains
+Manifest V3 Unveiled: Navigating the New Era of Browser Extensions	Architecture & privilege model
+Peeking through the window: Fingerprinting Browser Extensions through Page-Visible Execution Traces and Interactions	Privacy & tracking
+RXSS Protect: A Browser Extension for Detection of Reflected Cross-Site Scripting Attacks in Real-Time Using Machine Learning	Defensive tooling
+Semantic SDG-Mapper: Browser Extension for Mapping Sustainable Development Goals to Open Webpages	Specialized domains
+Towards Browser Controls to Protect Cookies from Malicious Extensions	Architecture & privilege model
+TypoAlert: a browser extension against typosquatting	Defensive tooling
+UltraCommander: Ultrasonic Side Channel Attack via Browser Extensions	Attack papers
+WRIT: Web Request Integrity and Attestation Against Malicious Browser Extensions	Architecture & privilege model
+What is in the Chrome Web Store? Investigating Security-Noteworthy Browser Extensions	Measurement & ecosystem
+Zunna - The Browser Extension for Protecting Personal Data	Defensive tooling
+"I have no idea how to make it safer": Studying Security and Privacy Mindsets of Browser Extension Developers	Users & developers
+A Study on Malicious Browser Extensions in 2025	Measurement & ecosystem
+ASSURE: Metamorphic Testing for AI-powered Browser Extensions	Frameworks & testing
+Characterizing Cryptocurrency-Themed Malicious Browser Extensions	Measurement & ecosystem
+CodeX: Contextual Flow Tracking for Browser Extensions	Detection & analysis
+Cryptocurrency Browser-Extension Security: A Wake-Up Call and a Way Forward	Measurement & ecosystem
+ExtFPDet: A CNN-Based Detection Framework for Browser Extensions Fingerprinting	Privacy & tracking
+FallacyCheck - A Proactive LLM-based Browser Extension to Motivate Critical Assessment of News Articles by Questioning Logical Fallacies	Defensive tooling
+FocusUp: A Browser Extension for Enhancing Online Attention and Productivity for ADHD Individuals	Specialized domains
+From Browser to Kernel: Exploring a Lightweight Sandboxed Approach for Unikernel Extensions	Architecture & privilege model
+Impact of extensions on browser performance: An empirical study on google chrome	Measurement & ecosystem
+JavaSith: A Client-Side Framework for Analyzing Potentially Malicious Extensions in Browsers, VS Code, and NPM Packages	Frameworks & testing
+Performance analysis of common browser extensions for cryptojacking detection	Measurement & ecosystem
+Phishing Attacks against Password Manager Browser Extensions	Attack papers
+Plugin Extension for Chrome Browser to Display Web Browsing History in Tree View	Specialized domains
+Stealth Extension Exfiltration (SEE) Attacks: Stealing User Data without Permissions via Browser Extensions	Attack papers
+The Proactive Gap: A Scoping Review of Publicly Available LLM-based Browser Extensions and Their Potential to Mitigate Information Disorder	Measurement & ecosystem
+WalletProbe: A Testing Framework for Browser-based Cryptocurrency Wallet Extensions	Frameworks & testing
+Webcam Eye-Tracking Browser Extension For General Navigation	Specialized domains
+Witty Gerbil Chrome Extension: A Browser-Based Framework for Comprehensive AI System Evaluation	Frameworks & testing
+liBERTa: Local Intelligence via Browser Extensions for Real-Time Applications	Specialized domains
+A Contextual Help Browser Extension to Assist Digital Illiterate Internet Users	Specialized domains
+From comments to threats: leveraging NLP to detect malicious browser extensions	Detection & analysis
+Gefährliche Browser-Extensions - Der "ShadyPanda"-Fall	Attack papers
+Verify as You Go: An LLM-Powered Browser Extension for Fake News Detection	Defensive tooling

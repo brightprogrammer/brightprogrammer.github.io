@@ -290,7 +290,7 @@
           "citations": 706
         },
         {
-          "title": "Verifying Web Browser Extensions&apos; Compliance with Private-Browsing Mode",
+          "title": "Verifying Web Browser Extensions' Compliance with Private-Browsing Mode",
           "url": "https://doi.org/10.1007/978-3-642-40203-6_4",
           "venue": "ESORICS",
           "citations": 20
@@ -332,7 +332,7 @@
           "citations": 2
         },
         {
-          "title": "Design and Implementation of a Functional Extension Framework for Authn &amp; Authz Federation Infrastructure Using Web Browser Add-on",
+          "title": "Design and Implementation of a Functional Extension Framework for Authn & Authz Federation Infrastructure Using Web Browser Add-on",
           "url": "https://doi.org/10.1109/AINA.2013.115",
           "venue": "AINA",
           "citations": 0
@@ -633,7 +633,7 @@
         {
           "title": "I Spy with My Little Eye: Analysis and Detection of Spying Browser Extensions",
           "url": "https://doi.org/10.1109/EUROSP.2018.00012",
-          "venue": "EuroS&amp;P",
+          "venue": "EuroS&P",
           "citations": 17
         },
         {
@@ -795,7 +795,7 @@
           "citations": 27
         },
         {
-          "title": "You&apos;ve Changed: Detecting Malicious Browser Extensions through their Update Deltas",
+          "title": "You've Changed: Detecting Malicious Browser Extensions through their Update Deltas",
           "url": "https://doi.org/10.1145/3372297.3423343",
           "venue": "CCS",
           "citations": 21
@@ -904,7 +904,7 @@
           "citations": 0
         },
         {
-          "title": "Understanding Users&apos; Knowledge about the Privacy and Security of Browser Extensions",
+          "title": "Understanding Users' Knowledge about the Privacy and Security of Browser Extensions",
           "url": "https://www.usenix.org/conference/soups2021/presentation/kariryaa",
           "venue": "SOUPS @ USENIX Security Symposium",
           "citations": 0
@@ -947,7 +947,7 @@
           "citations": 6
         },
         {
-          "title": "Our Browser Extension Lets Readers Change the Headlines on News Articles, and You Won&apos;t Believe What They Did!",
+          "title": "Our Browser Extension Lets Readers Change the Headlines on News Articles, and You Won't Believe What They Did!",
           "url": "https://doi.org/10.1145/3555643",
           "venue": "Proc. ACM Hum. Comput. Interact.",
           "citations": 6
@@ -971,7 +971,7 @@
           "citations": 0
         },
         {
-          "title": "A Study on the Design of Pandora&apos;s Box Web Application Using Design Thinking approach: A study on a centralized web browser security extension design and planned realization",
+          "title": "A Study on the Design of Pandora's Box Web Application Using Design Thinking approach: A study on a centralized web browser security extension design and planned realization",
           "url": "https://doi.org/10.1145/3578997.3579006",
           "venue": "ICSEB",
           "citations": 0
@@ -1268,7 +1268,7 @@
       "citations": 0,
       "papers": [
         {
-          "title": "&quot;I have no idea how to make it safer&quot;: Studying Security and Privacy Mindsets of Browser Extension Developers",
+          "title": "\"I have no idea how to make it safer\": Studying Security and Privacy Mindsets of Browser Extension Developers",
           "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/agarwal-shubham",
           "venue": "USENIX Security Symposium",
           "citations": 0
@@ -1413,7 +1413,7 @@
           "citations": 0
         },
         {
-          "title": "Gef\u00e4hrliche Browser-Extensions - Der &quot;ShadyPanda&quot;-Fall",
+          "title": "Gef\u00e4hrliche Browser-Extensions - Der \"ShadyPanda\"-Fall",
           "url": "https://doi.org/10.1007/S11623-026-2220-X",
           "venue": "Datenschutz und Datensicherheit",
           "citations": 0

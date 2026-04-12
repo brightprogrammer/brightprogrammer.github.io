@@ -7,6 +7,7 @@ import urllib.parse
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
+from html import unescape
 
 MAILTO = "hello@brightprogrammer.in"
 
@@ -100,11 +101,12 @@ def matches_top_venue(venue):
 
 def parse_dblp_hit(hit):
     info = hit.get("info", {})
-    title = info.get("title") or ""
+    title = unescape(info.get("title") or "")
     if title.endswith("."):
         title = title[:-1]
     year = normalize_year(info.get("year"))
-    venue = info.get("venue") or info.get("booktitle") or info.get("journal")
+    venue_raw = info.get("venue") or info.get("booktitle") or info.get("journal")
+    venue = unescape(venue_raw) if venue_raw else venue_raw
     doi = info.get("doi")
 
     ee = info.get("ee")

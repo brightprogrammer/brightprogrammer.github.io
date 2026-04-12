@@ -56,3 +56,9 @@ For context, our first presentation was on onion-routing security. I started wit
   title="All venues (same query, no venue filter)"
   note="Same query as above, without the venue filter, to show the broader literature (including arXiv preprints)."
 >}}
+
+{{< paper-radar
+  data="paper_categories"
+  title="Paper themes"
+  note="Manually curated buckets; overlap is minimized by assigning each paper to a single category."
+>}}
