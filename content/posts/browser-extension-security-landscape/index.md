@@ -135,3 +135,42 @@ The inference rules are the interesting bit. The notation is: $\rho \leadsto_{\e
 Because they don't analyze concrete implementations, this is an over-approximation. That's a feature here: the goal is to surface potential escalation paths and identify "escalation points" where a narrow interface still leaks broader power. Those points are exactly what their new Chrome-like extension design tries to eliminate.
 
 Two extra details from the text matter for how these rules behave in practice. First, the interfaces live in XPCOM and are specified in an IDL, so the browser enforces the declared parameter and return types regardless of who implements the interface. The authors attach a Datalog backend to the IDL compiler, manually label 613 of 1582 interfaces by severity, and then compute reachability using the rules above. Second, the analysis is deliberately an over-approximation because it ignores concrete implementations, so the parameter-flow rule might fire even if a real implementation never calls a particular method on its input. The payoff is that it surfaces potential escalation paths that would otherwise be missed in a strictly implementation-based analysis, and it explains why the type-forgery rule matters: extensions can manufacture objects that claim to implement XPCOM interfaces via `queryInterface`, which makes it possible to reach methods you couldn't otherwise call.
+
+### Proposed model: Chrome extension system
+
+The proposed architecture is the Chrome extension model built around least privilege, privilege separation, and isolation. The idea is to make the *default* extension shape safer, not to bolt on after-the-fact checks.
+
+**Least privilege via the manifest.** Every extension declares what it wants up front. Privileges fall into three buckets:
+
+- **Execute arbitrary code** by listing a native binary in the manifest (NPAPI in the 2010 era).
+- **Web site access** by origin patterns, so an extension can target `*.google.com` without ever seeing `bank.com`.
+- **API access** via named groups like `tabs`, only granted if explicitly listed.
+
+The paper also cares about incentives: the Chrome gallery tightens the install UX for high‑privilege extensions and blocks arbitrary‑code extensions unless the developer signs a contract. Extensions installed outside the gallery use a scary, “native executable”‑style flow, which means a site tricking the user into installing a malicious extension isn’t gaining much more than it already could with a normal binary.
+
+**Privilege separation by design.** Extensions are forced into three components:
+
+- **Content scripts** live inside web pages and can only touch the DOM plus message the core.
+- **Extension core** runs with the extension APIs and can reach the network, but only for origins listed in the manifest.
+- **Native binary** is optional and the only place with arbitrary code / file access.
+
+The key property is that the most exposed component (content scripts) never directly talks to the most privileged component (native binary). That makes multi‑step exploitation the *expected* path, not the exception.
+
+**Isolation mechanisms.** The model adds three layers:
+
+- **Origin isolation** by embedding the extension’s public key in its URL (`chrome-extension://<public key>/`), which avoids a central naming authority and lets the same‑origin policy do real work.
+- **Process isolation** for core and native binaries, so a renderer compromise doesn’t immediately grant extension APIs.
+- **Isolated worlds** for content scripts: the page and the content script see the same DOM, but they do not share JS objects or pointers, which is meant to reduce capability leaks and DOM‑level “rootkits.”
+
+**Evaluation and overhead.** When they survey 25 popular Chrome extensions, privilege requests are already narrower than Firefox. Only one extension (Cooliris) asks for more than it needs, and overall the privilege gap shrinks. The cost is real but manageable: message round‑trips across components average ~0.8ms, and isolated worlds add about a third to raw DOM micro‑benchmarks, but the paper argues those costs are small in real user flows.
+
+### Related work
+
+The paper positions itself against a few nearby lines of work:
+
+- **Jetpack (Firefox Labs)** is closer to their interface design, but at the time still ran with full privileges.
+- **IE BHOs** are the cautionary tale: native code extensions with wide system access.
+- **Sandboxing Firefox extensions** existed as a mechanism, but didn’t address *which* policies should be enforced.
+- **Plug‑in confinement** (SFI, interposition, etc.) is adjacent but focuses on native code isolation rather than JS APIs.
+- **Mashup security** and **capability‑leak research** motivate the “isolated worlds” design.
+- **Kernel‑module analogies** (Nooks, SafeDrive) show the same idea in OS land, but with different techniques.

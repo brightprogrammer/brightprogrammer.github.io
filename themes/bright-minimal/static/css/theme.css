@@ -481,6 +481,7 @@ video {
   margin: 0.65rem 0 1rem;
 }
 
+
 @media (max-width: 720px) {
   .paper-base__grid {
     grid-template-columns: 1fr;
