@@ -14,7 +14,7 @@ enableDuckDuckGoSearchBox = false
 numberedSubtitles = true
 enableInlineShortcodes = true
 mermaid = true
-palette = "copper"
+palette = "graphite"
 
 [sharingbuttons]
 facebook = true
