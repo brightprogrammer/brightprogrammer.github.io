@@ -10,7 +10,7 @@
   {{- $needsMermaid = true -}}
 {{- end -}}
 {{- if $needsMermaid }}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+  <script src="{{ "vendor/mermaid/mermaid.min.js" | relURL }}" defer></script>
   <script src="{{ "js/mermaid.js" | relURL }}" defer></script>
 {{- end }}
 

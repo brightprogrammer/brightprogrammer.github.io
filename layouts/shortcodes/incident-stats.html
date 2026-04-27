@@ -14,11 +14,11 @@
 
 {{ if not (.Page.Scratch.Get "chartjs") }}
   {{ .Page.Scratch.Set "chartjs" true }}
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="{{ "vendor/chartjs/chart.umd.min.js" | relURL }}" defer></script>
 {{ end }}
 {{ if not (.Page.Scratch.Get "incidentStatsChart") }}
   {{ .Page.Scratch.Set "incidentStatsChart" true }}
-  <script src="/js/incident-stats.js" defer></script>
+  <script src="{{ "js/incident-stats.js" | relURL }}" defer></script>
 {{ end }}
 
 {{ range $entry := $data.by_year }}

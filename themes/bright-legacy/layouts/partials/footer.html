@@ -1,4 +1,20 @@
 <footer class="site-footer">
+  <div class="footer-badges">
+    <a href="https://www.gnu.org/software/emacs/">
+      <img src="{{ "images/badges/emacs.gif" | relURL }}" alt="Emacs 88x31 button" width="88" height="31" />
+    </a>
+    <a href="https://www.kernel.org/">
+      <img src="{{ "images/badges/linux_powered.gif" | relURL }}" alt="Powered by Linux 88x31 button" width="88" height="31" />
+    </a>
+    <a href="https://github.com/brightprogrammer">
+      <img src="{{ "images/badges/hackerpowered.gif" | relURL }}" alt="Hacker Powered 88x31 button" width="88" height="31" />
+    </a>
+    <a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ else }}{{ "/index.xml" | relURL }}{{ end }}">
+      <img src="{{ "images/badges/rss-button.gif" | relURL }}" alt="RSS feed 88x31 button" width="88" height="31" />
+    </a>
+    <img src="{{ "images/badges/nocookie.gif" | relURL }}" alt="No Cookies 88x31 button" width="88" height="31" />
+    <img src="{{ "images/badges/internetprivacy.gif" | relURL }}" alt="Internet Privacy 88x31 button" width="88" height="31" />
+  </div>
   {{ with .Site.Params.footnote }}
     <div class="footer-note">{{ . | safeHTML }}</div>
   {{ else }}

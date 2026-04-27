@@ -47,7 +47,7 @@ For the latter method, we just have to download [Vulkan Loader](https://github.c
 
 Volk (and similar implementations) gets it's perfomance boost because it skips the [trampoline](http://kylehalladay.com/blog/2020/11/13/Hooking-By-Example.html) (also known as hooking) part in Vulkan Loader. An example image retrieved from khronos site is :
 
-{{< img src="https://www.khronos.org/assets/uploads/blogs/2017-Webinar-Recap-Vulkan-Loader-Deep-Dive.jpg" alt="Webinar Recap: Vulkan Loader Deep Dive" >}}
+{{< img src="/images/external/vulkan-loader-deep-dive-khronos.jpg" alt="Webinar Recap: Vulkan Loader Deep Dive" caption="Source: Khronos Group." title="Source: Khronos Group." >}}
 Here is a paragraph from a [vulkan.lunarg.com post](https://vulkan.lunarg.com/doc/view/1.2.170.0/windows/loader_and_layer_interface.html) : 
 
 > ##### [](https://vulkan.lunarg.com/doc/view/1.2.170.0/windows/loader_and_layer_interface.html#user-content-indirectly-linking-to-the-loader)Indirectly Linking to the Loader
@@ -68,8 +68,7 @@ Say you are calling some function named `doSomething(xyz)`. Now, this function h
 
 This way the loader allows you to use multiple `ICD`s at a time! You just need to have the driver and the `ICD` present on your system. Below is an image to show how loader works
 
-{{< img src="https://github.com/KhronosGroup/Vulkan-Loader/raw/master/loader/images/high_level_loader.png" alt="High Level View of Loader" >}}
-source : Khronos Group
+{{< img src="/images/external/vulkan-loader-high-level.png" alt="High Level View of Loader" caption="Source: KhronosGroup/Vulkan-Loader repository." title="Source: KhronosGroup/Vulkan-Loader repository." >}}
 
 In Linux you will generally find the loader as a shared object file named `/usr/lib/libvulkan.so`. You will see a library file named the same in our projects `/lib` directory because remember we build this as a dependency.
 

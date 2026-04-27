@@ -50,21 +50,7 @@ and then wrapped those in html code. For styling I took help from ChatGPT and it
 looking website, and I would've kept it if not for constantly breaking it when updating the code, and the website
 going down again and again, whenever that happened.
 
-<center>
-<blockquote class="twitter-tweet">
-        <p lang="en" dir="ltr">
-            Who needs a web framework when you can do that all in C and have fun at the same time :-)<br><br>
-            Testing out an idea of how web pages will be rendered in components.<br><br>
-            Options :<br>
-                - Use a template engine to replace template code blogs and generate html<br>
-                - What you see in this picture below
-            <a href="https://t.co/8h1Mk066LZ">pic.twitter.com/8h1Mk066LZ</a>
-        </p>
-        &mdash; Siddharth Mishra (@brightprogramer)
-        <a href="https://twitter.com/brightprogramer/status/1859432379678621745?ref_src=twsrc%5Etfw">November 21, 2024</a>
-</blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-</center>
+<p><a href="https://twitter.com/brightprogramer/status/1859432379678621745">Announcement tweet for this post</a></p>
 
 ## Socket & Bind
 

@@ -744,4 +744,4 @@ Edit : There is a mistake in the context struct. Total number of registers must 
 >
 > \- Steve Wozniak
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">New post!! 😋😋<br><br>Solving a VM CrackMe <a href="https://t.co/0IkHDWxvx2">https://t.co/0IkHDWxvx2</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1474820700393246720?ref_src=twsrc%5Etfw">December 25, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+[Announcement tweet for this post](https://twitter.com/brightprogramer/status/1474820700393246720)

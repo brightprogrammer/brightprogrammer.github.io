@@ -192,4 +192,4 @@ T﻿his writeup is no replacement for the 3000+ pages architecture manual given 
 
 {{< img src="screenshot-from-2023-03-02-00-34-12.png" alt="Figure 1-1 (AMD Vol3 Page2)" caption="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)" title="Control flow diagram of a simple algorithm to decode instructions (AMD Vol3 Page2)" >}}
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">As promised, I did a writeup for introducing you to the AMD64 Instruction Encoding format<a href="https://t.co/KVOBKG5KLb">https://t.co/KVOBKG5KLb</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1631008375898099713?ref_src=twsrc%5Etfw">March 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+[Announcement tweet for this post](https://twitter.com/brightprogramer/status/1631008375898099713)

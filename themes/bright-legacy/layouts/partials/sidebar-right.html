@@ -35,6 +35,7 @@
         <li><a href="{{ .url }}">{{ .title }}</a></li>
       {{ end }}
     </ul>
+    <p class="sidebar-more"><a href="{{ "/lists/#recently-read-papers" | relURL }}">Show more</a></p>
   </section>
 
   {{ with .Params.tags }}

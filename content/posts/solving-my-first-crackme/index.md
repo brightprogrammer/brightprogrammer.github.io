@@ -167,16 +167,12 @@ The next step is to disassemble / decompile the program and try to understand wh
 If haven't installed Ghidra yet, please google your way to install it. Fire up Ghidra, create a new project and hit `I` on your keyboard to import an executable. Navigate your way to the `forest` executable and select it. Ghidra will do some analysis now and you can just skip those steps as at this stage even I don't pay much attention to those.\
 Next you will see a window labled `Listing: forest` with some elvish written in it. Just kidding 😜, that's your disassembled code! Try to hit a few buttons and menus for a file, explore the interface a bit
 
-{{< img src="https://brightprogrammer.github.io/images/blog-res/ghidra-forest-1.png" alt="ghidra-forest-1" >}}
+{{< img src="ghidra-forest-1.png" alt="ghidra-forest-1" >}}
 
 Next, search for `.text` in the upper left window named `Program Trees` because that is where we will find our `main`. Why are we looking for `main`, well that's because all C/C++ programs must have it! and that is the entry point for every C/C++ program and that is where you will always want to start reversing.\
 Navigating to that section, you will instantly see disassembly of `main` pop up in the `Listing` window. If you are still not able to find this, then you can navigate to `main` in the window below `Program Trees` window named `Sybmol Tree`. You will find `main` in `Functions` label.
 
-{{< img src="https://brightprogrammer.github.io/images/blog-res/ghidra-forest-2.png" alt="ghidra-forest-2" >}}
-
 Next click on the `Listing: forest` window and you will see a C-style code pop up in window next to that (i.e `Decompile: main - (forest)`).  
-
-{{< img src="https://brightprogrammer.github.io/images/blog-res/ghidra-forest-3.png" alt="ghidra-forest-3" >}}
 
 We will copy this code from `Decompile` window in another text file and try to analyze that.
 
@@ -423,8 +419,6 @@ int main(){
 	fclose(passwd_dump);
 }
 ```
-
-<iframe src="https://pastebin.com/embed_iframe/xY31vYSi?theme=dark" style="border:none;width:100%"></iframe>
 
 [Here](https://pastebin.com/xY31vYSi) is the generated file. Note that there are some broken passwords and that is because of some non `printf` friendly characters.
 

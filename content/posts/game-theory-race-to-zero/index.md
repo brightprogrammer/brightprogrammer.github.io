@@ -65,4 +65,4 @@ This approach not only solved this Race-to-Ten problem, but also solved Cournot'
 
 To be honest, I'm new to game theory and some of the statements I wrote today sometimes go over my head to and I have to re-read them multiple times and recally how I understood it last time. It is quite complex (atleast at this point) but I know that it will open a new dimension of thinking for me.
 
-<blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">New post, after a long time. This one is on mathematics, game theory. Hope you guys like the practicality of this post!! 😋<a href="https://t.co/rhsUW5TnJd">https://t.co/rhsUW5TnJd</a></p>&mdash; Siddharth Mishra (@brightprogramer) <a href="https://twitter.com/brightprogramer/status/1560728347302170624?ref_src=twsrc%5Etfw">August 19, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+[Announcement tweet for this post](https://twitter.com/brightprogramer/status/1560728347302170624)

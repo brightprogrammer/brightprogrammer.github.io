@@ -1,5 +1,5 @@
 <aside class="sidebar sidebar-left" aria-label="Site sidebar">
-  <section class="sidebar-box">
+  <section class="sidebar-box sidebar-archive-box">
     <h2>Archive</h2>
     {{ $posts := where .Site.RegularPages "Section" "posts" }}
     {{ $groups := $posts.GroupByDate "2006" }}
@@ -11,5 +11,16 @@
         </li>
       {{ end }}
     </ul>
+  </section>
+
+  <section class="sidebar-box">
+    <h2>Tags</h2>
+    {{ $tags := .Site.Taxonomies.tags.ByCount }}
+    <ul class="sidebar-list sidebar-tags-list">
+      {{ range first 12 $tags }}
+        <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})</li>
+      {{ end }}
+    </ul>
+    <p class="sidebar-more"><a href="{{ "/tags/" | relURL }}">All tags</a></p>
   </section>
 </aside>

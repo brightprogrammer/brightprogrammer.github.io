@@ -3504,9 +3504,7 @@ uint32_t updateByteCode(SectionHeader* pSectionHeader, uint8_t arg2){
 }
 ```
 
-At this point I made changes everywhere in the code and since we are understanding code more and more and the size of code is increasing too, the entropy of the code is also increasing. To look at the state of code at this moment, take a look at [this pastebin](https://pastebin.com/DiUnkY3q) and you can also see the scrollable code below
-
-<iframe src="https://pastebin.com/embed_iframe/DiUnkY3q?theme=dark" style="border:none;width:100%;height:200px"></iframe>
+At this point I made changes everywhere in the code and since we are understanding code more and more and the size of code is increasing too, the entropy of the code is also increasing. To look at the state of code at this moment, take a look at [this pastebin](https://pastebin.com/DiUnkY3q).
 
 Next, we decompile this next function being called here (i.e `fcn_64bc`) : 
 
@@ -3741,8 +3739,6 @@ void fcn_64bc(uint32_t arg1, SectionHeader *pSectionHeader, uint32_t arg3){
 ```
 
 Clearly `arg1` is an error code here, `arg3` is the byte address. This means that `bcd2` is the offset of this section. We will make necessary changes in the code and rename `fcn_64bc` to `printError`. [Here](https://pastebin.com/2X74vNpT) is the change state.
-
-<iframe src="https://pastebin.com/embed_iframe/2X74vNpT?theme=dark" style="border:none;width:100%"></iframe>
 
 Great! this leaves only two more functions (`fcn_55db` and `fcn_3b29`) left to reverse the function `readByteCodeData` completely! Let's start with `fcn_55db`.
 

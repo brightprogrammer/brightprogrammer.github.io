@@ -11,6 +11,7 @@ readers.
 - [Lei Mao's Log Book](https://leimao.github.io/)
 - [Josh's Blog](https://lospi.net/)
 - [Nico Brailovsky's Thought Repository](https://nicolasbrailo.github.io/blog/index.html)
+- [X3eRo0](https://x3ero0.tech/)
 
 ## Interesting Talks & Debates/Conversations
 
@@ -20,7 +21,7 @@ readers.
 
 - [Programming Languages - S. Arun-Kumar IITD](/documents/s-arun-kumar-iitd-pl.pdf)
 
-## Recently Read Papers
+## Papers I've Read (LIFO)
 
 {{< recent-papers >}}
 

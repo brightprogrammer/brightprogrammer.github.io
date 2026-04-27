@@ -12,17 +12,17 @@ categories:
   - conferences
   - r2con
 ---
-So I participated in this year's online [r2con](https://rada.re/con/2021/)'s [r2wars](https://rada.re/con/2021/#r2wars) event. It was amazing. Me and my friend (**[X3eRo0](https://twitter.com/X3eRo0)**) participated in this years [r2con](https://rada.re/con/2021/). I never heard of this event before and it was introduced to me by **[X3eRo0](https://twitter.com/X3eRo0)** himself. Also this type of event was completely new to me.
+So I participated in this year's online [r2con](https://rada.re/con/2021/)'s [r2wars](https://rada.re/con/2021/#r2wars) event. It was amazing. Me and my friend (**[X3eRo0](https://x3ero0.tech)**) participated in this years [r2con](https://rada.re/con/2021/). I never heard of this event before and it was introduced to me by **[X3eRo0](https://x3ero0.tech)** himself. Also this type of event was completely new to me.
 
-{{< img src="https://github.com/radareorg/r2wars/blob/master/csharp/resources/r2wars_logo_transparent.png?raw=true" alt="r2wars image" caption="Source : https://github.com/radareorg/r2wars " title="Source : https://github.com/radareorg/r2wars " >}}
+{{< img src="/images/external/r2wars-logo.png" alt="r2wars image" caption="Source: radareorg/r2wars repository." title="Source: radareorg/r2wars repository." >}}
 
 ### Beginning
 
-My exams were already over and I was sitting waiting for a nice thing to happen in my life  (working on my side projects). As I've mentioned in my earlier post ([Solving **X3eRo0**'s CrackME The Hard Way](/posts/solving-x3ero0s-crackme-the-hard-way/)) **[X3eRo0](https://twitter.com/X3eRo0)** challeged me to solve his CrackMe and he'll invite me to his **[ctf-team](https://medium.com/zh3r0)**. This acted as a motivation to me. At the time of writing this post, the CrackMe is still unsolved (I am still at reversing stage, the read time is 109mins and I guess it will probably increase to 400mins+ after I'm done with it). After a month approx he sent me an invitation to join his **[ctf-team](https://medium.com/zh3r0)** (probably by seeing how foolish I am and that I won't be able to complete his crackme in an eternity 😂 🤣). Everyone is polite and helpful in the team I feel comfortable with them 😄.
+My exams were already over and I was sitting waiting for a nice thing to happen in my life  (working on my side projects). As I've mentioned in my earlier post ([Solving **X3eRo0**'s CrackME The Hard Way](/posts/solving-x3ero0s-crackme-the-hard-way/)) **[X3eRo0](https://x3ero0.tech)** challeged me to solve his CrackMe and he'll invite me to his **[ctf-team](https://medium.com/zh3r0)**. This acted as a motivation to me. At the time of writing this post, the CrackMe is still unsolved (I am still at reversing stage, the read time is 109mins and I guess it will probably increase to 400mins+ after I'm done with it). After a month approx he sent me an invitation to join his **[ctf-team](https://medium.com/zh3r0)** (probably by seeing how foolish I am and that I won't be able to complete his crackme in an eternity 😂 🤣). Everyone is polite and helpful in the team I feel comfortable with them 😄.
 
 {{< img src="chat_ss.png" caption="😂😂😂😂" title="😂😂😂😂" >}}
 
-So, I was there checking my notifications, reading some ctf writeups, waiting for a nice team event to occur and on the 2nd day of joining the team, **[X3eRo0](https://twitter.com/X3eRo0)** invited me and some other team members to participate in this event. Some members were busy with their college life and other stuffs so in the end only me and **[X3eRo0](https://twitter.com/X3eRo0)** were participating.
+So, I was there checking my notifications, reading some ctf writeups, waiting for a nice team event to occur and on the 2nd day of joining the team, **[X3eRo0](https://x3ero0.tech)** invited me and some other team members to participate in this event. Some members were busy with their college life and other stuffs so in the end only me and **[X3eRo0](https://x3ero0.tech)** were participating.
 
 ### What is [r2wars](https://rada.re/con/2021/#r2wars)?
 
@@ -36,17 +36,17 @@ The competing bots will be initialized in a common memory space of 1024 (0x400 o
 
 {{< img src="r2wars_ui.png" caption="a look at r2wars arena" title="a look at r2wars arena" >}}
 
-So as you can see above, the coloured (yellow, red, blue, pink etc...) region in the middle is a pictorial representation of memory region allocated to the two bots. In the image you can see that almost every thing is open source here. You can see the god damn assembly instructions of each bot in there! Which means you can reverse the bot by just looking at the match! Here **[X3eRo0](https://twitter.com/X3eRo0)**'s bot is competing against a bot named **old-flacucho.** This bot was reversed by **[X3eRo0](https://twitter.com/X3eRo0)** after [day1's match](https://youtu.be/yv4vuXrbt0M?t=19274). Blue means the executable code for left bot and Red means the executable code for right bot. Also the |R|W| colors shown beside the name of each bot is the colour of read and written memory for each bot. So, for eg: orange coloured memory region is written by **[X3eRo0](https://twitter.com/X3eRo0)**'s bot and the region in pink is written by **old-flacucho.**
+So as you can see above, the coloured (yellow, red, blue, pink etc...) region in the middle is a pictorial representation of memory region allocated to the two bots. In the image you can see that almost every thing is open source here. You can see the god damn assembly instructions of each bot in there! Which means you can reverse the bot by just looking at the match! Here **[X3eRo0](https://x3ero0.tech)**'s bot is competing against a bot named **old-flacucho.** This bot was reversed by **[X3eRo0](https://x3ero0.tech)** after [day1's match](https://youtu.be/yv4vuXrbt0M?t=19274). Blue means the executable code for left bot and Red means the executable code for right bot. Also the |R|W| colors shown beside the name of each bot is the colour of read and written memory for each bot. So, for eg: orange coloured memory region is written by **[X3eRo0](https://x3ero0.tech)**'s bot and the region in pink is written by **old-flacucho.**
 
 ### Day 1
 
-[Day1's match](https://youtu.be/yv4vuXrbt0M?t=19274) got me demotivated a little bit. This was becuase I was completely new to this type of warfare. **[X3eRo0](https://twitter.com/X3eRo0)** had his bot almost ready so he sumbitted his bot before deadline. There were 4 participants only. Two bo's were from the same author (as we come to know in the end). I didn't understand a bit! Nothing made sense except the scoreboard. **[X3eRo0](https://twitter.com/X3eRo0)** too participated in this for the first time. Though he was enjoying it at the same time 😆.
+[Day1's match](https://youtu.be/yv4vuXrbt0M?t=19274) got me demotivated a little bit. This was becuase I was completely new to this type of warfare. **[X3eRo0](https://x3ero0.tech)** had his bot almost ready so he sumbitted his bot before deadline. There were 4 participants only. Two bo's were from the same author (as we come to know in the end). I didn't understand a bit! Nothing made sense except the scoreboard. **[X3eRo0](https://x3ero0.tech)** too participated in this for the first time. Though he was enjoying it at the same time 😆.
 
 According to Indian Standard Time (IST) the matches where held between 12:30 A.M to 1:00 A.M. I was pretty exhausted because before this day I usually was fast asleep till 11:00 - 11:30 P.M but the story after this day was about to change. You can find the schedule r2con2021 [here](https://rada.re/con/2021/#schedule).
 
 ### Day 2
 
-I had plans this day to go outside for some work but it got cancelled so I had the whole day ahead of me to work on my bot. I didn't knew where to start so **[X3eRo0](https://twitter.com/X3eRo0)** gave me some resources to begin with. He showed me some previously written bots and helped me understand them. Here are those resources : 
+I had plans this day to go outside for some work but it got cancelled so I had the whole day ahead of me to work on my bot. I didn't knew where to start so **[X3eRo0](https://x3ero0.tech)** gave me some resources to begin with. He showed me some previously written bots and helped me understand them. Here are those resources : 
 
 * [r2wars for n00bs by Captain Banana](https://www.youtube.com/watch?v=PB0AFBqFwGQ)
 * [The Kamikaze Bot](https://github.com/m1ckey/r2wars-bots/blob/master/kamikaze.x86-32.asm) - Probably the best bot for x86-32 architecture.
@@ -96,7 +96,7 @@ loop:
 	jmp loop;								do it again
 ```
 
-You can read the comments and understand. After writing this bot, I asked **[X3eRo0](https://twitter.com/X3eRo0)** for a match between our bots. This bot was too slow and almost all other bot's beat this one. Still it perfomed better against some bots because some of them were so fast that they curropted themselves 🤣. Bots can be funny once you start wrting them. 
+You can read the comments and understand. After writing this bot, I asked **[X3eRo0](https://x3ero0.tech)** for a match between our bots. This bot was too slow and almost all other bot's beat this one. Still it perfomed better against some bots because some of them were so fast that they curropted themselves 🤣. Bots can be funny once you start wrting them. 
 
 So after failing a lot, I wrote another bot named `amaterasu` named after [The Japanese Sun Goddess](https://www.britannica.com/topic/Amaterasu). It was also mentioned in [Naruto](https://en.wikipedia.org/wiki/Naruto)'s S6E25 where Sasuke's brother Itachi uses Amaterasu for the first time. The code for this bot is : 
 
@@ -162,13 +162,13 @@ But this was a failure too. I sumbitted this on for [Day2 match](https://youtu.b
 
 {{< img src="spiderman-infinity-war.gif" caption="source : tenor" title="source : tenor" >}}
 
-We both were constantly modifying our code and testing against other bots from github. It was was a blast. I had my setup for r2wars already done so **[X3eRo0](https://twitter.com/X3eRo0)** sent me his bots to test and run. I screencasted  my pc and we enjoyed a lot.
+We both were constantly modifying our code and testing against other bots from github. It was was a blast. I had my setup for r2wars already done so **[X3eRo0](https://x3ero0.tech)** sent me his bots to test and run. I screencasted  my pc and we enjoyed a lot.
 
-This time  **[X3eRo0](https://twitter.com/X3eRo0)** made a bot in `arm-32` code. His bot was nailing it! But still ***amaterasu*** was able to defeat it sometimes! I planned to learn `arm-32` the next day and this marked the end of Day 2.
+This time  **[X3eRo0](https://x3ero0.tech)** made a bot in `arm-32` code. His bot was nailing it! But still ***amaterasu*** was able to defeat it sometimes! I planned to learn `arm-32` the next day and this marked the end of Day 2.
 
 ### Day 3
 
-This was the final day. Day 1 and Day 2 were just test rounds and 2 test matches were conducted on each day but today it was just gonna be only one single round! ***THE FINAL ROUND***! I woke up and started to read [this awesome blog post](https://modexp.wordpress.com/2018/10/30/arm64-assembly/) on `aarch64` assembly. I just started reading the post and then my discord notification popped out. A team member requested me to help him solve a CTF challenge. I got involved in that for more than half of the day. Next it was gym time from 4:30 to 6:30 and I came home at 6:50. **[X3eRo0](https://twitter.com/X3eRo0)** was already ready with his new improved bot! It was monstrous! The bot won against Day2's best bot amphibia sometimes! I got fresh till 7:00 and we joined vc at 7:05. Then we began running final tests for our bots. I had to write a new one so I made a new bot named newbot 😆. At this point there wasn't any new ideas popping in my mind. I saw that other bots were hardcoding assembly code and pushing it onto the stack! so I tried the same. **[X3eRo0](https://twitter.com/X3eRo0)** and I began to write this new bot and it ended up being same as kamikaze 😆. To be honest, we nevert took reference from kamikaze and at this point we realized that kamikaze is the best bot there can be on `x86-32` arch.
+This was the final day. Day 1 and Day 2 were just test rounds and 2 test matches were conducted on each day but today it was just gonna be only one single round! ***THE FINAL ROUND***! I woke up and started to read [this awesome blog post](https://modexp.wordpress.com/2018/10/30/arm64-assembly/) on `aarch64` assembly. I just started reading the post and then my discord notification popped out. A team member requested me to help him solve a CTF challenge. I got involved in that for more than half of the day. Next it was gym time from 4:30 to 6:30 and I came home at 6:50. **[X3eRo0](https://x3ero0.tech)** was already ready with his new improved bot! It was monstrous! The bot won against Day2's best bot amphibia sometimes! I got fresh till 7:00 and we joined vc at 7:05. Then we began running final tests for our bots. I had to write a new one so I made a new bot named newbot 😆. At this point there wasn't any new ideas popping in my mind. I saw that other bots were hardcoding assembly code and pushing it onto the stack! so I tried the same. **[X3eRo0](https://x3ero0.tech)** and I began to write this new bot and it ended up being same as kamikaze 😆. To be honest, we nevert took reference from kamikaze and at this point we realized that kamikaze is the best bot there can be on `x86-32` arch.
 
 ```
 start:
@@ -216,7 +216,7 @@ pusha
 jmp esp
 ```
 
-I hope you enjoyed reading this post. I thank all the members of the conference ([Captian Banana](https://twitter.com/CaptnBanana) for his video and amazing [writeup](https://bananamafia.dev/post/r2wars-2019/), [Pancake](https://twitter.com/trufae) for developing this game in the first place, [Abel](https://twitter.com/sanguinawer) for allowing multiple bots and being polite, and other [contributors](https://www.radare.org/con/2021/#contributors) who were in the conference too) who made this possible and interesting and I want to thank **[X3eRo0](https://twitter.com/X3eRo0)** for his help but I can do that personally 🤣.
+I hope you enjoyed reading this post. I thank all the members of the conference ([Captian Banana](https://twitter.com/CaptnBanana) for his video and amazing [writeup](https://bananamafia.dev/post/r2wars-2019/), [Pancake](https://twitter.com/trufae) for developing this game in the first place, [Abel](https://twitter.com/sanguinawer) for allowing multiple bots and being polite, and other [contributors](https://www.radare.org/con/2021/#contributors) who were in the conference too) who made this possible and interesting and I want to thank **[X3eRo0](https://x3ero0.tech)** for his help but I can do that personally 🤣.
 
 So this was it!. This year's winner is ***amphibia***. I look forward to participate next year and hit 'em with the strongest bot out there 😎. You can find source code for all my bots in [this github repo](https://github.com/brightprogrammer/r2wars-bots). This year's result is also in [that repo](https://github.com/brightprogrammer/r2wars-bots).
 

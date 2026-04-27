@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Bright Legacy Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/bright-legacy-serif-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/bright-legacy-serif-bold.ttf") format("truetype");
+}
+
 :root {
   --text: #111111;
   --link: #0000aa;
@@ -8,8 +24,8 @@
   --page: #bdbdbd;
   --accent-rgb: 0 51 153;
   --bg-rgb: 255 255 255;
-  --font-ui: Arial, Helvetica, sans-serif;
-  --font-copy: "Times New Roman", Times, "Liberation Serif", serif;
+  --font-ui: "Bright Legacy Serif", Georgia, "Times New Roman", Times, serif;
+  --font-copy: "Bright Legacy Serif", Georgia, "Times New Roman", Times, serif;
 }
 
 html {
@@ -187,11 +203,14 @@ td {
   background: var(--panel);
 }
 
-.sidebar-left .sidebar-box {
+.sidebar-left .sidebar-box:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-archive-box {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  margin-bottom: 0;
 }
 
 .sidebar-papers-box {
@@ -224,8 +243,16 @@ td {
   margin-top: 0.55rem;
 }
 
+.sidebar-tags-list li + li {
+  margin-top: 0.25rem;
+}
+
 .paper-list {
   flex: 1 1 auto;
+}
+
+.sidebar-more {
+  margin: 0.55rem 0 0;
 }
 
 .sidebar-news li + li {
@@ -255,6 +282,29 @@ td {
 
 .sidebar-tags {
   margin: 0;
+}
+
+.site-footer {
+  padding: 0.55rem 0.7rem;
+}
+
+.footer-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+.footer-badges a {
+  display: block;
+}
+
+.footer-badges img {
+  display: block;
+  width: 88px;
+  height: 31px;
+  image-rendering: pixelated;
 }
 
 .panel {

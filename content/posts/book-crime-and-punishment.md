@@ -21,8 +21,10 @@ media apps. I sometimes find myself scrolling for random content on YouTube, wit
 internal need to watch or consume any content, just out of habit!
 
 <center>
-<img border="0" alt="Crime and Punishment" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1382846449l/7144._SX196_.jpg"/>
+<img border="0" alt="Crime and Punishment" src="/images/external/crime-and-punishment-goodreads.jpg"/>
 </center>
+
+Source: Goodreads cover image.
 
 Well, I'm just in the middle of reading the book at the time of writing, and I'm quite proud of myself that I'm at page
 97 (that's almost 100 pages!) out of 656 pages (that's around 14% of the entire book). The part where I am, I cannot say
