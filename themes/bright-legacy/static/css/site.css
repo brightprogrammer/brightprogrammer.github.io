@@ -1,25 +1,28 @@
 @font-face {
   font-family: "Bright Legacy Serif";
   font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/cormorant-garamond-regular.ttf") format("truetype");
+  font-weight: 500;
+  font-display: optional;
+  src: url("/fonts/cormorant-garamond-latin.woff2") format("woff2"),
+       url("/fonts/cormorant-garamond-regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Bright Legacy Serif";
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/cormorant-garamond-italic.ttf") format("truetype");
+  font-display: optional;
+  src: url("/fonts/cormorant-garamond-italic-latin.woff2") format("woff2"),
+       url("/fonts/cormorant-garamond-italic.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Bright Legacy Serif";
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/cormorant-garamond-bold.ttf") format("truetype");
+  font-display: optional;
+  src: url("/fonts/cormorant-garamond-latin.woff2") format("woff2"),
+       url("/fonts/cormorant-garamond-bold.ttf") format("truetype");
 }
 
 @font-face {
