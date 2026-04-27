@@ -1,0 +1,23 @@
+[[papers]]
+title = "Protecting Browsers from Extension Vulnerabilities"
+url = "https://www.ndss-symposium.org/ndss2010/protecting-browsers-extension-vulnerabilities/"
+
+[[papers]]
+title = "Extending a Hand to Attackers: Browser Privilege Escalation Attacks via Extensions"
+url = "https://www.usenix.org/conference/usenixsecurity23/presentation/kim-young-min"
+
+[[papers]]
+title = "The Dangers of Human Touch: Fingerprinting Browser Extensions through User Actions"
+url = "https://www.usenix.org/conference/usenixsecurity22/presentation/solomos"
+
+[[papers]]
+title = "Anonymous Connections and Onion Routing"
+url = "https://ieeexplore.ieee.org/document/668972/"
+
+[[papers]]
+title = "Tor: The Second-Generation Onion Router"
+url = "https://www.usenix.org/conference/13th-usenix-security-symposium/tor-second-generation-onion-router"
+
+[[papers]]
+title = "RAPTOR: Routing Attacks on Privacy in Tor"
+url = "https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/sun"

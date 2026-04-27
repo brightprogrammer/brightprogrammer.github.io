@@ -1,0 +1,21 @@
+{{- if .Page.Scratch.Get "needsSlideshow" }}
+  <script src="{{ "js/slideshow.js" | relURL }}" defer></script>
+{{- end }}
+
+{{- $content := .Content | default "" -}}
+{{- $needsMermaid := false -}}
+{{- if .Params.mermaid -}}
+  {{- $needsMermaid = true -}}
+{{- else if gt (len (findRE "language-mermaid|class=\\\"mermaid\\\"" $content)) 0 -}}
+  {{- $needsMermaid = true -}}
+{{- end -}}
+{{- if $needsMermaid }}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+  <script src="{{ "js/mermaid.js" | relURL }}" defer></script>
+{{- end }}
+
+{{- with .Site.Params.customJS }}
+  {{- range . }}
+    <script src="{{ . | relURL }}" defer></script>
+  {{- end }}
+{{- end }}

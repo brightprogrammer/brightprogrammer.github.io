@@ -1,0 +1,29 @@
+{{ $dataKey := .Get "data" | default "browser_extension_security" }}
+{{ $data := index .Site.Data.paper_stats $dataKey }}
+{{ $id := printf "paper-stats-%d" .Ordinal }}
+{{ $title := .Get "title" }}
+{{ $note := .Get "note" }}
+
+{{ if not (.Page.Scratch.Get "chartjs") }}
+  {{ .Page.Scratch.Set "chartjs" true }}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+{{ end }}
+{{ if not (.Page.Scratch.Get "paperStatsChart") }}
+  {{ .Page.Scratch.Set "paperStatsChart" true }}
+  <script src="{{ "js/paper-stats.js" | relURL }}" defer></script>
+{{ end }}
+
+<figure class="paper-stats" data-paper-stats>
+  {{ with $title }}
+    <div class="paper-stats__title">{{ . }}</div>
+  {{ end }}
+  <div class="paper-stats__chart">
+    <canvas id="{{ $id }}" aria-label="{{ $title | default "Paper counts and citations by year" }}"></canvas>
+  </div>
+  <script type="application/json" data-paper-stats-json>
+    {{ $data | jsonify }}
+  </script>
+  {{ with $note }}
+    <figcaption class="paper-stats__note">{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>

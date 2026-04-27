@@ -1,0 +1,11 @@
+name = "bright-legacy"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A low-overhead old-style Hugo theme with no theme JavaScript."
+homepage = "https://brightprogrammer.in/"
+tags = ["blog", "minimal", "retro", "fast"]
+features = ["blog", "responsive", "old-style"]
+min_version = "0.111.0"
+
+[author]
+  name = "OpenAI Codex"

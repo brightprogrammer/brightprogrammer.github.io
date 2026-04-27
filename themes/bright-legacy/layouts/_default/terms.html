@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <section class="panel">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="content-body">
+        {{ . }}
+      </div>
+    {{ end }}
+    <ul class="term-list">
+      {{ range .Data.Terms.Alphabetical }}
+        <li>
+          <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+          <span>({{ .Count }})</span>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

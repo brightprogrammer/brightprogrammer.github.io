@@ -1,0 +1,13 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $link := .Get "link" -}}
+
+<div class="slideshow-slide">
+  {{- if $link -}}
+    <a class="slideshow-link" href="{{ $link | safeURL }}" rel="noopener noreferrer">
+  {{- end -}}
+      <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" loading="lazy" />
+  {{- if $link -}}
+    </a>
+  {{- end -}}
+</div>

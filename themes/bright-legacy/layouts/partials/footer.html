@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  {{ with .Site.Params.footnote }}
+    <div class="footer-note">{{ . | safeHTML }}</div>
+  {{ else }}
+    <p class="footer-meta">
+      {{ $year := now.Format "2006" }}
+      {{ with .Site.Params.since }}
+        Copyright &copy; {{ . }}-{{ $year }}
+      {{ else }}
+        Copyright &copy; {{ $year }}
+      {{ end }}
+      {{ with .Site.Params.author }} | {{ . }}{{ end }}
+    </p>
+  {{ end }}
+</footer>

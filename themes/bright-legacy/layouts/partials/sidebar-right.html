@@ -1,0 +1,56 @@
+<aside class="sidebar sidebar-right" aria-label="Page sidebar">
+  <section class="sidebar-box">
+    <h2>Page Info</h2>
+    <dl class="sidebar-facts">
+      <dt>Type</dt>
+      <dd>
+        {{- if .IsHome -}}
+          Home
+        {{- else if .IsPage -}}
+          Article
+        {{- else if .IsSection -}}
+          Section
+        {{- else if .Kind -}}
+          {{ .Kind | title }}
+        {{- else -}}
+          Page
+        {{- end -}}
+      </dd>
+      {{ with .Section }}
+        <dt>Section</dt>
+        <dd>{{ . | title }}</dd>
+      {{ end }}
+      {{ with .Date }}
+        <dt>Published</dt>
+        <dd>{{ .Format ($.Site.Params.dateFormat | default "2 January 2006") }}</dd>
+      {{ end }}
+      {{ if .IsPage }}
+        <dt>Words</dt>
+        <dd>{{ .WordCount }}</dd>
+      {{ end }}
+      <dt>Pages</dt>
+      <dd>{{ len .Site.RegularPages }}</dd>
+    </dl>
+  </section>
+
+  {{ $papers := .Site.Data.recent_papers.papers }}
+  <section class="sidebar-box sidebar-papers-box">
+    <h2>Recently Read Papers</h2>
+    <ul class="sidebar-list paper-list">
+      {{ range $papers }}
+        <li><a href="{{ .url }}">{{ .title }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+
+  {{ with .Params.tags }}
+    <section class="sidebar-box">
+      <h2>Tags</h2>
+      <p class="sidebar-tags">
+        {{ range $index, $tag := . }}
+          {{ if gt $index 0 }}, {{ end }}<a href="{{ printf "/tags/%s/" (urlize $tag) | relURL }}">{{ $tag }}</a>
+        {{ end }}
+      </p>
+    </section>
+  {{ end }}
+</aside>

@@ -1,0 +1,29 @@
+{{ $dataKey := .Get "data" | default "browser_extension_security_all" }}
+{{ $data := index .Site.Data.paper_stats $dataKey }}
+{{ $id := printf "paper-radar-%d" .Ordinal }}
+{{ $title := .Get "title" }}
+{{ $note := .Get "note" }}
+
+{{ if not (.Page.Scratch.Get "chartjs") }}
+  {{ .Page.Scratch.Set "chartjs" true }}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+{{ end }}
+{{ if not (.Page.Scratch.Get "paperRadarChart") }}
+  {{ .Page.Scratch.Set "paperRadarChart" true }}
+  <script src="{{ "js/paper-radar.js" | relURL }}" defer></script>
+{{ end }}
+
+<figure class="paper-stats paper-radar" data-paper-radar>
+  {{ with $title }}
+    <div class="paper-stats__title">{{ . }}</div>
+  {{ end }}
+  <div class="paper-stats__chart">
+    <canvas id="{{ $id }}" aria-label="{{ $title | default "Paper categories by count" }}"></canvas>
+  </div>
+  <script type="application/json" data-paper-radar-json>
+    {{ $data | jsonify }}
+  </script>
+  {{ with $note }}
+    <figcaption class="paper-stats__note">{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>

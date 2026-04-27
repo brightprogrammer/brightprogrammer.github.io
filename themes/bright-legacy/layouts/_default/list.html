@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <section class="panel">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="content-body">
+        {{ . }}
+      </div>
+    {{ end }}
+  </section>
+
+  {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
+  <section class="panel">
+    <ul class="post-list post-list-detailed">
+      {{ range $paginator.Pages }}
+        <li>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <div class="post-meta-line">
+            <span>{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</span>
+            {{ if $.Site.Params.showReadingTime }}
+              <span> | {{ .ReadingTime }} min read</span>
+            {{ end }}
+            {{ if $.Site.Params.showWordCount }}
+              <span> | {{ .WordCount }} words</span>
+            {{ end }}
+          </div>
+          {{ with .Params.description | default .Summary }}
+            <p>{{ . | plainify }}</p>
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      <nav class="pagination" aria-label="Pagination">
+        {{ if $paginator.HasPrev }}
+          <a href="{{ $paginator.Prev.URL }}">Newer</a>
+        {{ end }}
+        <span>Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+        {{ if $paginator.HasNext }}
+          <a href="{{ $paginator.Next.URL }}">Older</a>
+        {{ end }}
+      </nav>
+    {{ end }}
+  </section>
+{{ end }}

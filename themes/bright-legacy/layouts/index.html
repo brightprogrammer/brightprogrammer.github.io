@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <section class="panel">
+    {{ with .Site.Params.description }}
+      <p class="lead">{{ . }}</p>
+    {{ end }}
+    {{ with .Content }}
+      <div class="content-body home-copy">
+        {{ . }}
+      </div>
+    {{ end }}
+  </section>
+
+  {{ $posts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+  <section class="panel">
+    <h2>Recent Posts</h2>
+    <ul class="post-list">
+      {{ range first 12 $posts }}
+        <li>
+          <span class="post-date">{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</span>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    </ul>
+    <p><a href="{{ "/posts/" | relURL }}">Browse all posts</a></p>
+  </section>
+{{ end }}

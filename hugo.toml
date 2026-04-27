@@ -5,7 +5,7 @@ enableRobotsTXT = true
 hasCJKLanguage = true
 languageCode = "en"
 rssLimit = 10
-theme = "bright-minimal"
+theme = "bright-legacy"
 title = "Siddharth Mishra"
 enableEmoji = true
 

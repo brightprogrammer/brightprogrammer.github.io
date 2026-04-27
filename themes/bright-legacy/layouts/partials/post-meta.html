@@ -1,0 +1,19 @@
+<p class="post-meta-line">
+  <span>{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</span>
+  {{ if .Site.Params.showReadingTime }}
+    <span> | {{ .ReadingTime }} min read</span>
+  {{ end }}
+  {{ if .Site.Params.showWordCount }}
+    <span> | {{ .WordCount }} words</span>
+  {{ end }}
+</p>
+
+{{ with .Params.tags }}
+  <p class="tag-list">
+    Tags:
+    {{ range $index, $tag := . }}
+      {{ if gt $index 0 }}, {{ end }}
+      <a href="{{ printf "/tags/%s/" (urlize $tag) | relURL }}">{{ $tag }}</a>
+    {{ end }}
+  </p>
+{{ end }}

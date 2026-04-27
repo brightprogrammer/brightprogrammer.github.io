@@ -1,0 +1,13 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $title := .Get "title" | default "" -}}
+
+<figure class="image-block">
+  <a href="{{ $src | safeURL }}">
+    <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}"{{ with $title }} title="{{ . | plainify }}"{{ end }} loading="lazy" />
+  </a>
+  {{- if $caption }}
+    <figcaption>{{ $caption | markdownify }}</figcaption>
+  {{- end }}
+</figure>

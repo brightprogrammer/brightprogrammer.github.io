@@ -1,0 +1,14 @@
+<aside class="sidebar sidebar-left" aria-label="Site sidebar">
+  <section class="sidebar-box">
+    <h2>Recent Updates</h2>
+    {{ $posts := first 5 ((where .Site.RegularPages "Section" "posts").ByDate.Reverse) }}
+    <ul class="sidebar-list sidebar-news">
+      {{ range $posts }}
+        <li>
+          <span class="sidebar-date">{{ .Date.Format "2006-01-02" }}</span>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+</aside>

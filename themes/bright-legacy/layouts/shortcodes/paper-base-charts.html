@@ -1,0 +1,91 @@
+{{ $id := printf "paper-base-%d" .Ordinal }}
+{{ $title := .Get "title" | default "Firefox extension privilege gap (NDSS 2010)" }}
+{{ $note := .Get "note" | default "Replotted from Figure 2 and Figure 3 in \"Protecting Browsers from Extension Vulnerabilities\" (NDSS 2010)." }}
+{{ $donutNote := .Get "donut_note" }}
+{{ $barNote := .Get "bar_note" }}
+
+{{ if not (.Page.Scratch.Get "chartjs") }}
+  {{ .Page.Scratch.Set "chartjs" true }}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+{{ end }}
+{{ if not (.Page.Scratch.Get "paperBaseCharts") }}
+  {{ .Page.Scratch.Set "paperBaseCharts" true }}
+  <script src="{{ "js/paper-base-charts.js" | relURL }}" defer></script>
+{{ end }}
+
+<figure class="paper-stats paper-base" data-paper-base>
+  {{ with $title }}
+    <div class="paper-stats__title">{{ . }}</div>
+  {{ end }}
+  <div class="paper-base__grid">
+    <div>
+      <div class="paper-base__label">Most powerful behavior (25 Firefox extensions)</div>
+      <div class="paper-stats__chart paper-base__chart">
+        <canvas id="{{ $id }}-behavior" aria-label="Most powerful behavior"></canvas>
+      </div>
+    </div>
+    <div>
+      <div class="paper-base__label">Most powerful interface used</div>
+      <div class="paper-stats__chart paper-base__chart">
+        <canvas id="{{ $id }}-interface" aria-label="Most powerful interface"></canvas>
+      </div>
+    </div>
+  </div>
+  {{ with $donutNote }}
+    <div class="paper-stats__note paper-base__note">{{ . | markdownify }}</div>
+  {{ end }}
+  <div>
+    <div class="paper-base__label">Behavior vs interface gap (frequency across 25 extensions)</div>
+    <div class="paper-stats__chart paper-base__wide">
+      <canvas id="{{ $id }}-gap" aria-label="Privilege gap by behavior"></canvas>
+    </div>
+  </div>
+  {{ with $barNote }}
+    <div class="paper-stats__note paper-base__note">{{ . | markdownify }}</div>
+  {{ end }}
+  <script type="application/json" data-paper-base-json>
+    {{ dict "fig2" (dict
+      "behavior" (dict "labels" (slice "Critical" "High" "Medium" "Low" "None") "counts" (slice 3 12 3 3 4))
+      "interface" (dict "labels" (slice "Critical" "High" "None") "counts" (slice 19 4 2))
+    )
+    "fig3" (dict
+      "labels" (slice
+        "Process launching (C)"
+        "User chooses a file (N)"
+        "Extension-specific files (N)"
+        "Extension-specific SQLite (N)"
+        "Arbitrary network access (H)"
+        "Specific domain access (M)"
+        "Arbitrary DOM access (H)"
+        "Page for display only (L)"
+        "DOM of specific sites (M)"
+        "Highlighted text/images (L)"
+        "Password, login managers (H)"
+        "Cookie manager (H)"
+        "Same-extension prefs (N)"
+        "Language preferences (M)"
+      )
+      "counts" (slice 3 11 10 3 8 2 9 3 2 2 3 2 21 1)
+      "disparity" (slice false true true true false true false true true true false false true true)
+      "interfaces" (slice
+        "Process launching (C)"
+        "Arbitrary file access (C)"
+        "Arbitrary file access (C)"
+        "Arbitrary SQLite access (H)"
+        "Arbitrary network access (H)"
+        "Arbitrary network access (H)"
+        "Arbitrary DOM access (H)"
+        "Arbitrary DOM access (H)"
+        "Arbitrary DOM access (H)"
+        "Arbitrary DOM access (H)"
+        "Password, login managers (H)"
+        "Cookie manager (H)"
+        "Browser & all ext prefs (H)"
+        "Browser & all ext prefs (H)"
+      )
+    ) | jsonify }}
+  </script>
+  {{ with $note }}
+    <figcaption class="paper-stats__note">{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>

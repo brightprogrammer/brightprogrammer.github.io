@@ -5,7 +5,8 @@ defaultMarkdownHandler = "goldmark"
   unsafe = true
 
   [markup.highlight]
-  noClasses = false
+  noClasses = true
+  style = "friendly"
 
   [markup.tableOfContents]
   endLevel = 6

@@ -20,6 +20,10 @@ readers.
 
 - [Programming Languages - S. Arun-Kumar IITD](/documents/s-arun-kumar-iitd-pl.pdf)
 
+## Recently Read Papers
+
+{{< recent-papers >}}
+
 ## Podcasts
 
 I like audio drama a lot. Below is a list of podcasts I like. Contains a mix of some informative podcasts,

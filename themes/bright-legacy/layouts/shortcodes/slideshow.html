@@ -1,0 +1,17 @@
+{{ .Page.Scratch.Set "needsSlideshow" true }}
+{{- $autoplay := .Get "autoplay" | default "false" -}}
+{{- $interval := .Get "interval" | default "6000" -}}
+
+<div class="slideshow" data-slideshow data-autoplay="{{ $autoplay }}" data-interval="{{ $interval }}">
+  <button class="slideshow-nav" type="button" data-slideshow-prev aria-label="Previous slide">
+    Previous
+  </button>
+  <div class="slideshow-viewport">
+    <div class="slideshow-track">
+      {{ .Inner }}
+    </div>
+  </div>
+  <button class="slideshow-nav" type="button" data-slideshow-next aria-label="Next slide">
+    Next
+  </button>
+</div>
