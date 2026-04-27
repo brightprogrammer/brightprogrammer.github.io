@@ -16,12 +16,17 @@
 
 :root {
   --text: #111111;
+  --text-rgb: 17 17 17;
   --link: #0000aa;
   --visited: #551a8b;
   --border: #666666;
+  --border-rgb: 102 102 102;
   --panel: #ffffff;
+  --panel-rgb: 255 255 255;
   --chrome: #d9d9d9;
+  --chrome-rgb: 217 217 217;
   --page: #bdbdbd;
+  --page-rgb: 189 189 189;
   --accent-rgb: 0 51 153;
   --bg-rgb: 255 255 255;
   --font-ui: "Bright Legacy Serif", Georgia, "Times New Roman", Times, serif;
@@ -207,12 +212,7 @@ td {
   margin-bottom: 0;
 }
 
-.sidebar-archive-box {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-
+.sidebar-fill-box,
 .sidebar-papers-box {
   flex: 1 1 auto;
   display: flex;
@@ -516,7 +516,7 @@ td {
   margin: 1.5rem 0;
   padding: 0.85rem;
   border: 1px solid var(--border);
-  background: #fafafa;
+  background: var(--panel);
 }
 
 .paper-stats__title,
@@ -528,6 +528,9 @@ td {
 .paper-stats__chart {
   position: relative;
   min-height: 20rem;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  background: #f7f7f7;
 }
 
 .paper-base__chart {
@@ -563,7 +566,7 @@ td {
 .paper-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(68, 68, 68, 0.72);
 }
 
 .paper-modal__content {
@@ -575,7 +578,7 @@ td {
   overflow: auto;
   padding: 1rem;
   border: 1px solid var(--border);
-  background: #ffffff;
+  background: var(--panel);
 }
 
 .paper-modal__header {
@@ -596,7 +599,7 @@ td {
 
 .paper-modal__close {
   border: 1px solid var(--border);
-  background: #efefef;
+  background: var(--chrome);
   color: var(--text);
   font: inherit;
   cursor: pointer;

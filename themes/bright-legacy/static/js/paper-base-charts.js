@@ -22,9 +22,9 @@
     const theme = document.documentElement.getAttribute("data-theme") || "light";
     const accentRgb = parseRgb(
       rootStyle.getPropertyValue("--accent-rgb"),
-      [194, 65, 12]
+      [0, 51, 153]
     );
-    const bgRgb = parseRgb(rootStyle.getPropertyValue("--bg-rgb"), [255, 246, 238]);
+    const bgRgb = parseRgb(rootStyle.getPropertyValue("--bg-rgb"), [255, 255, 255]);
     const textColor =
       rootStyle.getPropertyValue("--text").trim() ||
       getComputedStyle(document.body).color ||

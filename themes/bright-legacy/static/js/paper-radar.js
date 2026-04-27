@@ -146,17 +146,24 @@
       .getPropertyValue("--accent-rgb")
       .trim()
       .replace(/\s+/g, " ");
+    const borderRgb = rootStyle
+      .getPropertyValue("--border-rgb")
+      .trim()
+      .replace(/\s+/g, " ");
     const [r, g, b] = accentRgb
       ? accentRgb.split(" ").map((value) => Number(value))
-      : [194, 65, 12];
-    const fill = `rgba(${r}, ${g}, ${b}, 0.2)`;
-    const line = `rgb(${r}, ${g}, ${b})`;
+      : [0, 51, 153];
+    const [br, bg, bb] = borderRgb
+      ? borderRgb.split(" ").map((value) => Number(value))
+      : [102, 102, 102];
+    const fill = `rgba(${r}, ${g}, ${b}, 0.12)`;
+    const line = `rgba(${r}, ${g}, ${b}, 0.9)`;
     const point = `rgb(${r}, ${g}, ${b})`;
-    const grid = `rgba(${r}, ${g}, ${b}, 0.22)`;
+    const grid = `rgba(${br}, ${bg}, ${bb}, 0.32)`;
     const textColor =
       rootStyle.getPropertyValue("--text").trim() ||
       getComputedStyle(document.body).color ||
-      "#0f172a";
+      "#111111";
 
     return {
       fillColor: fill,
@@ -318,7 +325,7 @@
               pointLabels: {
                 font: {
                   size: 12,
-                  weight: "600",
+                  weight: "400",
                 },
               },
             },
