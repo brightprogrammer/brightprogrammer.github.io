@@ -1,6 +1,6 @@
 {{ $papers := .Site.Data.recent_papers.papers }}
 <ul class="paper-list">
-  {{ range $papers }}
+  {{ range first 3 $papers }}
     <li><a href="{{ .url }}">{{ .title }}</a></li>
   {{ end }}
 </ul>

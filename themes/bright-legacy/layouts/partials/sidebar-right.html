@@ -1,35 +1,29 @@
 <aside class="sidebar sidebar-right" aria-label="Page sidebar">
+  {{ $allPages := .Site.RegularPages }}
+  {{ $posts := where $allPages "Section" "posts" }}
+  {{ $totalWords := 0 }}
+  {{ $totalRead := 0 }}
+  {{ range $allPages }}
+    {{ $totalWords = add $totalWords .WordCount }}
+    {{ $totalRead = add $totalRead .ReadingTime }}
+  {{ end }}
+  {{ $firstPost := index $posts.ByDate 0 }}
+  {{ $latestPost := index $posts.ByDate.Reverse 0 }}
   <section class="sidebar-box">
-    <h2>Page Info</h2>
+    <h2>Site Info</h2>
     <dl class="sidebar-facts">
-      <dt>Type</dt>
-      <dd>
-        {{- if .IsHome -}}
-          Home
-        {{- else if .IsPage -}}
-          Article
-        {{- else if .IsSection -}}
-          Section
-        {{- else if .Kind -}}
-          {{ .Kind | title }}
-        {{- else -}}
-          Page
-        {{- end -}}
-      </dd>
-      {{ with .Section }}
-        <dt>Section</dt>
-        <dd>{{ . | title }}</dd>
-      {{ end }}
-      {{ with .Date }}
-        <dt>Published</dt>
-        <dd>{{ .Format ($.Site.Params.dateFormat | default "2 January 2006") }}</dd>
-      {{ end }}
-      {{ if .IsPage }}
-        <dt>Words</dt>
-        <dd>{{ .WordCount }}</dd>
-      {{ end }}
+      <dt>Posts</dt>
+      <dd>{{ len $posts }}</dd>
       <dt>Pages</dt>
-      <dd>{{ len .Site.RegularPages }}</dd>
+      <dd>{{ len $allPages }}</dd>
+      <dt>Reading</dt>
+      <dd>{{ $totalWords }} words</dd>
+      <dt>Read Time</dt>
+      <dd>{{ $totalRead }} min</dd>
+      <dt>Since</dt>
+      <dd>{{ $firstPost.Date.Format "2006" }}</dd>
+      <dt>Latest</dt>
+      <dd>{{ $latestPost.Date.Format ($.Site.Params.dateFormat | default "2 January 2006") }}</dd>
     </dl>
   </section>
 
@@ -37,7 +31,7 @@
   <section class="sidebar-box sidebar-papers-box">
     <h2>Recently Read Papers</h2>
     <ul class="sidebar-list paper-list">
-      {{ range $papers }}
+      {{ range first 3 $papers }}
         <li><a href="{{ .url }}">{{ .title }}</a></li>
       {{ end }}
     </ul>

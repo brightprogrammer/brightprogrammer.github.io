@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="panel">
+  <section class="panel home-intro-panel">
     {{ with .Content }}
       <div class="content-body home-copy">
         {{ . }}
@@ -8,7 +8,7 @@
   </section>
 
   {{ $posts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
-  <section class="panel">
+  <section class="panel home-posts-panel">
     <h2>Recent Posts</h2>
     <ul class="post-list">
       {{ range first 12 $posts }}

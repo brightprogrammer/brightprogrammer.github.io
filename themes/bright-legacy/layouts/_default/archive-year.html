@@ -1,0 +1,30 @@
+{{ define "main" }}
+  {{ $year := printf "%v" .Params.year }}
+  <section class="panel">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+      <p class="lead">{{ . }}</p>
+    {{ end }}
+    <ul class="post-list post-list-detailed">
+      {{ range where (.Site.RegularPages.ByDate.Reverse) "Section" "posts" }}
+        {{ if eq (.Date.Format "2006") $year }}
+          <li>
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <div class="post-meta-line">
+              <span>{{ .Date.Format (.Site.Params.dateFormat | default "2 January 2006") }}</span>
+              {{ if $.Site.Params.showReadingTime }}
+                <span> | {{ .ReadingTime }} min read</span>
+              {{ end }}
+              {{ if $.Site.Params.showWordCount }}
+                <span> | {{ .WordCount }} words</span>
+              {{ end }}
+            </div>
+            {{ with .Params.description | default .Summary }}
+              <p>{{ . | plainify }}</p>
+            {{ end }}
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

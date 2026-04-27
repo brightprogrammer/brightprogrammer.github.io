@@ -1,12 +1,13 @@
 <aside class="sidebar sidebar-left" aria-label="Site sidebar">
   <section class="sidebar-box">
-    <h2>Recent Updates</h2>
-    {{ $posts := first 5 ((where .Site.RegularPages "Section" "posts").ByDate.Reverse) }}
-    <ul class="sidebar-list sidebar-news">
-      {{ range $posts }}
+    <h2>Archive</h2>
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ $groups := $posts.GroupByDate "2006" }}
+    <ul class="sidebar-list sidebar-news sidebar-archive">
+      {{ range sort $groups "Key" "desc" }}
         <li>
-          <span class="sidebar-date">{{ .Date.Format "2006-01-02" }}</span>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="sidebar-date">{{ .Key }}</span>
+          <a href="{{ printf "/archives/%s/" .Key | relURL }}">{{ len .Pages }} posts</a>
         </li>
       {{ end }}
     </ul>

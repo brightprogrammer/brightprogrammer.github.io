@@ -156,6 +156,16 @@ td {
   min-height: 20rem;
 }
 
+.home-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.home-posts-panel {
+  flex: 1 1 auto;
+}
+
 .sidebar {
   min-width: 0;
 }
@@ -208,6 +218,10 @@ td {
   flex: 1 1 auto;
   padding-left: 0;
   list-style: none;
+}
+
+.sidebar-archive li + li {
+  margin-top: 0.55rem;
 }
 
 .paper-list {
@@ -622,15 +636,22 @@ body.modal-open {
   }
 
   .layout-shell {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .sidebar-left {
     display: block;
+    order: 3;
   }
 
   .sidebar-right {
     display: block;
+    order: 2;
+  }
+
+  .site-main {
+    order: 1;
   }
 
   .site-header,
