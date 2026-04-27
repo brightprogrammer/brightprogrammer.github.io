@@ -3,7 +3,15 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/bright-legacy-serif-regular.ttf") format("truetype");
+  src: url("/fonts/cormorant-garamond-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-italic.ttf") format("truetype");
 }
 
 @font-face {
@@ -11,7 +19,39 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("/fonts/bright-legacy-serif-bold.ttf") format("truetype");
+  src: url("/fonts/cormorant-garamond-bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/UbuntuMono-R.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Mono";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/UbuntuMono-RI.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/UbuntuMono-B.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bright Legacy Mono";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/UbuntuMono-BI.ttf") format("truetype");
 }
 
 :root {
@@ -31,6 +71,7 @@
   --bg-rgb: 255 255 255;
   --font-ui: "Bright Legacy Serif", Georgia, "Times New Roman", Times, serif;
   --font-copy: "Bright Legacy Serif", Georgia, "Times New Roman", Times, serif;
+  --font-mono: "Bright Legacy Mono", "Ubuntu Mono", "Courier New", Courier, monospace;
 }
 
 html {
@@ -41,7 +82,7 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--page);
-  font: 15px/1.4 var(--font-ui);
+  font: 500 16px/1.45 var(--font-ui);
 }
 
 a {
@@ -62,7 +103,7 @@ code,
 pre,
 kbd,
 samp {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--font-mono);
 }
 
 pre {
@@ -240,7 +281,7 @@ td {
 }
 
 .sidebar-archive li + li {
-  margin-top: 0.55rem;
+  margin-top: 0.25rem;
 }
 
 .sidebar-tags-list li + li {
@@ -304,6 +345,9 @@ td {
   display: block;
   width: 88px;
   height: 31px;
+}
+
+.footer-badges img.badge-pixel {
   image-rendering: pixelated;
 }
 
@@ -336,8 +380,8 @@ td {
 
 .content-body {
   font-family: var(--font-copy);
-  font-size: 1.05rem;
-  line-height: 1.35;
+  font-size: 1.08rem;
+  line-height: 1.38;
 }
 
 .content-body::after {

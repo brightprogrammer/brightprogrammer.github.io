@@ -20,11 +20,6 @@ categories = "categories"
 title="Siddharth Mishra"
 author = "Siddharth Mishra"
 description = "Personal blogging and note taking."
-footnote = """
-<center>
-Siddharth Mishra. All Rights Reserved.<br/>
-</center>
-"""
 customCSS = []
 customJS = []
 dateFormat = "2 January 2006"

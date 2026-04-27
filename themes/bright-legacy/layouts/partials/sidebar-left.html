@@ -6,8 +6,7 @@
     <ul class="sidebar-list sidebar-news sidebar-archive">
       {{ range sort $groups "Key" "desc" }}
         <li>
-          <span class="sidebar-date">{{ .Key }}</span>
-          <a href="{{ printf "/archives/%s/" .Key | relURL }}">{{ len .Pages }} posts</a>
+          <a href="{{ printf "/archives/%s/" .Key | relURL }}">{{ .Key }}</a> ({{ len .Pages }})
         </li>
       {{ end }}
     </ul>
