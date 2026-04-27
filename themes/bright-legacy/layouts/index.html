@@ -1,8 +1,5 @@
 {{ define "main" }}
   <section class="panel">
-    {{ with .Site.Params.description }}
-      <p class="lead">{{ . }}</p>
-    {{ end }}
     {{ with .Content }}
       <div class="content-body home-copy">
         {{ . }}

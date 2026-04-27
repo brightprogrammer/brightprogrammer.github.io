@@ -12,5 +12,9 @@
       {{ $isActive := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
       <a href="{{ .URL | safeURL }}"{{ if $isActive }} aria-current="page"{{ end }}>{{ .Name }}</a>
     {{ end }}
+    {{ with .Site.GetPage "/search" }}
+      <span class="nav-sep">|</span>
+      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>Search</a>
+    {{ end }}
   </nav>
 </header>

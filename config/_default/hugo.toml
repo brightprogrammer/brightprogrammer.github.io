@@ -17,6 +17,15 @@ defaultMarkdownHandler = "goldmark"
 tags = "tags"
 categories = "categories"
 
+[outputFormats.LUNR]
+mediaType = "application/json"
+baseName = "lunr"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["HTML", "RSS", "LUNR"]
+
 [[menu.main]]
 identifier = "posts"
 name = "Blog"

@@ -1,0 +1,12 @@
+{{- $pages := where .Site.RegularPages "Type" "ne" "search" -}}
+{{- $docs := slice -}}
+{{- range $pages -}}
+  {{- $doc := dict
+    "uri" .RelPermalink
+    "title" .Title
+    "content" (.Plain | default (.Summary | plainify))
+    "tags" (.Params.tags | default (slice))
+  -}}
+  {{- $docs = $docs | append $doc -}}
+{{- end -}}
+{{- $docs | jsonify -}}
