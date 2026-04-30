@@ -26,7 +26,7 @@ computer science, not medical science! Health is wealth :-)
 ## Childhood
 
 Imagine childhood, you were new to this world with so many things to explore, and you knew nothing about anything, so you wanted to explore everything in your surrounding.
-From things like breaking really costly things in the house, just to know what happens, to just wandering off to somewhere, slowly adding one to the stack of creases the parents
+From things like breaking really costly things in the house, just to know what happens, to just wandering off to somewhere, slowly adding one to the stack of forehead wrinkles the parents
 are going to have as they grow with us.
 
 I don't remember really getting bored at all, because I always had some questions in my mind about the things/places near me. Sometimes this was a nearby pond, sometimes it was
