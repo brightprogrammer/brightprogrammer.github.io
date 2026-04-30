@@ -183,16 +183,27 @@ Which now many people are already aware is a downward spiral of it's own!
 
 Sometimes this _challenge/exposure_ to self also manifests itself out of (or as a consequence of) motivation acquired after achieving something (a sense of achievement).
 You unknowingly ask yourself can I do this again? Let's find out! This is why you'll get recommended about making small achievements, like cleaning your place,
-taking a shower, reading a book, etc... Medical science also suggests that boredom is partly due to lack of focus. In my case I realize I can stay focused for
-hours if I'm working on something that I find interesting. This is the case with many as I've seen in my life.
+taking a shower, reading a book, etc...
 
-Some people challenge themselves by playing sports, some by playing games like chess, some by video games, some by going out, some by trying new food, etc...
-There are just different options left out to explore, things that when doing, your brain feels slightly uncomfortable, but also interested at the same time.
+## Focus
+
+Medical science also suggests that boredom is partly due to lack of focus. In my case I realize I can stay focused for hours if I'm working on something that I
+find interesting. This is the case with many as I've seen in my life. The good thing is focus can be built by embracing boredom! Try to wait it out, sit, medidate,
+force yourself out of your comfort zone.
 
 ## Induced Pressure
 
 I've realized that sometimes, a controlled induced pressure, like using a deadline to get things done make things less boring. Because you're basically forcing the the time parameters
 to go smaller, also you give your brain less time to get distracted on other stuff. This is also probably why completing whole syllabus the night before exam just works! This induced pressure
 has to be controlled, just so that it does not turn into stress.
+
+## It's Not Always Direct
+
+Forcing yourself out of comfort zone is not always direct/easy. Forcing a deadline on yourself is not easy as well. Another important observation I've made about my behavior,
+is that if you chain actions, to make it feel as if starting to get a thing done is easy, it just works! Sometimes it requires pre-planning, like preparing your uniform a night before,
+meal prep, grocery shopping on weekends, and sometimes it just requires a different perspective, like me preparing a cup of chai for myself to push me out of bed, and then slowly convincing
+myself to cook some food.
+
+## Its Only A Hypothesis
 
 In a few years I'll have more data, and then I guess I can support The Hypothesis more! See you next time ;-)
