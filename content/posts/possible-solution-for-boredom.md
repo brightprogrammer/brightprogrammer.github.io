@@ -83,21 +83,24 @@ matched what I had to learn. I already had a pretty good headstart with programm
 This life stage is a spiral because I was stuck in same repetitive loops! The exploration part was very little! And all of this, being constantly stuck in this loop, was leading to more and more
 boredom.
 
-# The Liveness Graph!
+# The Liveliness Graph!
 
-Consider an ad-hoc metric to capture the liveness of your live during a period of time :
+Consider an ad-hoc metric to capture the liveliness of your live during a period of time :
 
-$$ \text{liveness} = \text{some function}(\frac{\text{time passed}}{\text{time experienced }}) $$
+$$ \text{liveliness} = \text{some function}(\frac{\text{time passed}}{\text{time experienced}}) $$
 
-Using this metric, this is my liveness
+So, basically if $ \text{time passed} > \text{time experienced} $, you're focused and enjoying your time, you're more live, and if $ \text{time passed} < \text{time experienced} $ you're most probably not enjoying.
+Almost always $ \text{time passed} \ne \text{time experienced} $ in my experience.
+
+Using this metric, this is my liveliness
 
 <center>
 
 ```mermaid
 xychart-beta
-    title "perceived liveness over stages of live (abstract)"
+    title "perceived liveliness over stages of live (abstract)"
     x-axis ["childhood", "adolescence", "pre-adulthood", "college", "adulthood"]
-    y-axis "Liveness"
+    y-axis "liveliness"
     bar [1, 2, 2.1, 0.2, 0.5]
 ```
 
@@ -146,7 +149,10 @@ account, here's the hypothesis :
 > The cure to boredom is self-challenge
 
 Challenging yourself in new ways to keep exploring. The key component is to build a faculty that makes you realize that you've stopped exploring, or maybe your exploration speed is just too slow for your brain.
-I've noticed that I get bored only when that liveness score gets low. That liveness score gets low because the numerator in the formula is going below a bar. There's a popular line by [Rajesh Khanna](https://en.wikipedia.org/wiki/Rajesh_Khanna)
+I've noticed that I get bored only when that liveliness score gets low. That liveliness score gets low because the denominator in the formula is going above a bar.
+
+There's a popular line by a famous actor in India [Rajesh Khanna](https://en.wikipedia.org/wiki/Rajesh_Khanna)
+
 that goes like
 
 > ... Babumoshai, zindagi badi honi chahiye ...  
@@ -180,5 +186,11 @@ hours if I'm working on something that I find interesting. This is the case with
 
 Some people challenge themselves by playing sports, some by playing games like chess, some by video games, some by going out, some by trying new food, etc...
 There are just different options left out to explore, things that when doing, your brain feels slightly uncomfortable, but also interested at the same time.
+
+## Induced Pressure
+
+I've realized that sometimes, a controlled induced pressure, like using a deadline to get things done make things less boring. Because you're basically forcing the the time parameters
+to go smaller, also you give your brain less time to get distracted on other stuff. This is also probably why completing whole syllabus the night before exam just works! This induced pressure
+has to be controlled, just so that it does not turn into stress.
 
 In a few years I'll have more data, and then I guess I can support The Hypothesis more! See you next time ;-)
