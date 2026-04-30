@@ -131,7 +131,7 @@ Boredom! In hopes of escaping, still not realizing the root cause, again stuck w
 
 # Now!
 
-This is a completely different stage of life! It was like I was somehow pulled out of that state slowly and slowly. I moved places, I switched careers (now pursuing a PhD), I was forced to explore
+This is a completely different stage of life! It's like I was somehow pulled out of that state slowly and slowly. I moved places, I switched careers (now pursuing a PhD), I was forced to explore
 by some unseen force.
 
 <center>
