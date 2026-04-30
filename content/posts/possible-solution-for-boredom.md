@@ -140,6 +140,8 @@ by some unseen force.
 
 </center>
 
+I was forced to cook, to do things other than just programming whole day. I went on hikes, climbing, ice skating, etc... the list is now growing and will keep growing. A bucket list so large!
+
 # Hypothesis
 
 Now that I have enough data, and slowly am building a scientific temperament as well, I realize the core of the issue. As soon as I entered college, I stopped challenging myself. The courses were quite easy,
