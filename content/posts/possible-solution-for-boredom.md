@@ -38,7 +38,7 @@ maybe 5 or 6 years old. I remember wanting to see "What happens when I burn a th
 thread I took out of my Mother's set of threading tools). I also remember getting beaten really hard that day, but Mothers are superheroes, saving the day for me :-) And then
 everybody laughed at the foolishness, but for me it was a good experiment, and the results were really impactful!
 
-## Adloescence
+## Adolescence
 
 Growing up, My interactions with technology started increasing year by year. I got a computer and then I had a single place to focus all my energy to. There was internet that
 could answered almost anything I wanted to know. There were games! Games!!! Best playground to try "What will happen if I do this?". Since computer, I slowly stopped trying any
