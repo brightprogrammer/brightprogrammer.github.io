@@ -13,7 +13,8 @@
       {{ end }}
     </header>
 
-    {{ if and .Site.Params.toc (gt (len .TableOfContents) 0) }}
+    {{ $toc := cond (isset .Params "toc") .Params.toc .Site.Params.toc }}
+    {{ if and $toc (gt (len .TableOfContents) 0) }}
       <section class="toc-box">
         <h2>On This Page</h2>
         {{ .TableOfContents }}

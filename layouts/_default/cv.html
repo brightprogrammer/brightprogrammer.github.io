@@ -1,0 +1,253 @@
+{{ define "main" }}
+  {{ $p := . }}
+  <style>
+    .cv { padding: 1.1rem 1.3rem; }
+    .cv-head {
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+    .cv-name {
+      margin: 0;
+      font: bold 2.3rem/1.05 var(--font-copy);
+      letter-spacing: 0.01em;
+    }
+    .cv-tagline {
+      margin: 0.3rem 0 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #333333;
+    }
+    .cv-contacts {
+      margin: 0.6rem 0 0;
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem 0.5rem;
+      align-items: baseline;
+    }
+    .cv-contacts .sep { color: var(--border); }
+    .cv-contacts .k { color: #555555; }
+
+    .cv-section { margin-top: 1.7rem; }
+    .cv-section__title {
+      margin: 0 0 0.9rem;
+      font: bold 0.95rem/1.2 var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgb(var(--accent-rgb));
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+    }
+
+    /* Timeline rows: experience & education */
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      gap: 0.2rem 1.2rem;
+      padding: 0.55rem 0 0.85rem;
+      border-bottom: 1px dotted var(--border);
+    }
+    .cv-entry:last-child { border-bottom: 0; }
+    .cv-period {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #444444;
+      padding-top: 0.18rem;
+      white-space: nowrap;
+    }
+    .cv-entry__body { min-width: 0; }
+    .cv-role {
+      margin: 0;
+      font: bold 1.15rem/1.25 var(--font-copy);
+    }
+    .cv-org {
+      margin: 0.05rem 0 0;
+      font-style: italic;
+      color: #333333;
+    }
+    .cv-points {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+    }
+    .cv-points li { margin: 0.18rem 0; }
+
+    /* Cards: open source & projects */
+    .cv-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.7rem;
+    }
+    .cv-card {
+      border: 1px solid var(--border);
+      background: #fafafa;
+      padding: 0.7rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .cv-card__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .cv-card__name {
+      margin: 0;
+      font: bold 1.08rem/1.2 var(--font-mono);
+    }
+    .cv-card__name a { text-decoration: none; }
+    .cv-card__name a:hover { text-decoration: underline; }
+    .cv-card__arrow { color: var(--border); font-family: var(--font-mono); }
+    .cv-card__desc { margin: 0; font-size: 0.98rem; }
+    .cv-card__desc code { font-size: 0.85em; }
+
+    /* Chips: coursework */
+    .cv-chips {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .cv-chips li {
+      border: 1px solid var(--border);
+      background: var(--chrome);
+      padding: 0.25rem 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+
+    .cv-intro { margin: 0 0 0.9rem; max-width: 90ch; }
+
+    @media (max-width: 640px) {
+      .cv { padding: 0.8rem 0.9rem; }
+      .cv-name { font-size: 1.9rem; }
+      .cv-entry { grid-template-columns: 1fr; gap: 0.1rem; }
+      .cv-period { padding-top: 0; }
+    }
+  </style>
+
+  <article class="panel cv">
+    <header class="cv-head">
+      <h1 class="cv-name">{{ .Params.name | default .Title }}</h1>
+      {{ with .Params.tagline }}<p class="cv-tagline">{{ . }}</p>{{ end }}
+      {{ with .Params.contacts }}
+        <div class="cv-contacts">
+          {{ range $i, $c := . }}
+            {{ if $i }}<span class="sep">|</span>{{ end }}
+            <span><span class="k">{{ $c.label }}:</span>
+              {{ if $c.url }}<a href="{{ $c.url }}">{{ $c.text }}</a>{{ else }}{{ $c.text }}{{ end }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </header>
+
+    {{ with .Params.experience }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Experience</h2>
+        {{ range . }}
+          <div class="cv-entry">
+            <div class="cv-period">{{ .period }}</div>
+            <div class="cv-entry__body">
+              <p class="cv-role">{{ .role }}</p>
+              <p class="cv-org">{{ .org }}</p>
+              {{ with .points }}
+                <ul class="cv-points">
+                  {{ range . }}<li>{{ $p.RenderString (dict "display" "inline") . }}</li>{{ end }}
+                </ul>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.opensource }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Open Source</h2>
+        <div class="cv-cards">
+          {{ range . }}
+            <div class="cv-card">
+              <div class="cv-card__head">
+                <h3 class="cv-card__name">{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h3>
+                {{ if .url }}<span class="cv-card__arrow">↗</span>{{ end }}
+              </div>
+              <p class="cv-card__desc">{{ $p.RenderString (dict "display" "inline") .desc }}</p>
+            </div>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with .Params.projects }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Projects</h2>
+        <div class="cv-cards">
+          {{ range . }}
+            <div class="cv-card">
+              <div class="cv-card__head">
+                <h3 class="cv-card__name">{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h3>
+                {{ if .url }}<span class="cv-card__arrow">↗</span>{{ end }}
+              </div>
+              <p class="cv-card__desc">{{ $p.RenderString (dict "display" "inline") .desc }}</p>
+            </div>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with .Params.education }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Education</h2>
+        {{ range . }}
+          <div class="cv-entry">
+            <div class="cv-period">{{ .period }}</div>
+            <div class="cv-entry__body">
+              <p class="cv-role">{{ .role }}</p>
+              <p class="cv-org">{{ .org }}</p>
+              {{ with .points }}
+                <ul class="cv-points">
+                  {{ range . }}<li>{{ $p.RenderString (dict "display" "inline") . }}</li>{{ end }}
+                </ul>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.coursework }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Relevant Coursework</h2>
+        <ul class="cv-chips">
+          {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </section>
+    {{ end }}
+
+    {{ with .Params.selfhosting }}
+      <section class="cv-section">
+        <h2 class="cv-section__title">Self-Hosting & Sysadmin</h2>
+        {{ with .intro }}<p class="cv-intro">{{ $p.RenderString (dict "display" "inline") . }}</p>{{ end }}
+        {{ with .services }}
+          <div class="cv-cards">
+            {{ range . }}
+              <div class="cv-card">
+                <div class="cv-card__head">
+                  <h3 class="cv-card__name">{{ if .url }}<a href="{{ .url }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h3>
+                  {{ if .url }}<span class="cv-card__arrow">↗</span>{{ end }}
+                </div>
+                <p class="cv-card__desc">{{ $p.RenderString (dict "display" "inline") .desc }}</p>
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Content }}<div class="content-body">{{ . }}</div>{{ end }}
+  </article>
+{{ end }}
