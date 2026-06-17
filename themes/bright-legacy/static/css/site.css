@@ -660,6 +660,57 @@ td {
   margin-top: 0.75rem;
 }
 
+.gb-entry {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.7rem 0;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border);
+  background: #fafafa;
+}
+
+.gb-entry__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.gb-entry__name {
+  font-weight: bold;
+}
+
+.gb-entry__date {
+  color: #555555;
+  white-space: nowrap;
+}
+
+.gb-entry__site {
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+
+.gb-entry__site a::before {
+  content: "↗ ";
+}
+
+.gb-entry__msg {
+  font-family: var(--font-copy);
+}
+
+.gb-entry__msg > :first-child {
+  margin-top: 0;
+}
+
+.gb-entry__msg > :last-child {
+  margin-bottom: 0;
+}
+
 .search-form {
   margin: 1rem 0;
 }

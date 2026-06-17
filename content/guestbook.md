@@ -17,4 +17,6 @@ Use a real email address. Disposable mail domains may be ignored.
 
 ## Entries
 
-No entries yet.
+{{< guestbook name="Quadroli" url="http://limisi.srht.site" date="2026-06-17" >}}
+First one here 🙂‍↕️
+{{< /guestbook >}}

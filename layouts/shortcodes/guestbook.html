@@ -1,0 +1,21 @@
+{{- /* Full-width guestbook entry card.
+       Usage:
+       {{< guestbook name="Ada" url="https://example.com" date="2026-06-15" >}}
+       Your message (markdown allowed).
+       {{< /guestbook >}}
+*/ -}}
+{{- $name := .Get "name" | default "Anonymous" -}}
+{{- $url := .Get "url" -}}
+{{- $date := .Get "date" -}}
+<div class="gb-entry">
+  <div class="gb-entry__head">
+    <span class="gb-entry__name">{{ $name }}</span>
+    {{- with $date }}<time class="gb-entry__date">{{ . }}</time>{{ end -}}
+  </div>
+  {{- with $url }}
+  <div class="gb-entry__site">
+    <a href="{{ . }}" rel="nofollow noopener" target="_blank">{{ replaceRE "/$" "" (replaceRE "^https?://" "" .) }}</a>
+  </div>
+  {{- end }}
+  <div class="gb-entry__msg">{{ .Inner | markdownify }}</div>
+</div>
