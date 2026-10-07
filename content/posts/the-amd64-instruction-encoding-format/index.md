@@ -156,7 +156,7 @@ T﻿his prefix is used to override and select the non default operand size. If R
 
 {{< img src="screenshot-from-2023-03-02-00-15-40.png" alt="Table 1-2 (AMD Vol3 Page8)" caption="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)" title="Table showing the different operand size overrides when this prefix is present (AMD Vol3 Page8)" >}}
 
-T﻿ake a look at this table and closely understand the meaning and then try to decode/assemble the following opcodes/instructions.
+Take a look at this table and closely understand the meaning and then try to decode/assemble the following opcodes/instructions.
 
 * `66 03 f8`
 * `66 03 c0`
