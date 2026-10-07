@@ -222,7 +222,9 @@ drift towards finding out the cause of the tool failure rather than getting past
 It's engineering because you already have your methods, all you're trying to do is to make it faster, stronger, reliable,
 robust. It's also just wild to see the machine think like we do and follow your instructions, and with slight change of instruction
 it make fun of you, not by intent but by nature, by it's design, and purely within the bounds of what the logic
-suggests.
+suggests. There's different dimensions of engineering here : how you write your prompts, how you write your tools,
+how your agnet interacts with the tools, the personalities, the skills, the workflows and how they define the achievable
+goal (the loop).
 
 I had a blast working on all this and learning all this. I didn't know any of this when I started and I spent about
 two months stuck in a loop myself!
