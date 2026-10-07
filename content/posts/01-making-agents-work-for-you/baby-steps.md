@@ -199,7 +199,7 @@ itself, then whether or not the instructions were clear, whether or not the goal
 and some other small factors that are not immediately coming to my head right now.
 {{< /notice >}}
 
-# Selecting Good LLM/Agent
+## Selecting Good LLM Model
 
 There are some properties I found in the models that I experimented with, that are desirable for it
 to function well given a task of average complexity.
