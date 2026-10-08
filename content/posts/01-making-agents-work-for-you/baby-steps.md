@@ -250,6 +250,23 @@ A 10MB image can be converted to 10KB or 100KB, looking almost the same until yo
 For models, we learned that 4 bits is a good compression level and at that quantization level, the agent thinks
 reasonably good enough to be usable and useful.
 
+The good thing about quantization is that it reduces total VRAM space that the model will occupy while running.
+Quantizations can go from Q1, Q2, Q3, Q4, Q5, Q6, Q8, FP16, FP32. Not only that the model occupies less space,
+the compuation time also shortens. Given the shortage of RAM nowadays, and how limited sizes of RAM us normal
+people get (unlike billionare companies), we have to compromise on the model size and quantization levels.
+
+We can not only quantize the model weights but also the tokens and KV cache.
+
+## KV Cache
+
+It's just an optimization that remembers some heavy compuation that is probably going to happen next time as well.
+This is required if you dont want your LLM to re-compute same things again and again for each token generation turn.
+
+I don't know too much about this, but from what I know, it's just a cache that gets used to avoid recompuation, or
+in other words, it allows the agent to re-use already read. Imagine being in the agent's place! You wouldn't wanna
+learn how to solve quadratic equations every time a question appears. Rather you'd wanna understand how the solution
+works, and you reuse it for next few solutions (assuming you dont already know how to solve quadratict equations)
+
 ## Context & Context Window
 
 Think about what _context_ means for us when we are normally conversing with other humans. It is essentially
@@ -269,6 +286,47 @@ A model usually starts with empty context, but you can start with a populated co
 Context window essentially decides the size of the tokens that live in the context. For frontier models
 at the time of this writing this, it is 1 million tokens. For the agent that i've been using locally, I usually
 cap it out at 100k tokens, beacuse of the VRAM limitation I got.
+
+Think of context window as a short term memory the agent has. This memory lives in a very forgetful and volatile
+space in the sense that this can be changed or dropped anytime you want!
+
+## Context Compaction
+
+So the context has a limit and agent has to keep going on. Obviously it will read and generate a lot and only
+so much can fit inside this limited space. How do we keep the agent keep going with knowledge of what it has
+been doing all this time?
+
+I don't exactly know how compaction works and I dont really wanna know at the time of writing this, I'm already
+quite exhausted and just wanna complete a first version of this series ASAP. I do have a general idea though,
+and this comes from my intuition that can be wrong.
+
+The general idea is that once you hit your context limit cap, you ask an LLM to summarize parts of the context
+to keep the relevant information in the context. The quality of compaction will depend on how good the agent
+is instructed to do this. I myself tried doing this way but then later realized that for the intents and purposes
+of my use case I dont really need the agent to remember what it has been doing because it's working in a loop,
+and every now and then the agent finishes it's assigned work and gets new work, and the two works are not
+directly related.
+
+The bad thing about making it work this way is that the summarizer agent can really mess things up sometimes.
+One challenge I faced was how the summarizer itself got stuck in the thought process. A low quality compacted
+context is bound to produce low quality thoughts in turns after compaction. This is the reason why even frontier
+model's capability degrades after mutliple context compactions.
+
+## Keeping It Clean
+
+So, I leanred the hard way that if two tasks are unrelated, just clear the context window, let the agent start
+fresh. People have been trying to solve this by storing some of the learned facts in files, because for example
+some things the agent learns along a task can be reused in some other task. If it has to spend time re-learning
+it again and again, it's spending more time learning the same thing. This is also where skills and memory of agents
+come in, where claude code or codex will save memories that the agents themselves write, and boy do they shit in there!
+
+I usually make very explicit rules about no comments in code, and no memories without my permission. The frontier
+models do respect it sometimes, but an extra git commit hook enforces this and make sure they doing shit around
+the codebase they're working on, transferring false claims to the next session.
+
+This is also where the idea of poisoning or degradation of contexts come in. Context management is a hard problem,
+and I think if this gets solved, how agents work will take another huge leap towards autonomous work. Right now
+the quality of work degrades with time (at least for me).
 
 ## Prompt
 
