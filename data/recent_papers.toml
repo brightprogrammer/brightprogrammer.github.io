@@ -1,4 +1,16 @@
 [[papers]]
+title = "Testing Storage-System Correctness: Challenges, Fuzzing Limitations, and AI-Augmented Opportunities"
+url = "https://arxiv.org/abs/2602.02614"
+
+[[papers]]
+title = "Fuzzing File Systems via Two-Dimensional Input Space Exploration"
+url = "https://doi.org/10.1109/SP.2019.00035"
+
+[[papers]]
+title = "Finding Semantic Bugs in File Systems with an Extensible Fuzzing Framework"
+url = "https://doi.org/10.1145/3341301.3359662"
+
+[[papers]]
 title = "Protecting Browsers from Extension Vulnerabilities"
 url = "https://www.ndss-symposium.org/ndss2010/protecting-browsers-extension-vulnerabilities/"
 

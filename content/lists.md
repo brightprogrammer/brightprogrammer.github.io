@@ -47,3 +47,5 @@ why you see so many in the list. I started exploring very early.
 - [The Stack Overflow Podcast](https://open.spotify.com/show/0e5eoM6w7eW9Wu7wMA04Tr)
 - [The Hacker Mind](https://open.spotify.com/show/6zkacjxPFG0qbcMWzDHvfH)
 - [Tales](https://open.spotify.com/show/2OIRaDoDPKx77wz1945ihy)
+- [Dirt - An Audio Drama](https://open.spotify.com/show/2n1yNo7UJMcQlVZhkbgsFz)
+- [Where the Leaves Fall Purple](https://open.spotify.com/show/5Vh2iqVbV2mJNHXVlF9fBm)
