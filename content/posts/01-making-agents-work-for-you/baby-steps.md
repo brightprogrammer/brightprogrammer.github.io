@@ -39,11 +39,9 @@ I only have arguments to make for the side of answer I want to believe in. Becau
 being skeptical, I started exploring late than others.
 
 Almost mid-year I was using agents to work because I used one time and I realized the
-potenial of speeding up my work. ASU (my college) allowed students, free access to OpenAI frontier
-models and we had a blast using frontier level intelligence. It was fun while it lasted.
-Later the access got very strict because of disproportional use of the token budgets. Some
-experts used the agents a lot while they got the chance, maybe because they already knew
-the potential and were already looking for an opportunity.
+potenial of speeding up my work. ASU (my college) gave students free access to OpenAI frontier models
+and we had a blast using frontier level intelligence. It was fun while it lasted, the access got stricter
+later on. Some people had already seen the potential and made the most of it while they could.
 
 Past mid-year, after DEFCON, I realized I had my Mac Mini lying around and stays mostly off.
 I also knew that in today's world, if you can put some compute power to good use, you can profit
