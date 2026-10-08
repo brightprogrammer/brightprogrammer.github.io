@@ -32,23 +32,6 @@ in the loop, doing part of my repetitive work for me. As a result, I do want the
 in their writing and in their thought process, just not without proper crediting the original
 source of information.
 
-Next, I realized closing myself in a room and working day and night, losing sleep over getting
-results so I can talk to my professor is not really a good idea. It took two months and a whole
-lot of stress and peak mental exhaustion, to the point that I was seriously considering myself
-on the edge of depression. This can be a completely different topic for discussion, which I think
-will automatically appear in my upcoming posts. I have learned a lot of interesting stuff in this
-span of two months and I'm excited to write about all of it ASAP.
-
-{{< notice type="info ">}}
-Also... if you're a PhD student, or someone who has access to a mentor, and are confused about
-when to talk to your advisor/mentor? Talk to them about what you've been working on. Maybe bi-weekly
-or monthly, or whatever timing works for you two. Up until now I was confused on when to go for a
-meeting with my advisor. It's not always possible to some results in a time you think you'll have it
-by. If you work on that, you'll start stressing yourself out just before your own self-set deadline.
-The best way to work this out is to make your report as what you did in that time span rather than
-some advancement in your progress.
-{{< /notice >}}
-
 Posts will come about the agents and harness writing part, this post is a short note on my
 very first DEFCON experience.
 
@@ -94,7 +77,7 @@ we would ask them about their interest in hacking and we tell them about [pwn.co
 
 The first day was mostly empty (at least in my shift). The second day, [Yan](yancomm.net) came and he
 just had this energy that started pulling people in and I was amazed by witnessing it right in front of me.
-We just had to change our strategy slightly to achieve this in the first day itself. [Yan][yanncomm.net]'s
+We just had to change our strategy slightly to achieve this in the first day itself. [Yan](yanncomm.net)'s
 strategy was to ask people whether they wanted to "start hacking right now?", as compared to our
 strategy of just telling people about what pwn.college works. I also started doing the same thing that
 he did and we just started filling up the spaces quite fast.
