@@ -1,6 +1,6 @@
 ---
 author: "Siddharth Mishra"
-title: "Making Agents Work For You"
+title: "Making Agents Work For You : Getting Familiar"
 date: "2026-10-07"
 description: "Introductory Series In Making Agentic Workflows"
 tags:
