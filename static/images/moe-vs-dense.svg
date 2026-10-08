@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dg" viewBox="0 0 760 340" width="760" height="340">
+<style>.dg text{font-family:var(--font-copy,Georgia,serif);fill:#111;font-size:19px}
+.dg .c{text-anchor:middle;dominant-baseline:central}
+.dg .t{font-size:24px;font-weight:700}
+.dg .b{font-weight:700}
+.dg .i{font-style:italic;fill:#333;font-size:17px}
+.dg .sm{font-size:16px}
+.dg .m{font-family:var(--font-mono,monospace);font-size:15px}
+.dg .box{fill:#fff;stroke:#666;stroke-width:1}
+.dg .off{fill:#fff;stroke:#aaa;stroke-width:1}
+.dg .hi{fill:#eef5ff;stroke:#003399;stroke-width:1.2}
+.dg .panel{fill:#fbfbfb;stroke:#999;stroke-width:1}
+.dg .ln{stroke:#333;stroke-width:1.3;fill:none}
+.dg .lh{stroke:#003399;stroke-width:1.6;fill:none}
+.dg .cached{fill:#f2f2f2;stroke:#999;stroke-width:1}</style>
+<defs>
+<marker id="md-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+</defs>
+<rect width="760" height="340" fill="#fff"/>
+
+<rect class="panel" x="15" y="15" width="345" height="310"/>
+<text class="t c" x="187" y="42">Dense</text>
+<rect class="box" x="152" y="60" width="70" height="28"/><text class="c m" x="187" y="74">token</text>
+<path class="ln" d="M187,88 V100" marker-end="url(#md-a)"/>
+<g>
+<rect class="hi" x="37" y="102" width="34" height="30"/><rect class="hi" x="75" y="102" width="34" height="30"/><rect class="hi" x="113" y="102" width="34" height="30"/><rect class="hi" x="151" y="102" width="34" height="30"/><rect class="hi" x="189" y="102" width="34" height="30"/><rect class="hi" x="227" y="102" width="34" height="30"/><rect class="hi" x="265" y="102" width="34" height="30"/><rect class="hi" x="303" y="102" width="34" height="30"/>
+</g>
+<path class="ln" d="M187,132 V150" marker-end="url(#md-a)"/>
+<g>
+<rect class="hi" x="37" y="152" width="34" height="30"/><rect class="hi" x="75" y="152" width="34" height="30"/><rect class="hi" x="113" y="152" width="34" height="30"/><rect class="hi" x="151" y="152" width="34" height="30"/><rect class="hi" x="189" y="152" width="34" height="30"/><rect class="hi" x="227" y="152" width="34" height="30"/><rect class="hi" x="265" y="152" width="34" height="30"/><rect class="hi" x="303" y="152" width="34" height="30"/>
+</g>
+<path class="ln" d="M187,182 V200" marker-end="url(#md-a)"/>
+<g>
+<rect class="hi" x="37" y="202" width="34" height="30"/><rect class="hi" x="75" y="202" width="34" height="30"/><rect class="hi" x="113" y="202" width="34" height="30"/><rect class="hi" x="151" y="202" width="34" height="30"/><rect class="hi" x="189" y="202" width="34" height="30"/><rect class="hi" x="227" y="202" width="34" height="30"/><rect class="hi" x="265" y="202" width="34" height="30"/><rect class="hi" x="303" y="202" width="34" height="30"/>
+</g>
+<circle cx="187" cy="242" r="1.8" fill="#333"/><circle cx="187" cy="249" r="1.8" fill="#333"/><circle cx="187" cy="256" r="1.8" fill="#333"/>
+<path class="ln" d="M187,262 V278" marker-end="url(#md-a)"/>
+<text class="sm c" x="187" y="290">next token</text>
+<text class="i c" x="187" y="312">every weight is used for every token</text>
+
+<rect class="panel" x="395" y="15" width="350" height="310"/>
+<text class="t c" x="570" y="42">Mixture-of-Experts</text>
+<rect class="box" x="535" y="60" width="70" height="28"/><text class="c m" x="570" y="74">token</text>
+<path class="ln" d="M570,88 V100" marker-end="url(#md-a)"/>
+<text class="sm c" x="710" y="92">shared</text>
+
+<rect class="box" x="405" y="102" width="56" height="30"/><text class="c sm" x="433" y="117">router</text>
+<path class="ln" d="M461,117 H470" marker-end="url(#md-a)"/>
+<rect class="off" x="472" y="102" width="18" height="30"/><rect class="hi" x="493" y="102" width="18" height="30"/><rect class="off" x="514" y="102" width="18" height="30"/><rect class="off" x="535" y="102" width="18" height="30"/><rect class="off" x="556" y="102" width="18" height="30"/><rect class="off" x="577" y="102" width="18" height="30"/><rect class="hi" x="598" y="102" width="18" height="30"/><rect class="off" x="619" y="102" width="18" height="30"/><rect class="off" x="640" y="102" width="18" height="30"/><rect class="off" x="661" y="102" width="18" height="30"/>
+<rect class="hi" x="690" y="102" width="40" height="30"/>
+<path class="ln" d="M570,132 V150" marker-end="url(#md-a)"/>
+
+<rect class="box" x="405" y="152" width="56" height="30"/><text class="c sm" x="433" y="167">router</text>
+<path class="ln" d="M461,167 H470" marker-end="url(#md-a)"/>
+<rect class="off" x="472" y="152" width="18" height="30"/><rect class="off" x="493" y="152" width="18" height="30"/><rect class="off" x="514" y="152" width="18" height="30"/><rect class="hi" x="535" y="152" width="18" height="30"/><rect class="off" x="556" y="152" width="18" height="30"/><rect class="off" x="577" y="152" width="18" height="30"/><rect class="off" x="598" y="152" width="18" height="30"/><rect class="off" x="619" y="152" width="18" height="30"/><rect class="hi" x="640" y="152" width="18" height="30"/><rect class="off" x="661" y="152" width="18" height="30"/>
+<rect class="hi" x="690" y="152" width="40" height="30"/>
+<path class="ln" d="M570,182 V200" marker-end="url(#md-a)"/>
+
+<rect class="box" x="405" y="202" width="56" height="30"/><text class="c sm" x="433" y="217">router</text>
+<path class="ln" d="M461,217 H470" marker-end="url(#md-a)"/>
+<rect class="hi" x="472" y="202" width="18" height="30"/><rect class="off" x="493" y="202" width="18" height="30"/><rect class="off" x="514" y="202" width="18" height="30"/><rect class="off" x="535" y="202" width="18" height="30"/><rect class="off" x="556" y="202" width="18" height="30"/><rect class="hi" x="577" y="202" width="18" height="30"/><rect class="off" x="598" y="202" width="18" height="30"/><rect class="off" x="619" y="202" width="18" height="30"/><rect class="off" x="640" y="202" width="18" height="30"/><rect class="off" x="661" y="202" width="18" height="30"/>
+<rect class="hi" x="690" y="202" width="40" height="30"/>
+
+<circle cx="570" cy="242" r="1.8" fill="#333"/><circle cx="570" cy="249" r="1.8" fill="#333"/><circle cx="570" cy="256" r="1.8" fill="#333"/>
+<path class="ln" d="M570,262 V278" marker-end="url(#md-a)"/>
+<text class="sm c" x="570" y="290">next token</text>
+<text class="i c" x="570" y="312">router picks a few experts, per layer, per token</text>
+</svg>

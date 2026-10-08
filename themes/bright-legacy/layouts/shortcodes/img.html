@@ -2,12 +2,23 @@
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" | default "" -}}
 {{- $title := .Get "title" | default "" -}}
+{{- $width := .Get "width" | default "" -}}
 
-<figure class="image-block">
-  <a href="{{ $src | safeURL }}">
-    <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}"{{ with $title }} title="{{ . | plainify }}"{{ end }} loading="lazy" />
-  </a>
+<table class="image-block"{{ with $width }} style="{{ printf "width: %s" . | safeCSS }}"{{ end }}>
+  <tr>
+    <td>
+      {{- if strings.HasSuffix $src ".svg" }}
+      <div class="image-svg">{{ readFile (printf "static%s" $src) | safeHTML }}</div>
+      {{- else }}
+      <a href="{{ $src | safeURL }}">
+        <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}"{{ with $title }} title="{{ . | plainify }}"{{ end }}{{ with $width }} style="width: 100%"{{ end }} loading="lazy" />
+      </a>
+      {{- end }}
+    </td>
+  </tr>
   {{- if $caption }}
-    <figcaption>{{ $caption | markdownify }}</figcaption>
+  <tr>
+    <td class="image-caption">{{ $caption | markdownify }}</td>
+  </tr>
   {{- end }}
-</figure>
+</table>

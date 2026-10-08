@@ -480,17 +480,36 @@ td {
 }
 
 .image-block {
-  margin: 1.25rem 0;
+  width: 100%;
+  margin: 1.25rem auto;
+  table-layout: fixed;
+}
+
+.image-block td {
+  padding: 0;
+  border: none;
+  text-align: center;
 }
 
 .image-block img {
   display: block;
+  margin: 0 auto;
   height: auto;
   border: 1px solid var(--border);
 }
 
-.image-block figcaption {
-  margin-top: 0.45rem;
+.image-block .image-svg {
+  border: 1px solid var(--border);
+}
+
+.image-block .image-svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image-block .image-caption {
+  padding-top: 0.45rem;
   font-size: 0.95rem;
 }
 

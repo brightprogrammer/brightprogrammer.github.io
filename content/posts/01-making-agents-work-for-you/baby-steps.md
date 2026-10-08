@@ -94,7 +94,7 @@ This machine is more valuable than the price I got it for.
 
 Another interesting thing about this machine is that I got this machine only to deliver software for a client
 I used to work with. They wanted it on all platforms and I only had Linux back then. Windows was just an emulation
-away but Mac? They've made it near impossible to emulate MacOS now.
+away but Mac? They've made it near impossible to emulate MacOS now, especially on Apple Silicon.
 
 # Introduction
 
@@ -121,6 +121,8 @@ like reading an image and describing it, reading your mail and filtering spam, d
 answer to some of your questions. Agents are expected to work until they achieve their goal. An LLM is just there
 to generate the text.
 
+{{< img src="/images/llm-vs-agent.svg" width="85%" caption="An LLM answers in one pass. An agent is the same LLM in a loop, calling tools until the goal is met." >}}
+
 Interesting part is that the way we've engineered work in computer science is through natural language itself!
 In other words, think of what you do when you have to install a new package in your linux machine? Think of what
 you do when you want to write a program that can play chess in place of you (stockfish!). You write commands in
@@ -137,7 +139,8 @@ sitting inside a loop with a goal and some ways to achieve the goal.
 ## Weights/Parameters
 
 LLM's learn by learning weights. Weights is nothing but a fancy word for a number like -0.0014, 0.9948, etc...
-They are always (AFAIK) between -1 and 1. Nobody knows what these numbers actually mean, they just make the model work.
+They are mostly small numbers between -1 and 1. Nobody knows what these numbers actually mean, they just make the
+model work.
 It's called learning weights because they start very dumb. They absolutely generate gibberish. Much like a new
 born baby, who does not even know how to talk. So when they are given a token and asked to predict next, they
 will generate anything, absolutely anything from their vocabulary. They are then told what they should've
@@ -161,9 +164,13 @@ sentences.
 
 ## Token
 
-A token is a representation of a single word in agent's vocabulary. More bigger vocabulary means much bigger token
-size. A model consumes this token and gives you a list of tokens that should come next. This part of giving your
-model a token and getting tokens out of it is done by inference implementations like mlx (for Apple Silicon on MacOS).
+A token is a single entry in the model's vocabulary, the smallest unit of text the model can comprehend. It's not
+always a whole word. It can be a whole word, a piece of a word, a punctuation mark, or even a single byte. For example,
+"unbelievable" might get split into "un", "believ" and "able". The model only ever sees these tokens, each identified
+by a number (its position in the vocabulary). More bigger vocabulary means the model has more entries to pick from, and
+a bigger table of learned weights to describe each entry. A model consumes this token and gives you a list of tokens
+that should come next. This part of giving your model a token and getting tokens out of it is done by inference
+implementations like mlx (for Apple Silicon on MacOS).
 
 This process of consuming a token and giving out a list of tokens, is what we refer to as the _token generation process_.
 Your list of tokens will have an associated probability of which token is most likely to be next. There are
@@ -186,9 +193,16 @@ you can see this. Whenever you'll write something to the agent, it will start ge
 not for fancy. The tokens are getting streamed to you. Streamed in the sense that the tokens are copied out of the GPU
 memory, decoded, and then sent to your browser/terminal client over whatever internet protocol you're connected with.
 The speed at which the model can generate not only depends on how fast your GPU is, but also on how fast the memory
-bandwith is. That will decide how fast you can copy out tokens out of GPUs memory, and this is the part taht decides
-your tokens per second. I've been getting around 20 tokens per second on average on my Mac Mini M2 for Gemma4 26b A4b
-Mixture-of-Experts model.
+bandwith is. The weights live in GPU memory, but the GPU can only do math on the few MBs that fit on the chip itself.
+So for every single token, all the weights the model uses have to be read from memory into the GPU's compute units
+all over again. Copying the generated token out is nothing, it's just a number (a few bytes). Reading gigabytes of
+weights per token is what takes time, and this is the part that decides your tokens per second. I've been getting
+around 20 tokens per second on average on my Mac Mini M2 for Gemma4 26b A4b Mixture-of-Experts model.
+
+{{< notice type="info" >}}
+Quick math : Gemma4 26B A4B uses about 4B parameters per token. At 4-bit quantization that's roughly 2GB of weights
+read for every token. M2 has about 100GB/s of memory bandwidth, so 100 / 2 = ~50 tokens per second at best.
+{{< /notice >}}
 
 Newer generations of Mac have higher bandwith but not my a very hihg margin. I'd expect Somewhere around 30-60 tokens
 per second on latest Macs, the reason being that they have higher memory bandwith than an M2. On a dedicated graphics
@@ -199,16 +213,19 @@ operations along all the the weights/parameters it learned and finally some pred
 probability of being next in seqeuence) come out.
 
 Think of it this way. Our world has some things always true, and somethings that are conditionally true based on
-what context you're asking question. Addition encodes the always true nature of the world and multiplication encodes
-conditional nature. When the token goes in, it goes through lots of multiplications and attitions at once, and it
-keeps happening at different steps (called layers) and at each layer the values generated changes until it reaches
-the final prediction layer, and by the time it has reached the final prediction layer, the agent has finished it's
-_thinking_ process, which was basically just mutliplying and adding it with the learned weights.
+what context you're asking question. Loosely speaking, addition encodes the always true nature of the world and
+multiplication encodes conditional nature. When the token goes in, it goes through lots of multiplications and
+attitions at once, and it keeps happening at different steps (called layers) and at each layer the values generated
+changes until it reaches the final prediction layer, and by the time it has reached the final prediction layer,
+the agent has finished it's _thinking_ process, which was basically just mutliplying and adding it with the learned
+weights.
 
 So, at the final layer there are many predicted token each with their associated probability of being next, and
 your token decoding process can either select the token with highest probably or you can do some other stuff
 as well. There are some values you can tweak to get different results most of the time, or same results most of
 the time.
+
+{{< img src="/images/token-generation.svg" width="85%" caption="One token at a time. The whole sequence goes back in at every step. (probabilities are made up for illustration)" >}}
 
 ## Mixture-of-Experts vs Dense Models
 
@@ -217,14 +234,24 @@ will forward the information to all parts of it's brain. It's called dense for e
 parameters it learned for mutliplication and addition operations (Floating Ops) to predict the next token.
 
 In case of a mixture-of-experts, the model wont use all it's brain power at once. Instead the model is built
-like a court of experts sitting at a round table. The router is sitting on the head seat. It first gets the token
-and it will know who knows about this token (in given context) best and it will forward the information to that
-_expert_ (a smaller set of parameters) and ask it to generate the finall predictions. This essentially ends up doing
-less computation and hence generating faster results with mabye slightly less thinking power.
+like a court of experts sitting at a round table. The router decides, for every token, which few _experts_
+(each a smaller set of parameters) should work on it. The chosen experts each give their answer, and the router
+mixes those answers together, giving more weight to the experts it trusts more for this token. This essentially
+ends up doing less computation and hence generating faster results with mabye slightly less thinking power.
+
+The analogy breaks in a few places though. There's not just one court, but one at every layer of the model, each
+with its own router and its own experts. And the routing happens again for every single token at every layer, so
+the experts used for one token can be completely different from the ones used for the next token. The experts also
+don't specialize in topics like "math" or "biology" the way we would expect. What each expert is good at is learned
+during training, and mostly we can't tell what that is. For example, Gemma4 26B A4B has 128 experts per layer, and
+for each token it picks 8 of them plus one shared expert that always runs. That's how it only uses about 4B of its
+26B parameters for each token.
+
+{{< img src="/images/moe-vs-dense.svg" width="85%" caption="Dense uses every weight for every token. MoE routes each token to a few experts per layer. (10 experts drawn, Gemma4 26B A4B has 128 per layer)" >}}
 
 So imagine a dense model as being a single person doing all the thinking, and a mixture of expert model as being
-multiple persons available for thinking, but depending on what task currently they're working on, only one gets
-the final say. The catch here is that the single person thinking in this case will do slow thinking (by design,
+multiple persons available for thinking, but depending on what task currently they're working on, only a few of
+them get a say. The catch here is that the single person thinking in this case will do slow thinking (by design,
 it's got bigger brain, so it will think about more ifs and buts and thens), and the court of people is having
 slightly less intelligent people but they think very fast as compared to the single very smart person.
 
@@ -250,22 +277,50 @@ A 10MB image can be converted to 10KB or 100KB, looking almost the same until yo
 For models, we learned that 4 bits is a good compression level and at that quantization level, the agent thinks
 reasonably good enough to be usable and useful.
 
+{{< img src="/images/quantization-levels.webp" width="60%" caption="Same image, each color rounded to fewer levels. Q4 still looks almost the same, Q2 and Q1 fall apart. (photo : [Acacia At Dusk](https://commons.wikimedia.org/wiki/File:Acacia_At_Dusk.jpg) by John Storr, public domain)" >}}
+
 The good thing about quantization is that it reduces total VRAM space that the model will occupy while running.
 Quantizations can go from Q1, Q2, Q3, Q4, Q5, Q6, Q8, FP16, FP32. Not only that the model occupies less space,
-the compuation time also shortens. Given the shortage of RAM nowadays, and how limited sizes of RAM us normal
+it also generates tokens faster, because there are fewer bytes of weights to read from memory for every token
+(remember the memory bandwidth part?). Given the shortage of RAM nowadays, and how limited sizes of RAM us normal
 people get (unlike billionare companies), we have to compromise on the model size and quantization levels.
 
-We can not only quantize the model weights but also the tokens and KV cache.
+We can not only quantize the model weights but also the KV cache (more on that next). Quantizing the KV cache
+lets you fit a longer context in the same amount of RAM.
+
+Also, as for the compression parts, it's only true if you are compressing the model weights after the training.
+There are also quantization aware training, and the model that I have been using is a QAT learned model. They
+sometimes are expected to work better than compressed models.
 
 ## KV Cache
 
-It's just an optimization that remembers some heavy compuation that is probably going to happen next time as well.
-This is required if you dont want your LLM to re-compute same things again and again for each token generation turn.
+Remember that at every step, the whole sequence of tokens goes into the model to predict the next one. If the model
+redid all the math for every token at every step, generating the 1000th token would mean redoing the work for the
+999 before it. That's a lot of wasted work.
 
-I don't know too much about this, but from what I know, it's just a cache that gets used to avoid recompuation, or
-in other words, it allows the agent to re-use already read. Imagine being in the agent's place! You wouldn't wanna
-learn how to solve quadratic equations every time a question appears. Rather you'd wanna understand how the solution
-works, and you reuse it for next few solutions (assuming you dont already know how to solve quadratict equations)
+Turns out, a big part of that math never changes. At every layer, the model turns each token into two lists of
+numbers, a _key_ and a _value_, which later tokens use to "look back" at it. A token can only look at tokens before
+it, so once a token is in the context, its keys and values never change. So we compute them once, store them, and
+reuse in every following step. That store is the KV cache. With it, each step only does the math for the one
+new token.
+
+{{< img src="/images/kv-cache.svg" width="85%" caption="Generating the token after \"on\". Without a cache everything is computed again, with it only the newest token is." >}}
+
+Think of reading a long book. Without a KV cache, every time you read a new sentence, you'd re-read the book from
+page 1. With it, you keep notes of what you've read so far and just read the next sentence.
+
+The cache grows with every token in the context, and it lives in the same RAM as the model
+itself. For Gemma4 26B A4B that's roughly 1-2GB of cache at 16 bits, on top of the model,
+on a machine with 24GB shared between everything. Quantizing the KV cache (mentioned
+above) can shrink this further.
+
+Man did I not struggle with the harness speed until I came to know abut KV cache. I remember naiively writing
+the harness and it was reading the whole context on each `generate` call. Soon after it I started vibe coding
+because it was just taking too much time and I wanted to show something to my advisor soon so I can talk to him
+about my progress. Anyways, I started vibe coding and I remember screaming out for the slow speed and exhausted
+until AI caught me not using KV cache as optimization, and I know for sure that had I been watching myself
+at that time I would've see a shine, a sparkle, a glitter in my eyes! I asked AI to add that in and it just sped
+things up so fast! I was amazed! I will remember that always by the means of this post!
 
 ## Context & Context Window
 
@@ -332,8 +387,9 @@ the quality of work degrades with time (at least for me).
 
 A prompt is a message/content that you provide to the agent for reading. In case of visual models, this content
 can be an image, a sqeuence of images with timestamps (a video!). In case of textual models, this content is
-usually a message, but can be a binary file as well! A binary is not exactly a natural language, but these LLMs
-are quite good at reasoning through these as well, finding patterns that are hard to catch human eye in limited time.
+usually a message, but can be a binary file as well, converted to text first (like a hex dump or disassembly)!
+A binary is not exactly a natural language, but these LLMs are quite good at reasoning through these as well,
+finding patterns that are hard to catch human eye in limited time.
 
 The quality of prompts decide a lot about how good the agent understands the final goal. Vague prompts can make
 the agent stuck in a loop or just give up. These are some very interesting behaviors that is visible in small
@@ -348,16 +404,18 @@ but there will definitely be repetition when it's stuck!
 {{< /notice >}}
 
 Prompts first get encoded into a sequence of tokens and then pasted into the context of the agent. The reading part
-of process has to encode different modalities of tokens as well, depending on who they're coming from. Was the
-token from system? from user? or was the token generated from model itself?
+of process also has to mark who each token is coming from. Was the token from system? from user? or was the token
+generated from model itself? These are called roles, and the model is trained to treat them differently.
 
 ## Harness
 
-Harness the world where your agent will run inside. The general idea is that harness will contain tools
+Harness is the world where your agent will run inside. The general idea is that harness will contain tools
 and any other thing your agent might need to function well. Harness can have personalities of different
 agents. Like for example, when you are writing an agent for hunting bugs, you can have an agent personality
 more practical where it will prefer running code (because it's instructed to), and one agent personality
 that will prefer reading code and finding bugs statically (again, because its instructed to act that way).
+
+{{< img src="/images/harness.svg" width="85%" caption="The harness is the world around the LLM : instructions, tools, context and the loop." >}}
 
 Imagine I ask an LLM to find me latest world population report per country. An LLM (no tools) will only be
 able to give you a correct and up-to-date answer if it got trained immediately before you asked this question
@@ -416,5 +474,75 @@ so the agent wastes one less turn, and the agent was stuck in a loop because I w
 
 Now I'm probably gonna infect you with the virus that infected me for about the span of two months.
 So! I welcome you to the loop!
+
+# Resources
+
+- [System Over Model : Zero-Day Discovery at the Jagged Frontier](https://aisle.com/blog/system-over-model-zero-day-discovery-at-the-jagged-frontier) - AISLE
+- [Gemma 4 Model Card](https://ai.google.dev/gemma/docs/core/model_card_4) - Google
+- [Neural Networks Series](https://www.3blue1brown.com/topics/neural-networks) - 3Blue1Brown
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) - Jay Alammar
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) - Vaswani et al., 2017
+- [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) - Kaplan et al., 2020
+- [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556) - Hoffmann et al., 2022
+- [The Super Weight in Large Language Models](https://arxiv.org/abs/2411.07191) - Yu et al., 2024
+- [Scaling Monosemanticity](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) - Anthropic, 2024
+- [Let's Build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE) - Andrej Karpathy
+- [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909) - Sennrich et al., 2016
+- [SentencePiece](https://arxiv.org/abs/1808.06226) - Kudo & Richardson, 2018
+- [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751) - Holtzman et al., 2020
+- [Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html) - Horace He
+- [Efficiently Scaling Transformer Inference](https://arxiv.org/abs/2211.05102) - Pope et al., 2022
+- [Apple M2](https://en.wikipedia.org/wiki/Apple_M2) - Wikipedia
+- [Mixture of Experts Explained](https://huggingface.co/blog/moe) - Hugging Face
+- [Outrageously Large Neural Networks](https://arxiv.org/abs/1701.06538) - Shazeer et al., 2017
+- [Switch Transformers](https://arxiv.org/abs/2101.03961) - Fedus et al., 2021
+- [Mixtral of Experts](https://arxiv.org/abs/2401.04088) - Mistral AI, 2024
+- [GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202) - Shazeer, 2020
+- [A Visual Guide to Quantization](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-quantization) - Maarten Grootendorst
+- [LLM.int8()](https://arxiv.org/abs/2208.07339) - Dettmers et al., 2022
+- [GPTQ](https://arxiv.org/abs/2210.17323) - Frantar et al., 2022
+- [Gemma 3 QAT Models](https://developers.googleblog.com/en/gemma-3-quantized-aware-trained-state-of-the-art-ai-to-consumer-gpus/) - Google
+- [Gemma 4 QAT](https://unsloth.ai/docs/models/gemma-4/qat) - Unsloth
+- [KV Cache from Scratch](https://huggingface.co/blog/kv-cache) - Hugging Face
+- [Efficient Memory Management for LLM Serving with PagedAttention](https://arxiv.org/abs/2309.06180) - Kwon et al., 2023
+- [KIVI : 2-bit KV Cache Quantization](https://arxiv.org/abs/2402.02750) - Liu et al., 2024
+- [Lost in the Middle](https://arxiv.org/abs/2307.03172) - Liu et al., 2023
+- [Context Rot](https://research.trychroma.com/context-rot) - Chroma
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) - Anthropic
+- [Chat Templates](https://huggingface.co/docs/transformers/main/en/chat_templating) - Hugging Face
+- [ReAct](https://arxiv.org/abs/2210.03629) - Yao et al., 2022
+- [Toolformer](https://arxiv.org/abs/2302.04761) - Schick et al., 2023
+- [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) - Anthropic
+- [OSX-KVM](https://github.com/kholia/OSX-KVM)
+
+# AI Edit Disclosure
+
+After making lots of edit myself and realizing I have knowledge gaps in certain places I asked
+an AI (or SI) to proofread the post and got a some good feedback and some false positives. I
+guarantee that I read all those suggestions and edits myself and carefully applied some edits
+over the AI edits myself.
+
+What I got wrong :
+
+- Tokens aren't always whole words. They can be word pieces, punctuation or even bytes.
+- Memory bandwidth matters because weights are re-read every token, not because tokens are copied out.
+- MoE routers pick several experts per token, at every layer, and blend their answers.
+- Weights are mostly, not always, between -1 and 1.
+- Tokens can't be quantized. The KV cache can.
+- System, user and model are "roles", not "modalities".
+- Quantization speeds things up mainly by reducing memory reads.
+- Binary files must be converted to text (hex dump, disassembly) before a model reads them.
+
+Small clarifications :
+
+- Marked the addition/multiplication analogy as "loosely speaking".
+- Specified that emulating macOS is especially hard on Apple Silicon.
+
+What the AI contributed :
+
+- Made the quantization image from a public-domain photo (Acacia At Dusk by John Storr).
+- Drew all five diagrams : LLM vs Agent, token generation, MoE vs Dense, KV cache and harness.
+- Rewrote the KV Cache section, after I approved the draft.
+- Found the resources and checked that each link loads and is free to read.
 
 If you wanna talk about any of this! Write to me at hi@brightprogrammer.in, I'll try my best to reach back.
