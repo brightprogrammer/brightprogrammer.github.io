@@ -134,24 +134,30 @@ From now on I'll use the terms LLM and Agent interchangeably, until unless expli
 I just gave you the distinction because I thought it's better to have it clear. Agents are LLMs but
 sitting inside a loop with a goal and some ways to achieve the goal.
 
-## Prompt
+## Weights/Parameters
 
-A prompt is a message/content that you provide to the agent for reading. In case of visual models, this content
-can be an image, a sqeuence of images with timestamps (a video!). In case of textual models, this content is
-usually a message, but can be a binary file as well! A binary is not exactly a natural language, but these LLMs
-are quite good at reasoning through these as well, finding patterns that are hard to catch human eye in limited time.
+LLM's learn by learning weights. Weights is nothing but a fancy word for a number like -0.0014, 0.9948, etc...
+They are always between 0 and 1. Nobody knows what these numbers actually mean, they just make the model work.
+It's called learning weights because they start very dumb. They absolutely generate gibberish. Much like a new
+born baby, who does not even know how to talk. So when they are given a token and asked to predict next, they
+will generate anything, absolutely anything from their vocabulary. They are then told what they should've
+predicted and told how much they were wrong, and from that the models get corrected.
 
-The quality of prompts decide a lot about how good the agent understands the final goal. Vague prompts can make
-the agent stuck in a loop or just give up. These are some very interesting behaviors that is visible in small
-models. I dont know whether these issues are present in frontier models or not, or if it's present how they deal with it.
-What I do know is that some of these models come with a percentage chance of getting stuck in their thought loop
-during benchmarks.
+I'm talking as if the models correct themselves, but there's much  more to it. There are learning algorithms
+that do the actual training. These algorithms compute how much the agent was wrong and then update it's weights.
+This process of first getting a value that the model generates (observed value), then comparing it with the expected value and
+then getting _how_ wrong it was (in form of a value, called error value), is then used to mathematically find
+out which weights caused this wrong value, and those weights get slightly nudged to be more biased towards
+generating the expected value next time.
 
-{{< notice type="info" >}}
-I call it thought loop, idk the formal term. The behavior is visible in the chain of thought of the agent.
-When it's stuck in this loop, it will keep repeating same stuff. This stuff can be 10 words loop, or 1000,
-but there will definitely be repetition when it's stuck!
-{{< /notice >}}
+The total number of weights a model is said to predict how much thinking capacity it can have. Think of it
+as size comparisions of brain between different animal species. Even in the same species and same model size,
+intelligence can be very different. Like intelligence of two humans can be different based on what the've learned
+and which parts of their brain are activated, they brain size (i think it's measured by grey matter or something??).
+
+So when I say a 26B model, it means it's a 26B weight (or parameter, both are used interchangeably) model, it has
+roughly that many learned weights. More weights just mean more ways the LLM learns to differentiate between complex
+sentences.
 
 ## Token
 
@@ -171,6 +177,121 @@ the 7 days of week, then it only needs 7 distinct bits (as per my understanding,
 form, assuming one-hot-enocoded. So a large model that needs to understand and speak many words, it needs proportional
 to that many bits.
 {{< /notice >}}
+
+## Token Generation
+
+These models work by consuming all the tokens generated and provided in sequence. That is essentially how they
+predict what token should come next. If you've ever had a chat with an AI like Claude or ChatGPT or any other model,
+you can see this. Whenever you'll write something to the agent, it will start generating word for word. That is
+not for fancy. The tokens are getting streamed to you. Streamed in the sense that the tokens are copied out of the GPU
+memory, decoded, and then sent to your browser/terminal client over whatever internet protocol you're connected with.
+The speed at which the model can generate not only depends on how fast your GPU is, but also on how fast the memory
+bandwith is. That will decide how fast you can copy out tokens out of GPUs memory, and this is the part taht decides
+your tokens per second. I've been getting around 20 tokens per second on average on my Mac Mini M2 for Gemma4 26b A4b
+Mixture-of-Experts model.
+
+Newer generations of Mac have higher bandwith but not my a very hihg margin. I'd expect Somewhere around 30-60 tokens
+per second on latest Macs, the reason being that they have higher memory bandwith than an M2. On a dedicated graphics
+card with a good memory bandwith with your DRAM, you can get about 80-120 tokens per second for dense models!
+
+Know that the tokens are consumed by these models, and then it goes through lots of multiplications and addition
+operations along all the the weights/parameters it learned and finally some predictions (token with their associated
+probability of being next in seqeuence) come out.
+
+Think of it this way. Our world has some things always true, and somethings that are conditionally true based on
+what context you're asking question. Addition encodes the always true nature of the world and multiplication encodes
+conditional nature. When the token goes in, it goes through lots of multiplications and attitions at once, and it
+keeps happening at different steps (called layers) and at each layer the values generated changes until it reaches
+the final prediction layer, and by the time it has reached the final prediction layer, the agent has finished it's
+_thinking_ process, which was basically just mutliplying and adding it with the learned weights.
+
+So, at the final layer there are many predicted token each with their associated probability of being next, and
+your token decoding process can either select the token with highest probably or you can do some other stuff
+as well. There are some values you can tweak to get different results most of the time, or same results most of
+the time.
+
+## Mixture-of-Experts vs Dense Models
+
+Think of a dense model as using all its brain power at once. When it reads a token, it's brain's working mechanism
+will forward the information to all parts of it's brain. It's called dense for exactly this reason, it uses all the
+parameters it learned for mutliplication and addition operations (Floating Ops) to predict the next token.
+
+In case of a mixture-of-experts, the model wont use all it's brain power at once. Instead the model is built
+like a court of experts sitting at a round table. The router is sitting on the head seat. It first gets the token
+and it will know who knows about this token (in given context) best and it will forward the information to that
+_expert_ (a smaller set of parameters) and ask it to generate the finall predictions. This essentially ends up doing
+less computation and hence generating faster results with mabye slightly less thinking power.
+
+So imagine a dense model as being a single person doing all the thinking, and a mixture of expert model as being
+multiple persons available for thinking, but depending on what task currently they're working on, only one gets
+the final say. The catch here is that the single person thinking in this case will do slow thinking (by design,
+it's got bigger brain, so it will think about more ifs and buts and thens), and the court of people is having
+slightly less intelligent people but they think very fast as compared to the single very smart person.
+
+This eventually also brings up the fact that you cannot say how good a Mixture-of-Experts model is, as compared
+to a Dense model. It also depends on what they've learned, how they've been trained on what they've learned,
+etc... and not only just on the model size.
+
+The good thing about MoE (mixture-of-expert) models is that they are fast, and given that they have reasonable
+thinking power, they can fail fast and correct themselves fast. It all becmes a tradeoff, in one way or another
+and your workflow or harness has to be engineered around these different behaviors.
+
+## Quantization & Optimizations On FLOPS
+
+When the agents do their learning, they are usually taught in high resolution, meaning the learned weights usually
+consume high bits per weight. Like 16 bits per weight or 32 bits per weight. Higher bits means higher resolution of
+learning, means the agent will have more clarity in thinking.
+
+Performing computation on higher number of bits takes more power and time, so that can impact how fast the model
+thinks. For this, people came up with the idea of compressing the weights to lower bits, but keeping most of the
+information in the weights. Think of it like image compression. There's high res images and then there's JPEG.
+A 10MB image can be converted to 10KB or 100KB, looking almost the same until you zoom in.
+
+For models, we learned that 4 bits is a good compression level and at that quantization level, the agent thinks
+reasonably good enough to be usable and useful.
+
+## Context & Context Window
+
+Think about what _context_ means for us when we are normally conversing with other humans. It is essentially
+every set of related conversations and events that came before the current conversation. That decides what
+you're gonna talk about next.
+
+That is essentially what _context_ means for agents as well, except that it's very specific to what agents
+are working on right now, and there's a limit to how much they can remember.
+
+As I've been saying, the models generate token by token, but they dont just consume one token and generate
+the next, they consume a set of previously generated and consumed tokens, in sequence they appeared, to
+generate the next token. this seqeunce of previously generated and consumed tokens is what context for the model
+is.
+
+A model usually starts with empty context, but you can start with a populated context as well.
+
+Context window essentially decides the size of the tokens that live in the context. For frontier models
+at the time of this writing this, it is 1 million tokens. For the agent that i've been using locally, I usually
+cap it out at 100k tokens, beacuse of the VRAM limitation I got.
+
+## Prompt
+
+A prompt is a message/content that you provide to the agent for reading. In case of visual models, this content
+can be an image, a sqeuence of images with timestamps (a video!). In case of textual models, this content is
+usually a message, but can be a binary file as well! A binary is not exactly a natural language, but these LLMs
+are quite good at reasoning through these as well, finding patterns that are hard to catch human eye in limited time.
+
+The quality of prompts decide a lot about how good the agent understands the final goal. Vague prompts can make
+the agent stuck in a loop or just give up. These are some very interesting behaviors that is visible in small
+models. I dont know whether these issues are present in frontier models or not, or if it's present how they deal with it.
+What I do know is that some of these models come with a percentage chance of getting stuck in their thought loop
+during benchmarks.
+
+{{< notice type="info" >}}
+I call it thought loop, idk the formal term. The behavior is visible in the chain of thought of the agent.
+When it's stuck in this loop, it will keep repeating same stuff. This stuff can be 10 words loop, or 1000,
+but there will definitely be repetition when it's stuck!
+{{< /notice >}}
+
+Prompts first get encoded into a sequence of tokens and then pasted into the context of the agent. The reading part
+of process has to encode different modalities of tokens as well, depending on who they're coming from. Was the
+token from system? from user? or was the token generated from model itself?
 
 ## Harness
 
