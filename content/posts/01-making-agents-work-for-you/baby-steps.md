@@ -49,11 +49,9 @@ out off that. I'm also an avid homelabber and I host almost all of the services 
 I own the data, I own the infrastructure! What about LLMs though? I neither own the data and neither
 the infrastructure!
 
-How can I put a good use to this Mac Mini? FYI, I already tried running harnesses and LLM servers
-like LmStudio, llama.cpp on this machine. I did not like that because, first of all, I was not really
-paying attention to how it worked, I just expected it to work, and next I didn't really knew what works best.
-I tried it back then and it didn't work out for me. I tried a few different models back then. I was already
-having debates with my fellow PhD students about using AI (or SI??) agents for bug hunting. My stance was that
+How can I put a good use to this Mac Mini? This wasn't my first attempt. I had tried [LM Studio](https://lmstudio.ai)
+and [llama.cpp](https://github.com/ggml-org/llama.cpp) with a few models before, and it didn't stick. I expected it to just work, and never looked at how it worked or
+what works best. That turned out to be the whole problem. I was already having debates with my fellow PhD students about using AI (or SI??) agents for bug hunting. My stance was that
 using AI agents for hunting bugs and writing exploits is not a good idea (FYI, I have 0 record of finding bugs
 in a widely used software, and 0 record of any 0-day or even n-day exploits, I want to make that non-zero though).
 I was talking with people who are really good at what they do (v/s me who is a noob in bug hunting and exploitation).
