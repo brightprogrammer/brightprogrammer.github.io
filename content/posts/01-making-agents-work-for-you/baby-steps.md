@@ -137,7 +137,7 @@ sitting inside a loop with a goal and some ways to achieve the goal.
 ## Weights/Parameters
 
 LLM's learn by learning weights. Weights is nothing but a fancy word for a number like -0.0014, 0.9948, etc...
-They are always between 0 and 1. Nobody knows what these numbers actually mean, they just make the model work.
+They are always (AFAIK) between -1 and 1. Nobody knows what these numbers actually mean, they just make the model work.
 It's called learning weights because they start very dumb. They absolutely generate gibberish. Much like a new
 born baby, who does not even know how to talk. So when they are given a token and asked to predict next, they
 will generate anything, absolutely anything from their vocabulary. They are then told what they should've
