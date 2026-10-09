@@ -588,6 +588,16 @@ like when a message is finished and is meaningful already, the agent may faulter
 These are the small details that our harness will take care of along with the tasks we give to the
 agent.
 
+# Assignment
+
+Now, I want you to play with different values of `add_generation_prompt` and `continue_final_message`,
+and I want you to try on different models. On smaller and on if possible bigger models. On models
+of the same family, on models of different families. Does your harness work without changing code
+for different model families?
+
+If you let the loop run for long, how does your memory change? If you let it run for long, do you
+see any change in timing between two turns? Or are they always happening at same time?
+
 # Conclusion
 
 I consider this a good starting point. I also learned a few things I didn't know earlier
