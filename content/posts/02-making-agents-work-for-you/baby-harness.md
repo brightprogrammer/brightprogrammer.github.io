@@ -499,13 +499,14 @@ for x in range(0, 10):
                 prompt=prompt,
                 verbose=True)
 
-    if text:
-        split = text.split("<channel|>")
-        thought = split[0] + "<channel|>" if len(split) > 0 else ""
-        answer = split[1] if len(split) > 1 else ""
+    # put thought in a separate key
+    # apply chat template will remove thought from prompt
+    if "<channel|>" in text:
+        thought, answer = text.split("<channel|>", 1)
+        thought += "<channel|>"
     else:
         thought = ""
-        answer = ""
+        answer = text
 
     # append model generated text to chat transcript
     messages.append({"role": "assistant", "thought": thought, "content": answer})
