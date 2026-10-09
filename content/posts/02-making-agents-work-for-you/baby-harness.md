@@ -589,6 +589,75 @@ like when a message is finished and is meaningful already, the agent may faulter
 These are the small details that our harness will take care of along with the tasks we give to the
 agent.
 
+# Thought Police
+
+Have you read [1984](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four) btw?
+If not then go read it now, it's required for this next section.
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+... just kidding.
+
+While reading the code, did you notice that `enable_thinking=True`? Turns out that you can control
+whether you want the agent to think in the next turn or not. This parameter when enabled renders
+the context like this :
+
+```
+<|turn>user
+Write a story about Einstein<turn|>
+<|turn>model
+```
+
+But when disabled, it renders the context like this
+
+```
+<|turn>user
+Write a story about Einstein<turn|>
+<|turn>model
+<|channel>thought
+<channel|>
+```
+
+Notice how this one adds an empty _thought channel_. When agent reads this one, it will not think
+at all and just generate the text it's supposed to. Can you try this with the _Death Note_ question
+we asked to the LLM?
+
+To study the difference, you can also play with this code, setting `enable_thinking=True` once
+and `enable_thinking=False` the other time.
+
+```python
+
+#!/usr/bin/env python3
+
+from mlx_lm import load, generate
+
+model, tokenizer = load("mlx-community/gemma-4-26B-A4B-it-qat-4bit")
+
+prompt = "Write a story about Einstein"
+
+messages = [{"role": "user", "content": prompt}]
+print(tokenizer.apply_chat_template(
+                        messages,
+                        enable_thinking=True,
+                        tokenize=False,
+                        add_generation_prompt=True))
+```
+
+Imagine your thoughts getting enabled or disabled like this. Are you up-to-date with the news
+btw? I wrote a post about how to make your own personal feed [here](https://brightprogrammer.in/posts/use-rss-feeds/).
+It helps me be up to date with latest news.
+
+Btw, I had to set `tokenize=False`, because otherwise it will generate something like this :
+
+```
+[2, 105, 9731, 107, 98, 107, 106, 107, 105, 2364, 107, 6974, 496, 3925, 1003, 44281, 106, 107, 105, 4368, 107]  
+```
+
 # Assignment
 
 Now, I want you to play with different values of `add_generation_prompt` and `continue_final_message`,
