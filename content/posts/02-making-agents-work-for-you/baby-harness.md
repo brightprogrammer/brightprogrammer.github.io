@@ -598,6 +598,16 @@ for different model families?
 If you let the loop run for long, how does your memory change? If you let it run for long, do you
 see any change in timing between two turns? Or are they always happening at same time?
 
+For `mlx_lm.generate` command, it takes a lot more other parameters that can impact the output.
+I want you to play along with those parameters and understand their values emperically. I want you
+to take a parameter like `--temp` for example and find out what are it's bounds, like say, $-1$ to $1$.
+Then I want you to split that range into five different values like $\{-1, -0.5, 0, 0.5, 1\}$ and I want
+you to try all those values keeping other things constant and I want you to do that with all other parameters.
+What behavior differences do you see? What behavior differences do you see if you start changing multiple parameters
+at once?
+
+Have fun!
+
 # Conclusion
 
 I consider this a good starting point. I also learned a few things I didn't know earlier
