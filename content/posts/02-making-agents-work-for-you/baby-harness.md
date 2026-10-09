@@ -531,28 +531,62 @@ has been trained on. Without the templated formatting the agent won't be able to
 which message came from where. The template allows the agent to read it's own answers and
 previous user prompts and tool results, everything in the transcript basically.
 
-Part of this transcript makes up the context of the agent. Once context fills up, you can
-either provide a new `messages` list with one single message, that the `apply_chat_template`
-function will render again as a prompt that the agent  understands, or you can summarize
-the latest few messages of transcript (calling it a compaction of context) and then render
-that and then feed that to the agent as prompt.
+{{< notice type="info" >}}
+It is part of this transcript that makes up the context of the agent. Once context fills up, you can
+either provide a new `messages` list with one single message (essentially becomes a new chat),
+that the `apply_chat_template` function will render again as a prompt that the agent understands,
+or you can summarize the latest few messages of transcript (calling it a compaction of context)
+and then render that and then feed that to the agent as prompt (continues the previous work).
+
+Context compaction will be addressed in future in detail, this is a glimpse and a good point to
+play with it.
+{{< /notice >}}
 
 In first case, the loop just makes the generation process continue by inserting a new user
-message into the prompt. When `apply_chat_template` renders that `messages` list it will
-end the rendering with a turn token, so that when agent reads the prompt, it will know
+message into the prompt. This happens because in the first `apply_chat_template`, the one outside
+the loop, we set `add_generation_prompt` to true.
+
+```
+<|turn>user
+Write a story about Einstein<turn|>
+<|turn>model
+```
+
+Notice how `apply_chat_template` renders that `messages` list it will
+end the rendering with a turn for the `model`, so that when agent reads the prompt, it will know
 that it's the agent's turn to write.  Once the agent is done, it will finish it's turn
 with a marker. This marker is specific to different AI model families, because each
 are trained on differently formatted data.
 
-In the second case the loop does  not add a user message and assumes that the generation
+In the second case the loop does not add a user message and assumes that the generation
 is incomplete, it may have got cut off in mid and just lets the agent continue whatever
 it was working on. The issue I faced was because the `jinja` template removes `thought`
 markers and that causes a mismatch between what's present in the context and what's present
-in the rendered chat template. Setting `continue_final_message` requires the last message
+in the rendered chat template.
+
+Setting `continue_final_message` requires the last message
 to be unchanged. That's why when inserting the generated text to context, I removed thought
 and I kept it as a separate field itself. The template never reads it, so it's still there
 for something like showign the thought process in chat interface, so that others can distill
 my agent's thoughts XD.
+
+Btw, with `continue_generation_prompt`, it looks like this
+
+```
+<|turn>user
+How's it going?<turn|>
+<|turn>model
+....something model wrote very long...but got cut off because of token limit or any other factor...
+```
+
+^^ Notice how at the end, there is no `<turn|>` marker. There actually was a marker at the end,
+but `apply_chat_template` when got `continue_final_message=True`, it rippped apart the last `<turn|>`
+marker. Now when this prompt will be sent to the agent, it will continue the generation from there.
+If it makes sense to generate from there, you'll get sensible tokens after that, but if it does not,
+like when a message is finished and is meaningful already, the agent may faulter.
+
+These are the small details that our harness will take care of along with the tasks we give to the
+agent.
 
 # Conclusion
 
