@@ -404,7 +404,162 @@ Peak memory: 14.613 GB
 ```
 
 Well, it got cut off because of some default limit. Let's allow it more tokens and convert this into
-a loop that runs five times in total.
+a loop that runs five times in total. To allow more tokens just call `generate` with `max_tokens`.
+If you read `mlx-lm` code, you'll find out that `generate` calls `stream_generate`. `generate` itself
+does not contain the `max_tokens` paramter but it takes a `**kwargs` and then it passes that to
+`stream_generate` which takes `max_tokens` and that is set to $256$ [at the time of writing this](https://github.com/ml-explore/mlx-lm/blob/9d8abd94d63a9b3c72e7e9b146e43af1005368fa/mlx_lm/generate.py#L658).
+
+## Running In Loop
+
+To keep it in loop, we just run the generate command again and again. I can either add a fixed user message
+after each generation step or read it from standard input and add it, or just leave it and just call
+generate again and again.
+
+All this is, is a simple loop calling generate again and and again, and you can call this the _Hello World!_
+of writing a harness. This is functional but not useful to you at the moment. Next post will make it useful.
+
+```python
+#!/usr/bin/env python3
+
+from mlx_lm import load, generate
+
+model, tokenizer = load("mlx-community/gemma-4-26B-A4B-it-qat-4bit")
+
+prompt = "Write a story about Einstein"
+
+messages = [{"role": "user", "content": prompt}]
+prompt = tokenizer.apply_chat_template(
+                        messages,
+                        enable_thinking=True,
+                        add_generation_prompt=True)
+
+for x in range(0, 10):
+    text = generate(model,
+                tokenizer,
+                max_tokens=2560,
+                prompt=prompt,
+                verbose=True)
+
+    messages.append({"role": "assistant", "content": text})
+    messages.append({"role": "user", "content": "i like the story, can you improve the language? i promise none of this is AI written!"})
+
+    prompt = tokenizer.apply_chat_template(
+                            messages,
+                            enable_thinking=True,
+                            add_generation_prompt=True)
+
+```
+
+[Here's](/data/writing-harness/simple-generate-loop.txt) the generated (but interrupted because too long) output of this loop. It's too long to paste here.
+Have fun reading the thought process of the agent!
+
+## Running In Loop (v2)
+
+While trying I came across an error, where setting `continue_final_message` in the `apply_chat_template` wouldn't
+work because gemma4's chat template strips away thought when rendering message for the agent. It took some
+time to figure that out. Here's the code if you wanna play with it. It ends up repeating same response again and again.
+This happens because it's answer is genuinely complete and continuing from there does not really make sense.
+
+I still wanted to try and after a few hours of struggling, I made it work. It took so much time maybe because
+I've lost my sharpness of writing manual code. I've lost my documentation research skills maybe. It took me some
+time but i found the reason. I was not reading the error message properly.
+
+```python
+#!/usr/bin/env python3
+
+from mlx_lm import load, generate
+
+model, tokenizer = load("mlx-community/gemma-4-26B-A4B-it-qat-4bit")
+
+# While doing research I came across a bug in original release of gemma4's chat template
+# They released a fix template in June 2026. I downloaded it and kept as this file
+# https://huggingface.co/google/gemma-4-12B-it-qat-q4_0-unquantized-assistant/raw/main/chat_template.jinja
+with open("gemma4_canonical_chat_template.jinja", "r") as file:
+    custom_template = file.read()
+
+# This is how you apply a custom chat template
+# Following with this issue taught me that I can change the chat template if there are some
+# bugs in the rendering process. This rendering is not the same as rendering the chat on Web.
+# I remember AI telling me about token drifts because of reendering when we were vibe-coding
+# my last harness
+tokenizer.chat_template = custom_template
+
+prompt = "How's it going?"
+
+messages = [{"role": "user", "content": prompt}]
+prompt = tokenizer.apply_chat_template(
+                        messages,
+                        enable_thinking=True,
+                        add_generation_prompt=True)
+
+for x in range(0, 10):
+    text = generate(model,
+                tokenizer,
+                max_tokens=2560,
+                prompt=prompt,
+                verbose=True)
+
+    if text:
+        split = text.split("<channel|>")
+        thought = split[0] + "<channel|>" if len(split) > 0 else ""
+        answer = split[1] if len(split) > 1 else ""
+    else:
+        thought = ""
+        answer = ""
+
+    # append model generated text to chat transcript
+    messages.append({"role": "assistant", "thought": thought, "content": answer})
+
+    # apply the chat template
+    # every model has it's own chat template
+    # this comes with the model you download
+    prompt = tokenizer.apply_chat_template(
+                            messages,
+                            enable_thinking=True,
+                            add_generation_prompt=False,
+                            continue_final_message=True)
+
+```
+
+## Differences
+
+First loop is simple, it just gets the generated text and adds it in the transcript
+as user message, renders the transcript as a prompt using `transformer` package's
+`apply_chat_template` function that takes a `jinja` template and converts the transcript
+to another text that the agent after tokenization can understand. That's what the agent
+has been trained on. Without the templated formatting the agent won't be able to understand
+which message came from where. The template allows the agent to read it's own answers and
+previous user prompts and tool results, everything in the transcript basically.
+
+Part of this transcript makes up the context of the agent. Once context fills up, you can
+either provide a new `messages` list with one single message, that the `apply_chat_template`
+function will render again as a prompt that the agent  understands, or you can summarize
+the latest few messages of transcript (calling it a compaction of context) and then render
+that and then feed that to the agent as prompt.
+
+In first case, the loop just makes the generation process continue by inserting a new user
+message into the prompt. When `apply_chat_template` renders that `messages` list it will
+end the rendering with a turn token, so that when agent reads the prompt, it will know
+that it's the agent's turn to write.  Once the agent is done, it will finish it's turn
+with a marker. This marker is specific to different AI model families, because each
+are trained on differently formatted data.
+
+In the second case the loop does  not add a user message and assumes that the generation
+is incomplete, it may have got cut off in mid and just lets the agent continue whatever
+it was working on. The issue I faced was because the `jinja` template removes `thought`
+markers and that causes a mismatch between what's present in the context and what's present
+in the rendered chat template. Setting `continue_final_message` requires the last message
+to be unchanged. That's why when inserting the generated text to context, I removed thought
+and I kept it as a separate field itself. The template never reads it, so it's still there
+for something like showign the thought process in chat interface, so that others can distill
+my agent's thoughts XD.
+
+# Conclusion
+
+I consider this a good starting point. I also learned a few things I didn't know earlier
+just by commiting to write this post today. This is what I would call a [Hello World!](https://en.wikipedia.org/wiki/Hello,_world) of harness writing.
+I gotta go, take a run, cook some food for me, take a bath, get some sleep, I've been at this for long time now.
+See you in next post! Bye!!
 
 # Resources
 
@@ -413,3 +568,7 @@ a loop that runs five times in total.
 - [Tensorflow - Quantization Aware Training](https://www.tensorflow.org/model_optimization/guide/quantization/training)
 - [Quantization-Aware Training for Large Language Models with PyTorch](https://pytorch.org/blog/quantization-aware-training/)
 - [How Quantization Aware Training Enables Low-Precision Accuracy Recovery](https://developer.nvidia.com/blog/how-quantization-aware-training-enables-low-precision-accuracy-recovery/)
+- [Chat templates](https://huggingface.co/docs/transformers/chat_templating)
+
+
+Like this reading? Wanna talk? Contact me at hi@brightprogrammer.in
