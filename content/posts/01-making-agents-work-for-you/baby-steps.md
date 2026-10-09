@@ -21,7 +21,7 @@ Tentative split is like this :
 
 - This post : Talk about how I started and my perception before and after the work.
   Also give some introductory ideas and jargons.
-- Next post : Get things running. Write a very basic hello world style harness.
+- [Next post](/posts/02-making-agents-work-for-you/baby-harness) : Get things running. Write a very basic hello world style harness.
 - Third post : Get some tools in. Introducing problems and a goal to the agent and
     watching it use the tools to achieve the goal
 - Fourth post : Experimentations on tool usage and prompts. Understanding the world
@@ -431,6 +431,25 @@ capable enough, wont be able to meet the goal. This depends on the model's train
 itself, then whether or not the instructions were clear, whether or not the goal is even comprehendible by the agent,
 and some other small factors that are not immediately coming to my head right now.
 {{< /notice >}}
+
+## Inference
+
+Inference is just the process of running an AI model on a machine. It's the pipeline of going
+from input tokens to output tokens.
+
+There are inference engines out there, like MLX, llama.cpp, that can run the models and handle the nitty-gritties
+of the token generation process for you. You just provide these engines the model weights and a config (a json file)
+that tells these engines about the architecture and default settings to use.
+
+In my case I have an Apple Silicon M2, and I use MLX that is now considered quite mature on MacOS.
+When I started learning I used to read posts saying "now mlx is also quite good on Mac". That gives me a hint
+about it not being quite good earlier and Apple did put some effort into their inference engine recently.
+
+> If I like one thing about Apple, its that their software engineering is appreciable! I'm happy that I got this
+machine back then and I'll consider myself lucky that just by owning a machine that I got for a completely different
+purpose I get to learn low level stuff about a recent technology. I've always been interested in low level working
+of technologies and how to re-implement these things from scratch. It always helps me learn the issues that are
+faced by people and helps me reason better about the problems in the domain.
 
 ## Selecting Good LLM Model
 
