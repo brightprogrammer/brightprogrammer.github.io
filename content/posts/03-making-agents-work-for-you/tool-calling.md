@@ -693,6 +693,12 @@ In the end, I started studying the transcripts manually and started dropping the
   Rather make the harness give correct and precise (only what's requried) answer every single time!
 - Make the tool outputs more linguistic rather than formal. For example, GDB output getting parsed and printed more like a language
   than a formal output that it currenly gives.
+- If the agent used two tools in succession most of the time, then it's a strong signal to merge the tools. Optimize a turn for the agent,
+  because each turn takes some time! Rather save it my giving a single tool two purposes than having two tools with different purposes.
+
+I renamed the tools that were very long to have shorter names and tools that had large matching prefixes to have shorter but least maatching
+prefixes. Given the standard of tool description, and names, and the tool output stays up, the agent can recover from bad results a good number
+of times. This is one of the properties of Gemma4 that came up a lot when I was experimenting with it, and this made me like the model a lot!
 
 # Assignments
 
