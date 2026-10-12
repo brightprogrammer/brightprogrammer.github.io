@@ -23,7 +23,7 @@ This is the whole series (tentative, not complete yet):
 
 - [Last post](/posts/01-making-agents-work-for-you/baby-steps) : Introduction to basic concepts that will be required for this series
 - This post : Writing a basic harness and watching the agent work, studying the behavior
-- Next post : Get some tools in. Introducing problems and a goal to the agent and
+- [Next post](/posts/03-making-agents-work-for-you/tool-calling) : Get some tools in. Introducing problems and a goal to the agent and
     watching it use the tools to achieve the goal
 - Fourth post : Experimentations on tool usage and prompts. Understanding the world
     the agent experiences.

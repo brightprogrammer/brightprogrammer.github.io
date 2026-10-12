@@ -22,7 +22,7 @@ Tentative split is like this :
 - This post : Talk about how I started and my perception before and after the work.
   Also give some introductory ideas and jargons.
 - [Next post](/posts/02-making-agents-work-for-you/baby-harness) : Get things running. Write a very basic hello world style harness.
-- Third post : Get some tools in. Introducing problems and a goal to the agent and
+- [Third post](/posts/03-making-agents-work-for-you/tool-calling) : Get some tools in. Introducing problems and a goal to the agent and
     watching it use the tools to achieve the goal
 - Fourth post : Experimentations on tool usage and prompts. Understanding the world
     the agent experiences.
