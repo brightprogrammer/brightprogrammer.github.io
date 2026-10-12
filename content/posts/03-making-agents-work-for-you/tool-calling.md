@@ -688,13 +688,20 @@ tools were not really required to get answers. I realized a few things
 
 In the end, I started studying the transcripts manually and started dropping the tools if
 
-- The agent didn't use a tool even once in very long sessions
+- The agent didn't use a tool even once in very long sessions. This resulted in a lot of static analysis tools getting dropped.
+  After dropping the tools, and running the sessions agan and again for long hours, more and more tools kept getting droppeed, and agent
+  kept achieving same goal in lower number of turns.
 - The agent got confused by one tool and started using other to verify claims. Verification shouldn't be for the agent to do!
   Rather make the harness give correct and precise (only what's requried) answer every single time!
+  I had a tracer tool for the agent to avoid using GDB, and I also provided GDB and ability to set breakpoints. Agent sometimes
+  spent lots of turns verifying the output of trace using gdb. 
 - Make the tool outputs more linguistic rather than formal. For example, GDB output getting parsed and printed more like a language
-  than a formal output that it currenly gives.
+  than a formal output that it currenly gives. I removed trace and converted it to a tool that generates linguistic
+  output, and that alone made made the verification behavior go away!
 - If the agent used two tools in succession most of the time, then it's a strong signal to merge the tools. Optimize a turn for the agent,
   because each turn takes some time! Rather save it my giving a single tool two purposes than having two tools with different purposes.
+  The trace tool that got converted to a linguistic explainer kind-of replaced debugging almost completely. The agent almost stopped
+  using GDB completely.
 
 I renamed the tools that were very long to have shorter names and tools that had large matching prefixes to have shorter but least maatching
 prefixes. Given the standard of tool description, and names, and the tool output stays up, the agent can recover from bad results a good number
