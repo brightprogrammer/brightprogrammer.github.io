@@ -452,7 +452,7 @@ tools that do the same job, but their names and descriptions will be different.
 I added one more tool to show the date only and edited the last tool to show time only.
 
 ```py
-def cur_date():
+def get_current_date():
     """
     Get current date
     """
@@ -466,7 +466,7 @@ def cur_time():
     return str(datetime.now().time())
 
 
-TOOLS = {"cur_time": cur_time, "cur_date": cur_date}
+TOOLS = {"cur_time": cur_time, "get_current_date": get_current_date}
 
 prompt = "What's the current date and time?"
 ```
