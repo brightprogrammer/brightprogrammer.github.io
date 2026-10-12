@@ -700,6 +700,10 @@ I renamed the tools that were very long to have shorter names and tools that had
 prefixes. Given the standard of tool description, and names, and the tool output stays up, the agent can recover from bad results a good number
 of times. This is one of the properties of Gemma4 that came up a lot when I was experimenting with it, and this made me like the model a lot!
 
+I also tried hiding some tools by default, and opening them up only later after a certain set of preceding tools are used first, in an attempt
+to, first, keep the context size small, and second, reduce confusion on what to use first. In my case I hid debugging tools before any code was
+written. Once the agent writes code, only then dynamic tools are made available for in chat context.
+
 # Assignments
 
 - Write a custom parser for tool outputs rather than using the provided parser by mlx-lm
@@ -715,10 +719,15 @@ of times. This is one of the properties of Gemma4 that came up a lot when I was 
 - Add a few more tools. Try the overlapping idea by tools that give both date and time.
 - Try the verification idea by giving making the `cur_time` tool print a different date than `cur_date` tool.
 
-# References
+# Resources
 
 - [Expanding Chat Templates with Tools and Documents](https://huggingface.co/docs/transformers/main/en/chat_template_tools_and_documents)
 - [Towards Long-Horizon Agents: A Survey](https://long-horizon-agents.github.io/)
 - [Tool Calling Tests](https://github.com/ml-explore/mlx-lm/blob/ba8a08fd2ed72bbc53de84f89933f91fe4743e4a/tests/test_tool_parsing.py#L343)
+- [Writing effective tools for agents — with agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [Writing a Chat Template — Hugging Face](https://huggingface.co/docs/transformers/chat_templating_writing)
+- [Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency)
+- [Introducing advanced tool use on the Claude Developer Platform](https://www.anthropic.com/engineering/advanced-tool-use)
 
 See you in next post! If you wanna talk about this, or say hi, reach me at hi@brightprogrammer.in, I'll try my best to reach back.
