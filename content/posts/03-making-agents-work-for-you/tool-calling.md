@@ -423,7 +423,7 @@ While I was working on my very first harness, I though giving agents many tools 
 I also didn't have a good heuristic to measure how well the harness is doing it's job. Now I do have it!
 
 > My current heuristic to measure effectiveness of a harness is
-  $$E(H, M, G) = \lim_{n \to \infty} \sum_{t = 0}^{n} \frac{1}{n} \cdot \frac{\operatorname{int}(goal\\_achieved_t(H, M, G))}{turns\\_taken_t(H, M, G) - 1}$$
+  $$E(H, M, G) = \lim_{n \to \infty} \sum_{t = 1}^{n} \frac{1}{n} \cdot \frac{\operatorname{int}(goal\\_achieved_t(H, M, G))}{turns\\_taken_t(H, M, G) - 1}$$
   where $goal\\_achieved_t$ is either $\texttt{true}$ or $\texttt{false}$ for the trial $t$. Operator $\operatorname{int}$ maps that to $0$ or $1$.
   $turns\\_taken_t$ is total number of turns taken to achieve the goal. $H$ is the harness we just wrote, $M$ is the model and $G$ is the goal.
   This heuristic assumes that the prompt clearly states what the goal is.
