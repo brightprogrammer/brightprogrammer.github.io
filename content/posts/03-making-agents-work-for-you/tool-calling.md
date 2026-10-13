@@ -441,8 +441,14 @@ with `temp = 1.0`. You can still experiment to see the values change.
 The heuristic value alone does not tell you anything! A value of $0.1$ or $0.0000001$ for a goal is not good or bad alone.
 The heuristic is there to tell you whether the effectiveness drops or improves when you change your harness
 in a certain way. That's all. If for the same goal the value drops, then you've changed something that's bugging the agent.
-If for the same goal t he value increases, you've improved something.
+If for the same goal the value increases, you've improved something.
 {{< /notice >}}
+
+> Defining $$ \Delta E(H, M, G) = E(H_{after}, M, G) - E(H_{before}, M, G)$$
+> $H_{after}$ and $H_{before}$ being the harnesses before and after a change, and $E(H, M, G)$ defined as before
+>  - if $\Delta E > 0$ then your harness improved to work with given model on the fixed goal
+>  - if $\Delta E < 0$ then your harness is now worse than previous version to work with given model on the fixed goal
+>  - if $\Delta E \sim 0$ then nothing changed noticeably
 
 # Possibility of Ambiguity
 
