@@ -25,8 +25,9 @@ This is the whole series (tentative, not complete yet):
 - This post : Writing a basic harness and watching the agent work, studying the behavior
 - [Next post](/posts/03-making-agents-work-for-you/tool-calling) : Get some tools in. Introducing problems and a goal to the agent and
     watching it use the tools to achieve the goal
-- Fourth post : Experimentations on tool usage and prompts. Understanding the world
-    the agent experiences.
+- [Fourth post](/posts/04-making-agents-work-for-you/interacting-with-remote-inference) : Working with a remote inference (current plan)
+    - ~~Fourth post~~ : ~~Experimentations on tool usage and prompts. Understanding the world
+        the agent experiences~~. (was tentative plan)
 - Final post : Giving agent a full problem to solve
 
 # Required Infrastructure

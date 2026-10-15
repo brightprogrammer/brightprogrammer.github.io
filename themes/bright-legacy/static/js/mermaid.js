@@ -44,6 +44,7 @@
     mermaid.initialize({
       startOnLoad: false,
       theme: theme === "dark" ? "dark" : "default",
+      fontFamily: "Arial, Helvetica, sans-serif",
     });
 
     document.querySelectorAll(".mermaid").forEach((el) => {

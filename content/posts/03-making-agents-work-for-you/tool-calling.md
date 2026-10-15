@@ -42,7 +42,8 @@ This is the whole series (tentative, not complete yet):
 - [First post](/posts/01-making-agents-work-for-you/baby-steps/) : Introduced basic jargons that we need to be familiar with to get started. I also talked about my motivation of why I thought it's a good idea to write a harness
 - [Last post](/posts/02-making-agents-work-for-you/baby-harness/) : Wrote a basic _Hello World!_ harness. It just calls `generate` in a loop a certain number of times.
 - This post : We will give agent some tools and some tasks and we will watch it achieve and fail those tasks.
-- Next post : Improving tools and prompts, maybe adding more tools?
+- [Next post](/posts/04-making-agents-work-for-you/interacting-with-remote-inference) : Working with a remote inference (current plan) (current plan)
+  - ~~Next post~~ : ~~Improving tools and prompts, maybe adding more tools?~~ (was tentative plan)
 - Final post : Watching it complete complex tasks. I'm still planning on this one. I'm thinking of implementing a recent paper, and I already have it selected.
 
 # Agentic Tools
